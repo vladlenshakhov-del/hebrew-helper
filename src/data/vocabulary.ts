@@ -279,7 +279,17 @@ export const vocabulary: Word[] = [
   { id: 's28', hebrew: 'הַמְּקָרֵר לֹא מְקָרֵר מַסְפִּיק', transcription: 'hамекарер ло мекарер маспик', russian: 'Холодильник недостаточно охлаждает', category: 'sentences' },
   { id: 's29', hebrew: 'אֲנִי מְסַיֵּם אֶת הַהַתְקָנָה', transcription: 'ани месаем эт hаhаткана', russian: 'Я заканчиваю установку', category: 'sentences' },
   { id: 's30', hebrew: 'תַּחְזוּקָה שְׁנָתִית נְדָרֶשֶׁת', transcription: 'тахзука шнатит нидрешет', russian: 'Требуется ежегодное ТО', category: 'sentences' },
-
+  { id: 's31', hebrew: 'אני צריך לבדוק את זה', transcription: 'ани царих ливдок эт зе', russian: 'Мне нужно это проверить', category: 'sentences' },
+  { id: 's32', hebrew: 'תבדוק שוב', transcription: 'тивдок шув', russian: 'Проверь ещё раз', category: 'sentences' },
+  { id: 's33', hebrew: 'זה לא עובד', transcription: 'зе ло овед', russian: 'Это не работает', category: 'sentences' },
+  { id: 's34', hebrew: 'עכשיו זה עובד', transcription: 'ахшав зе овед', russian: 'Теперь это работает', category: 'sentences' },
+  { id: 's35', hebrew: 'צריך להחליף את זה', transcription: 'царих леахлиф эт зе', russian: 'Нужно это заменить', category: 'sentences' },
+  { id: 's36', hebrew: 'מי עשה את זה?', transcription: 'ми аса эт зе', russian: 'Кто это сделал?', category: 'sentences' },
+  { id: 's37', hebrew: 'אני עשיתי', transcription: 'ани асити', russian: 'Я сделал', category: 'sentences' },
+  { id: 's38', hebrew: 'לא סיימתי עדיין', transcription: 'ло сиямти адайн', russian: 'Я ещё не закончил', category: 'sentences' },
+  { id: 's39', hebrew: 'עוד רגע אני מסיים', transcription: 'од рега ани месаем', russian: 'Ещё минуту и закончу', category: 'sentences' },
+  { id: 's40', hebrew: 'צריך עזרה כאן', transcription: 'царих эзра кан', russian: 'Нужна помощь здесь', category: 'sentences' },
+  
   // ===================== ТЕХНИЧЕСКИЙ ИВРИТ (technical) =====================
 
   // --- Оборудование ---
