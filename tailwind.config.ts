@@ -12,8 +12,28 @@ export default {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+        sans: ['Rubik', 'sans-serif'],
+        hebrew: ['Frank Ruhl Libre', 'serif'],
+      },
     extend: {
       colors: {
+        hebrew: {
+          DEFAULT: "hsl(var(--hebrew))",
+          light: "hsl(var(--hebrew-light))",
+        },
+        technical: {
+          DEFAULT: "hsl(var(--technical))",
+          light: "hsl(var(--technical-light))",
+        },
+        category: {
+          everyday: "hsl(var(--category-everyday))",
+          verbs: "hsl(var(--category-verbs))",
+          adjectives: "hsl(var(--category-adjectives))",
+          nouns: "hsl(var(--category-nouns))",
+          sentences: "hsl(var(--category-sentences))",
+          technical: "hsl(var(--category-technical))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
