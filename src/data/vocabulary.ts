@@ -298,6 +298,61 @@ export const vocabulary: Word[] = [
   { id: 't13', hebrew: 'מַשְׁאֵבַת חֹם', transcription: 'машэвет хом', russian: 'тепловой насос', category: 'technical', subcategory: 'Оборудование' },
   { id: 't14', hebrew: 'מְצַנֵּן מַיִם', transcription: 'мецанен маим', russian: 'водоохладитель', category: 'technical', subcategory: 'Оборудование' },
   { id: 't15', hebrew: 'מַעֲרֶכֶת קֵירוּר מֶרְכָּזִית', transcription: 'маарехет кейрур мерказит', russian: 'центральная система охлаждения', category: 'technical', subcategory: 'Оборудование' },
+  {id: 't16',
+    hebrew: 'מַפְסֵק לַחַץ',
+    transcription: 'мафсЕк лАхац',
+    russian: 'Реле давления (Прессостат)',
+    category: 'technical'
+  },
+  {
+    id: 't17',
+    hebrew: 'לַחַץ גָּבוֹהַּ',
+    transcription: 'лАхац гавОа',
+    russian: 'Высокое давление',
+    category: 'technical'
+  },
+  {
+    id: 't18',
+    hebrew: 'לַחַץ נָמוּךְ',
+    transcription: 'лАхац намУх',
+    russian: 'Низкое давление',
+    category: 'technical'
+  },
+  {
+    id: 't19',
+    hebrew: 'מַסְנֵן מְיַבֵּשׁ',
+    transcription: 'маснЕн меябЕш',
+    russian: 'Фильтр-осушитель',
+    category: 'technical'
+  },
+  {
+    id: 't20',
+    hebrew: 'שַׁסְתּוֹם הִתְפַּשְּׁטוּת',
+    transcription: 'шастОм итпаштУт',
+    russian: 'Терморегулирующий вентиль (ТРВ)',
+    category: 'technical'
+  },
+  {
+    id: 't21',
+    hebrew: 'סוֹלֵנוֹיד',
+    transcription: 'солено́ид',
+    russian: 'Соленоидный клапан',
+    category: 'technical'
+  },
+  {
+    id: 't22',
+    hebrew: 'מַחְלִיף חֹם',
+    transcription: 'махлИф хом',
+    russian: 'Теплообменник',
+    category: 'technical'
+  },
+  {
+    id: 't23',
+    hebrew: 'בְּדִיקַת אֲטִימוּת',
+    transcription: 'бедикАт атимУт',
+    russian: 'Проверка на герметичность',
+    category: 'technical'
+  },
 
   // --- Основные компоненты ---
   { id: 't16', hebrew: 'מַדְחֵס', transcription: 'мадхес', russian: 'компрессор', category: 'technical', subcategory: 'Компоненты' },
