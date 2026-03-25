@@ -3,7 +3,8 @@ import { vocabulary, Category, categoryLabels } from '@/data/vocabulary';
 import WordCard from '@/components/WordCard';
 import WordListItem from '@/components/WordListItem';
 import CategoryFilter from '@/components/CategoryFilter';
-import { Search, LayoutGrid, List } from 'lucide-react';
+import { useTheme } from '@/components/ThemeProvider';
+import { Search, LayoutGrid, List, Sun, Moon } from 'lucide-react';
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
