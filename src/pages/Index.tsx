@@ -46,9 +46,27 @@ const Index = () => {
               </h1>
               <p className="text-sm text-muted-foreground">Повседневный и технический иврит — холодильное оборудование</p>
             </div>
-            <div className="text-right">
-              <span className="text-3xl font-bold text-primary">{vocabulary.length}</span>
-              <p className="text-xs text-muted-foreground">слов</p>
+            <div className="flex items-center gap-3">
+              <div className="flex rounded-lg border border-border overflow-hidden">
+                <button
+                  onClick={() => setViewMode('cards')}
+                  className={`p-2 transition-colors ${viewMode === 'cards' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                  title="Карточки"
+                >
+                  <LayoutGrid className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 transition-colors ${viewMode === 'list' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                  title="Список"
+                >
+                  <List className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="text-right">
+                <span className="text-3xl font-bold text-primary">{vocabulary.length}</span>
+                <p className="text-xs text-muted-foreground">слов</p>
+              </div>
             </div>
           </div>
 
