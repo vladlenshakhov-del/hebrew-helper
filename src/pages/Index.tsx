@@ -48,7 +48,14 @@ const Index = () => {
               </h1>
               <p className="text-sm text-muted-foreground">Повседневный и технический иврит — холодильное оборудование</p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg border border-border bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                title={theme === 'light' ? 'Тёмная тема' : 'Светлая тема'}
+              >
+                {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+              </button>
               <div className="flex rounded-lg border border-border overflow-hidden">
                 <button
                   onClick={() => setViewMode('cards')}
