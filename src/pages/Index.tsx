@@ -1,8 +1,9 @@
 import { useState, useMemo } from 'react';
 import { vocabulary, Category, categoryLabels } from '@/data/vocabulary';
 import WordCard from '@/components/WordCard';
+import WordListItem from '@/components/WordListItem';
 import CategoryFilter from '@/components/CategoryFilter';
-import { Search } from 'lucide-react';
+import { Search, LayoutGrid, List } from 'lucide-react';
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
