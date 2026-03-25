@@ -7,6 +7,7 @@ import { useTheme } from '@/components/ThemeProvider';
 import { Search, LayoutGrid, List, Sun, Moon } from 'lucide-react';
 
 const Index = () => {
+  const { theme, toggleTheme } = useTheme();
   const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
   const [search, setSearch] = useState('');
   const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
