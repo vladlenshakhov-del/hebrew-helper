@@ -8,6 +8,7 @@ import { Search, LayoutGrid, List } from 'lucide-react';
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
   const [search, setSearch] = useState('');
+  const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
 
   const filtered = useMemo(() => {
     return vocabulary.filter((w) => {
