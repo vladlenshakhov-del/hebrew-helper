@@ -58,6 +58,56 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  .dark {
+    --background: 220 20% 10%;
+    --foreground: 210 20% 90%;
+
+    --card: 220 18% 14%;
+    --card-foreground: 210 20% 90%;
+
+    --popover: 220 18% 14%;
+    --popover-foreground: 210 20% 90%;
+
+    --primary: 197 71% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 35 70% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 15% 20%;
+    --muted-foreground: 215 16% 60%;
+
+    --accent: 197 30% 20%;
+    --accent-foreground: 197 71% 70%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 22%;
+    --input: 220 15% 22%;
+    --ring: 197 71% 50%;
+
+    --hebrew: 197 71% 60%;
+    --hebrew-light: 197 20% 18%;
+    --technical: 35 70% 55%;
+    --technical-light: 35 30% 18%;
+    --category-everyday: 160 50% 50%;
+    --category-verbs: 270 50% 65%;
+    --category-adjectives: 340 60% 65%;
+    --category-nouns: 197 71% 55%;
+    --category-sentences: 25 80% 60%;
+    --category-technical: 35 80% 60%;
+
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 210 20% 90%;
+    --sidebar-primary-foreground: 220 20% 10%;
+    --sidebar-accent: 220 15% 16%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 220 15% 20%;
+    --sidebar-ring: 197 71% 50%;
+  }
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap');
