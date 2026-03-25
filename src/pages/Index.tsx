@@ -96,9 +96,9 @@ const Index = () => {
               <span className="font-hebrew text-primary ml-2" dir="rtl">{categoryLabels[selectedCategory].he}</span>
               <span className="text-sm font-normal text-muted-foreground ml-2">({filtered.length})</span>
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className={viewMode === 'cards' ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" : "flex flex-col gap-3"}>
               {filtered.map((w) => (
-                <WordCard key={w.id} word={w} />
+                viewMode === 'cards' ? <WordCard key={w.id} word={w} /> : <WordListItem key={w.id} word={w} />
               ))}
             </div>
           </>
@@ -110,9 +110,9 @@ const Index = () => {
                 <span className="font-hebrew text-primary ml-2" dir="rtl">{categoryLabels[cat as Category].he}</span>
                 <span className="text-sm font-normal text-muted-foreground ml-2">({words!.length})</span>
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className={viewMode === 'cards' ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" : "flex flex-col gap-3"}>
                 {words!.map((w) => (
-                  <WordCard key={w.id} word={w} />
+                  viewMode === 'cards' ? <WordCard key={w.id} word={w} /> : <WordListItem key={w.id} word={w} />
                 ))}
               </div>
             </section>
