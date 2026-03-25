@@ -756,16 +756,16 @@ export const vocabulary: Word[] = [
   { id: 'n60', hebrew: 'מַחְסָן', transcription: 'махсан', russian: 'склад', category: 'nouns' },
 
   // --- Дополнительные предложения ---
-  { id: 's31', hebrew: 'אֵיפֹה הַכְּלִי?', transcription: 'эйфо hакли?', russian: 'Где инструмент?', category: 'sentences' },
-  { id: 's32', hebrew: 'תְּבִיא לִי מַבְרֵגָה', transcription: 'тевиа ли маврега', russian: 'Принеси мне отвёртку', category: 'sentences' },
-  { id: 's33', hebrew: 'צָרִיךְ לִסְגֹּר אֶת הַבֶּרֶז', transcription: 'царих лисгор эт hаберез', russian: 'Нужно закрыть вентиль', category: 'sentences' },
-  { id: 's34', hebrew: 'הַמְּנוֹעַ לֹא מִסְתּוֹבֵב', transcription: 'hаманоа ло мистовев', russian: 'Двигатель не крутится', category: 'sentences' },
-  { id: 's35', hebrew: 'יֵשׁ קֶצֶר בַּמַּעֲרֶכֶת', transcription: 'еш кецер бамаарехет', russian: 'В системе короткое замыкание', category: 'sentences' },
-  { id: 's36', hebrew: 'צָרִיךְ לְכַבּוֹת אֶת הַמַּפְסֵק הָרָאשִׁי', transcription: 'царих лехабот эт hамафсек hараши', russian: 'Нужно выключить главный рубильник', category: 'sentences' },
-  { id: 's37', hebrew: 'הַבַּקָּר מַרְאֶה קוֹד שְׁגִיאָה', transcription: 'hабакар маръе код шгиа', russian: 'Контроллер показывает код ошибки', category: 'sentences' },
-  { id: 's38', hebrew: 'צָרִיךְ לְהַחְלִיף אֶת הַחִיישָׁן', transcription: 'царих леhахлиф эт hахийшан', russian: 'Нужно заменить датчик', category: 'sentences' },
-  { id: 's39', hebrew: 'אֲנִי צָרִיךְ לְהַזְמִין חֶלְקֵי חִילוּף', transcription: 'ани царих леhазмин хелькей хилуф', russian: 'Мне нужно заказать запчасти', category: 'sentences' },
-  { id: 's40', hebrew: 'הַעֲבוֹדָה בְּאַחֲרָיוּת', transcription: 'hаавода беахарают', russian: 'Работа на гарантии', category: 'sentences' },
+  { id: 's61', hebrew: 'אֵיפֹה הַכְּלִי?', transcription: 'эйфо hакли?', russian: 'Где инструмент?', category: 'sentences' },
+  { id: 's62', hebrew: 'תְּבִיא לִי מַבְרֵגָה', transcription: 'тевиа ли маврега', russian: 'Принеси мне отвёртку', category: 'sentences' },
+  { id: 's63', hebrew: 'צָרִיךְ לִסְגֹּר אֶת הַבֶּרֶז', transcription: 'царих лисгор эт hаберез', russian: 'Нужно закрыть вентиль', category: 'sentences' },
+  { id: 's64', hebrew: 'הַמְּנוֹעַ לֹא מִסְתּוֹבֵב', transcription: 'hаманоа ло мистовев', russian: 'Двигатель не крутится', category: 'sentences' },
+  { id: 's65', hebrew: 'יֵשׁ קֶצֶר בַּמַּעֲרֶכֶת', transcription: 'еш кецер бамаарехет', russian: 'В системе короткое замыкание', category: 'sentences' },
+  { id: 's66', hebrew: 'צָרִיךְ לְכַבּוֹת אֶת הַמַּפְסֵק הָרָאשִׁי', transcription: 'царих лехабот эт hамафсек hараши', russian: 'Нужно выключить главный рубильник', category: 'sentences' },
+  { id: 's67', hebrew: 'הַבַּקָּר מַרְאֶה קוֹד שְׁגִיאָה', transcription: 'hабакар маръе код шгиа', russian: 'Контроллер показывает код ошибки', category: 'sentences' },
+  { id: 's68', hebrew: 'צָרִיךְ לְהַחְלִיף אֶת הַחִיישָׁן', transcription: 'царих леhахлиф эт hахийшан', russian: 'Нужно заменить датчик', category: 'sentences' },
+  { id: 's69', hebrew: 'אֲנִי צָרִיךְ לְהַזְמִין חֶלְקֵי חִילוּף', transcription: 'ани царих леhазмин хелькей хилуф', russian: 'Мне нужно заказать запчасти', category: 'sentences' },
+  { id: 's70', hebrew: 'הַעֲבוֹדָה בְּאַחֲרָיוּת', transcription: 'hаавода беахарают', russian: 'Работа на гарантии', category: 'sentences' },
 
   // ===================== НОВЫЕ ПОВСЕДНЕВНЫЕ СЛОВА И ВЫРАЖЕНИЯ (200) =====================
   // --- Деловой разговорный ---
