@@ -1,12 +1,14 @@
 import { useState, useMemo } from 'react';
 import { vocabulary, Category, categoryLabels } from '@/data/vocabulary';
 import WordCard from '@/components/WordCard';
+import WordListItem from '@/components/WordListItem';
 import CategoryFilter from '@/components/CategoryFilter';
-import { Search } from 'lucide-react';
+import { Search, LayoutGrid, List } from 'lucide-react';
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
   const [search, setSearch] = useState('');
+  const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
 
   const filtered = useMemo(() => {
     return vocabulary.filter((w) => {
@@ -44,9 +46,27 @@ const Index = () => {
               </h1>
               <p className="text-sm text-muted-foreground">Повседневный и технический иврит — холодильное оборудование</p>
             </div>
-            <div className="text-right">
-              <span className="text-3xl font-bold text-primary">{vocabulary.length}</span>
-              <p className="text-xs text-muted-foreground">слов</p>
+            <div className="flex items-center gap-3">
+              <div className="flex rounded-lg border border-border overflow-hidden">
+                <button
+                  onClick={() => setViewMode('cards')}
+                  className={`p-2 transition-colors ${viewMode === 'cards' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                  title="Карточки"
+                >
+                  <LayoutGrid className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 transition-colors ${viewMode === 'list' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                  title="Список"
+                >
+                  <List className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="text-right">
+                <span className="text-3xl font-bold text-primary">{vocabulary.length}</span>
+                <p className="text-xs text-muted-foreground">слов</p>
+              </div>
             </div>
           </div>
 
@@ -76,9 +96,9 @@ const Index = () => {
               <span className="font-hebrew text-primary ml-2" dir="rtl">{categoryLabels[selectedCategory].he}</span>
               <span className="text-sm font-normal text-muted-foreground ml-2">({filtered.length})</span>
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className={viewMode === 'cards' ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" : "flex flex-col gap-3"}>
               {filtered.map((w) => (
-                <WordCard key={w.id} word={w} />
+                viewMode === 'cards' ? <WordCard key={w.id} word={w} /> : <WordListItem key={w.id} word={w} />
               ))}
             </div>
           </>
@@ -90,9 +110,9 @@ const Index = () => {
                 <span className="font-hebrew text-primary ml-2" dir="rtl">{categoryLabels[cat as Category].he}</span>
                 <span className="text-sm font-normal text-muted-foreground ml-2">({words!.length})</span>
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className={viewMode === 'cards' ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" : "flex flex-col gap-3"}>
                 {words!.map((w) => (
-                  <WordCard key={w.id} word={w} />
+                  viewMode === 'cards' ? <WordCard key={w.id} word={w} /> : <WordListItem key={w.id} word={w} />
                 ))}
               </div>
             </section>
