@@ -256,7 +256,7 @@ export const vocabulary: Word[] = [
   { id: 'v102', hebrew: 'לְהַסְכִּים', transcription: 'леhаским', russian: 'соглашаться', category: 'verbs', subcategory: 'Активная форма' },
   { id: 'v103', hebrew: 'לְהַגִּיעַ', transcription: 'леhагиа', russian: 'прибывать / приходить', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
   { id: 'v104', hebrew: 'לַעֲזֹב', transcription: 'лаазов', russian: 'оставлять / покидать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль' },
-  { id: 'v105', hebrew: 'לְהִשְׁתַּמֵּשׁ', transcription: 'леhиштамеш', russian: 'пользоваться', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', binyan: 'Хифиль', example: { hebrew: 'באיזה כלי להשתמש?', russian: 'Каким инструментом пользоваться?' } },
+  { id: 'v105', hebrew: 'לְהִשְׁתַּמֵּשׁ', transcription: 'леhиштамеш', russian: 'пользоваться', category: 'verbs', subcategory: 'Активная форма', { id: 'v105', hebrew: 'לְהִשְׁתַּמֵּשׁ', transcription: 'леhиштамеш', russian: 'пользоваться', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', example: { hebrew: 'באיזה כלי להשתמש?', russian: 'Каким инструментом пользоваться?' } },, example: { hebrew: 'באיזה כלי להשתמש?', russian: 'Каким инструментом пользоваться?' } },
   { id: 'v106', hebrew: 'לְהַעֲדִיף', transcription: 'леhаадиф', russian: 'предпочитать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
   { id: 'v107', hebrew: 'לִמְצֹא', transcription: 'лимцо', russian: 'находить', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль' },
   { id: 'v108', hebrew: 'נִמְצָא', transcription: 'нимца', russian: 'находиться', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Нифаль' },
