@@ -20,7 +20,6 @@ export interface Word {
   forms?: WordForms;
   binyan?: Binyan;
   example?: { hebrew: string; russian: string };
-};
 }
 
 export const categoryLabels: Record<Category, { ru: string; he: string; icon: string }> = {
