@@ -250,7 +250,7 @@ export const vocabulary: Word[] = [
   { id: 'v96', hebrew: 'לְהַמְשִׁיךְ', transcription: 'леhамших', russian: 'продолжать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
   { id: 'v97', hebrew: 'לְהַפְסִיק', transcription: 'леhафсик', russian: 'прекращать / останавливать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
   { id: 'v98', hebrew: 'לִקְרוֹת', transcription: 'ликрот', russian: 'случаться / происходить', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль', example: { hebrew: 'מה קרה?', russian: 'Что случилось?' } },
-  { id: 'v99', hebrew: 'לְהַחְזִיר', transcription: 'леhахзир', russian: 'возвращать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', binyan: 'Пааль' },
+  { id: 'v99', hebrew: 'לְהַחְזִיר', transcription: 'леhахзир', russian: 'возвращать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
   { id: 'v100', hebrew: 'הוּחְזַר', transcription: 'hухзар', russian: 'был возвращен', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Пуаль' },
   { id: 'v101', hebrew: 'לַחְזוֹר', transcription: 'лахзор', russian: 'возвращаться', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль' },
   { id: 'v102', hebrew: 'לְהַסְכִּים', transcription: 'леhаским', russian: 'соглашаться', category: 'verbs', subcategory: 'Активная форма' },
