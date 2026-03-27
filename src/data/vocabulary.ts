@@ -20,7 +20,6 @@ export interface Word {
   forms?: WordForms;
   binyan?: Binyan;
   example?: { hebrew: string; russian: string };
-};
 }
 
 export const categoryLabels: Record<Category, { ru: string; he: string; icon: string }> = {
@@ -251,13 +250,13 @@ export const vocabulary: Word[] = [
   { id: 'v96', hebrew: 'לְהַמְשִׁיךְ', transcription: 'леhамших', russian: 'продолжать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
   { id: 'v97', hebrew: 'לְהַפְסִיק', transcription: 'леhафсик', russian: 'прекращать / останавливать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
   { id: 'v98', hebrew: 'לִקְרוֹת', transcription: 'ликрот', russian: 'случаться / происходить', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль', example: { hebrew: 'מה קרה?', russian: 'Что случилось?' } },
-  { id: 'v99', hebrew: 'לְהַחְזִיר', transcription: 'леhахзир', russian: 'возвращать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', binyan: 'Пааль' },
+  { id: 'v99', hebrew: 'לְהַחְזִיר', transcription: 'леhахзир', russian: 'возвращать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
   { id: 'v100', hebrew: 'הוּחְזַר', transcription: 'hухзар', russian: 'был возвращен', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Пуаль' },
   { id: 'v101', hebrew: 'לַחְזוֹר', transcription: 'лахзор', russian: 'возвращаться', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль' },
   { id: 'v102', hebrew: 'לְהַסְכִּים', transcription: 'леhаским', russian: 'соглашаться', category: 'verbs', subcategory: 'Активная форма' },
   { id: 'v103', hebrew: 'לְהַגִּיעַ', transcription: 'леhагиа', russian: 'прибывать / приходить', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
   { id: 'v104', hebrew: 'לַעֲזֹב', transcription: 'лаазов', russian: 'оставлять / покидать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль' },
-  { id: 'v105', hebrew: 'לְהִשְׁתַּמֵּשׁ', transcription: 'леhиштамеш', russian: 'пользоваться', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', binyan: 'Хифиль', example: { hebrew: 'באיזה כלי להשתמש?', russian: 'Каким инструментом пользоваться?' } },
+  { id: 'v105', hebrew: 'לְהִשְׁתַּמֵּשׁ', transcription: 'леhиштамеш', russian: 'пользоваться', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', example: { hebrew: 'באיזה כלי להשתמש?', russian: 'Каким инструментом пользоваться?' } },
   { id: 'v106', hebrew: 'לְהַעֲדִיף', transcription: 'леhаадиф', russian: 'предпочитать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
   { id: 'v107', hebrew: 'לִמְצֹא', transcription: 'лимцо', russian: 'находить', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль' },
   { id: 'v108', hebrew: 'נִמְצָא', transcription: 'нимца', russian: 'находиться', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Нифаль' },
