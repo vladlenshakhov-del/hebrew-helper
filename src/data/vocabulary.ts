@@ -31,7 +31,7 @@ export const categoryLabels: Record<Category, { ru: string; he: string; icon: st
   technical: { ru: 'Техн. иврит', he: 'טכני', icon: '❄️' },
 };
 
-const vocabularyPart1: Word[] = [
+const _part1: Word[] = [
   // ===================== ПОВСЕДНЕВНЫЕ (everyday) =====================
   { id: 'e1', hebrew: 'מָה נִסְגַּר?', transcription: 'ма нисга́р?', russian: 'Что в итоге? / На чем решили?', category: 'everyday' },
   { id: 'e2', hebrew: 'חֲבָל עַל הַזְּמַן', transcription: 'хава́ль аль а-зма́н', russian: 'Просто супер / Офигенно', category: 'everyday' },
