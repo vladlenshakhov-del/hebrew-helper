@@ -30,9 +30,10 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
         className="group cursor-pointer perspective-1000"
       >
         <div
-          className={`relative w-full min-h-[180px] transition-transform duration-500 transform-style-preserve-3d ${
+          className={`relative w-full transition-transform duration-500 transform-style-preserve-3d ${
             flipped ? 'rotate-y-180' : ''
           }`}
+          style={{ minHeight: word.category === 'sentences' ? '240px' : '180px' }}
         >
           {/* Front */}
           <div className={`absolute inset-0 backface-hidden rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col items-center justify-center gap-1.5 shadow-sm hover:shadow-md transition-shadow overflow-hidden`}>
