@@ -30,21 +30,22 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
         className="group cursor-pointer perspective-1000"
       >
         <div
-          className={`relative w-full min-h-[180px] transition-transform duration-500 transform-style-preserve-3d ${
+          className={`relative w-full transition-transform duration-500 transform-style-preserve-3d ${
             flipped ? 'rotate-y-180' : ''
           }`}
+          style={{ minHeight: word.category === 'sentences' ? '240px' : '180px' }}
         >
           {/* Front */}
-          <div className={`absolute inset-0 backface-hidden rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-5 flex flex-col items-center justify-center gap-2 shadow-sm hover:shadow-md transition-shadow`}>
+          <div className={`absolute inset-0 backface-hidden rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col items-center justify-center gap-1.5 shadow-sm hover:shadow-md transition-shadow overflow-hidden`}>
             {!isDue && (
               <span className="absolute top-2 right-2 text-[10px] px-1.5 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-0.5">
                 <Clock className="w-3 h-3" /> {daysLeft}д
               </span>
             )}
-            <span className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground" dir="rtl">
+            <span className="font-hebrew text-xl md:text-2xl leading-snug text-foreground text-center break-words w-full" dir="rtl">
               {word.hebrew}
             </span>
-            <span className="text-sm text-muted-foreground italic">{word.transcription}</span>
+            <span className="text-xs text-muted-foreground italic text-center break-words w-full">{word.transcription}</span>
             {word.gender && (
               <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">
                 {word.gender === 'masculine' ? '♂ муж.' : '♀ жен.'}
@@ -64,20 +65,20 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
           </div>
 
           {/* Back */}
-          <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-primary p-5 flex flex-col items-center justify-center gap-2 shadow-md">
-            <span className="text-xl font-medium text-primary-foreground">{word.russian}</span>
-            <span className="font-hebrew text-lg text-primary-foreground/70" dir="rtl">{word.hebrew}</span>
+          <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-primary p-4 flex flex-col items-center justify-center gap-1.5 shadow-md overflow-hidden">
+            <span className="text-sm md:text-base font-medium text-primary-foreground text-center break-words w-full">{word.russian}</span>
+            <span className="font-hebrew text-sm text-primary-foreground/70 text-center break-words w-full" dir="rtl">{word.hebrew}</span>
             {word.forms && (
-              <div className="text-xs text-primary-foreground/60 text-center space-y-0.5">
+              <div className="text-[10px] text-primary-foreground/60 text-center space-y-0.5">
                 {word.forms.feminine && <p>♀ {word.forms.feminine}</p>}
                 {word.forms.plural && <p>мн. {word.forms.plural}</p>}
                 {word.forms.femininePlural && <p>♀мн. {word.forms.femininePlural}</p>}
               </div>
             )}
             {word.example && (
-              <div className="mt-2 text-center border-t border-primary-foreground/20 pt-2 w-full">
-                <p className="font-hebrew text-sm text-primary-foreground/80" dir="rtl">{word.example.hebrew}</p>
-                <p className="text-xs text-primary-foreground/60 mt-1">{word.example.russian}</p>
+              <div className="mt-1 text-center border-t border-primary-foreground/20 pt-1.5 w-full">
+                <p className="font-hebrew text-xs text-primary-foreground/80 break-words" dir="rtl">{word.example.hebrew}</p>
+                <p className="text-[10px] text-primary-foreground/60 mt-0.5 break-words">{word.example.russian}</p>
               </div>
             )}
           </div>

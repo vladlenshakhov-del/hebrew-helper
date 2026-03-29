@@ -20,14 +20,17 @@ const Index = () => {
   const [showDueOnly, setShowDueOnly] = useState(false);
   const [selectedBinyan, setSelectedBinyan] = useState<string | null>(null);
 
+  const stripNiqqud = (s: string) => s.replace(/[\u0591-\u05C7]/g, '');
+
   const filtered = useMemo(() => {
     let result = vocabulary.filter((w) => {
       const matchCat = selectedCategory === 'all' || w.category === selectedCategory;
       const q = search.toLowerCase();
+      const qClean = stripNiqqud(q);
       const matchSearch =
         !q ||
         w.russian.toLowerCase().includes(q) ||
-        w.hebrew.includes(q) ||
+        stripNiqqud(w.hebrew).includes(qClean) ||
         w.transcription.toLowerCase().includes(q);
       const matchBinyan = !selectedBinyan || w.binyan === selectedBinyan;
       const matchDue = !showDueOnly || sr.isDue(w.id);
