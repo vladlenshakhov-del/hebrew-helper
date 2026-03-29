@@ -35,16 +35,16 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
           }`}
         >
           {/* Front */}
-          <div className={`absolute inset-0 backface-hidden rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-5 flex flex-col items-center justify-center gap-2 shadow-sm hover:shadow-md transition-shadow`}>
+          <div className={`absolute inset-0 backface-hidden rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col items-center justify-center gap-1.5 shadow-sm hover:shadow-md transition-shadow overflow-hidden`}>
             {!isDue && (
               <span className="absolute top-2 right-2 text-[10px] px-1.5 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-0.5">
                 <Clock className="w-3 h-3" /> {daysLeft}д
               </span>
             )}
-            <span className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground" dir="rtl">
+            <span className="font-hebrew text-xl md:text-2xl leading-snug text-foreground text-center break-words w-full" dir="rtl">
               {word.hebrew}
             </span>
-            <span className="text-sm text-muted-foreground italic">{word.transcription}</span>
+            <span className="text-xs text-muted-foreground italic text-center break-words w-full">{word.transcription}</span>
             {word.gender && (
               <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">
                 {word.gender === 'masculine' ? '♂ муж.' : '♀ жен.'}
