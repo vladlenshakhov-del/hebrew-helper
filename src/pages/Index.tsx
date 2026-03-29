@@ -12,6 +12,18 @@ const BINYANIM = ['Пааль', 'Пиэль', 'Хифиль', 'Нифаль', '�
 const Index = () => {
   const { theme, toggleTheme } = useTheme();
   const sr = useSpacedRepetition();
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setHeaderVisible(y < 50 || y < lastScrollY.current);
+      lastScrollY.current = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
   const [search, setSearch] = useState('');
   const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
