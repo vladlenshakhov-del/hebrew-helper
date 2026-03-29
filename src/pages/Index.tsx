@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { vocabulary, Category, categoryLabels } from '@/data/vocabulary';
 import WordCard from '@/components/WordCard';
 import WordListItem from '@/components/WordListItem';
