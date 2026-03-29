@@ -88,7 +88,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border">
+      <header className={`sticky z-10 bg-background/80 backdrop-blur-md border-b border-border transition-all duration-300 ${headerVisible ? 'top-0' : '-top-[300px]'}`}>
         <div className="max-w-5xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
             <div>
