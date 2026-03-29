@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { vocabulary, Category, categoryLabels } from '@/data/vocabulary';
 import WordCard from '@/components/WordCard';
 import WordListItem from '@/components/WordListItem';
@@ -12,6 +12,18 @@ const BINYANIM = ['Пааль', 'Пиэль', 'Хифиль', 'Нифаль', '�
 const Index = () => {
   const { theme, toggleTheme } = useTheme();
   const sr = useSpacedRepetition();
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setHeaderVisible(y < 50 || y < lastScrollY.current);
+      lastScrollY.current = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
   const [search, setSearch] = useState('');
   const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
@@ -76,7 +88,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border">
+      <header className={`sticky z-10 bg-background/80 backdrop-blur-md border-b border-border transition-all duration-300 ${headerVisible ? 'top-0' : '-top-[300px]'}`}>
         <div className="max-w-5xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
             <div>
