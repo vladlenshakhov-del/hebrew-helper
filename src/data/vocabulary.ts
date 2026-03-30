@@ -1083,8 +1083,8 @@ export const vocabulary: Word[] = [
   { id: 'tv7', hebrew: 'לַחְשׂוֹף', transcription: 'лахсоф', russian: 'вскрывать / обнажать', category: 'verbs', subcategory: 'Диагностика', binyan: 'Пааль' },
   { id: 'tv8', hebrew: 'לְפַעֲנֵחַ', transcription: 'лефаанэах', russian: 'расшифровывать (коды)', category: 'verbs', subcategory: 'Диагностика', binyan: 'Пиэль', example: { hebrew: 'צריך לפענח את קוד השגיאה', russian: 'Нужно расшифровать код ошибки' } },
   // --- Монтаж ---
-  { id: 'tv9', hebrew: 'לְפָרֵק', transcription: 'лефарэк', russian: 'разбирать / демонтировать', category: 'verbs', subcategory: 'Монтаж', binyan: 'Пиэль', example: { hebrew: 'צריך לפרק את היחידה החיצונית', russian: 'Нужно демонтировать наружный блок' } },
-  { id: 'tv10', hebrew: 'לְהַרְכִּיב', transcription: 'леhаркив', russian: 'собирать / монтировать', category: 'verbs', subcategory: 'Монтаж', binyan: 'Хифиль', example: { hebrew: 'נרכיב את המערכת מחדש', russian: 'Соберём систему заново' } },
+  { id: 'tv9', hebrew: 'לְעַגֵּן', transcription: 'леагэн', russian: 'закреплять / фиксировать на месте', category: 'verbs', subcategory: 'Монтаж', binyan: 'Пиэль', example: { hebrew: 'צריך לעגן את היחידה לקיר', russian: 'Нужно закрепить блок на стене' } },
+  { id: 'tv10', hebrew: 'לַהֲלוֹם', transcription: 'лаhалом', russian: 'забивать / вколачивать', category: 'verbs', subcategory: 'Монтаж', binyan: 'Пааль', example: { hebrew: 'נהלום דובלים לקיר', russian: 'Забьём дюбели в стену' } },
   { id: 'tv11', hebrew: 'לְהָסִיר', transcription: 'леhасир', russian: 'снимать / удалять', category: 'verbs', subcategory: 'Монтаж', binyan: 'Хифиль' },
   { id: 'tv12', hebrew: 'לִשְׁלוֹף', transcription: 'лишлоф', russian: 'вытаскивать', category: 'verbs', subcategory: 'Монтаж', binyan: 'Пааль' },
   { id: 'tv13', hebrew: 'לְהַכְנִיס', transcription: 'леhахнис', russian: 'вставлять / вводить', category: 'verbs', subcategory: 'Монтаж', binyan: 'Хифиль' },
