@@ -1151,7 +1151,7 @@ export const vocabulary: Word[] = [
   { id: 'tv71', hebrew: 'לְבַזְבֵּז', transcription: 'левазбэз', russian: 'тратить впустую', category: 'verbs', subcategory: 'Проф. общение', binyan: 'Пиэль' },
   { id: 'tv72', hebrew: 'לְבַדֵּל', transcription: 'левадэль', russian: 'изолировать / разделять', category: 'verbs', subcategory: 'Проф. общение', binyan: 'Пиэль' },
   { id: 'tv73', hebrew: 'לִפְתּוֹר', transcription: 'лифтор', russian: 'решать (проблему)', category: 'verbs', subcategory: 'Проф. общение', binyan: 'Пааль', example: { hebrew: 'פתרנו את הבעיה', russian: 'Мы решили проблему' } },
-  { id: 'tv74', hebrew: 'לְהַצְלִיחַ', transcription: 'леhацлиах', russian: 'преуспеть / удаться', category: 'verbs', subcategory: 'Проф. общение', binyan: 'Хифиль' },
+  { id: 'tv74', hebrew: 'לְהִתְכּוֹנֵן', transcription: 'леhитконэн', russian: 'подготавливаться', category: 'verbs', subcategory: 'Проф. общение', binyan: 'Хитпаэль' },
 
   // ===================== СЛОВА-СВЯЗКИ И ПРЕДЛОГИ (everyday) =====================
   // --- Причина и следствие ---
