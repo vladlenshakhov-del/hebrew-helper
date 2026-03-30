@@ -379,7 +379,7 @@ export const vocabulary: Word[] = [
   { id: 's1', hebrew: 'אֲנִי לוֹמֵד עִבְרִית', transcription: 'ани ломед иврит', russian: 'Я учу иврит', category: 'sentences' },
   { id: 's2', hebrew: 'אֵיפֹה הַשֵּׁרוּתִים?', transcription: 'эйфо hашерутим?', russian: 'Где туалет?', category: 'sentences' },
   { id: 's3', hebrew: 'כַּמָּה זֶה עוֹלֶה?', transcription: 'кама зе оле?', russian: 'Сколько это стоит?', category: 'sentences' },
-  { id: 's4', hebrew: 'אֲנִי לֹא מֵבִין', transcription: 'ани ло мевин', russian: 'Я не понимаю', category: 'sentences' },
+  { id: 's4', hebrew: 'אֲנִי רוֹצֶה לְהַזְמִין שׁוּלְחָן', transcription: 'ани роцэ леhазмин шульхан', russian: 'Я хочу заказать стол (в ресторане)', category: 'sentences' },
   { id: 's5', hebrew: 'אֲנִי צָרִיךְ עֶזְרָה', transcription: 'ани царих эзра', russian: 'Мне нужна помощь', category: 'sentences' },
   { id: 's6', hebrew: 'יֵשׁ תַּקָּלָה בַּמְקָרֵר', transcription: 'еш такала бамекарер', russian: 'Есть неисправность в холодильнике', category: 'sentences' },
   { id: 's7', hebrew: 'צָרִיךְ לְהַחְלִיף אֶת הַמַּדְחֵס', transcription: 'царих лехахлиф эт hамадхес', russian: 'Нужно заменить компрессор', category: 'sentences' },
