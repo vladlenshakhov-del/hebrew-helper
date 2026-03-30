@@ -882,7 +882,7 @@ export const vocabulary: Word[] = [
   { id: 'ne74', hebrew: 'הִתְחַיְּבוּת', transcription: 'hитхайвУт', russian: 'обязательство', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne75', hebrew: 'הֶסְדֵּר', transcription: 'эсдЭр', russian: 'соглашение / договорённость', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne76', hebrew: 'מַשָּׂא וּמַתָּן', transcription: 'масА у-матАн', russian: 'переговоры', category: 'nouns', subcategory: 'Высокий регистр' },
-  { id: 'ne77', hebrew: 'הֶסְכֵּם', transcription: 'эскЭм', russian: 'договор / контракт', category: 'nouns', subcategory: 'Высокий регистр' },
+  { id: 'ne77', hebrew: 'מִכְרָז', transcription: 'михрАз', russian: 'тендер / конкурс', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne78', hebrew: 'תְּנָאִים', transcription: 'тнаИм', russian: 'условия', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne79', hebrew: 'מְחִיר', transcription: 'мехИр', russian: 'цена', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne80', hebrew: 'הַנָּחָה', transcription: 'анахА', russian: 'скидка', category: 'nouns', subcategory: 'Высокий регистр' },
