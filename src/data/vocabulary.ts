@@ -1106,7 +1106,7 @@ export const vocabulary: Word[] = [
   { id: 'tv28', hebrew: 'לְשַׁיֵּף', transcription: 'лешайеф', russian: 'шлифовать', category: 'verbs', subcategory: 'Ремонт', binyan: 'Пиэль' },
   // --- Работа системы ---
   { id: 'tv29', hebrew: 'לִפְעוֹל', transcription: 'лифъоль', russian: 'действовать / функционировать', category: 'verbs', subcategory: 'Система', binyan: 'Пааль' },
-  { id: 'tv30', hebrew: 'לְהַפְסִיק', transcription: 'леhафсик', russian: 'прекращать', category: 'verbs', subcategory: 'Система', binyan: 'Хифиль' },
+  { id: 'tv30', hebrew: 'לְהֵעָצֵר', transcription: 'леhэацэр', russian: 'останавливаться (о механизме)', category: 'verbs', subcategory: 'Система', binyan: 'Нифаль' },
   { id: 'tv31', hebrew: 'לְהַשְׁהוֹת', transcription: 'леhашhот', russian: 'приостанавливать', category: 'verbs', subcategory: 'Система', binyan: 'Хифиль' },
   { id: 'tv32', hebrew: 'לְהִסְתּוֹבֵב', transcription: 'леhистовэв', russian: 'вращаться', category: 'verbs', subcategory: 'Система', binyan: 'Хитпаэль' },
   { id: 'tv33', hebrew: 'לִדְחוֹף', transcription: 'лидхоф', russian: 'толкать', category: 'verbs', subcategory: 'Система', binyan: 'Пааль' },
