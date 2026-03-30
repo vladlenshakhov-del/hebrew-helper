@@ -877,7 +877,7 @@ export const vocabulary: Word[] = [
 
   // --- Существительные высокого регистра ---
   { id: 'ne71', hebrew: 'מוּדָעוּת', transcription: 'мудаУт', russian: 'осведомлённость / осознанность', category: 'nouns', subcategory: 'Высокий регистр' },
-  { id: 'ne72', hebrew: 'הַשְׁפָּעָה', transcription: 'ашпаА', russian: 'влияние', category: 'nouns', subcategory: 'Высокий регистр' },
+  { id: 'ne72', hebrew: 'תְּשׁוּמַת לֵב', transcription: 'тшумАт лев', russian: 'внимание', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne73', hebrew: 'סַמְכוּת', transcription: 'самхУт', russian: 'полномочие / авторитет', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne74', hebrew: 'הִתְחַיְּבוּת', transcription: 'hитхайвУт', russian: 'обязательство', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne75', hebrew: 'הֶסְדֵּר', transcription: 'эсдЭр', russian: 'соглашение / договорённость', category: 'nouns', subcategory: 'Высокий регистр' },
