@@ -890,7 +890,7 @@ export const vocabulary: Word[] = [
   { id: 'ne82', hebrew: 'חוֹב', transcription: 'хов', russian: 'долг', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne83', hebrew: 'רֶוַח', transcription: 'рЭвах', russian: 'прибыль', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne84', hebrew: 'הֶפְסֵד', transcription: 'эфсЭд', russian: 'убыток', category: 'nouns', subcategory: 'Высокий регистр' },
-  { id: 'ne85', hebrew: 'הַלְוָאָה', transcription: 'альваА', russian: 'заём / ссуда', category: 'nouns', subcategory: 'Высокий регистр' },
+  { id: 'ne85', hebrew: 'פִּקָּדוֹן', transcription: 'пикадОн', russian: 'залог / депозит', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne86', hebrew: 'עֲמְלָה', transcription: 'амлА', russian: 'комиссия', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne87', hebrew: 'מִיסִּים', transcription: 'мисИм', russian: 'налоги', category: 'nouns', subcategory: 'Высокий регистр' },
   { id: 'ne88', hebrew: 'בִּיטוּחַ', transcription: 'битУах', russian: 'страховка', category: 'nouns', subcategory: 'Высокий регистр' },
