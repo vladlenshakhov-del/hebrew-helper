@@ -61,7 +61,7 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
                 {word.subcategory}
               </span>
             )}
-            <span className="text-xs text-muted-foreground mt-1 opacity-60">нажмите для перевода</span>
+            <span className="text-[11px] text-muted-foreground mt-1 opacity-60">нажмите для перевода</span>
           </div>
 
           {/* Back */}

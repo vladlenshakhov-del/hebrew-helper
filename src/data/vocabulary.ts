@@ -219,7 +219,7 @@ export const vocabulary: Word[] = [
   { id: 'v65', hebrew: 'לְהַזְמִין', transcription: 'леhазмин', russian: 'заказывать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль',
     example: { hebrew: 'הזמנתי חלקי חילוף', russian: 'Я заказал запчасти' } },
   { id: 'v66', hebrew: 'הוּזְמַן', transcription: 'hузман', russian: 'быть заказанным', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Пуаль' },
-  { id: 'v67', hebrew: 'לִכְרֹע', transcription: 'лихрoа', russian: 'сгибать (трубу)', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль' },
+  { id: 'v67', hebrew: 'לְכוֹפֵף', transcription: 'лехофЭф', russian: 'сгибать (трубу)', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль' },
   { id: 'v68', hebrew: 'לְחַזֵּק', transcription: 'лехазек', russian: 'укреплять / затягивать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль' },
   { id: 'v69', hebrew: 'חוּזַּק', transcription: 'хузак', russian: 'быть укреплённым', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Пуаль' },
   { id: 'v70', hebrew: 'לְפָרֵק', transcription: 'лефарек', russian: 'разбирать / демонтировать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль' },

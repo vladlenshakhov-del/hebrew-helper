@@ -49,8 +49,8 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
           )}
         </div>
       </div>
-      <span className="text-sm text-muted-foreground italic">{word.transcription}</span>
-      <span className="text-base font-medium text-primary">{word.russian}</span>
+      <span className="text-base text-muted-foreground italic">{word.transcription}</span>
+      <span className="text-lg font-medium text-primary">{word.russian}</span>
       
       {word.forms && (
         <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
