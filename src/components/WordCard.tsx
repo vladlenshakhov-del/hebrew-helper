@@ -42,10 +42,10 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
                 <Clock className="w-3 h-3" /> {daysLeft}д
               </span>
             )}
-            <span className="font-hebrew text-xl md:text-2xl leading-snug text-foreground text-center break-words w-full" dir="rtl">
+            <span className="font-hebrew text-2xl md:text-3xl leading-snug text-foreground text-center break-words w-full" dir="rtl">
               {word.hebrew}
             </span>
-            <span className="text-xs text-muted-foreground italic text-center break-words w-full">{word.transcription}</span>
+            <span className="text-sm text-muted-foreground italic text-center break-words w-full">{word.transcription}</span>
             {word.gender && (
               <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">
                 {word.gender === 'masculine' ? '♂ муж.' : '♀ жен.'}
