@@ -23,7 +23,7 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
   return (
     <div className={`rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col gap-2 shadow-sm`}>
       <div className="flex items-start justify-between gap-4">
-        <span className="font-hebrew text-2xl md:text-3xl leading-relaxed text-foreground" dir="rtl">
+        <span className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground" dir="rtl">
           {word.hebrew}
         </span>
         <div className="flex items-center gap-1.5 flex-shrink-0 mt-1">
@@ -49,8 +49,8 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
           )}
         </div>
       </div>
-      <span className="text-sm text-muted-foreground italic">{word.transcription}</span>
-      <span className="text-base font-medium text-primary">{word.russian}</span>
+      <span className="text-base text-muted-foreground italic">{word.transcription}</span>
+      <span className="text-lg font-medium text-primary">{word.russian}</span>
       
       {word.forms && (
         <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">

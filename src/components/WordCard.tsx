@@ -42,10 +42,10 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
                 <Clock className="w-3 h-3" /> {daysLeft}д
               </span>
             )}
-            <span className="font-hebrew text-xl md:text-2xl leading-snug text-foreground text-center break-words w-full" dir="rtl">
+            <span className="font-hebrew text-2xl md:text-3xl leading-snug text-foreground text-center break-words w-full" dir="rtl">
               {word.hebrew}
             </span>
-            <span className="text-xs text-muted-foreground italic text-center break-words w-full">{word.transcription}</span>
+            <span className="text-sm text-muted-foreground italic text-center break-words w-full">{word.transcription}</span>
             {word.gender && (
               <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">
                 {word.gender === 'masculine' ? '♂ муж.' : '♀ жен.'}
@@ -61,13 +61,13 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
                 {word.subcategory}
               </span>
             )}
-            <span className="text-xs text-muted-foreground mt-1 opacity-60">нажмите для перевода</span>
+            <span className="text-[11px] text-muted-foreground mt-1 opacity-60">нажмите для перевода</span>
           </div>
 
           {/* Back */}
           <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-primary p-4 flex flex-col items-center justify-center gap-1.5 shadow-md overflow-hidden">
-            <span className="text-sm md:text-base font-medium text-primary-foreground text-center break-words w-full">{word.russian}</span>
-            <span className="font-hebrew text-sm text-primary-foreground/70 text-center break-words w-full" dir="rtl">{word.hebrew}</span>
+            <span className="text-base md:text-lg font-medium text-primary-foreground text-center break-words w-full">{word.russian}</span>
+            <span className="font-hebrew text-base text-primary-foreground/70 text-center break-words w-full" dir="rtl">{word.hebrew}</span>
             {word.forms && (
               <div className="text-[10px] text-primary-foreground/60 text-center space-y-0.5">
                 {word.forms.feminine && <p>♀ {word.forms.feminine}</p>}
