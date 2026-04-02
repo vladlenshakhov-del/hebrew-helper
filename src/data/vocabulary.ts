@@ -9,6 +9,13 @@ export interface WordForms {
   femininePlural?: string;
 }
 
+export interface VerbConjugation {
+  past?: string;      // прошедшее
+  present?: string;   // настоящее
+  future?: string;    // будущее
+  imperative?: string; // повелительное
+}
+
 export interface Word {
   id: string;
   hebrew: string;
@@ -19,6 +26,8 @@ export interface Word {
   gender?: Gender;
   forms?: WordForms;
   binyan?: Binyan;
+  preposition?: string;   // предлог для глагола
+  conjugation?: VerbConjugation;
   example?: { hebrew: string; russian: string };
 }
 
