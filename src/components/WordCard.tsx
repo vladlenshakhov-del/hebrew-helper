@@ -51,9 +51,19 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
                 {word.gender === 'masculine' ? '♂ муж.' : '♀ жен.'}
               </span>
             )}
+            {word.forms?.plural && (
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">
+                мн. {word.forms.plural}
+              </span>
+            )}
             {word.binyan && (
               <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">
                 {word.binyan}
+              </span>
+            )}
+            {word.preposition && (
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/50 text-accent-foreground">
+                + {word.preposition}
               </span>
             )}
             {word.subcategory && !word.binyan && (
