@@ -80,8 +80,8 @@ const Index = () => {
     <div className={viewMode === 'cards' ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" : "flex flex-col gap-3"}>
       {words.map((w) => (
         viewMode === 'cards'
-          ? <WordCard key={w.id} word={w} review={sr.getReview(w.id)} onSetInterval={sr.setInterval} onClearInterval={sr.clearInterval} />
-          : <WordListItem key={w.id} word={w} review={sr.getReview(w.id)} onSetInterval={sr.setInterval} onClearInterval={sr.clearInterval} />
+          ? <WordCard key={w.id} word={w} review={getReview(w.id)} onSetInterval={setSrInterval} onClearInterval={clearSrInterval} />
+          : <WordListItem key={w.id} word={w} review={getReview(w.id)} onSetInterval={setSrInterval} onClearInterval={clearSrInterval} />
       ))}
     </div>
   );
