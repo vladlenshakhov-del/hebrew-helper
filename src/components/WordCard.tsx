@@ -51,9 +51,19 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
                 {word.gender === 'masculine' ? '♂ муж.' : '♀ жен.'}
               </span>
             )}
+            {word.forms?.plural && (
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">
+                мн. {word.forms.plural}
+              </span>
+            )}
             {word.binyan && (
               <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">
                 {word.binyan}
+              </span>
+            )}
+            {word.preposition && (
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/50 text-accent-foreground">
+                + {word.preposition}
               </span>
             )}
             {word.subcategory && !word.binyan && (
@@ -73,6 +83,14 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
                 {word.forms.feminine && <p>♀ {word.forms.feminine}</p>}
                 {word.forms.plural && <p>мн. {word.forms.plural}</p>}
                 {word.forms.femininePlural && <p>♀мн. {word.forms.femininePlural}</p>}
+              </div>
+            )}
+            {word.conjugation && (
+              <div className="text-[10px] text-primary-foreground/60 text-center space-y-0.5 border-t border-primary-foreground/20 pt-1 w-full">
+                {word.conjugation.past && <p>⏪ {word.conjugation.past}</p>}
+                {word.conjugation.present && <p>▶️ {word.conjugation.present}</p>}
+                {word.conjugation.future && <p>⏩ {word.conjugation.future}</p>}
+                {word.conjugation.imperative && <p>❗ {word.conjugation.imperative}</p>}
               </div>
             )}
             {word.example && (

@@ -42,6 +42,11 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
               {word.binyan}
             </span>
           )}
+          {word.preposition && (
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/50 text-accent-foreground">
+              + {word.preposition}
+            </span>
+          )}
           {word.subcategory && !word.binyan && (
             <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
               {word.subcategory}
@@ -57,6 +62,15 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
           {word.forms.feminine && <span>♀ {word.forms.feminine}</span>}
           {word.forms.plural && <span>мн. {word.forms.plural}</span>}
           {word.forms.femininePlural && <span>♀мн. {word.forms.femininePlural}</span>}
+        </div>
+      )}
+
+      {word.conjugation && (
+        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+          {word.conjugation.past && <span>⏪ {word.conjugation.past}</span>}
+          {word.conjugation.present && <span>▶️ {word.conjugation.present}</span>}
+          {word.conjugation.future && <span>⏩ {word.conjugation.future}</span>}
+          {word.conjugation.imperative && <span>❗ {word.conjugation.imperative}</span>}
         </div>
       )}
 
