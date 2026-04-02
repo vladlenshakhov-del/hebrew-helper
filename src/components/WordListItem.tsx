@@ -65,6 +65,15 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
         </div>
       )}
 
+      {word.conjugation && (
+        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+          {word.conjugation.past && <span>⏪ {word.conjugation.past}</span>}
+          {word.conjugation.present && <span>▶️ {word.conjugation.present}</span>}
+          {word.conjugation.future && <span>⏩ {word.conjugation.future}</span>}
+          {word.conjugation.imperative && <span>❗ {word.conjugation.imperative}</span>}
+        </div>
+      )}
+
       {word.example && (
         <div className="mt-1 border-t border-border pt-2">
           <p className="font-hebrew text-sm text-foreground/80" dir="rtl">{word.example.hebrew}</p>
