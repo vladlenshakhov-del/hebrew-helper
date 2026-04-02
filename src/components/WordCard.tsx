@@ -85,6 +85,14 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
                 {word.forms.femininePlural && <p>♀мн. {word.forms.femininePlural}</p>}
               </div>
             )}
+            {word.conjugation && (
+              <div className="text-[10px] text-primary-foreground/60 text-center space-y-0.5 border-t border-primary-foreground/20 pt-1 w-full">
+                {word.conjugation.past && <p>⏪ {word.conjugation.past}</p>}
+                {word.conjugation.present && <p>▶️ {word.conjugation.present}</p>}
+                {word.conjugation.future && <p>⏩ {word.conjugation.future}</p>}
+                {word.conjugation.imperative && <p>❗ {word.conjugation.imperative}</p>}
+              </div>
+            )}
             {word.example && (
               <div className="mt-1 text-center border-t border-primary-foreground/20 pt-1.5 w-full">
                 <p className="font-hebrew text-xs text-primary-foreground/80 break-words" dir="rtl">{word.example.hebrew}</p>
