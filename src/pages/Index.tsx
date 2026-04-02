@@ -32,10 +32,12 @@ const Index = () => {
   const [showDueOnly, setShowDueOnly] = useState(false);
   const [selectedBinyan, setSelectedBinyan] = useState<string | null>(null);
 
-  const stripNiqqud = (s: string) => s.replace(/[\u0591-\u05C7]/g, '');
+  const stripNiqqud = useCallback((s: string) => s.replace(/[\u0591-\u05C7]/g, ''), []);
+
+  const { isDue, sortByPriority, getReview, setInterval: setSrInterval, clearInterval: clearSrInterval, reviews } = sr;
 
   const filtered = useMemo(() => {
-    let result = vocabulary.filter((w) => {
+    return vocabulary.filter((w) => {
       const matchCat = selectedCategory === 'all' || w.category === selectedCategory;
       const q = search.toLowerCase();
       const qClean = stripNiqqud(q);
@@ -45,20 +47,19 @@ const Index = () => {
         stripNiqqud(w.hebrew).includes(qClean) ||
         w.transcription.toLowerCase().includes(q);
       const matchBinyan = !selectedBinyan || w.binyan === selectedBinyan;
-      const matchDue = !showDueOnly || sr.isDue(w.id);
+      const matchDue = !showDueOnly || isDue(w.id);
       return matchCat && matchSearch && matchBinyan && matchDue;
     });
-    return result;
-  }, [selectedCategory, search, selectedBinyan, showDueOnly, sr]);
+  }, [selectedCategory, search, selectedBinyan, showDueOnly, isDue, stripNiqqud]);
 
   const processed = useMemo(() => {
-    let result = sr.sortByPriority(filtered);
+    let result = sortByPriority(filtered);
     if (isShuffled) {
       result = shuffleArray(result);
     }
     return result;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filtered, isShuffled, shuffleKey, sr]);
+  }, [filtered, isShuffled, shuffleKey, sortByPriority]);
 
   const grouped = useMemo(() => {
     if (selectedCategory !== 'all') return null;
