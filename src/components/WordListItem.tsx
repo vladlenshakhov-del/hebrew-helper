@@ -42,6 +42,11 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
               {word.binyan}
             </span>
           )}
+          {word.preposition && (
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/50 text-accent-foreground">
+              + {word.preposition}
+            </span>
+          )}
           {word.subcategory && !word.binyan && (
             <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
               {word.subcategory}
