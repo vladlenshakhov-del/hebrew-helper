@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef, useDeferredValue } from 'react';
 import { vocabulary, Category, categoryLabels } from '@/data/vocabulary';
 import WordCard from '@/components/WordCard';
 import WordListItem from '@/components/WordListItem';
@@ -31,15 +31,22 @@ const Index = () => {
   const [shuffleKey, setShuffleKey] = useState(0);
   const [showDueOnly, setShowDueOnly] = useState(false);
   const [selectedBinyan, setSelectedBinyan] = useState<string | null>(null);
+  const deferredSearch = useDeferredValue(search);
+  const itemsPerPage = viewMode === 'cards' ? 60 : 120;
+  const [visibleCount, setVisibleCount] = useState(itemsPerPage);
 
   const stripNiqqud = useCallback((s: string) => s.replace(/[\u0591-\u05C7]/g, ''), []);
 
   const { isDue, sortByPriority, getReview, setInterval: setSrInterval, clearInterval: clearSrInterval, reviews } = sr;
 
+  useEffect(() => {
+    setVisibleCount(itemsPerPage);
+  }, [itemsPerPage, selectedCategory, search, isShuffled, shuffleKey, showDueOnly, selectedBinyan]);
+
   const filtered = useMemo(() => {
     return vocabulary.filter((w) => {
       const matchCat = selectedCategory === 'all' || w.category === selectedCategory;
-      const q = search.toLowerCase();
+      const q = deferredSearch.toLowerCase();
       const qClean = stripNiqqud(q);
       const matchSearch =
         !q ||
@@ -50,7 +57,7 @@ const Index = () => {
       const matchDue = !showDueOnly || isDue(w.id);
       return matchCat && matchSearch && matchBinyan && matchDue;
     });
-  }, [selectedCategory, search, selectedBinyan, showDueOnly, isDue, stripNiqqud]);
+  }, [selectedCategory, deferredSearch, selectedBinyan, showDueOnly, isDue, stripNiqqud]);
 
   const processed = useMemo(() => {
     let result = sortByPriority(filtered);
@@ -61,15 +68,19 @@ const Index = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtered, isShuffled, shuffleKey, sortByPriority]);
 
+  const visibleProcessed = useMemo(() => {
+    return processed.slice(0, visibleCount);
+  }, [processed, visibleCount]);
+
   const grouped = useMemo(() => {
     if (selectedCategory !== 'all') return null;
     const groups: Partial<Record<Category, typeof processed>> = {};
-    processed.forEach((w) => {
+    visibleProcessed.forEach((w) => {
       if (!groups[w.category]) groups[w.category] = [];
       groups[w.category]!.push(w);
     });
     return groups;
-  }, [processed, selectedCategory]);
+  }, [visibleProcessed, selectedCategory]);
 
   const handleShuffle = useCallback(() => {
     setIsShuffled(true);
@@ -192,7 +203,7 @@ const Index = () => {
               <span className="font-hebrew text-primary ml-2" dir="rtl">{categoryLabels[selectedCategory].he}</span>
               <span className="text-sm font-normal text-muted-foreground ml-2">({processed.length})</span>
             </h2>
-            {renderWords(processed)}
+            {renderWords(visibleProcessed)}
           </>
         ) : grouped ? (
           Object.entries(grouped).map(([cat, words]) => (
@@ -211,6 +222,17 @@ const Index = () => {
           <div className="text-center py-16">
             <p className="text-4xl mb-3">🔍</p>
             <p className="text-muted-foreground">Ничего не найдено</p>
+          </div>
+        )}
+
+        {processed.length > visibleCount && (
+          <div className="mt-8 flex justify-center">
+            <button
+              onClick={() => setVisibleCount((count) => Math.min(count + itemsPerPage, processed.length))}
+              className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              Показать ещё ({visibleCount} / {processed.length})
+            </button>
           </div>
         )}
       </main>

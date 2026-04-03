@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Word } from '@/data/vocabulary';
 import { ReviewData } from '@/hooks/useSpacedRepetition';
 import { Clock, RotateCcw } from 'lucide-react';
@@ -21,7 +22,7 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
   const daysLeft = review ? Math.max(0, Math.ceil((review.nextReview - Date.now()) / 86400000)) : 0;
 
   return (
-    <div className={`rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col gap-2 shadow-sm`}>
+    <div className={`content-visibility-auto rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col gap-2 shadow-sm`}>
       <div className="flex items-start justify-between gap-4">
         <span className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground" dir="rtl">
           {word.hebrew}
@@ -110,4 +111,4 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
   );
 };
 
-export default WordListItem;
+export default memo(WordListItem);
