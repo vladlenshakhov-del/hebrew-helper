@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { Word } from '@/data/vocabulary';
 import { ReviewData } from '@/hooks/useSpacedRepetition';
 import { Clock, RotateCcw } from 'lucide-react';
@@ -24,7 +24,7 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
   const daysLeft = review ? Math.max(0, Math.ceil((review.nextReview - Date.now()) / 86400000)) : 0;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="content-visibility-auto flex flex-col gap-2">
       <div
         onClick={() => setFlipped(!flipped)}
         className="group cursor-pointer perspective-1000"
@@ -132,4 +132,4 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
   );
 };
 
-export default WordCard;
+export default memo(WordCard);
