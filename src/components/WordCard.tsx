@@ -95,8 +95,8 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
             )}
             {word.example && (
               <div className="mt-1 text-center border-t border-primary-foreground/20 pt-1.5 w-full">
-                <p className="font-hebrew text-xs text-primary-foreground/80 break-words" dir="rtl">{word.example.hebrew}</p>
-                <p className="text-[10px] text-primary-foreground/60 mt-0.5 break-words">{word.example.russian}</p>
+                <p className="font-hebrew text-sm text-primary-foreground/80 break-words" dir="rtl">{word.example.hebrew}</p>
+                <p className="text-xs text-primary-foreground/60 mt-0.5 break-words">{word.example.russian}</p>
               </div>
             )}
           </div>
