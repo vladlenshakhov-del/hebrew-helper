@@ -86,7 +86,7 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
               </div>
             )}
             {word.conjugation && (
-              <div className="text-[10px] text-primary-foreground/60 text-center space-y-0.5 border-t border-primary-foreground/20 pt-1 w-full">
+              <div className="text-xs text-primary-foreground/60 text-center space-y-0.5 border-t border-primary-foreground/20 pt-1 w-full">
                 {word.conjugation.past && <p>⏪ {word.conjugation.past}</p>}
                 {word.conjugation.present && <p>▶️ {word.conjugation.present}</p>}
                 {word.conjugation.future && <p>⏩ {word.conjugation.future}</p>}
