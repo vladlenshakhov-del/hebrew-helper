@@ -76,8 +76,8 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
 
           {/* Back */}
           <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-primary p-4 flex flex-col items-center justify-center gap-1.5 shadow-md overflow-hidden">
-            <span className="text-base md:text-lg font-medium text-primary-foreground text-center break-words w-full">{word.russian}</span>
-            <span className="font-hebrew text-base text-primary-foreground/70 text-center break-words w-full" dir="rtl">{word.hebrew}</span>
+            <span className="text-lg md:text-xl font-medium text-primary-foreground text-center break-words w-full">{word.russian}</span>
+            <span className="font-hebrew text-lg text-primary-foreground/70 text-center break-words w-full" dir="rtl">{word.hebrew}</span>
             {word.forms && (
               <div className="text-[10px] text-primary-foreground/60 text-center space-y-0.5">
                 {word.forms.feminine && <p>♀ {word.forms.feminine}</p>}
