@@ -79,7 +79,7 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
             <span className="text-lg md:text-xl font-medium text-primary-foreground text-center break-words w-full">{word.russian}</span>
             <span className="font-hebrew text-lg text-primary-foreground/70 text-center break-words w-full" dir="rtl">{word.hebrew}</span>
             {word.forms && (
-              <div className="text-[10px] text-primary-foreground/60 text-center space-y-0.5">
+              <div className="text-xs text-primary-foreground/60 text-center space-y-0.5">
                 {word.forms.feminine && <p>♀ {word.forms.feminine}</p>}
                 {word.forms.plural && <p>мн. {word.forms.plural}</p>}
                 {word.forms.femininePlural && <p>♀мн. {word.forms.femininePlural}</p>}
