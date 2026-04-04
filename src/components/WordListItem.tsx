@@ -56,10 +56,10 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
         </div>
       </div>
       <span className="text-base text-muted-foreground italic">{word.transcription}</span>
-      <span className="text-lg font-medium text-primary">{word.russian}</span>
+      <span className="text-xl font-medium text-primary">{word.russian}</span>
       
       {word.forms && (
-        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+        <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
           {word.forms.feminine && <span>♀ {word.forms.feminine}</span>}
           {word.forms.plural && <span>мн. {word.forms.plural}</span>}
           {word.forms.femininePlural && <span>♀мн. {word.forms.femininePlural}</span>}
@@ -67,7 +67,7 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
       )}
 
       {word.conjugation && (
-        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+        <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
           {word.conjugation.past && <span>⏪ {word.conjugation.past}</span>}
           {word.conjugation.present && <span>▶️ {word.conjugation.present}</span>}
           {word.conjugation.future && <span>⏩ {word.conjugation.future}</span>}
@@ -77,8 +77,8 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
 
       {word.example && (
         <div className="mt-1 border-t border-border pt-2">
-          <p className="font-hebrew text-sm text-foreground/80" dir="rtl">{word.example.hebrew}</p>
-          <p className="text-xs text-muted-foreground mt-0.5">{word.example.russian}</p>
+          <p className="font-hebrew text-base text-foreground/80" dir="rtl">{word.example.hebrew}</p>
+          <p className="text-sm text-muted-foreground mt-0.5">{word.example.russian}</p>
         </div>
       )}
 

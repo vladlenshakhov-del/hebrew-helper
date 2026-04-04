@@ -42,10 +42,10 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
                 <Clock className="w-3 h-3" /> {daysLeft}д
               </span>
             )}
-            <span className="font-hebrew text-2xl md:text-3xl leading-snug text-foreground text-center break-words w-full" dir="rtl">
+            <span className="font-hebrew text-3xl md:text-4xl leading-snug text-foreground text-center break-words w-full" dir="rtl">
               {word.hebrew}
             </span>
-            <span className="text-sm text-muted-foreground italic text-center break-words w-full">{word.transcription}</span>
+            <span className="text-base text-muted-foreground italic text-center break-words w-full">{word.transcription}</span>
             {word.gender && (
               <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">
                 {word.gender === 'masculine' ? '♂ муж.' : '♀ жен.'}
@@ -76,17 +76,17 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
 
           {/* Back */}
           <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-primary p-4 flex flex-col items-center justify-center gap-1.5 shadow-md overflow-hidden">
-            <span className="text-base md:text-lg font-medium text-primary-foreground text-center break-words w-full">{word.russian}</span>
-            <span className="font-hebrew text-base text-primary-foreground/70 text-center break-words w-full" dir="rtl">{word.hebrew}</span>
+            <span className="text-lg md:text-xl font-medium text-primary-foreground text-center break-words w-full">{word.russian}</span>
+            <span className="font-hebrew text-lg text-primary-foreground/70 text-center break-words w-full" dir="rtl">{word.hebrew}</span>
             {word.forms && (
-              <div className="text-[10px] text-primary-foreground/60 text-center space-y-0.5">
+              <div className="text-xs text-primary-foreground/60 text-center space-y-0.5">
                 {word.forms.feminine && <p>♀ {word.forms.feminine}</p>}
                 {word.forms.plural && <p>мн. {word.forms.plural}</p>}
                 {word.forms.femininePlural && <p>♀мн. {word.forms.femininePlural}</p>}
               </div>
             )}
             {word.conjugation && (
-              <div className="text-[10px] text-primary-foreground/60 text-center space-y-0.5 border-t border-primary-foreground/20 pt-1 w-full">
+              <div className="text-xs text-primary-foreground/60 text-center space-y-0.5 border-t border-primary-foreground/20 pt-1 w-full">
                 {word.conjugation.past && <p>⏪ {word.conjugation.past}</p>}
                 {word.conjugation.present && <p>▶️ {word.conjugation.present}</p>}
                 {word.conjugation.future && <p>⏩ {word.conjugation.future}</p>}
@@ -95,8 +95,8 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
             )}
             {word.example && (
               <div className="mt-1 text-center border-t border-primary-foreground/20 pt-1.5 w-full">
-                <p className="font-hebrew text-xs text-primary-foreground/80 break-words" dir="rtl">{word.example.hebrew}</p>
-                <p className="text-[10px] text-primary-foreground/60 mt-0.5 break-words">{word.example.russian}</p>
+                <p className="font-hebrew text-sm text-primary-foreground/80 break-words" dir="rtl">{word.example.hebrew}</p>
+                <p className="text-xs text-primary-foreground/60 mt-0.5 break-words">{word.example.russian}</p>
               </div>
             )}
           </div>
