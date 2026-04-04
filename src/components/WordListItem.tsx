@@ -77,8 +77,8 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
 
       {word.example && (
         <div className="mt-1 border-t border-border pt-2">
-          <p className="font-hebrew text-sm text-foreground/80" dir="rtl">{word.example.hebrew}</p>
-          <p className="text-xs text-muted-foreground mt-0.5">{word.example.russian}</p>
+          <p className="font-hebrew text-base text-foreground/80" dir="rtl">{word.example.hebrew}</p>
+          <p className="text-sm text-muted-foreground mt-0.5">{word.example.russian}</p>
         </div>
       )}
 
