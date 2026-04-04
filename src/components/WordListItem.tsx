@@ -59,7 +59,7 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
       <span className="text-xl font-medium text-primary">{word.russian}</span>
       
       {word.forms && (
-        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+        <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
           {word.forms.feminine && <span>♀ {word.forms.feminine}</span>}
           {word.forms.plural && <span>мн. {word.forms.plural}</span>}
           {word.forms.femininePlural && <span>♀мн. {word.forms.femininePlural}</span>}
