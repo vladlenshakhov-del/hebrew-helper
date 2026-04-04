@@ -67,7 +67,7 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
       )}
 
       {word.conjugation && (
-        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+        <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
           {word.conjugation.past && <span>⏪ {word.conjugation.past}</span>}
           {word.conjugation.present && <span>▶️ {word.conjugation.present}</span>}
           {word.conjugation.future && <span>⏩ {word.conjugation.future}</span>}
