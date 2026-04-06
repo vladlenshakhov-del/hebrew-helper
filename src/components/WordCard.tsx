@@ -76,17 +76,17 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
 
           {/* Back */}
           <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-primary p-4 flex flex-col items-center justify-center gap-1.5 shadow-md overflow-hidden">
-            <span className="text-lg md:text-xl font-medium text-primary-foreground text-center break-words w-full">{word.russian}</span>
-            <span className="font-hebrew text-lg text-primary-foreground/70 text-center break-words w-full" dir="rtl">{word.hebrew}</span>
+            <span className="text-xl md:text-2xl font-bold text-primary-foreground text-center break-words w-full">{word.russian}</span>
+            <span className="font-hebrew text-xl font-semibold text-primary-foreground/80 text-center break-words w-full" dir="rtl">{word.hebrew}</span>
             {word.forms && (
-              <div className="text-xs text-primary-foreground/60 text-center space-y-0.5">
+              <div className="text-sm font-medium text-primary-foreground/70 text-center space-y-0.5">
                 {word.forms.feminine && <p>♀ {word.forms.feminine}</p>}
                 {word.forms.plural && <p>мн. {word.forms.plural}</p>}
                 {word.forms.femininePlural && <p>♀мн. {word.forms.femininePlural}</p>}
               </div>
             )}
             {word.conjugation && (
-              <div className="text-xs text-primary-foreground/60 text-center space-y-0.5 border-t border-primary-foreground/20 pt-1 w-full">
+              <div className="text-sm font-medium text-primary-foreground/70 text-center space-y-0.5 border-t border-primary-foreground/20 pt-1 w-full">
                 {word.conjugation.past && <p>⏪ {word.conjugation.past}</p>}
                 {word.conjugation.present && <p>▶️ {word.conjugation.present}</p>}
                 {word.conjugation.future && <p>⏩ {word.conjugation.future}</p>}
@@ -95,8 +95,8 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
             )}
             {word.example && (
               <div className="mt-1 text-center border-t border-primary-foreground/20 pt-1.5 w-full">
-                <p className="font-hebrew text-sm text-primary-foreground/80 break-words" dir="rtl">{word.example.hebrew}</p>
-                <p className="text-xs text-primary-foreground/60 mt-0.5 break-words">{word.example.russian}</p>
+                <p className="font-hebrew text-base font-semibold text-primary-foreground/90 break-words" dir="rtl">{word.example.hebrew}</p>
+                <p className="text-sm font-medium text-primary-foreground/70 mt-0.5 break-words">{word.example.russian}</p>
               </div>
             )}
           </div>
