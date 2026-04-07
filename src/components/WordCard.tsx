@@ -27,76 +27,87 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
     <div className="content-visibility-auto flex flex-col gap-2">
       <div
         onClick={() => setFlipped(!flipped)}
-        className="group cursor-pointer perspective-1000"
+        className="group cursor-pointer h-full"
+        style={{ perspective: '1000px' }}
       >
         <div
-          className={`relative w-full transition-transform duration-500 transform-style-preserve-3d ${
-            flipped ? 'rotate-y-180' : ''
-          }`}
-          style={{ minHeight: word.category === 'sentences' ? '240px' : '180px' }}
+          className="relative w-full transition-transform duration-500"
+          style={{
+            minHeight: word.category === 'sentences' ? '240px' : '180px',
+            transformStyle: 'preserve-3d',
+            transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+          }}
         >
           {/* Front */}
-          <div className={`absolute inset-0 backface-hidden rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col items-center justify-center gap-1.5 shadow-sm hover:shadow-md transition-shadow overflow-hidden`}>
+          <div
+            className={`absolute inset-0 rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col items-center justify-center gap-1.5 shadow-sm hover:shadow-md transition-shadow overflow-hidden`}
+            style={{ backfaceVisibility: 'hidden' }}
+          >
             {!isDue && (
               <span className="absolute top-2 right-2 text-[10px] px-1.5 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-0.5">
                 <Clock className="w-3 h-3" /> {daysLeft}д
               </span>
             )}
-            <span className="font-hebrew text-3xl md:text-4xl leading-snug text-foreground text-center break-words w-full" dir="rtl">
+            <span className="font-hebrew text-3xl md:text-4xl leading-snug text-foreground text-center break-words w-full max-w-full" dir="rtl">
               {word.hebrew}
             </span>
-            <span className="text-base text-muted-foreground italic text-center break-words w-full">{word.transcription}</span>
-            {word.gender && (
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">
-                {word.gender === 'masculine' ? '♂ муж.' : '♀ жен.'}
-              </span>
-            )}
-            {word.forms?.plural && (
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">
-                мн. {word.forms.plural}
-              </span>
-            )}
-            {word.binyan && (
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">
-                {word.binyan}
-              </span>
-            )}
-            {word.preposition && (
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/50 text-accent-foreground">
-                + {word.preposition}
-              </span>
-            )}
-            {word.subcategory && !word.binyan && (
-              <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                {word.subcategory}
-              </span>
-            )}
+            <span className="text-base text-muted-foreground italic text-center break-words w-full max-w-full">{word.transcription}</span>
+            <div className="flex flex-wrap gap-1 justify-center w-full">
+              {word.gender && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground whitespace-nowrap">
+                  {word.gender === 'masculine' ? '♂ муж.' : '♀ жен.'}
+                </span>
+              )}
+              {word.forms?.plural && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
+                  мн. {word.forms.plural}
+                </span>
+              )}
+              {word.binyan && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
+                  {word.binyan}
+                </span>
+              )}
+              {word.preposition && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/50 text-accent-foreground whitespace-nowrap">
+                  + {word.preposition}
+                </span>
+              )}
+              {word.subcategory && !word.binyan && (
+                <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
+                  {word.subcategory}
+                </span>
+              )}
+            </div>
             <span className="text-[11px] text-muted-foreground mt-1 opacity-60">нажмите для перевода</span>
           </div>
 
           {/* Back */}
-          <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-primary p-4 flex flex-col items-center justify-center gap-1.5 shadow-md overflow-hidden">
-            <span className="text-xl md:text-2xl font-bold text-primary-foreground text-center break-words w-full">{word.russian}</span>
-            <span className="font-hebrew text-xl font-semibold text-primary-foreground/80 text-center break-words w-full" dir="rtl">{word.hebrew}</span>
+          <div
+            className="absolute inset-0 rounded-xl bg-primary p-4 flex flex-col items-center justify-center gap-1.5 shadow-md overflow-hidden"
+            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+          >
+            <span className="text-xl md:text-2xl font-bold text-primary-foreground text-center break-words w-full max-w-full">{word.russian}</span>
+            <span className="font-hebrew text-xl font-semibold text-primary-foreground/80 text-center break-words w-full max-w-full" dir="rtl">{word.hebrew}</span>
             {word.forms && (
-              <div className="text-sm font-medium text-primary-foreground/70 text-center space-y-0.5">
-                {word.forms.feminine && <p>♀ {word.forms.feminine}</p>}
-                {word.forms.plural && <p>мн. {word.forms.plural}</p>}
-                {word.forms.femininePlural && <p>♀мн. {word.forms.femininePlural}</p>}
+              <div className="text-sm font-medium text-primary-foreground/70 text-center space-y-0.5 w-full">
+                {word.forms.feminine && <p className="break-words">♀ {word.forms.feminine}</p>}
+                {word.forms.plural && <p className="break-words">мн. {word.forms.plural}</p>}
+                {word.forms.femininePlural && <p className="break-words">♀мн. {word.forms.femininePlural}</p>}
               </div>
             )}
             {word.conjugation && (
               <div className="text-sm font-medium text-primary-foreground/70 text-center space-y-0.5 border-t border-primary-foreground/20 pt-1 w-full">
-                {word.conjugation.past && <p>⏪ {word.conjugation.past}</p>}
-                {word.conjugation.present && <p>▶️ {word.conjugation.present}</p>}
-                {word.conjugation.future && <p>⏩ {word.conjugation.future}</p>}
-                {word.conjugation.imperative && <p>❗ {word.conjugation.imperative}</p>}
+                {word.conjugation.past && <p className="break-words">⏪ {word.conjugation.past}</p>}
+                {word.conjugation.present && <p className="break-words">▶️ {word.conjugation.present}</p>}
+                {word.conjugation.future && <p className="break-words">⏩ {word.conjugation.future}</p>}
+                {word.conjugation.imperative && <p className="break-words">❗ {word.conjugation.imperative}</p>}
               </div>
             )}
             {word.example && (
               <div className="mt-1 text-center border-t border-primary-foreground/20 pt-1.5 w-full">
-                <p className="font-hebrew text-base font-semibold text-primary-foreground/90 break-words" dir="rtl">{word.example.hebrew}</p>
-                <p className="text-sm font-medium text-primary-foreground/70 mt-0.5 break-words">{word.example.russian}</p>
+                <p className="font-hebrew text-base font-semibold text-primary-foreground/90 break-words w-full max-w-full" dir="rtl">{word.example.hebrew}</p>
+                <p className="text-sm font-medium text-primary-foreground/70 mt-0.5 break-words w-full max-w-full">{word.example.russian}</p>
               </div>
             )}
           </div>
