@@ -33,14 +33,14 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
         <div
           className="relative w-full transition-transform duration-500"
           style={{
-            minHeight: word.category === 'sentences' ? '240px' : '180px',
+            minHeight: word.category === 'sentences' ? '280px' : '220px',
             transformStyle: 'preserve-3d',
             transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
           }}
         >
           {/* Front */}
           <div
-            className={`absolute inset-0 rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col items-center justify-center gap-1.5 shadow-sm hover:shadow-md transition-shadow overflow-hidden`}
+            className={`absolute inset-0 rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col items-center justify-center gap-1.5 shadow-sm hover:shadow-md transition-shadow overflow-y-auto`}
             style={{ backfaceVisibility: 'hidden' }}
           >
             {!isDue && (
@@ -79,12 +79,12 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
                 </span>
               )}
             </div>
-            <span className="text-[11px] text-muted-foreground mt-1 opacity-60">нажмите для перевода</span>
+            <span className="text-[11px] text-muted-foreground mt-auto opacity-60">нажмите для перевода</span>
           </div>
 
           {/* Back */}
           <div
-            className="absolute inset-0 rounded-xl bg-primary p-4 flex flex-col items-center justify-center gap-1.5 shadow-md overflow-hidden"
+            className="absolute inset-0 rounded-xl bg-primary p-4 flex flex-col items-center justify-center gap-1.5 shadow-md overflow-y-auto"
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
             <span className="text-xl md:text-2xl font-bold text-primary-foreground text-center break-words w-full max-w-full">{word.russian}</span>
