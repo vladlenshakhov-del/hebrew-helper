@@ -1,13 +1,15 @@
 import { memo, useState } from 'react';
 import { Word } from '@/data/vocabulary';
 import { ReviewData } from '@/hooks/useSpacedRepetition';
-import { Clock, RotateCcw } from 'lucide-react';
+import { Clock, RotateCcw, Star } from 'lucide-react';
 
 interface WordCardProps {
   word: Word;
   review?: ReviewData;
   onSetInterval?: (wordId: string, days: number) => void;
   onClearInterval?: (wordId: string) => void;
+  isFavorite?: boolean;
+  onToggleFavorite?: (wordId: string) => void;
 }
 
 const intervalOptions = [
@@ -17,7 +19,7 @@ const intervalOptions = [
   { days: 10, label: '10д' },
 ];
 
-const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProps) => {
+const WordCard = ({ word, review, onSetInterval, onClearInterval, isFavorite, onToggleFavorite }: WordCardProps) => {
   const [flipped, setFlipped] = useState(false);
 
   const isDue = !review || Date.now() >= review.nextReview;
@@ -40,46 +42,38 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval }: WordCardProp
         >
           {/* Front */}
           <div
-            className={`absolute inset-0 rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col items-center justify-center gap-1.5 shadow-sm hover:shadow-md transition-shadow overflow-y-auto`}
+            className={`absolute inset-0 rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-3 flex flex-col items-center justify-center gap-1 shadow-sm hover:shadow-md transition-shadow overflow-y-auto`}
             style={{ backfaceVisibility: 'hidden' }}
           >
+            <button
+              onClick={(e) => { e.stopPropagation(); onToggleFavorite?.(word.id); }}
+              className="absolute top-2 right-2 p-1.5 rounded-full hover:bg-accent transition-colors"
+              title={isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
+            >
+              <Star className={`w-4 h-4 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground'}`} />
+            </button>
             {!isDue && (
-              <span className="absolute top-2 right-2 text-[10px] px-1.5 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-0.5">
+              <span className="absolute top-2 left-2 text-[10px] px-1.5 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-0.5">
                 <Clock className="w-3 h-3" /> {daysLeft}д
               </span>
             )}
-            <span className="font-hebrew text-3xl md:text-4xl leading-snug text-foreground text-center break-words w-full max-w-full" dir="rtl">
+            <span className="font-hebrew text-2xl md:text-3xl leading-snug text-foreground text-center break-words w-full max-w-full" dir="rtl">
               {word.hebrew}
             </span>
-            <span className="text-base text-muted-foreground italic text-center break-words w-full max-w-full">{word.transcription}</span>
-            <div className="flex flex-wrap gap-1 justify-center w-full">
+            <span className="text-sm text-muted-foreground italic text-center break-words w-full max-w-full">{word.transcription}</span>
+            <div className="flex flex-wrap gap-0.5 justify-center w-full text-[9px]">
               {word.gender && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground whitespace-nowrap">
-                  {word.gender === 'masculine' ? '♂ муж.' : '♀ жен.'}
-                </span>
-              )}
-              {word.forms?.plural && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
-                  мн. {word.forms.plural}
+                <span className="px-1 py-0.5 rounded-full bg-accent text-accent-foreground whitespace-nowrap">
+                  {word.gender === 'masculine' ? '♂' : '♀'}
                 </span>
               )}
               {word.binyan && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
+                <span className="px-1 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
                   {word.binyan}
                 </span>
               )}
-              {word.preposition && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/50 text-accent-foreground whitespace-nowrap">
-                  + {word.preposition}
-                </span>
-              )}
-              {word.subcategory && !word.binyan && (
-                <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
-                  {word.subcategory}
-                </span>
-              )}
             </div>
-            <span className="text-[11px] text-muted-foreground mt-auto opacity-60">нажмите для перевода</span>
+            <span className="text-[10px] text-muted-foreground mt-auto opacity-60">нажмите</span>
           </div>
 
           {/* Back */}

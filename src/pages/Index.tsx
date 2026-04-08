@@ -5,13 +5,15 @@ import WordListItem from '@/components/WordListItem';
 import CategoryFilter from '@/components/CategoryFilter';
 import { useTheme } from '@/components/ThemeProvider';
 import { useSpacedRepetition, shuffleArray } from '@/hooks/useSpacedRepetition';
-import { Search, LayoutGrid, List, Sun, Moon, Shuffle, ArrowUpDown, Eye, EyeOff } from 'lucide-react';
+import { useFavorites } from '@/hooks/useFavorites';
+import { Search, LayoutGrid, List, Sun, Moon, Shuffle, ArrowUpDown, Eye, EyeOff, Heart } from 'lucide-react';
 
 const BINYANIM = ['Пааль', 'Пиэль', 'Хифиль', 'Нифаль', 'Пуаль', 'Хуфаль', 'Хитпаэль'] as const;
 
 const Index = () => {
   const { theme, toggleTheme } = useTheme();
   const sr = useSpacedRepetition();
+  const { isFavorite, toggleFavorite, isLoaded } = useFavorites();
   const [headerVisible, setHeaderVisible] = useState(true);
   const lastScrollY = useRef(0);
 
@@ -30,6 +32,7 @@ const Index = () => {
   const [isShuffled, setIsShuffled] = useState(false);
   const [shuffleKey, setShuffleKey] = useState(0);
   const [showDueOnly, setShowDueOnly] = useState(false);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [selectedBinyan, setSelectedBinyan] = useState<string | null>(null);
   const deferredSearch = useDeferredValue(search);
   const itemsPerPage = viewMode === 'cards' ? 60 : 120;
@@ -41,7 +44,7 @@ const Index = () => {
 
   useEffect(() => {
     setVisibleCount(itemsPerPage);
-  }, [itemsPerPage, selectedCategory, search, isShuffled, shuffleKey, showDueOnly, selectedBinyan]);
+  }, [itemsPerPage, selectedCategory, search, isShuffled, shuffleKey, showDueOnly, showFavoritesOnly, selectedBinyan]);
 
   const filtered = useMemo(() => {
     return vocabulary.filter((w) => {
@@ -55,9 +58,10 @@ const Index = () => {
         w.transcription.toLowerCase().includes(q);
       const matchBinyan = !selectedBinyan || w.binyan === selectedBinyan;
       const matchDue = !showDueOnly || isDue(w.id);
-      return matchCat && matchSearch && matchBinyan && matchDue;
+      const matchFavorites = !showFavoritesOnly || isFavorite(w.id);
+      return matchCat && matchSearch && matchBinyan && matchDue && matchFavorites;
     });
-  }, [selectedCategory, deferredSearch, selectedBinyan, showDueOnly, isDue, stripNiqqud]);
+  }, [selectedCategory, deferredSearch, selectedBinyan, showDueOnly, showFavoritesOnly, isDue, isFavorite, stripNiqqud]);
 
   const processed = useMemo(() => {
     let result = sortByPriority(filtered);
@@ -91,8 +95,8 @@ const Index = () => {
     <div className={viewMode === 'cards' ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" : "flex flex-col gap-3"}>
       {words.map((w) => (
         viewMode === 'cards'
-          ? <WordCard key={`${w.id}-${selectedCategory}-${viewMode}`} word={w} review={getReview(w.id)} onSetInterval={setSrInterval} onClearInterval={clearSrInterval} />
-          : <WordListItem key={`${w.id}-${selectedCategory}-${viewMode}`} word={w} review={getReview(w.id)} onSetInterval={setSrInterval} onClearInterval={clearSrInterval} />
+          ? <WordCard key={`${w.id}-${selectedCategory}-${viewMode}`} word={w} review={getReview(w.id)} onSetInterval={setSrInterval} onClearInterval={clearSrInterval} isFavorite={isFavorite(w.id)} onToggleFavorite={toggleFavorite} />
+          : <WordListItem key={`${w.id}-${selectedCategory}-${viewMode}`} word={w} review={getReview(w.id)} onSetInterval={setSrInterval} onClearInterval={clearSrInterval} isFavorite={isFavorite(w.id)} onToggleFavorite={toggleFavorite} />
       ))}
     </div>
   );
@@ -161,6 +165,13 @@ const Index = () => {
               title={showDueOnly ? 'Показать все' : 'Только к повторению'}
             >
               {showDueOnly ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+              className={`p-2.5 rounded-lg border border-border transition-colors ${showFavoritesOnly ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+              title={showFavoritesOnly ? 'Показать все' : 'Только избранные'}
+            >
+              <Heart className={`w-4 h-4 ${showFavoritesOnly ? 'fill-current' : ''}`} />
             </button>
           </div>
 

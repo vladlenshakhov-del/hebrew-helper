@@ -1,13 +1,15 @@
 import { memo } from 'react';
 import { Word } from '@/data/vocabulary';
 import { ReviewData } from '@/hooks/useSpacedRepetition';
-import { Clock, RotateCcw } from 'lucide-react';
+import { Clock, RotateCcw, Star } from 'lucide-react';
 
 interface WordListItemProps {
   word: Word;
   review?: ReviewData;
   onSetInterval?: (wordId: string, days: number) => void;
   onClearInterval?: (wordId: string) => void;
+  isFavorite?: boolean;
+  onToggleFavorite?: (wordId: string) => void;
 }
 
 const intervalOptions = [
@@ -17,7 +19,7 @@ const intervalOptions = [
   { days: 10, label: '10д' },
 ];
 
-const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordListItemProps) => {
+const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite, onToggleFavorite }: WordListItemProps) => {
   const isDue = !review || Date.now() >= review.nextReview;
   const daysLeft = review ? Math.max(0, Math.ceil((review.nextReview - Date.now()) / 86400000)) : 0;
 
@@ -28,6 +30,13 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval }: WordList
           {word.hebrew}
         </span>
         <div className="flex items-center gap-1.5 flex-shrink-0 mt-1">
+          <button
+            onClick={() => onToggleFavorite?.(word.id)}
+            className="p-1.5 rounded hover:bg-accent transition-colors"
+            title={isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
+          >
+            <Star className={`w-4 h-4 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground'}`} />
+          </button>
           {!isDue && (
             <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-0.5">
               <Clock className="w-3 h-3" /> {daysLeft}д
