@@ -26,45 +26,49 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite
   return (
     <div className={`content-visibility-auto rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col gap-2 shadow-sm`}>
       <div className="flex items-start justify-between gap-4">
-        <span className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground" dir="rtl">
-          {word.hebrew}
-        </span>
+        <div className="flex-1">
+          <span className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground block" dir="rtl">
+            {word.hebrew}
+          </span>
+          <span className="text-base text-muted-foreground italic block">{word.transcription}</span>
+        </div>
         <div className="flex items-center gap-1.5 flex-shrink-0 mt-1">
           <button
             onClick={() => onToggleFavorite?.(word.id)}
-            className="p-1.5 rounded hover:bg-accent transition-colors"
+            className="p-1 rounded hover:bg-accent transition-colors"
             title={isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
           >
             <Star className={`w-4 h-4 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground'}`} />
           </button>
           {!isDue && (
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-0.5">
+            <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-0.5 flex-shrink-0">
               <Clock className="w-3 h-3" /> {daysLeft}д
-            </span>
-          )}
-          {word.gender && (
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">
-              {word.gender === 'masculine' ? '♂' : '♀'}
-            </span>
-          )}
-          {word.binyan && (
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">
-              {word.binyan}
-            </span>
-          )}
-          {word.preposition && (
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/50 text-accent-foreground">
-              + {word.preposition}
-            </span>
-          )}
-          {word.subcategory && !word.binyan && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
-              {word.subcategory}
             </span>
           )}
         </div>
       </div>
-      <span className="text-base text-muted-foreground italic">{word.transcription}</span>
+      <div className="flex flex-wrap gap-1 items-center">
+        {word.gender && (
+          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">
+            {word.gender === 'masculine' ? '♂' : '♀'}
+          </span>
+        )}
+        {word.binyan && (
+          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">
+            {word.binyan}
+          </span>
+        )}
+        {word.preposition && (
+          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/50 text-accent-foreground">
+            + {word.preposition}
+          </span>
+        )}
+        {word.subcategory && !word.binyan && (
+          <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
+            {word.subcategory}
+          </span>
+        )}
+      </div>
       <span className="text-xl font-medium text-primary">{word.russian}</span>
       
       {word.forms && (
