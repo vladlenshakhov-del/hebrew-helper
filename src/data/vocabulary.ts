@@ -41,7 +41,7 @@ export const categoryLabels: Record<Category, { ru: string; he: string; icon: st
 };
 
 // @ts-ignore - array too large for TS union inference
-export const vocabulary: Word[] = [
+export const vocabulary: Word[
   // ===================== ПОВСЕДНЕВНЫЕ (everyday) =====================
   { id: 'e1', hebrew: 'מָה נִסְגַּר?', transcription: 'ма нисга́р?', russian: 'Что в итоге? / На чем решили?', category: 'everyday' },
   { id: 'e2', hebrew: 'חֲבָל עַל הַזְּמַן', transcription: 'хава́ль аль а-зма́н', russian: 'Просто супер / Офигенно', category: 'everyday' },
@@ -143,7 +143,6 @@ export const vocabulary: Word[] = [
   { id: 'e98', hebrew: 'אֲנִי מַגִּיעַ עוֹד מְעַט', transcription: 'ани магИа од меАт', russian: 'Я скоро буду', category: 'everyday' },
   { id: 'e99', hebrew: 'זֶה הָיָה בְּטָעוּת', transcription: 'зэ айЯ бе-таУт', russian: 'Это было по ошибке', category: 'everyday' },
   { id: 'e100', hebrew: 'כָּל הַכָּבוֹד', transcription: 'коль а-кавОд', russian: 'Молодец / Респект', category: 'everyday' },
-
   // ===================== ГЛАГОЛЫ (verbs) — активная и пассивная формы =====================
   { id: 'v1', hebrew: 'לִכְתֹּב', transcription: 'лихтов', russian: 'писать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль', preposition: 'את', conjugation: { past: 'כָּתַב', present: 'כּוֹתֵב', future: 'יִכְתֹּב', imperative: 'כְּתֹב' }, example: { hebrew: 'אני כותב מכתב', russian: 'Я пишу письмо'  } },
   { id: 'v2', hebrew: 'נִכְתָּב', transcription: 'нихтав', russian: 'быть написанным', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Нифаль', conjugation: { past: 'נִכְתַּב', present: 'נִכְתָּב', future: 'יִכָּתֵב' }, example: { hebrew: 'המכתב נכתב אתמול', russian: 'Письмо было написано вчера'  } },
@@ -268,8 +267,6 @@ export const vocabulary: Word[] = [
   { id: 'v121', hebrew: 'לְהַשְׁאִיר', transcription: 'леhашир', russian: 'оставлять (вещь/сообщение)', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
   { id: 'v122', hebrew: 'הוּשְׁאַר', transcription: 'hушар', russian: 'был оставлен', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Пуаль' },
   { id: 'v123', hebrew: 'לְקַבֵּל', transcription: 'лекабель', russian: 'получать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль' },
-  
-
   // --- Дополнительные пассивные формы ---
   { id: 'v124', hebrew: 'נִלְמָד', transcription: 'нильмад', russian: 'быть изученным', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Нифаль', conjugation: { past: 'נִלְמַד', present: 'נִלְמָד', future: 'יִלָּמֵד' }, example: { hebrew: 'הנושא הזה נלמד בכיתה', russian: 'Эта тема изучается в классе' } },
   { id: 'v125', hebrew: 'נֶאֱכַל', transcription: 'нээхаль', russian: 'быть съеденным', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Нифаль', conjugation: { past: 'נֶאֱכַל', present: 'נֶאֱכָל', future: 'יֵאָכֵל' }, example: { hebrew: 'העוגה נאכלה בחמש דקות', russian: 'Торт был съеден за пять минут' } },
@@ -284,7 +281,6 @@ export const vocabulary: Word[] = [
   { id: 'v134', hebrew: 'הוּבְטַח', transcription: 'hувтах', russian: 'быть обещанным', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Хуфаль', conjugation: { past: 'הוּבְטַח', present: 'מוּבְטָח', future: 'יוּבְטַח' }, example: { hebrew: 'לו הובטחה העלאה', russian: 'Ему было обещано повышение' } },
   { id: 'v135', hebrew: 'הוּרְגַּשׁ', transcription: 'hургаш', russian: 'быть ощутимым', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Хуфаль', conjugation: { past: 'הוּרְגַּשׁ', present: 'מוּרְגָּשׁ', future: 'יוּרְגַּשׁ' }, example: { hebrew: 'הרעידה הורגשה בכל העיר', russian: 'Землетрясение ощущалось по всему городу' } },
   { id: 'v136', hebrew: 'קוּבַּל', transcription: 'кубаль', russian: 'быть принятым', category: 'verbs', subcategory: 'Пассивная форма', binyan: 'Пуаль', conjugation: { past: 'קוּבַּל', present: 'מְקוּבָּל', future: 'יְקוּבַּל' }, example: { hebrew: 'הבקשה קובלה מיד', russian: 'Заявка была принята сразу' } },
-
   // ===================== ПРИЛАГАТЕЛЬНЫЕ (adjectives) =====================
   { id: 'a1', hebrew: 'גָּדוֹל', transcription: 'гадоль', russian: 'большой', category: 'adjectives', gender: 'masculine', forms: {"feminine":"גְּדוֹלָה","plural":"גְּדוֹלִים","femininePlural":"גְּדוֹלוֹת"} },
   { id: 'a2', hebrew: 'קָטָן', transcription: 'катан', russian: 'маленький', category: 'adjectives', gender: 'masculine', forms: {"feminine":"קְטַנָּה","plural":"קְטַנִּים","femininePlural":"קְטַנּוֹת"} },
@@ -320,13 +316,11 @@ export const vocabulary: Word[] = [
   { id: 'a32', hebrew: 'מָלֵא', transcription: 'мале', russian: 'полный', category: 'adjectives', gender: 'masculine', forms: {"feminine":"מְלֵאָה","plural":"מְלֵאִים","femininePlural":"מְלֵאוֹת"} },
   { id: 'a33', hebrew: 'רֵיק', transcription: 'рейк', russian: 'пустой', category: 'adjectives' },
   { id: 'a34', hebrew: 'פָּתוּחַ', transcription: 'патуах', russian: 'открытый', category: 'adjectives', gender: 'masculine', forms: {"feminine":"פְּתוּחָה","plural":"פְּתוּחִים","femininePlural":"פְּתוּחוֹת"} },
-  { id: 'a35', hebrew: 'סָגוּר', transcription: 'сагур', russian: 'закрытый', category: 'adjectives', gender: 'masculine', forms: {"feminine":"סְגוּרָה","plural":"סְגוּרִים","femininePlural":"סְגוּרוֹת"} },
   { id: 'a36', hebrew: 'דָּלוּק', transcription: 'далюк', russian: 'включённый (горит)', category: 'adjectives' },
   { id: 'a37', hebrew: 'כָּבוּי', transcription: 'кавуй', russian: 'выключенный', category: 'adjectives' },
   { id: 'a38', hebrew: 'חַד', transcription: 'хад', russian: 'острый', category: 'adjectives' },
   { id: 'a39', hebrew: 'עָגֹל', transcription: 'аголь', russian: 'круглый', category: 'adjectives' },
   { id: 'a40', hebrew: 'מְרוּבָּע', transcription: 'мерубa', russian: 'квадратный', category: 'adjectives' },
-
   // ===================== СУЩЕСТВИТЕЛЬНЫЕ (nouns) =====================
   // --- Деловые и профессиональные ---
   { id: 'n1', hebrew: 'הֶסְכֵּם', transcription: 'hеске́м', russian: 'договор / соглашение', category: 'nouns', gender: 'masculine', forms: { plural: 'הֶסְכֵּמִים' } },
@@ -382,7 +376,6 @@ export const vocabulary: Word[] = [
   { id: 'n48', hebrew: 'הַשְׁפָּעָה', transcription: 'hашпаа́', russian: 'влияние', category: 'nouns', gender: 'feminine', forms: { plural: 'הַשְׁפָּעוֹת' } },
   { id: 'n49', hebrew: 'עֵרֶךְ', transcription: 'э́рех', russian: 'ценность / значение', category: 'nouns', gender: 'masculine', forms: { plural: 'עֲרָכִים' } },
   { id: 'n50', hebrew: 'מַשְׁמָעוּת', transcription: 'машмау́т', russian: 'значение / смысл', category: 'nouns', gender: 'feminine', forms: { plural: 'מַשְׁמָעוּיוֹת' } },
-
   // ===================== ПРЕДЛОЖЕНИЯ (sentences) =====================
   { id: 's1', hebrew: 'אֲנִי לוֹמֵד עִבְרִית', transcription: 'ани ломед иврит', russian: 'Я учу иврит', category: 'sentences' },
   { id: 's2', hebrew: 'אֵיפֹה הַשֵּׁרוּתִים?', transcription: 'эйфо hашерутим?', russian: 'Где туалет?', category: 'sentences' },
@@ -444,9 +437,7 @@ export const vocabulary: Word[] = [
   { id: 's58', hebrew: 'אני לא מסכים עם זה', transcription: 'ани ло маским им зе', russian: 'Я с этим не согласен', category: 'sentences' },
   { id: 's59', hebrew: 'תסביר לי עוד פעם לאט', transcription: 'тасбир ли од паам леат', russian: 'Объясни ещё раз медленно', category: 'sentences' },
   { id: 's60', hebrew: 'עכשיו הכל ברור', transcription: 'ахшав аколь барур', russian: 'Теперь всё понятно', category: 'sentences' },
-  
   // ===================== ТЕХНИЧЕСКИЙ ИВРИТ (technical) =====================
-
   // --- Оборудование ---
   { id: 't1', hebrew: 'מְקָרֵר', transcription: 'мекарер', russian: 'холодильник', category: 'technical', subcategory: 'Оборудование' },
   { id: 't2', hebrew: 'מַקְפִּיא', transcription: 'макпиа', russian: 'морозильник', category: 'technical', subcategory: 'Оборудование' },
@@ -518,17 +509,14 @@ export const vocabulary: Word[] = [
     russian: 'Проверка на герметичность',
     category: 'technical'
   },
-
   // --- Основные компоненты ---
-  { id: 't16', hebrew: 'מַדְחֵס', transcription: 'мадхес', russian: 'компрессор', category: 'technical', subcategory: 'Компоненты' },
-  { id: 't17', hebrew: 'מְעַבֶּה', transcription: 'меабе', russian: 'конденсатор', category: 'technical', subcategory: 'Компоненты' },
-  { id: 't18', hebrew: 'מְאַדֶּה', transcription: 'меаде', russian: 'испаритель', category: 'technical', subcategory: 'Компоненты' },
-  { id: 't19', hebrew: 'שַׁסְתּוֹם הַתְפַּשְּׁטוּת', transcription: 'шастом hитпаштут', russian: 'расширительный клапан (ТРВ)', category: 'technical', subcategory: 'Компоненты' },
-  { id: 't20', hebrew: 'צִנּוֹר', transcription: 'цинор', russian: 'труба / трубка', category: 'technical', subcategory: 'Компоненты' },
-  { id: 't21', hebrew: 'מְפוּחַ', transcription: 'мефуах', russian: 'вентилятор', category: 'technical', subcategory: 'Компоненты' },
-  { id: 't22', hebrew: 'תֶּרְמוֹסְטָט', transcription: 'термостат', russian: 'термостат', category: 'technical', subcategory: 'Компоненты' },
-  { id: 't23', hebrew: 'מְסַנֵּן', transcription: 'месанен', russian: 'фильтр', category: 'technical', subcategory: 'Компоненты' },
-  { id: 't24', hebrew: 'מְסַנֵּן מְיַבֵּשׁ', transcription: 'месанен меябеш', russian: 'фильтр-осушитель', category: 'technical', subcategory: 'Компоненты' },
+  { id: 'auto1', hebrew: 'מַדְחֵס', transcription: 'мадхес', russian: 'компрессор', category: 'technical', subcategory: 'Компоненты' },
+  { id: 'auto2', hebrew: 'מְעַבֶּה', transcription: 'меабе', russian: 'конденсатор', category: 'technical', subcategory: 'Компоненты' },
+  { id: 'auto3', hebrew: 'מְאַדֶּה', transcription: 'меаде', russian: 'испаритель', category: 'technical', subcategory: 'Компоненты' },
+  { id: 'auto4', hebrew: 'צִנּוֹר', transcription: 'цинор', russian: 'труба / трубка', category: 'technical', subcategory: 'Компоненты' },
+  { id: 'auto5', hebrew: 'מְפוּחַ', transcription: 'мефуах', russian: 'вентилятор', category: 'technical', subcategory: 'Компоненты' },
+  { id: 'auto6', hebrew: 'תֶּרְמוֹסְטָט', transcription: 'термостат', russian: 'термостат', category: 'technical', subcategory: 'Компоненты' },
+  { id: 'auto7', hebrew: 'מְסַנֵּן', transcription: 'месанен', russian: 'фильтр', category: 'technical', subcategory: 'Компоненты' },
   { id: 't25', hebrew: 'מַצְבֵּר', transcription: 'мацбер', russian: 'ресивер / аккумулятор', category: 'technical', subcategory: 'Компоненты' },
   { id: 't26', hebrew: 'שַׁסְתּוֹם', transcription: 'шастом', russian: 'клапан', category: 'technical', subcategory: 'Компоненты' },
   { id: 't27', hebrew: 'שַׁסְתּוֹם סוֹלֶנוֹאִיד', transcription: 'шастом соленоид', russian: 'соленоидный клапан', category: 'technical', subcategory: 'Компоненты' },
@@ -549,7 +537,6 @@ export const vocabulary: Word[] = [
   { id: 't43', hebrew: 'אִיטוּם', transcription: 'итум', russian: 'уплотнение / прокладка', category: 'technical', subcategory: 'Компоненты' },
   { id: 't44', hebrew: 'גוּמִיָּה', transcription: 'гумия', russian: 'резиновая прокладка', category: 'technical', subcategory: 'Компоненты' },
   { id: 't45', hebrew: 'בִּידוּד', transcription: 'бидуд', russian: 'изоляция / утеплитель', category: 'technical', subcategory: 'Компоненты' },
-
   // --- Материалы ---
   { id: 't46', hebrew: 'גַּז קֵירוּר', transcription: 'газ кейрур', russian: 'хладагент / фреон', category: 'technical', subcategory: 'Материалы' },
   { id: 't47', hebrew: 'שֶׁמֶן קֵירוּר', transcription: 'шемен кейрур', russian: 'холодильное масло', category: 'technical', subcategory: 'Материалы' },
@@ -563,7 +550,6 @@ export const vocabulary: Word[] = [
   { id: 't55', hebrew: 'אַצֵטִילֵן', transcription: 'ацетилен', russian: 'ацетилен', category: 'technical', subcategory: 'Материалы' },
   { id: 't56', hebrew: 'קֶצֶף פּוֹלִיאוּרֶתָן', transcription: 'кецеф полиуретан', russian: 'пенополиуретан', category: 'technical', subcategory: 'Материалы' },
   { id: 't57', hebrew: 'סִילִיקוֹן', transcription: 'силикон', russian: 'силикон', category: 'technical', subcategory: 'Материалы' },
-
   // --- Параметры ---
   { id: 't58', hebrew: 'לַחַץ', transcription: 'лахац', russian: 'давление', category: 'technical', subcategory: 'Параметры' },
   { id: 't59', hebrew: 'טֶמְפֶּרָטוּרָה', transcription: 'температура', russian: 'температура', category: 'technical', subcategory: 'Параметры' },
@@ -576,12 +562,8 @@ export const vocabulary: Word[] = [
   { id: 't66', hebrew: 'זֶרֶם', transcription: 'зерем', russian: 'ток (электрический)', category: 'technical', subcategory: 'Параметры' },
   { id: 't67', hebrew: 'תְּדִירוּת', transcription: 'тедирут', russian: 'частота (Гц)', category: 'technical', subcategory: 'Параметры' },
   { id: 't68', hebrew: 'הִתְנַגְּדוּת', transcription: 'hитнагдут', russian: 'сопротивление (Ом)', category: 'technical', subcategory: 'Параметры' },
-  { id: 't69', hebrew: 'לַחַץ גָּבוֹהַּ', transcription: 'лахац гавоhа', russian: 'высокое давление', category: 'technical', subcategory: 'Параметры' },
   { id: 't71', hebrew: 'קוֹטֶר', transcription: 'котер', russian: 'диаметр', category: 'technical', subcategory: 'Параметры' },
-  { id: 't72', hebrew: 'אֹרֶךְ', transcription: 'орех', russian: 'длина', category: 'technical', subcategory: 'Параметры' },
-  { id: 't73', hebrew: 'רֹחַב', transcription: 'рохав', russian: 'ширина', category: 'technical', subcategory: 'Параметры' },
   { id: 't74', hebrew: 'גֹּבַהּ', transcription: 'гова', russian: 'высота', category: 'technical', subcategory: 'Параметры' },
-
   // --- Процессы ---
   { id: 't75', hebrew: 'הַפְשָׁרָה', transcription: 'hафшара', russian: 'разморозка', category: 'technical', subcategory: 'Процессы' },
   { id: 't76', hebrew: 'קֵירוּר', transcription: 'кейрур', russian: 'охлаждение', category: 'technical', subcategory: 'Процессы' },
@@ -597,16 +579,13 @@ export const vocabulary: Word[] = [
   { id: 't86', hebrew: 'פֵּירוּק', transcription: 'перук', russian: 'демонтаж', category: 'technical', subcategory: 'Процессы' },
   { id: 't87', hebrew: 'שְׁאִיבַת וַאקוּם', transcription: 'шеиват вакуум', russian: 'вакуумирование', category: 'technical', subcategory: 'Процессы' },
   { id: 't88', hebrew: 'מִילּוּי גַּז', transcription: 'милуй газ', russian: 'заправка газом', category: 'technical', subcategory: 'Процессы' },
-  { id: 't89', hebrew: 'בְּדִיקַת אִטִּימוּת', transcription: 'бдикат итимут', russian: 'проверка герметичности', category: 'technical', subcategory: 'Процессы' },
   { id: 't91', hebrew: 'רִתּוּךְ', transcription: 'ритух', russian: 'сварка', category: 'technical', subcategory: 'Процессы' },
   { id: 't92', hebrew: 'כִּיפּוּף צְנָרוֹת', transcription: 'кипуф цнарот', russian: 'гибка труб', category: 'technical', subcategory: 'Процессы' },
   { id: 't93', hebrew: 'שִׁטִיפָה', transcription: 'штифа', russian: 'промывка (системы)', category: 'technical', subcategory: 'Процессы' },
   { id: 't94', hebrew: 'אִיזוּן', transcription: 'изун', russian: 'балансировка', category: 'technical', subcategory: 'Процессы' },
-
   // --- Неисправности ---
   { id: 't95', hebrew: 'דְּלִיפָה', transcription: 'длифа', russian: 'утечка', category: 'technical', subcategory: 'Неисправности' },
   { id: 't96', hebrew: 'תַּקָּלָה', transcription: 'такала', russian: 'неисправность / поломка', category: 'technical', subcategory: 'Неисправности' },
-  { id: 't97', hebrew: 'קֶצֶר', transcription: 'кецер', russian: 'короткое замыкание', category: 'technical', subcategory: 'Неисправности' },
   { id: 't98', hebrew: 'חוֹסֵר גַּז', transcription: 'хосер газ', russian: 'нехватка газа', category: 'technical', subcategory: 'Неисправности' },
   { id: 't99', hebrew: 'עוֹמֶס יֶתֶר', transcription: 'омес етер', russian: 'перегрузка', category: 'technical', subcategory: 'Неисправности' },
   { id: 't100', hebrew: 'חֲסִימָה', transcription: 'хасима', russian: 'засор / блокировка', category: 'technical', subcategory: 'Неисправности' },
@@ -617,7 +596,6 @@ export const vocabulary: Word[] = [
   { id: 't105', hebrew: 'שְׁחִיקָה', transcription: 'шхика', russian: 'износ (истирание / абразивный)', category: 'technical', subcategory: 'Неисправности' },
   { id: 't106', hebrew: 'סְדָק', transcription: 'сдак', russian: 'трещина', category: 'technical', subcategory: 'Неисправности' },
   { id: 't107', hebrew: 'חֲלוּדָה', transcription: 'халуда', russian: 'ржавчина / коррозия', category: 'technical', subcategory: 'Неисправности' },
-
   // --- Инструменты ---
   { id: 't108', hebrew: 'מָנוֹמֶטֶר', transcription: 'манометер', russian: 'манометр', category: 'technical', subcategory: 'Инструменты' },
   { id: 't109', hebrew: 'מוּלְטִימֶטֶר', transcription: 'мультиметер', russian: 'мультиметр', category: 'technical', subcategory: 'Инструменты' },
@@ -638,7 +616,6 @@ export const vocabulary: Word[] = [
   { id: 't124', hebrew: 'מַד טֶמְפֶּרָטוּרָה', transcription: 'мад температура', russian: 'датчик температуры', category: 'technical', subcategory: 'Инструменты' },
   { id: 't125', hebrew: 'אֶמְבָּרֵגָה', transcription: 'эмбарега', russian: 'клещи', category: 'technical', subcategory: 'Инструменты' },
   { id: 't126', hebrew: 'מַסֵּכַת רִתּוּךְ', transcription: 'масехат ритух', russian: 'сварочная маска', category: 'technical', subcategory: 'Инструменты' },
-
   // --- Электрика ---
   { id: 't127', hebrew: 'חִיבּוּר חַשְׁמַל', transcription: 'хибур хашмаль', russian: 'электроподключение', category: 'technical', subcategory: 'Электрика' },
   { id: 't128', hebrew: 'כָּבֶל', transcription: 'кавель', russian: 'кабель', category: 'technical', subcategory: 'Электрика' },
@@ -656,7 +633,6 @@ export const vocabulary: Word[] = [
   { id: 't140', hebrew: 'מַמְסָר', transcription: 'мамсар', russian: 'контактор / пускатель', category: 'technical', subcategory: 'Электрика' },
   { id: 't141', hebrew: 'מַגֵּן מָנוֹעַ', transcription: 'маген маноа', russian: 'защита двигателя', category: 'technical', subcategory: 'Электрика' },
   { id: 't142', hebrew: 'טַיְמֶר', transcription: 'таймер', russian: 'таймер', category: 'technical', subcategory: 'Электрика' },
-
   // --- Щит управления ---
   { id: 't143', hebrew: 'לוּחַ חַשְׁמַל', transcription: 'луах хашмаль', russian: 'электрощит', category: 'technical', subcategory: 'Щит управления' },
   { id: 't144', hebrew: 'לוּחַ בַּקָּרָה', transcription: 'луах бакара', russian: 'щит управления', category: 'technical', subcategory: 'Щит управления' },
@@ -676,7 +652,6 @@ export const vocabulary: Word[] = [
   { id: 't158', hebrew: 'הַגְדָּרָה', transcription: 'hагдара', russian: 'настройка / уставка', category: 'technical', subcategory: 'Щит управления' },
   { id: 't159', hebrew: 'קוֹד שְׁגִיאָה', transcription: 'код шгиа', russian: 'код ошибки', category: 'technical', subcategory: 'Щит управления' },
   { id: 't160', hebrew: 'מָסָךְ מָגָע', transcription: 'масах мага', russian: 'сенсорный экран', category: 'technical', subcategory: 'Щит управления' },
-
   // --- Монтаж ---
   { id: 't161', hebrew: 'בֹּרֶג', transcription: 'борег', russian: 'болт / шуруп', category: 'technical', subcategory: 'Монтаж' },
   { id: 't162', hebrew: 'אוֹם', transcription: 'ом', russian: 'гайка', category: 'technical', subcategory: 'Монтаж' },
@@ -696,9 +671,7 @@ export const vocabulary: Word[] = [
   { id: 't176', hebrew: 'תַּעֲלַת כְּבָלִים', transcription: 'таалат квалим', russian: 'кабель-канал', category: 'technical', subcategory: 'Монтаж' },
   { id: 't177', hebrew: 'מַרְזֵב', transcription: 'марзев', russian: 'желоб / дренаж', category: 'technical', subcategory: 'Монтаж' },
   { id: 't178', hebrew: 'מִשְׁטָח', transcription: 'миштах', russian: 'платформа / площадка', category: 'technical', subcategory: 'Монтаж' },
-  { id: 't179', hebrew: 'אֹטֶם', transcription: 'отем', russian: 'герметик', category: 'technical', subcategory: 'Монтаж' },
   { id: 't180', hebrew: 'סֶרֶט טֶפְלוֹן', transcription: 'серет тефлон', russian: 'тефлоновая лента (фум)', category: 'technical', subcategory: 'Монтаж' },
-
   // --- Трубопровод ---
   { id: 't181', hebrew: 'צַנֶּרֶת', transcription: 'цанерет', russian: 'трубопровод / магистраль', category: 'technical', subcategory: 'Трубопровод' },
   { id: 't182', hebrew: 'צִנּוֹר יְנִיקָה', transcription: 'цинор еника', russian: 'всасывающая труба', category: 'technical', subcategory: 'Трубопровод' },
@@ -710,7 +683,6 @@ export const vocabulary: Word[] = [
   { id: 't188', hebrew: 'בֶּרֶז כַּדּוּרִי', transcription: 'берез кадури', russian: 'шаровой кран', category: 'technical', subcategory: 'Трубопровод' },
   { id: 't189', hebrew: 'מֹלֶד', transcription: 'молед', russian: 'тройник', category: 'technical', subcategory: 'Трубопровод' },
   { id: 't190', hebrew: 'בֶּרֶךְ', transcription: 'берех', russian: 'отвод / колено', category: 'technical', subcategory: 'Трубопровод' },
-
   // --- Хладагенты ---
   // --- Хладагенты и вещества ---
   { id: 't191', hebrew: 'חוֹמֶר קֵירוּר', transcription: 'хОмер кейрУр', russian: 'хладагент (вещество)', category: 'technical', subcategory: 'Хладагенты', gender: 'masculine', forms: { plural: 'חוֹמְרֵי קֵירוּר' } },
@@ -721,7 +693,6 @@ export const vocabulary: Word[] = [
   { id: 't196', hebrew: 'חֹסֶר מִילּוּי', transcription: 'хОсер милУй', russian: 'недозаправка', category: 'technical', subcategory: 'Хладагенты', gender: 'masculine' },
   { id: 't197', hebrew: 'רִכּוּז', transcription: 'рикУз', russian: 'концентрация', category: 'technical', subcategory: 'Хладагенты', gender: 'masculine', forms: { plural: 'רִכּוּזִים' } },
   { id: 't198', hebrew: 'נִיקּוּי מַעֲרֶכֶת', transcription: 'никУй маарЭхет', russian: 'промывка системы', category: 'technical', subcategory: 'Хладагенты', gender: 'masculine' },
-
   // --- Дополнительное оборудование ---
   { id: 't199', hebrew: 'דּוֹד חַשְׁמַל', transcription: 'дуд хашмаль', russian: 'бойлер электрический', category: 'technical', subcategory: 'Оборудование' },
   { id: 't200', hebrew: 'מְקָרֵר נֶגְדִּי', transcription: 'мекарер негди', russian: 'прилавок-холодильник', category: 'technical', subcategory: 'Оборудование' },
@@ -733,7 +704,6 @@ export const vocabulary: Word[] = [
   { id: 't206', hebrew: 'מְגֵן כְּפוֹר', transcription: 'меген кфор', russian: 'антиобледенитель', category: 'technical', subcategory: 'Компоненты' },
   { id: 't207', hebrew: 'אַנְטִי וַייבְּרֵישֶׁן', transcription: 'анти вайбрейшен', russian: 'антивибрационная опора', category: 'technical', subcategory: 'Монтаж' },
   { id: 't208', hebrew: 'סוֹפֵג רְעִידוֹת', transcription: 'софег реидот', russian: 'виброгаситель', category: 'technical', subcategory: 'Компоненты' },
-
   // --- Единицы измерения ---
   { id: 't209', hebrew: 'PSI', transcription: 'PSI', russian: 'PSI (фунт/кв.дюйм)', category: 'technical', subcategory: 'Единицы' },
   { id: 't210', hebrew: 'בָּר', transcription: 'бар', russian: 'бар (давление)', category: 'technical', subcategory: 'Единицы' },
@@ -745,7 +715,6 @@ export const vocabulary: Word[] = [
   { id: 't216', hebrew: 'מַעֲלוֹת צֶלְזִיוּס', transcription: 'маалот цельзиус', russian: 'градусы Цельсия', category: 'technical', subcategory: 'Единицы' },
   { id: 't217', hebrew: 'לִיטֶר', transcription: 'литер', russian: 'литр', category: 'technical', subcategory: 'Единицы' },
   { id: 't218', hebrew: 'קִילוֹגְרָם', transcription: 'килограм', russian: 'килограмм', category: 'technical', subcategory: 'Единицы' },
-
   // --- Безопасность ---
   { id: 't219', hebrew: 'בְּטִיחוּת', transcription: 'бетихут', russian: 'безопасность', category: 'technical', subcategory: 'Безопасность' },
   { id: 't220', hebrew: 'כְּפָפוֹת', transcription: 'кфафот', russian: 'перчатки', category: 'technical', subcategory: 'Безопасность' },
@@ -755,17 +724,13 @@ export const vocabulary: Word[] = [
   { id: 't224', hebrew: 'בִּגְדֵי עֲבוֹדָה', transcription: 'бигдей авода', russian: 'рабочая одежда', category: 'technical', subcategory: 'Безопасность' },
   { id: 't225', hebrew: 'מַטְפֵּה', transcription: 'матпе', russian: 'огнетушитель', category: 'technical', subcategory: 'Безопасность' },
   { id: 't226', hebrew: 'עֶזְרָה רִאשׁוֹנָה', transcription: 'эзра ришона', russian: 'первая помощь', category: 'technical', subcategory: 'Безопасность' },
-
   // --- Документация ---
-  { id: 't227', hebrew: 'אַחֲרָיוּת', transcription: 'ахарают', russian: 'гарантия', category: 'technical', subcategory: 'Документация' },
-  { id: 't228', hebrew: 'חֶשְׁבּוֹנִית', transcription: 'хешбонит', russian: 'счёт-фактура', category: 'technical', subcategory: 'Документация' },
   { id: 't229', hebrew: 'הַצָּעַת מְחִיר', transcription: 'hацаат мехир', russian: 'коммерческое предложение', category: 'technical', subcategory: 'Документация' },
   { id: 't230', hebrew: 'דּוּחַ תַּקָּלָה', transcription: 'дуах такала', russian: 'акт о неисправности', category: 'technical', subcategory: 'Документация' },
   { id: 't231', hebrew: 'דּוּחַ שֵׁרוּת', transcription: 'дуах шерут', russian: 'сервисный отчёт', category: 'technical', subcategory: 'Документация' },
   { id: 't232', hebrew: 'מִפְרָט טֶכְנִי', transcription: 'мифрат техни', russian: 'техническая спецификация', category: 'technical', subcategory: 'Документация' },
   { id: 't233', hebrew: 'תָּכְנִית', transcription: 'тохнит', russian: 'чертёж / план', category: 'technical', subcategory: 'Документация' },
   { id: 't234', hebrew: 'הוֹרָאוֹת הַפְעָלָה', transcription: 'hораот hафала', russian: 'инструкция по эксплуатации', category: 'technical', subcategory: 'Документация' },
-
   // --- Дополнительные повседневные существительные ---
   { id: 'n41b', hebrew: 'אֹכֶל', transcription: 'охель', russian: 'еда', category: 'nouns', gender: 'masculine', forms: { plural: 'אֳכָלִים' } },
   { id: 'n42b', hebrew: 'קָפֶה', transcription: 'кафе', russian: 'кофе', category: 'nouns', gender: 'masculine', forms: { plural: 'קָפוֹת' } },
@@ -787,7 +752,6 @@ export const vocabulary: Word[] = [
   { id: 'n58b', hebrew: 'טֶכְנַאי', transcription: 'технай', russian: 'техник', category: 'nouns', gender: 'masculine', forms: { plural: 'טֶכְנַאִים' } },
   { id: 'n59b', hebrew: 'מְנַהֵל', transcription: 'менаhель', russian: 'менеджер / директор', category: 'nouns', gender: 'masculine', forms: { plural: 'מְנַהֲלִים' } },
   { id: 'n60b', hebrew: 'מַחְסָן', transcription: 'махсан', russian: 'склад', category: 'nouns', gender: 'masculine', forms: { plural: 'מַחְסָנִים' } },
-
   // --- Дополнительные предложения ---
   { id: 's61', hebrew: 'אֵיפֹה הַכְּלִי?', transcription: 'эйфо hакли?', russian: 'Где инструмент?', category: 'sentences' },
   { id: 's62', hebrew: 'תְּבִיא לִי מַבְרֵגָה', transcription: 'тевиа ли маврега', russian: 'Принеси мне отвёртку', category: 'sentences' },
@@ -799,7 +763,6 @@ export const vocabulary: Word[] = [
   { id: 's68', hebrew: 'צָרִיךְ לְהַחְלִיף אֶת הַחִיישָׁן', transcription: 'царих леhахлиф эт hахийшан', russian: 'Нужно заменить датчик', category: 'sentences' },
   { id: 's69', hebrew: 'אֲנִי צָרִיךְ לְהַזְמִין חֶלְקֵי חִילוּף', transcription: 'ани царих леhазмин хелькей хилуф', russian: 'Мне нужно заказать запчасти', category: 'sentences' },
   { id: 's70', hebrew: 'הַעֲבוֹדָה בְּאַחֲרָיוּת', transcription: 'hаавода беахарают', russian: 'Работа на гарантии', category: 'sentences' },
-
   // ===================== НОВЫЕ ПОВСЕДНЕВНЫЕ СЛОВА И ВЫРАЖЕНИЯ (200) =====================
   // --- Деловой разговорный ---
   { id: 'ne1', hebrew: 'אֲנִי צָרִיךְ לְדַוֵּחַ לַמְּנַהֵל', transcription: 'ани царИх ледавЭах ла-менаhЭль', russian: 'Мне нужно доложить начальнику', category: 'everyday', subcategory: 'Деловой' },
@@ -822,7 +785,6 @@ export const vocabulary: Word[] = [
   { id: 'ne18', hebrew: 'אֲנִי בְּחוֹפֶשׁ מָחָר', transcription: 'ани бе-хОфеш махАр', russian: 'Я завтра в отпуске', category: 'everyday', subcategory: 'Деловой' },
   { id: 'ne19', hebrew: 'יֵשׁ פְּגִישָׁה בְּשָׁעָה עֶשֶׂר', transcription: 'йэш пгишА бе-шаА Эсер', russian: 'Встреча в десять', category: 'everyday', subcategory: 'Деловой' },
   { id: 'ne20', hebrew: 'הַלָּקוֹחַ מְתַלּוֹנֵן', transcription: 'а-лакОах метлонЭн', russian: 'Клиент жалуется', category: 'everyday', subcategory: 'Деловой' },
-
   // --- Бытовое общение (серьёзное) ---
   { id: 'ne21', hebrew: 'אֲנִי לֹא יָכוֹל לְהַרְשׁוֹת לְעַצְמִי', transcription: 'ани ло яхОль леаршОт ле-ацмИ', russian: 'Я не могу себе это позволить', category: 'everyday', subcategory: 'Бытовое' },
   { id: 'ne22', hebrew: 'צָרִיךְ לְשַׁלֵּם אֶת הַרִשָּׁיוֹנוֹת', transcription: 'царИх лешалЭм эт а-хешбонОт', russian: 'Нужно оплатить счета', category: 'everyday', subcategory: 'Бытовое' },
@@ -844,7 +806,6 @@ export const vocabulary: Word[] = [
   { id: 'ne38', hebrew: 'אֲנִי צָרִיךְ לָנוּחַ', transcription: 'ани царИх ланУах', russian: 'Мне нужно отдохнуть', category: 'everyday', subcategory: 'Бытовое' },
   { id: 'ne39', hebrew: 'הַחֹם בַּחוּץ בִּלְתִּי נִסְבָּל', transcription: 'а-хОм ба-хуц билтИ нисбАль', russian: 'Жара на улице невыносимая', category: 'everyday', subcategory: 'Бытовое' },
   { id: 'ne40', hebrew: 'תַּדְלִיק אֶת הַמַּזְגָּן', transcription: 'тадлИк эт а-мазгАн', russian: 'Включи кондиционер', category: 'everyday', subcategory: 'Бытовое' },
-
   // --- Мнения и аргументы ---
   { id: 'ne41', hebrew: 'לְדַעְתִּי זֶה לֹא נָכוֹן', transcription: 'ле-даатИ зэ ло нахОн', russian: 'По-моему, это неправильно', category: 'everyday', subcategory: 'Мнения' },
   { id: 'ne42', hebrew: 'אֲנִי חוֹשֵׁב שֶׁאַתָּה טוֹעֶה', transcription: 'ани хошЭв ше-атА тоЭ', russian: 'Я думаю, что ты ошибаешься', category: 'everyday', subcategory: 'Мнения' },
@@ -856,7 +817,6 @@ export const vocabulary: Word[] = [
   { id: 'ne48', hebrew: 'אַתָּה צוֹדֵק', transcription: 'атА цодЭк', russian: 'Ты прав', category: 'everyday', subcategory: 'Мнения' },
   { id: 'ne49', hebrew: 'אֲנִי מְסַכֵּם עִם מָה שֶׁאָמַרְתָּ', transcription: 'ани мескаЭм им ма ше-амАрта', russian: 'Я согласен с тем, что ты сказал', category: 'everyday', subcategory: 'Мнения' },
   { id: 'ne50', hebrew: 'בּוֹא נַשְׁאִיר אֶת זֶה לְמָחָר', transcription: 'бо нашъИр эт зэ ле-махАр', russian: 'Давай оставим это на завтра', category: 'everyday', subcategory: 'Мнения' },
-
   // --- Просьбы и указания ---
   { id: 'ne51', hebrew: 'תַּעֲבִיר לִי אֶת הַכְּלִי', transcription: 'таавИр ли эт а-клИ', russian: 'Передай мне инструмент', category: 'everyday', subcategory: 'Просьбы' },
   { id: 'ne52', hebrew: 'תַּחְזִיק אֶת זֶה רֶגַע', transcription: 'тахзИк эт зэ рЭга', russian: 'Подержи это секунду', category: 'everyday', subcategory: 'Просьбы' },
@@ -868,7 +828,6 @@ export const vocabulary: Word[] = [
   { id: 'ne58', hebrew: 'תְּנַתֵּק אֶת זֶה', transcription: 'тенатЭк эт зэ', russian: 'Отключи это', category: 'everyday', subcategory: 'Просьбы' },
   { id: 'ne59', hebrew: 'תִּפְתַּח אֶת הַכֹּל', transcription: 'тифтАх эт а-кОль', russian: 'Открой всё', category: 'everyday', subcategory: 'Просьбы' },
   { id: 'ne60', hebrew: 'תִּסְגֹּר הַכֹּל וּתְנַקֶּה', transcription: 'тисгОр а-кОль у-тенакЭ', russian: 'Закрой всё и убери за собой', category: 'everyday', subcategory: 'Просьбы' },
-
   // --- Время и планирование ---
   { id: 'ne61', hebrew: 'מָתַי נִגְמָר הַיּוֹם?', transcription: 'матАй нигмАр а-йОм?', russian: 'Когда заканчивается рабочий день?', category: 'everyday', subcategory: 'Время' },
   { id: 'ne62', hebrew: 'כַּמָּה שָׁעוֹת עֲבוֹדָה יֵשׁ?', transcription: 'кАма шаОт аводА йэш?', russian: 'Сколько часов работы?', category: 'everyday', subcategory: 'Время' },
@@ -880,7 +839,6 @@ export const vocabulary: Word[] = [
   { id: 'ne68', hebrew: 'הַהַזְמָנָה תַּגִּיעַ בְּעוֹד שָׁבוּעַ', transcription: 'а-азманА тагИа бе-Од шавУа', russian: 'Заказ прибудет через неделю', category: 'everyday', subcategory: 'Время' },
   { id: 'ne69', hebrew: 'כַּמָּה זֶה לוֹקֵחַ?', transcription: 'кАма зэ локЭах?', russian: 'Сколько это занимает?', category: 'everyday', subcategory: 'Время' },
   { id: 'ne70', hebrew: 'לְכָל הַיּוֹתֵר שָׁעָה', transcription: 'ле-кОль а-йотЭр шаА', russian: 'Максимум час', category: 'everyday', subcategory: 'Время' },
-
   // --- Существительные высокого регистра ---
   { id: 'ne71', hebrew: 'מוּדָעוּת', transcription: 'мудаУт', russian: 'осведомлённость / осознанность', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'feminine', forms: { plural: 'מוּדָעוּיוֹת' } },
   { id: 'ne72', hebrew: 'תְּשׁוּמַת לֵב', transcription: 'тшумАт лев', russian: 'внимание', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'feminine' , forms: { plural: 'תְּשׁוּמַת לֵבוֹת' } },
@@ -894,7 +852,6 @@ export const vocabulary: Word[] = [
   { id: 'ne80', hebrew: 'הַנָּחָה', transcription: 'анахА', russian: 'скидка', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'feminine', forms: { plural: 'הַנָּחוֹת' } },
   { id: 'ne81', hebrew: 'תַּשְׁלוּם', transcription: 'ташлУм', russian: 'оплата / платёж', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'masculine', forms: { plural: 'תַּשְׁלוּמִים' } },
   { id: 'ne82', hebrew: 'חוֹב', transcription: 'хов', russian: 'долг', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'masculine', forms: { plural: 'חוֹבוֹת' } },
-  { id: 'ne83', hebrew: 'רֶוַח', transcription: 'рЭвах', russian: 'прибыль', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'masculine', forms: { plural: 'רְוָחִים' } },
   { id: 'ne84', hebrew: 'הֶפְסֵד', transcription: 'эфсЭд', russian: 'убыток', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'masculine', forms: { plural: 'הֶפְסֵדִים' } },
   { id: 'ne85', hebrew: 'פִּקָּדוֹן', transcription: 'пикадОн', russian: 'залог / депозит', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'masculine', forms: { plural: 'פִּקָּדוֹנוֹת' } },
   { id: 'ne86', hebrew: 'עֲמְלָה', transcription: 'амлА', russian: 'комиссия', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'feminine', forms: { plural: 'עֲמָלוֹת' } },
@@ -902,7 +859,6 @@ export const vocabulary: Word[] = [
   { id: 'ne88', hebrew: 'בִּיטוּחַ', transcription: 'битУах', russian: 'страховка', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'masculine', forms: { plural: 'בִּיטוּחִים' } },
   { id: 'ne89', hebrew: 'זְכוּיוֹת', transcription: 'зхуйОт', russian: 'права', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'feminine' , forms: { plural: 'זְכוּיוֹת' } },
   { id: 'ne90', hebrew: 'חוֹבוֹת', transcription: 'ховОт', russian: 'обязанности', category: 'nouns', subcategory: 'Высокий регистр' , gender: 'feminine' , forms: { plural: 'חוֹבוֹת' } },
-
   // --- Глаголы высокого регистра ---
   { id: 'ne91', hebrew: 'לְהִתְפָּרֵץ', transcription: 'леhитпарЭц', russian: 'вспыхивать / разразиться', category: 'verbs', subcategory: 'Высокий регистр', binyan: 'Хитпаэль' },
   { id: 'ne92', hebrew: 'לְהִתְאוֹשֵׁשׁ', transcription: 'леhитошЭш', russian: 'оправляться / восстанавливаться', category: 'verbs', subcategory: 'Высокий регистр', binyan: 'Хитпаэль' },
@@ -924,7 +880,6 @@ export const vocabulary: Word[] = [
   { id: 'ne108', hebrew: 'לְהִשָּׁמֵע', transcription: 'леhишамЭа', russian: 'подчиняться', category: 'verbs', subcategory: 'Высокий регистр', binyan: 'Хитпаэль' },
   { id: 'ne109', hebrew: 'לְהִתְמוֹדֵד', transcription: 'леhитмодЭд', russian: 'справляться / бороться с', category: 'verbs', subcategory: 'Высокий регистр', binyan: 'Хитпаэль' },
   { id: 'ne110', hebrew: 'לְהָגִיב', transcription: 'леhагИв', russian: 'реагировать', category: 'verbs', subcategory: 'Высокий регистр', binyan: 'Хитпаэль' },
-
   // --- Прилагательные высокого регистра ---
   { id: 'ne111', hebrew: 'מְקוֹרִי', transcription: 'мекорИ', russian: 'оригинальный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'ne112', hebrew: 'רִשְׁמִי', transcription: 'ришмИ', russian: 'официальный', category: 'adjectives', subcategory: 'Высокий регистр' },
@@ -946,7 +901,6 @@ export const vocabulary: Word[] = [
   { id: 'ne128', hebrew: 'מְקַצוֹעִי', transcription: 'мекацоИ', russian: 'профессиональный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'ne129', hebrew: 'זְמַנִּי', transcription: 'зманИ', russian: 'временный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'ne130', hebrew: 'קָבוּעַ', transcription: 'кавУа', russian: 'постоянный', category: 'adjectives', subcategory: 'Высокий регистр' },
-
   // --- Выражения для обсуждения и споров ---
   { id: 'ne131', hebrew: 'תַּקְשִׁיב, יֵשׁ בְּעָיָה', transcription: 'такшИв, йэш беайЯ', russian: 'Слушай, есть проблема', category: 'everyday', subcategory: 'Обсуждение' },
   { id: 'ne132', hebrew: 'אֲנִי לֹא מוּכָן לְוַתֵּר', transcription: 'ани ло мухАн леватЭр', russian: 'Я не готов уступить', category: 'everyday', subcategory: 'Обсуждение' },
@@ -958,7 +912,6 @@ export const vocabulary: Word[] = [
   { id: 'ne138', hebrew: 'זֶה לֹא קָשׁוּר לַעִנְיָן', transcription: 'зэ ло кашУр ла-иньЯн', russian: 'Это не относится к делу', category: 'everyday', subcategory: 'Обсуждение' },
   { id: 'ne139', hebrew: 'בּוֹא לֹא נַחְרִיג אֶת הַדְּבָרִים', transcription: 'бо ло нахрИг эт а-дварИм', russian: 'Давай не будем обострять', category: 'everyday', subcategory: 'Обсуждение' },
   { id: 'ne140', hebrew: 'אֲנִי מַעֲדִיף לִשְׁמֹעַ אוֹתְךָ קוֹדֶם', transcription: 'ани маадИф лишмОа отхА кОдем', russian: 'Я предпочитаю сначала тебя выслушать', category: 'everyday', subcategory: 'Обсуждение' },
-
   // --- На объекте / в поле ---
   { id: 'ne141', hebrew: 'אֵיפֹה הַמַּחְסָן?', transcription: 'эйфО а-махсАн?', russian: 'Где склад?', category: 'everyday', subcategory: 'На объекте' },
   { id: 'ne142', hebrew: 'תָּבִיא סוּלָּם', transcription: 'тавИ сулАм', russian: 'Принеси лестницу', category: 'everyday', subcategory: 'На объекте' },
@@ -970,7 +923,6 @@ export const vocabulary: Word[] = [
   { id: 'ne148', hebrew: 'צָרִיךְ חֶשְׁמַל כָּאן', transcription: 'царИх хашмАль кан', russian: 'Здесь нужно электричество', category: 'everyday', subcategory: 'На объекте' },
   { id: 'ne149', hebrew: 'אֵיפֹה שִׁירוּתִים כָּאן?', transcription: 'эйфО ширутИм кан?', russian: 'Где тут туалет?', category: 'everyday', subcategory: 'На объекте' },
   { id: 'ne150', hebrew: 'יֵשׁ חֲנָיָה כָּאן?', transcription: 'йэш ханаЯ кан?', russian: 'Тут есть парковка?', category: 'everyday', subcategory: 'На объекте' },
-
   // --- Числа, количество, деньги ---
   { id: 'ne151', hebrew: 'כַּמָּה יְחִידוֹת צָרִיךְ?', transcription: 'кАма ехидОт царИх?', russian: 'Сколько единиц нужно?', category: 'everyday', subcategory: 'Количество' },
   { id: 'ne152', hebrew: 'יֵשׁ מַסְפִּיק בְּמְלַאי?', transcription: 'йэш маспИк бе-мелАй?', russian: 'Достаточно на складе?', category: 'everyday', subcategory: 'Количество' },
@@ -982,7 +934,6 @@ export const vocabulary: Word[] = [
   { id: 'ne158', hebrew: 'אֲנִי מְשַׁלֵּם בְּמַזוּמָן', transcription: 'ани мешалЭм бе-мазумАн', russian: 'Я плачу наличными', category: 'everyday', subcategory: 'Количество' },
   { id: 'ne159', hebrew: 'אֶפְשָׁר בְּהַעֲבָרָה?', transcription: 'эфшАр бе-аваарА?', russian: 'Можно переводом?', category: 'everyday', subcategory: 'Количество' },
   { id: 'ne160', hebrew: 'אֶפְשָׁר לְשַׁלֵּם בְּבִיט?', transcription: 'эфшАр лешалЭм бе-бит?', russian: 'Можно оплатить через Бит?', category: 'everyday', subcategory: 'Количество' },
-
   // --- Эмоции и оценки ---
   { id: 'ne161', hebrew: 'אֲנִי מְאוֹד מְרוּצֶה', transcription: 'ани меОд меруцЭ', russian: 'Я очень доволен', category: 'everyday', subcategory: 'Эмоции' },
   { id: 'ne162', hebrew: 'אֲנִי מְאוּכְזָב', transcription: 'ани меухзАв', russian: 'Я разочарован', category: 'everyday', subcategory: 'Эмоции' },
@@ -994,7 +945,6 @@ export const vocabulary: Word[] = [
   { id: 'ne168', hebrew: 'חֲבָל שֶׁלֹּא יָדַעְתָּ', transcription: 'хавАль ше-ло ядАта', russian: 'Жаль, что ты не знал', category: 'everyday', subcategory: 'Эмоции' },
   { id: 'ne169', hebrew: 'אֲנִי לֹא אוֹהֵב הַפְתָּעוֹת', transcription: 'ани ло оhЭв hафтаОт', russian: 'Я не люблю сюрпризы', category: 'everyday', subcategory: 'Эмоции' },
   { id: 'ne170', hebrew: 'כָּל הָעֲבוֹדָה הָלְכָה לַפַּח', transcription: 'коль а-аводА альхА ла-пАх', russian: 'Вся работа пошла насмарку', category: 'everyday', subcategory: 'Эмоции' },
-
   // --- Полезные фразы (транспорт, навигация) ---
   { id: 'ne171', hebrew: 'תִּפְנֶה יָמִינָה', transcription: 'тифнЭ ямИна', russian: 'Поверни направо', category: 'everyday', subcategory: 'Навигация' },
   { id: 'ne172', hebrew: 'תִּפְנֶה שְׂמֹאלָה', transcription: 'тифнЭ смОла', russian: 'Поверни налево', category: 'everyday', subcategory: 'Навигация' },
@@ -1006,7 +956,6 @@ export const vocabulary: Word[] = [
   { id: 'ne178', hebrew: 'יֵשׁ פְּנִיָּה בְּעוֹד מֵאָה מֶטֶר', transcription: 'йэш пниЯ бе-Од мэА мЭтер', russian: 'Через сто метров есть поворот', category: 'everyday', subcategory: 'Навигация' },
   { id: 'ne179', hebrew: 'אֲנִי אִבַּדְתִּי אֶת הַדֶּרֶךְ', transcription: 'ани ибАдти эт а-дЭрех', russian: 'Я заблудился', category: 'everyday', subcategory: 'Навигация' },
   { id: 'ne180', hebrew: 'תַּרְאֶה לִי עַל הַמָּפָּה', transcription: 'тарЭ ли аль а-мАпа', russian: 'Покажи мне на карте', category: 'everyday', subcategory: 'Навигация' },
-
   // --- Связки и вводные ---
   { id: 'ne181', hebrew: 'קוֹדֶם כֹּל', transcription: 'кОдем коль', russian: 'прежде всего', category: 'everyday', subcategory: 'Связки' },
   { id: 'ne182', hebrew: 'בְּנוֹסָף', transcription: 'бе-носАф', russian: 'кроме того / к тому же', category: 'everyday', subcategory: 'Связки' },
@@ -1018,7 +967,6 @@ export const vocabulary: Word[] = [
   { id: 'ne188', hebrew: 'עַל מְנָת', transcription: 'аль менАт', russian: 'для того чтобы', category: 'everyday', subcategory: 'Связки' },
   { id: 'ne189', hebrew: 'בְּכָל מִקְרֶה', transcription: 'бе-хОль микрЭ', russian: 'в любом случае', category: 'everyday', subcategory: 'Связки' },
   { id: 'ne190', hebrew: 'בְּהֶחְלֵט', transcription: 'бе-эхлЭт', russian: 'определённо / однозначно', category: 'everyday', subcategory: 'Связки' },
-
   // --- Телефонные разговоры ---
   { id: 'ne191', hebrew: 'מִי מְדַבֵּר?', transcription: 'ми медабЭр?', russian: 'Кто говорит?', category: 'everyday', subcategory: 'Телефон' },
   { id: 'ne192', hebrew: 'אֲנִי לֹא שׁוֹמֵעַ אוֹתְךָ', transcription: 'ани ло шомЭа отхА', russian: 'Я тебя не слышу', category: 'everyday', subcategory: 'Телефон' },
@@ -1030,7 +978,6 @@ export const vocabulary: Word[] = [
   { id: 'ne198', hebrew: 'קִיבַּלְתָּ אֶת הַהוֹדָעָה?', transcription: 'кибАлта эт а-одаА?', russian: 'Ты получил сообщение?', category: 'everyday', subcategory: 'Телефон' },
   { id: 'ne199', hebrew: 'תִּשְׁלַח לִי מִיקּוּם', transcription: 'тишлАх ли микУм', russian: 'Пришли мне локацию', category: 'everyday', subcategory: 'Телефон' },
   { id: 'ne200', hebrew: 'אֲנִי בְּשִׂיחָה, רֶגַע', transcription: 'ани бе-сихА, рЭга', russian: 'Я на разговоре, секунду', category: 'everyday', subcategory: 'Телефон' },
-
   // ===================== ТЕХНИЧЕСКИЕ ПРИЛАГАТЕЛЬНЫЕ (adjectives) =====================
   { id: 'ta1', hebrew: 'לָקוּי', transcription: 'лакуй', russian: 'дефектный / неисправный', category: 'adjectives', subcategory: 'Оборудование', gender: 'masculine', forms: { feminine: 'לְקוּיָה', plural: 'לְקוּיִים', femininePlural: 'לְקוּיוֹת' } },
   { id: 'ta2', hebrew: 'סָדוּק', transcription: 'садук', russian: 'треснутый', category: 'adjectives', subcategory: 'Оборудование', gender: 'masculine', forms: { feminine: 'סְדוּקָה', plural: 'סְדוּקִים', femininePlural: 'סְדוּקוֹת' } },
@@ -1077,7 +1024,6 @@ export const vocabulary: Word[] = [
   { id: 'ta43', hebrew: 'יַצִּיב', transcription: 'яцив', russian: 'стабильный / устойчивый', category: 'adjectives', subcategory: 'Оценка', gender: 'masculine', forms: { feminine: 'יַצִּיבָה', plural: 'יַצִּיבִים', femininePlural: 'יַצִּיבוֹת' } },
   { id: 'ta44', hebrew: 'רַגִּישׁ', transcription: 'рагиш', russian: 'чувствительный', category: 'adjectives', subcategory: 'Оценка', gender: 'masculine', forms: { feminine: 'רַגִּישָׁה', plural: 'רַגִּישִׁים', femininePlural: 'רַגִּישׁוֹת' } },
   { id: 'ta45', hebrew: 'מוּרְכָּב', transcription: 'муркав', russian: 'сложный / составной', category: 'adjectives', subcategory: 'Оценка', gender: 'masculine', forms: { feminine: 'מוּרְכֶּבֶת', plural: 'מוּרְכָּבִים', femininePlural: 'מוּרְכָּבוֹת' } },
-
   // ===================== ТЕХНИЧЕСКИЕ ГЛАГОЛЫ (verbs) =====================
   // --- Диагностика ---
   { id: 'tv1', hebrew: 'לִבְחוֹן', transcription: 'ливхон', russian: 'тестировать', category: 'verbs', subcategory: 'Диагностика', binyan: 'Пааль', example: { hebrew: 'צריך לבחון את המערכת לפני ההפעלה', russian: 'Нужно протестировать систему перед запуском' } },
@@ -1157,7 +1103,6 @@ export const vocabulary: Word[] = [
   { id: 'tv72', hebrew: 'לְבַדֵּל', transcription: 'левадэль', russian: 'изолировать / разделять', category: 'verbs', subcategory: 'Проф. общение', binyan: 'Пиэль' },
   { id: 'tv73', hebrew: 'לִפְתּוֹר', transcription: 'лифтор', russian: 'решать (проблему)', category: 'verbs', subcategory: 'Проф. общение', binyan: 'Пааль', example: { hebrew: 'פתרנו את הבעיה', russian: 'Мы решили проблему' } },
   { id: 'tv74', hebrew: 'לְהִתְכּוֹנֵן', transcription: 'леhитконэн', russian: 'подготавливаться', category: 'verbs', subcategory: 'Проф. общение', binyan: 'Хитпаэль' },
-
   // ===================== СЛОВА-СВЯЗКИ И ПРЕДЛОГИ (everyday) =====================
   // --- Причина и следствие ---
   { id: 'cn1', hebrew: 'עֵקֶב', transcription: 'экэв', russian: 'вследствие', category: 'everyday', subcategory: 'Причина' },
@@ -1171,7 +1116,6 @@ export const vocabulary: Word[] = [
   { id: 'cn9', hebrew: 'מִפְּנֵי שֶׁ...', transcription: 'ми-пнэй шэ...', russian: 'потому что...', category: 'everyday', subcategory: 'Причина' },
   { id: 'cn10', hebrew: 'הֱיוֹת שֶׁ...', transcription: 'hиёт шэ...', russian: 'так как...', category: 'everyday', subcategory: 'Причина' },
   { id: 'cn11', hebrew: 'מֵאָחַר שֶׁ...', transcription: 'мэ-ахар шэ...', russian: 'раз уж...', category: 'everyday', subcategory: 'Причина' },
-  { id: 'cn12', hebrew: 'סִיבָּה', transcription: 'сиба', russian: 'причина', category: 'everyday', subcategory: 'Причина' },
   { id: 'cn13', hebrew: 'גּוֹרֵם', transcription: 'горэм', russian: 'фактор / причина', category: 'everyday', subcategory: 'Причина' },
   // --- Время и последовательность ---
   { id: 'cn14', hebrew: 'בִּזְמַן', transcription: 'би-зман', russian: 'во время', category: 'everyday', subcategory: 'Время' },
@@ -1248,7 +1192,6 @@ export const vocabulary: Word[] = [
   { id: 'cn79', hebrew: 'כַּנִּרְאֶה', transcription: 'канирэ', russian: 'вероятно', category: 'everyday', subcategory: 'Итог' },
   { id: 'cn80', hebrew: 'בָּטוּחַ', transcription: 'батуах', russian: 'точно / уверен', category: 'everyday', subcategory: 'Итог' },
   { id: 'cn81', hebrew: 'יִיתָּכֵן', transcription: 'итахэн', russian: 'возможно', category: 'everyday', subcategory: 'Итог' },
-  { id: 'cn82', hebrew: 'חוֹבָה', transcription: 'хова', russian: 'обязательно', category: 'everyday', subcategory: 'Итог' },
   { id: 'cn83', hebrew: 'אָסוּר', transcription: 'асур', russian: 'запрещено', category: 'everyday', subcategory: 'Итог' },
   { id: 'cn84', hebrew: 'מוּתָּר', transcription: 'мутар', russian: 'разрешено', category: 'everyday', subcategory: 'Итог' },
   { id: 'cn85', hebrew: 'כְּדַאי', transcription: 'кэдай', russian: 'стоит / целесообразно', category: 'everyday', subcategory: 'Итог' },
@@ -1257,7 +1200,6 @@ export const vocabulary: Word[] = [
   { id: 'cn88', hebrew: 'מִיָּדִי', transcription: 'мияди', russian: 'немедленный', category: 'everyday', subcategory: 'Итог' },
   { id: 'cn89', hebrew: 'סוֹפִי', transcription: 'софи', russian: 'окончательный', category: 'everyday', subcategory: 'Итог' },
   { id: 'cn90', hebrew: 'נוֹסָף', transcription: 'носаф', russian: 'дополнительный', category: 'everyday', subcategory: 'Итог' },
-
   // ===================== ТЕХНИЧЕСКИЕ ПРЕДЛОЖЕНИЯ — ХОЛОДИЛЬНОЕ ОБОРУДОВАНИЕ (sentences) =====================
   { id: 'ts1', hebrew: 'החלפת שסתום ההתפשטות נחוצה כי הוא גורם לאיבוד ביצועים של מערכת הקירור, מה שמשפיע על זמן ההקפאה', transcription: 'ахлафат шастом а-hитпаштут нехуца ки hу горэм ле-ибуд бицуим шель маарехет а-кейрур, ма ше-машпиа аль зман а-hакпаа', russian: 'Замена ТРВ необходима, потому что он вызывает потерю производительности системы охлаждения, что влияет на время заморозки', category: 'sentences', subcategory: 'Техн. объяснения' },
   { id: 'ts2', hebrew: 'כשהמעבה מלוכלך, הלחץ הגבוה עולה והמדחס צורך יותר חשמל, לכן חשוב לנקות אותו באופן קבוע', transcription: 'кше-hа-меабэ мелухлах, а-лахац а-гавоа олэ вэ-hа-мадхэс цорэх йотэр хашмаль, лахэн хашув ленакот ото бе-офэн кавуа', russian: 'Когда конденсатор загрязнён, высокое давление растёт и компрессор потребляет больше электричества, поэтому важно чистить его регулярно', category: 'sentences', subcategory: 'Техн. объяснения' },
@@ -1309,7 +1251,6 @@ export const vocabulary: Word[] = [
   { id: 'ts48', hebrew: 'חלודה על צנרת ברזל מעידה על לחות גבוהה ועל הצורך בציפוי או החלפה', transcription: 'халуда аль цнарот барзэль маида аль лахут гвоhа вэ-аль а-цорэх бе-ципуй о hахлафа', russian: 'Ржавчина на стальных трубах указывает на высокую влажность и на необходимость покрытия или замены', category: 'sentences', subcategory: 'Техн. объяснения' },
   { id: 'ts49', hebrew: 'מדידת מתח ברגעי הפעלה חשובה כי נפילת מתח גדולה מדי פוגעת בביצועי המדחס', transcription: 'мэдидат мэтах бэ-ригъэй hафала хашува ки нфилат мэтах гдола мидай погаат бе-бицуэй а-мадхэс', russian: 'Измерение напряжения при пуске важно, потому что чрезмерная просадка напряжения ухудшает работу компрессора', category: 'sentences', subcategory: 'Техн. объяснения' },
   { id: 'ts50', hebrew: 'תיעוד מפורט של כל תיקון עוזר למעקב אחרי היסטוריית התקלות ומייעל תחזוקה עתידית', transcription: 'тиуд мефорат шель коль тикун озэр лемаакав ахарэй hисторият а-такалот вэ-мейаэль тахзука атидит', russian: 'Детальная документация каждого ремонта помогает отслеживать историю поломок и оптимизирует будущее ТО', category: 'sentences', subcategory: 'Техн. объяснения' },
-
   // ===================== ПОВСЕДНЕВНЫЕ ПРЕДЛОЖЕНИЯ — ОБЪЯСНИТЕЛЬНЫЕ (sentences) =====================
   { id: 'ds1', hebrew: 'חשוב להגיע בזמן לפגישות כי זה מראה כבוד לזמן של האדם השני', transcription: 'хашув леагиа бе-зман ле-пгишот ки зэ маръэ кавод ле-зман шель а-адам а-шэни', russian: 'Важно приходить вовремя на встречи, потому что это показывает уважение ко времени другого человека', category: 'sentences', subcategory: 'Повседневные' },
   { id: 'ds2', hebrew: 'כשאתה עובר דירה צריך לעדכן את הכתובת בכל המוסדות הרשמיים', transcription: 'кше-ата овэр дира царих леадкэн эт а-ктовет бе-коль а-мосдот а-ришмиим', russian: 'Когда переезжаешь, нужно обновить адрес во всех официальных учреждениях', category: 'sentences', subcategory: 'Повседневные' },
@@ -1361,7 +1302,6 @@ export const vocabulary: Word[] = [
   { id: 'ds48', hebrew: 'שינה טובה בלילה משפיעה על כל היום כי בלי מנוחה הגוף והמוח לא מתפקדים', transcription: 'шэна това ба-лайла машпиа аль коль а-йом ки бли менуха а-гуф вэ-а-моах ло митфакдим', russian: 'Хороший ночной сон влияет на весь день, потому что без отдыха тело и мозг не функционируют', category: 'sentences', subcategory: 'Повседневные' },
   { id: 'ds49', hebrew: 'כשמישהו עושה עבודה טובה חשוב להגיד לו כי הערכה מגבירה מוטיבציה', transcription: 'кше-мишеhу осэ авода това хашув леагид ло ки hаараха магбира мотивация', russian: 'Когда кто-то хорошо работает, важно сказать ему об этом, потому что признание повышает мотивацию', category: 'sentences', subcategory: 'Повседневные' },
   { id: 'ds50', hebrew: 'אם רוצים להשתפר בעברית חשוב להשתמש בשפה כל יום ולא לפחד מטעויות', transcription: 'им роцим леhиштапэр бе-иврит хашув леhиштамэш бе-сафа коль йом вэ-ло лефахэд ми-тауёт', russian: 'Если хочешь улучшить иврит, важно использовать язык каждый день и не бояться ошибок', category: 'sentences', subcategory: 'Повседневные' },
-
   // ===================== СУЩЕСТВИТЕЛЬНЫЕ — профессиональные/абстрактные (nouns2) =====================
   { id: 'n2-1', hebrew: 'עוּבְדָּה', transcription: 'увда', russian: 'Факт', category: 'nouns', gender: 'feminine' , forms: { plural: 'עוּבְדּוֹת' } },
   { id: 'n2-2', hebrew: 'טַעֲנָה', transcription: 'таана', russian: 'Аргумент / довод', category: 'nouns', gender: 'feminine' , forms: { plural: 'טַעֲנוֹת' } },
@@ -1412,7 +1352,6 @@ export const vocabulary: Word[] = [
   { id: 'n2-48', hebrew: 'סְטִיָּה', transcription: 'стийя', russian: 'Отклонение', category: 'nouns', gender: 'feminine' , forms: { plural: 'סְטִיּוֹת' } },
   { id: 'n2-49', hebrew: 'עִדְכּוּן', transcription: 'идкун', russian: 'Обновление / апдейт', category: 'nouns', gender: 'masculine' , forms: { plural: 'עִדְכּוּןִים' } },
   { id: 'n2-50', hebrew: 'הִתְקַדְּמוּת', transcription: 'hиткадмут', russian: 'Прогресс / продвижение', category: 'nouns', gender: 'feminine' , forms: { plural: 'הִתְקַדְּמוּתוֹת' } },
-
   // ===================== ГЛАГОЛЫ — продвинутые (verbs2) =====================
   { id: 'v2-1', hebrew: 'לְתַפְקֵד', transcription: 'летафкэд', russian: 'Функционировать', category: 'verbs', binyan: 'Пиэль' },
   { id: 'v2-2', hebrew: 'לְהִפָּעֵל', transcription: 'леhипаэль', russian: 'Срабатывать / активироваться', category: 'verbs', binyan: 'Нифаль' },
@@ -1463,7 +1402,6 @@ export const vocabulary: Word[] = [
   { id: 'v2-48', hebrew: 'לְהִתְעַדְכֵּן', transcription: 'леhитадкэн', russian: 'Обновляться / быть в курсе', category: 'verbs', binyan: 'Хитпаэль' },
   { id: 'v2-49', hebrew: 'לְהִתְרַכֵּז', transcription: 'леhитракэз', russian: 'Концентрироваться', category: 'verbs', binyan: 'Хитпаэль' },
   { id: 'v2-50', hebrew: 'לְהִתְנַהֵל', transcription: 'леhитнаhэль', russian: 'Вести себя / функционировать (о системе)', category: 'verbs', binyan: 'Хитпаэль' },
-
   // ===================== ПРЕДЛОЖЕНИЯ — повседневные продвинутые (ds2) =====================
   { id: 'ds2-1', hebrew: 'צריך לזהות את הבעיה לפני שמתחילים לחפש פתרון', transcription: 'царих лезаhот эт а-бъая лифнэй ше-матхилим лехапэс питрон', russian: 'Нужно идентифицировать проблему прежде чем начинать искать решение', category: 'sentences', subcategory: 'Повседневные' },
   { id: 'ds2-2', hebrew: 'המערכת לא מתפקדת כראוי ולכן צריך לבצע אבחון מקיף', transcription: 'а-маарэхэт ло метафкэдэт карауй вэ-лахэн царих левацэа ивхун макиф', russian: 'Система не функционирует должным образом, поэтому нужно провести комплексную диагностику', category: 'sentences', subcategory: 'Повседневные' },
@@ -1515,7 +1453,6 @@ export const vocabulary: Word[] = [
   { id: 'ds2-48', hebrew: 'הסיכום של הפגישה כולל את כל ההחלטות שהתקבלו ואת המשימות שחולקו', transcription: 'а-сикум шель а-пгиша колэль эт коль а-hахлатот ше-hиткаблу вэ-эт а-мешимот ше-хулку', russian: 'Протокол совещания включает все принятые решения и распределённые задачи', category: 'sentences', subcategory: 'Повседневные' },
   { id: 'ds2-49', hebrew: 'חשוב להפריך את ההנחות השגויות כדי לא לבזבז משאבים', transcription: 'хашув леhафрих эт а-hанахот а-шгуйот кэдэй ло левазбэз мешавим', russian: 'Важно опровергнуть ошибочные допущения, чтобы не тратить ресурсы впустую', category: 'sentences', subcategory: 'Повседневные' },
   { id: 'ds2-50', hebrew: 'כשמגיבים לביקורת חשוב להישאר מקצועי ולהתמקד בעובדות', transcription: 'кше-магивим ле-бикорэт хашув леhишаэр микцои вэ-леhитмакэд бе-увдот', russian: 'Реагируя на критику, важно оставаться профессиональным и сосредотачиваться на фактах', category: 'sentences', subcategory: 'Повседневные' },
-
   // ===================== НОВЫЕ ГЛАГОЛЫ — серьёзные/профессиональные (v3) =====================
   { id: 'v3-1', hebrew: 'לְהֵעָתֵר', transcription: 'леhэатэр', russian: 'Откликаться / удовлетворять просьбу', category: 'verbs', binyan: 'Нифаль' },
   { id: 'v3-2', hebrew: 'לְהִצְטַיֵּן', transcription: 'леhицтайэн', russian: 'Отличаться / выделяться', category: 'verbs', binyan: 'Хитпаэль' },
@@ -1565,7 +1502,6 @@ export const vocabulary: Word[] = [
   { id: 'v3-48', hebrew: 'לְהִסְתַּכֵּם', transcription: 'леhистакэм', russian: 'Суммироваться / составлять итого', category: 'verbs', binyan: 'Хитпаэль' },
   { id: 'v3-49', hebrew: 'לְחַזּוֹת', transcription: 'лехазот', russian: 'Предсказывать / прогнозировать', category: 'verbs', binyan: 'Пиэль' },
   { id: 'v3-50', hebrew: 'לְהִתְדַּרְדֵּר', transcription: 'леhитдардэр', russian: 'Скатываться / деградировать', category: 'verbs', binyan: 'Хитпаэль' },
-
   // ===================== НОВЫЕ СУЩЕСТВИТЕЛЬНЫЕ — профессиональные (n3) =====================
   { id: 'n3-1', hebrew: 'מַעֲרָךְ', transcription: 'маарах', russian: 'Система / совокупность', category: 'nouns', gender: 'masculine' , forms: { plural: 'מַעֲרָכִים' } },
   { id: 'n3-2', hebrew: 'תַּשְׁתִּית', transcription: 'таштит', russian: 'Инфраструктура', category: 'nouns', gender: 'feminine' , forms: { plural: 'תַּשְׁתִּיוֹת' } },
@@ -1579,7 +1515,6 @@ export const vocabulary: Word[] = [
   { id: 'n3-10', hebrew: 'תַּחֲלוּפָה', transcription: 'тахалуфа', russian: 'Замена / подмена', category: 'nouns', gender: 'feminine' , forms: { plural: 'תַּחֲלוּפָהוֹת' } },
   { id: 'n3-11', hebrew: 'כַּוָּנָה', transcription: 'кавана', russian: 'Намерение', category: 'nouns', gender: 'feminine' , forms: { plural: 'כַּוָּנָהוֹת' } },
   { id: 'n3-12', hebrew: 'הַנְחָיָה', transcription: 'hанхая', russian: 'Инструкция / директива', category: 'nouns', gender: 'feminine' , forms: { plural: 'הַנְחָיוֹת' } },
-  { id: 'n3-13', hebrew: 'סָמְכוּת', transcription: 'самхут', russian: 'Компетенция / полномочие', category: 'nouns', gender: 'feminine' , forms: { plural: 'סָמְכוּתוֹת' } },
   { id: 'n3-14', hebrew: 'אִישׁוּשׁ', transcription: 'ишуш', russian: 'Подтверждение / ратификация', category: 'nouns', gender: 'masculine' , forms: { plural: 'אִישׁוּשִׁים' } },
   { id: 'n3-15', hebrew: 'תְּחוּם', transcription: 'тхум', russian: 'Область / сфера', category: 'nouns', gender: 'masculine' , forms: { plural: 'תְּחוּםִים' } },
   { id: 'n3-16', hebrew: 'הֶרְכֵּב', transcription: 'hэркэв', russian: 'Состав / компоновка', category: 'nouns', gender: 'masculine' , forms: { plural: 'הֶרְכֵּבִים' } },
@@ -1616,7 +1551,6 @@ export const vocabulary: Word[] = [
   { id: 'n3-48', hebrew: 'עֲלוּת', transcription: 'алут', russian: 'Стоимость / затраты', category: 'nouns', gender: 'feminine' , forms: { plural: 'עֲלוּתוֹת' } },
   { id: 'n3-49', hebrew: 'תְּכִיפוּת', transcription: 'тхифут', russian: 'Частотность / периодичность', category: 'nouns', gender: 'feminine' , forms: { plural: 'תְּכִיפוּתוֹת' } },
   { id: 'n3-50', hebrew: 'מוּכָנוּת', transcription: 'муханут', russian: 'Готовность', category: 'nouns', gender: 'feminine' , forms: { plural: 'מוּכָנוּתוֹת' } },
-
   // ===================== НОВЫЕ ПРЕДЛОЖЕНИЯ — повседневные/профессиональные (ds3) =====================
   { id: 'ds3-1', hebrew: 'המערכת הפסיקה לפעול באמצע הלילה ואף אחד לא שם לב', transcription: 'а-маарэхэт hифсика лифъоль бе-эмца а-лайла вэ-аф эхад ло сам лев', russian: 'Система прекратила работать посреди ночи и никто не заметил', category: 'sentences', subcategory: 'Повседневные' },
   { id: 'ds3-2', hebrew: 'האזעקה נפעלה בגלל ירידת טמפרטורה חדה מתחת לסף המותר', transcription: 'а-азака нифъала бигляль йеридат тэмпэратура хада ми-тахат ле-саф а-мутар', russian: 'Сигнализация сработала из-за резкого падения температуры ниже допустимого порога', category: 'sentences', subcategory: 'Повседневные' },
@@ -1668,7 +1602,6 @@ export const vocabulary: Word[] = [
   { id: 'ds3-48', hebrew: 'ההענקה של הסמכות לצוות המקומי הקלה על קבלת החלטות', transcription: 'а-hаанака шель а-самхут ле-цевет а-мекоми hэкила аль каблат hахлатот', russian: 'Делегирование полномочий местной команде облегчило принятие решений', category: 'sentences', subcategory: 'Повседневные' },
   { id: 'ds3-49', hebrew: 'צריך להתמסר לעבודה כדי להגיע לתוצאות שאנחנו מצפים להן', transcription: 'царих леhитмасэр ла-авода кэдэй леhагиа ле-тоцаот ше-анахну мецапим ла-hэн', russian: 'Нужно посвятить себя работе, чтобы достичь результатов, которых мы ожидаем', category: 'sentences', subcategory: 'Повседневные' },
   { id: 'ds3-50', hebrew: 'כשהמצב מתאזן אפשר לחזור לשגרה ולהתמקד בפיתוח', transcription: 'кше-а-мацав митазэн эфшар лахзор ле-шигра вэ-леhитмакэд бе-питуах', russian: 'Когда ситуация стабилизируется, можно вернуться к рутине и сосредоточиться на развитии', category: 'sentences', subcategory: 'Повседневные' },
-
   // ===================== ГЛАГОЛЫ — серия 4 (v4) =====================
   { id: 'v4-1', hebrew: 'לְהֵיעָצֵר', transcription: 'леhэацЭр', russian: 'прекращаться / останавливаться', category: 'verbs', subcategory: 'Высокий регистр', binyan: 'Нифаль' },
   { id: 'v4-2', hebrew: 'לְהִתְחוֹלֵל', transcription: 'леhитхолЭль', russian: 'происходить / разворачиваться', category: 'verbs', subcategory: 'Высокий регистр', binyan: 'Хитпаэль' },
@@ -1695,35 +1628,26 @@ export const vocabulary: Word[] = [
   { id: 'v4-48', hebrew: 'לְהַחְלִישׁ', transcription: 'леhахлИш', russian: 'ослаблять', category: 'verbs', subcategory: 'Высокий регистр', binyan: 'Хифиль' },
   { id: 'v4-49', hebrew: 'לְיַצֵּב', transcription: 'леяцЭв', russian: 'стабилизировать', category: 'verbs', subcategory: 'Высокий регистр', binyan: 'Пиэль' },
   { id: 'v4-50', hebrew: 'לְתַקְשֵׁר', transcription: 'летакшЭр', russian: 'коммуницировать / связывать', category: 'verbs', subcategory: 'Высокий регистр', binyan: 'Пиэль' },
-
   // ===================== СУЩЕСТВИТЕЛЬНЫЕ — серия 4 (n4) =====================
   { id: 'n4-1', hebrew: 'תַּרְבּוּת', transcription: 'тарбУт', russian: 'Культура', category: 'nouns', gender: 'feminine' , forms: { plural: 'תַּרְבּוּיוֹת' } },
-  { id: 'n4-2', hebrew: 'מוֹדָעוּת', transcription: 'модаУт', russian: 'Осознанность / осведомлённость', category: 'nouns', gender: 'feminine' , forms: { plural: 'מוֹדָעוּתוֹת' } },
   { id: 'n4-4', hebrew: 'יְכוֹלֶת', transcription: 'ехОлет', russian: 'Способность / возможность', category: 'nouns', gender: 'feminine' , forms: { plural: 'יְכוֹלֶתוֹת' } },
   { id: 'n4-7', hebrew: 'סִיכּוּי', transcription: 'сикУй', russian: 'Шанс / вероятность', category: 'nouns', gender: 'masculine' , forms: { plural: 'סִיכּוּיִים' } },
-  { id: 'n4-8', hebrew: 'מַשְׁאָב', transcription: 'машАв', russian: 'Ресурс', category: 'nouns', gender: 'masculine' , forms: { plural: 'מַשְׁאָבִים' } },
   { id: 'n4-11', hebrew: 'חֲשִׁיבוּת', transcription: 'хашивУт', russian: 'Важность / значимость', category: 'nouns', gender: 'feminine' , forms: { plural: 'חֲשִׁיבוּתוֹת' } },
   { id: 'n4-12', hebrew: 'דִּיּוּק', transcription: 'диюк', russian: 'Точность / аккуратность', category: 'nouns', gender: 'masculine' , forms: { plural: 'דִּיּוּקִים' } },
-  { id: 'n4-13', hebrew: 'סְמָכוּת', transcription: 'смахУт', russian: 'Полномочие / авторитет', category: 'nouns', gender: 'feminine' , forms: { plural: 'סְמָכוּתוֹת' } },
   { id: 'n4-14', hebrew: 'הַתְפַּתְּחוּת', transcription: 'hитпатхУт', russian: 'Развитие', category: 'nouns', gender: 'feminine' , forms: { plural: 'הַתְפַּתְּחוּתוֹת' } },
   { id: 'n4-15', hebrew: 'יִצִּיבוּת', transcription: 'яцивУт', russian: 'Стабильность', category: 'nouns', gender: 'feminine' , forms: { plural: 'יִצִּיבוּתוֹת' } },
   { id: 'n4-16', hebrew: 'מוּמְחִיּוּת', transcription: 'мумхиЮт', russian: 'Экспертиза / компетентность', category: 'nouns', gender: 'feminine' , forms: { plural: 'מוּמְחִיּוּתוֹת' } },
   { id: 'n4-17', hebrew: 'נְכוֹנוּת', transcription: 'нехонУт', russian: 'Готовность / правильность', category: 'nouns', gender: 'feminine' , forms: { plural: 'נְכוֹנוּתוֹת' } },
-  { id: 'n4-19', hebrew: 'הִזְדַּמְנוּת', transcription: 'hиздамнУт', russian: 'Возможность / случай', category: 'nouns', gender: 'feminine' , forms: { plural: 'הִזְדַּמְנוּתוֹת' } },
   { id: 'n4-20', hebrew: 'אַתְגָּר', transcription: 'атгАр', russian: 'Вызов / челлендж', category: 'nouns', gender: 'masculine' , forms: { plural: 'אַתְגָּרִים' } },
-  { id: 'n4-21', hebrew: 'פִּתָּרוֹן', transcription: 'питарОн', russian: 'Решение (проблемы)', category: 'nouns', gender: 'masculine' , forms: { plural: 'פִּתָּרוֹןִים' } },
   { id: 'n4-22', hebrew: 'מַעֲרֶכֶת', transcription: 'маарЭхет', russian: 'Система', category: 'nouns', gender: 'feminine' , forms: { plural: 'מַעֲרֶכֶתוֹת' } },
   { id: 'n4-23', hebrew: 'תִּקְשׁוֹרֶת', transcription: 'тикшОрет', russian: 'Коммуникация / связь', category: 'nouns', gender: 'feminine' , forms: { plural: 'תִּקְשׁוֹרֶתוֹת' } },
-  { id: 'n4-24', hebrew: 'מִשְׁמָעוּת', transcription: 'мишмаУт', russian: 'Значение / смысл', category: 'nouns', gender: 'feminine' , forms: { plural: 'מִשְׁמָעוּתוֹת' } },
   { id: 'n4-26', hebrew: 'הַתְאָמָה', transcription: 'hатамА', russian: 'Совместимость / соответствие', category: 'nouns', gender: 'feminine' , forms: { plural: 'הַתְאָמָהוֹת' } },
   { id: 'n4-27', hebrew: 'תְּלוּת', transcription: 'тлУт', russian: 'Зависимость', category: 'nouns', gender: 'feminine' , forms: { plural: 'תְּלוּתוֹת' } },
   { id: 'n4-28', hebrew: 'עַצְמָאוּת', transcription: 'ацмаУт', russian: 'Независимость / самостоятельность', category: 'nouns', gender: 'feminine' , forms: { plural: 'עַצְמָאוּתוֹת' } },
-  { id: 'n4-29', hebrew: 'תַּפוּקָה', transcription: 'тафукА', russian: 'Производительность / выработка', category: 'nouns', gender: 'feminine' , forms: { plural: 'תַּפוּקָהוֹת' } },
   { id: 'n4-30', hebrew: 'צְרִיכָה', transcription: 'цриха', russian: 'Потребление', category: 'nouns', gender: 'feminine' , forms: { plural: 'צְרִיכָהוֹת' } },
   { id: 'n4-31', hebrew: 'אַסְטְרָטֶגְיָה', transcription: 'астратЭгья', russian: 'Стратегия', category: 'nouns', gender: 'feminine' , forms: { plural: 'אַסְטְרָטֶגְיָהוֹת' } },
   { id: 'n4-32', hebrew: 'טַקְטִיקָה', transcription: 'тактИка', russian: 'Тактика', category: 'nouns', gender: 'feminine' , forms: { plural: 'טַקְטִיקָהוֹת' } },
   { id: 'n4-33', hebrew: 'יָזְמָה', transcription: 'язмА', russian: 'Инициатива', category: 'nouns', gender: 'feminine' , forms: { plural: 'יָזְמָהוֹת' } },
-  { id: 'n4-34', hebrew: 'מָשָׁב', transcription: 'машАв', russian: 'Обратная связь (фидбек)', category: 'nouns', gender: 'masculine' , forms: { plural: 'מָשָׁבִים' } },
   { id: 'n4-35', hebrew: 'פְּרוֹדוּקְטִיבִיּוּת', transcription: 'продуктивиЮт', russian: 'Продуктивность', category: 'nouns', gender: 'feminine' , forms: { plural: 'פְּרוֹדוּקְטִיבִיּוּתוֹת' } },
   { id: 'n4-36', hebrew: 'מוֹטִיבַצְיָה', transcription: 'мотивАция', russian: 'Мотивация', category: 'nouns', gender: 'feminine' , forms: { plural: 'מוֹטִיבַצְיָהוֹת' } },
   { id: 'n4-37', hebrew: 'קוֹנְפְלִיקְט', transcription: 'конфлИкт', russian: 'Конфликт', category: 'nouns', gender: 'masculine' , forms: { plural: 'קוֹנְפְלִיקְטִים' } },
@@ -1738,16 +1662,13 @@ export const vocabulary: Word[] = [
   { id: 'n4-46', hebrew: 'חִסָּכוֹן', transcription: 'хисахОн', russian: 'Экономия / сбережение', category: 'nouns', gender: 'masculine' , forms: { plural: 'חִסָּכוֹןִים' } },
   { id: 'n4-47', hebrew: 'בִּזְבּוּז', transcription: 'бизбУз', russian: 'Расточительство / трата', category: 'nouns', gender: 'masculine' , forms: { plural: 'בִּזְבּוּזִים' } },
   { id: 'n4-48', hebrew: 'תְּחוּשָׁה', transcription: 'тхушА', russian: 'Ощущение / чувство', category: 'nouns', gender: 'feminine' , forms: { plural: 'תְּחוּשָׁהוֹת' } },
-  { id: 'n4-49', hebrew: 'הֶנְחָיָה', transcription: 'hэнхаЯ', russian: 'Инструкция / указание', category: 'nouns', gender: 'feminine' , forms: { plural: 'הֶנְחָיָהוֹת' } },
   { id: 'n4-50', hebrew: 'נִיסָיוֹן', transcription: 'нисайОн', russian: 'Опыт / попытка', category: 'nouns', gender: 'masculine' , forms: { plural: 'נִיסָיוֹןִים' } },
-
   // ===================== ПРИЛАГАТЕЛЬНЫЕ — серия 2 (adj2) =====================
   { id: 'adj2-1', hebrew: 'בּוֹלֵט', transcription: 'болЕт', russian: 'заметный / выдающийся', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-2', hebrew: 'שׁוּלִי', transcription: 'шулИ', russian: 'второстепенный / маргинальный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-3', hebrew: 'הֲדָדִי', transcription: 'hададИ', russian: 'взаимный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-4', hebrew: 'מוּחָשִׁי', transcription: 'мухашИ', russian: 'ощутимый / осязаемый', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-5', hebrew: 'מוּפְשָׁט', transcription: 'муфшАт', russian: 'абстрактный', category: 'adjectives', subcategory: 'Высокий регистр' },
-  { id: 'adj2-6', hebrew: 'מֵידִי', transcription: 'мейдИ', russian: 'немедленный / мгновенный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-7', hebrew: 'הַדְרָגָתִי', transcription: 'hадрагатИ', russian: 'постепенный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-8', hebrew: 'מַתְמִיד', transcription: 'матмИд', russian: 'постоянный / упорный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-9', hebrew: 'חָרִיג', transcription: 'харИг', russian: 'исключительный / аномальный', category: 'adjectives', subcategory: 'Высокий регистр' },
@@ -1773,7 +1694,6 @@ export const vocabulary: Word[] = [
   { id: 'adj2-31', hebrew: 'מַהוּתִי', transcription: 'маhутИ', russian: 'существенный / сущностный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-32', hebrew: 'זַנִּיחַ', transcription: 'занИах', russian: 'пренебрежимый / ничтожный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-33', hebrew: 'בָּר קַיָּמָא', transcription: 'бар каямА', russian: 'устойчивый / долговечный', category: 'adjectives', subcategory: 'Высокий регистр' },
-  { id: 'adj2-34', hebrew: 'רָגִישׁ', transcription: 'рагИш', russian: 'чувствительный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-36', hebrew: 'פָּגִיעַ', transcription: 'пагИа', russian: 'уязвимый', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-37', hebrew: 'מוּגָן', transcription: 'мугАн', russian: 'защищённый', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-38', hebrew: 'חָשׁוּף', transcription: 'хашУф', russian: 'открытый / незащищённый', category: 'adjectives', subcategory: 'Высокий регистр' },
@@ -1786,7 +1706,6 @@ export const vocabulary: Word[] = [
   { id: 'adj2-45', hebrew: 'יַחֲסִי', transcription: 'яхасИ', russian: 'относительный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-48', hebrew: 'מְתֻחְכָּם', transcription: 'метухкАм', russian: 'изощрённый / сложный', category: 'adjectives', subcategory: 'Высокий регистр' },
   { id: 'adj2-49', hebrew: 'אֲלֵמֶנְטָרִי', transcription: 'элементАри', russian: 'элементарный / базовый', category: 'adjectives', subcategory: 'Высокий регистр' },
-
   // ===================== ПОВСЕДНЕВНЫЕ СЛОВА — серия 2 (ev2) =====================
   { id: 'ev2-1', hebrew: 'תֵּן לִי לַחְשׁוֹב עַל זֶה', transcription: 'тэн ли лахшОв аль зэ', russian: 'Дай мне подумать об этом', category: 'everyday', subcategory: 'Решения' },
   { id: 'ev2-2', hebrew: 'אֲנִי מַעֲדִיף לֹא לְהִסְתַּכֵּן', transcription: 'ани маадИф ло леhистакЭн', russian: 'Я предпочитаю не рисковать', category: 'everyday', subcategory: 'Решения' },
@@ -1838,12 +1757,9 @@ export const vocabulary: Word[] = [
   { id: 'ev2-48', hebrew: 'אֲנַחְנוּ צְרִיכִים גִּיבּוּי', transcription: 'анАхну црихИм гибУй', russian: 'Нам нужна подстраховка / бэкап', category: 'everyday', subcategory: 'Работа' },
   { id: 'ev2-49', hebrew: 'הַתּוֹצָאוֹת עוֹלוֹת עַל הַצִּפִּיּוֹת', transcription: 'а-тоцаОт олОт аль а-ципиОт', russian: 'Результаты превосходят ожидания', category: 'everyday', subcategory: 'Работа' },
   { id: 'ev2-50', hebrew: 'צָרִיךְ לְהַגִּישׁ דּוּ"חַ בְּסוֹף הַשָּׁבוּעַ', transcription: 'царИх леhагИш дУах бе-соф а-шавУа', russian: 'Нужно сдать отчёт к концу недели', category: 'everyday', subcategory: 'Работа' },
-
   // ===================== ГЛАГОЛЫ v5 (50 шт.) =====================
   { id: 'v5-2', hebrew: 'לְהַשְׁפִּיעַ', transcription: 'леhашпИа', russian: 'Влиять / воздействовать', category: 'verbs', binyan: 'Хифиль', preposition: 'על', conjugation: { past: 'הִשְׁפִּיעַ', present: 'מַשְׁפִּיעַ', future: 'יַשְׁפִּיעַ' } },
   { id: 'v5-4', hebrew: 'לְהִתְקַדֵּם', transcription: 'леhиткадЭм', russian: 'Продвигаться / прогрессировать', category: 'verbs', binyan: 'Хитпаэль', conjugation: { past: 'הִתְקַדֵּם', present: 'מִתְקַדֵּם', future: 'יִתְקַדֵּם' } },
-  { id: 'v5-11', hebrew: 'לְצַפּוֹת', transcription: 'лецапОт', russian: 'Ожидать / предвидеть', category: 'verbs', binyan: 'Пиэль', preposition: 'ל', conjugation: { past: 'צִיפָּה', present: 'מְצַפֶּה', future: 'יְצַפֶּה' } },
-  { id: 'v5-13', hebrew: 'לְתַעְדֵּף', transcription: 'летаъдЭф', russian: 'Устанавливать приоритет', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'תִּעְדֵּף', present: 'מְתַעְדֵּף', future: 'יְתַעְדֵּף' } },
   { id: 'v5-19', hebrew: 'לְהִתְבּוֹנֵן', transcription: 'леhитбонЭн', russian: 'Наблюдать / всматриваться', category: 'verbs', binyan: 'Хитпаэль', preposition: 'ב', conjugation: { past: 'הִתְבּוֹנֵן', present: 'מִתְבּוֹנֵן', future: 'יִתְבּוֹנֵן' } },
   { id: 'v5-21', hebrew: 'לְהַפְרִיעַ', transcription: 'леhафрИа', russian: 'Мешать / нарушать', category: 'verbs', binyan: 'Хифиль', preposition: 'ל', conjugation: { past: 'הִפְרִיעַ', present: 'מַפְרִיעַ', future: 'יַפְרִיעַ' } },
   { id: 'v5-26', hebrew: 'לְהַקְפִּיד', transcription: 'леhакпИд', russian: 'Быть педантичным', category: 'verbs', binyan: 'Хифиль', preposition: 'על', conjugation: { past: 'הִקְפִּיד', present: 'מַקְפִּיד', future: 'יַקְפִּיד' } },
@@ -1855,37 +1771,27 @@ export const vocabulary: Word[] = [
   { id: 'v5-44', hebrew: 'לְהוֹרוֹת', transcription: 'леhорОт', russian: 'Указывать / давать указание', category: 'verbs', binyan: 'Хифиль', preposition: 'ל', conjugation: { past: 'הוֹרָה', present: 'מוֹרֶה', future: 'יוֹרֶה' } },
   { id: 'v5-46', hebrew: 'לְהִשָּׁמֵר', transcription: 'леhишамЭр', russian: 'Остерегаться / беречься', category: 'verbs', binyan: 'Нифаль', preposition: 'מ', conjugation: { past: 'נִשְׁמַר', present: 'נִשְׁמָר', future: 'יִשָּׁמֵר' } },
   { id: 'v5-49', hebrew: 'לְתַאֵם', transcription: 'летаЭм', russian: 'Координировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את / עם', conjugation: { past: 'תִּיאֵם', present: 'מְתַאֵם', future: 'יְתַאֵם' } },
-
   // ===================== СУЩЕСТВИТЕЛЬНЫЕ n5 (50 шт.) =====================
   { id: 'n5-2', hebrew: 'טִיעוּן', transcription: 'тиУн', russian: 'Аргумент / довод', category: 'nouns', gender: 'masculine', forms: { plural: 'טִיעוּנִים' } },
   { id: 'n5-7', hebrew: 'מַנְגְּנוֹן', transcription: 'мангенОн', russian: 'Механизм', category: 'nouns', gender: 'masculine', forms: { plural: 'מַנְגְּנוֹנִים' } },
   { id: 'n5-8', hebrew: 'תּוֹפָעָה', transcription: 'тофаА', russian: 'Явление / феномен', category: 'nouns', gender: 'feminine', forms: { plural: 'תּוֹפָעוֹת' } },
-  { id: 'n5-9', hebrew: 'מִסְגֶּרֶת', transcription: 'мисгЭрет', russian: 'Рамка / структура', category: 'nouns', gender: 'feminine', forms: { plural: 'מִסְגָּרוֹת' } },
   { id: 'n5-10', hebrew: 'הִתְיַחֲסוּת', transcription: 'итъяхасУт', russian: 'Отношение / подход', category: 'nouns', gender: 'feminine' , forms: { plural: 'הִתְיַחֲסוּיוֹת' } },
-  { id: 'n5-14', hebrew: 'מִגְבָּלָה', transcription: 'мигбалА', russian: 'Ограничение', category: 'nouns', gender: 'feminine', forms: { plural: 'מִגְבָּלוֹת' } },
-  { id: 'n5-21', hebrew: 'הַגְדָּרָה', transcription: 'агдарА', russian: 'Определение / дефиниция', category: 'nouns', gender: 'feminine', forms: { plural: 'הַגְדָּרוֹת' } },
-  { id: 'n5-23', hebrew: 'עֶקְרוֹן', transcription: 'экрОн', russian: 'Принцип', category: 'nouns', gender: 'masculine', forms: { plural: 'עֶקְרוֹנוֹת' } },
   { id: 'n5-24', hebrew: 'הַבְחָנָה', transcription: 'авханА', russian: 'Различение / дифференциация', category: 'nouns', gender: 'feminine', forms: { plural: 'הַבְחָנוֹת' } },
   { id: 'n5-25', hebrew: 'מַהוּת', transcription: 'маhУт', russian: 'Сущность / суть', category: 'nouns', gender: 'feminine' , forms: { plural: 'מַהוּיוֹת' } },
   { id: 'n5-27', hebrew: 'הִשְׁתַּמְּעוּת', transcription: 'иштамъУт', russian: 'Подтекст / импликация', category: 'nouns', gender: 'feminine' , forms: { plural: 'הִשְׁתַּמְּעוּיוֹת' } },
   { id: 'n5-29', hebrew: 'אֹמְדָן', transcription: 'омдАн', russian: 'Смета / оценка', category: 'nouns', gender: 'masculine', forms: { plural: 'אוֹמְדָנִים' } },
   { id: 'n5-31', hebrew: 'נָתוּן', transcription: 'натУн', russian: 'Данное / параметр', category: 'nouns', gender: 'masculine', forms: { plural: 'נְתוּנִים' } },
-  { id: 'n5-32', hebrew: 'מִתְאָם', transcription: 'митъАм', russian: 'Корреляция', category: 'nouns', gender: 'masculine', forms: { plural: 'מִתְאָמִים' } },
   { id: 'n5-36', hebrew: 'אַנָלוֹגְיָה', transcription: 'аналОгья', russian: 'Аналогия', category: 'nouns', gender: 'feminine', forms: { plural: 'אַנָלוֹגְיוֹת' } },
-  { id: 'n5-37', hebrew: 'רֶלֶוַנְטִיּוּת', transcription: 'релевантиЮт', russian: 'Релевантность', category: 'nouns', gender: 'feminine' , forms: { plural: 'רֶלֶוַנְטִיּוּיוֹת' } },
   { id: 'n5-38', hebrew: 'פְּרוֹפּוֹרְצְיָה', transcription: 'пропОрцъя', russian: 'Пропорция', category: 'nouns', gender: 'feminine', forms: { plural: 'פְּרוֹפּוֹרְצְיוֹת' } },
   { id: 'n5-39', hebrew: 'דִּינָמִיקָה', transcription: 'динамИка', russian: 'Динамика', category: 'nouns', gender: 'feminine' , forms: { plural: 'דִּינָמִיקוֹת' } },
   { id: 'n5-40', hebrew: 'אִינְטֶגְרַצְיָה', transcription: 'интеграцЪя', russian: 'Интеграция', category: 'nouns', gender: 'feminine' , forms: { plural: 'אִינְטֶגְרַצְיָהוֹת' } },
   { id: 'n5-41', hebrew: 'קוֹמְפּוֹנֶנְטָה', transcription: 'компонЭнта', russian: 'Компонент / составляющая', category: 'nouns', gender: 'feminine', forms: { plural: 'קוֹמְפּוֹנֶנְטוֹת' } },
   { id: 'n5-42', hebrew: 'אוֹפְּטִימִיזַצְיָה', transcription: 'оптимизАцъя', russian: 'Оптимизация', category: 'nouns', gender: 'feminine' , forms: { plural: 'אוֹפְּטִימִיזַצְיָהוֹת' } },
-  { id: 'n5-43', hebrew: 'רֶגוּלַצְיָה', transcription: 'регулАцъя', russian: 'Регуляция', category: 'nouns', gender: 'feminine', forms: { plural: 'רֶגוּלַצְיוֹת' } },
   { id: 'n5-44', hebrew: 'מֶתוֹדוֹלוֹגְיָה', transcription: 'методолОгья', russian: 'Методология', category: 'nouns', gender: 'feminine' , forms: { plural: 'מֶתוֹדוֹלוֹגְיָהוֹת' } },
-  { id: 'n5-46', hebrew: 'מִנְהָל', transcription: 'минhАль', russian: 'Администрация', category: 'nouns', gender: 'masculine' , forms: { plural: 'מִנְהָלִים' } },
   { id: 'n5-47', hebrew: 'מוּנָח', transcription: 'мунАх', russian: 'Термин / понятие', category: 'nouns', gender: 'masculine', forms: { plural: 'מוּנָחִים' } },
   { id: 'n5-48', hebrew: 'אִינְדִּיקָטוֹר', transcription: 'индикАтор', russian: 'Индикатор', category: 'nouns', gender: 'masculine', forms: { plural: 'אִינְדִּיקָטוֹרִים' } },
   { id: 'n5-49', hebrew: 'פְּלַטְפוֹרְמָה', transcription: 'платфОрма', russian: 'Платформа', category: 'nouns', gender: 'feminine', forms: { plural: 'פְּלַטְפוֹרְמוֹת' } },
   { id: 'n5-50', hebrew: 'אַלְגּוֹרִיתְם', transcription: 'алгорИтм', russian: 'Алгоритм', category: 'nouns', gender: 'masculine', forms: { plural: 'אַלְגּוֹרִיתְמִים' } },
-
   // ===================== ПРИЛАГАТЕЛЬНЫЕ adj3 (50 шт.) =====================
   { id: 'adj3-2', hebrew: 'מוּפְרָז', transcription: 'муфрАз', russian: 'Преувеличенный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מוּפְרָזָה', plural: 'מוּפְרָזִים' } },
   { id: 'adj3-4', hebrew: 'תָּקֵף', transcription: 'такЭф', russian: 'Действительный / валидный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'תְּקֵפָה', plural: 'תְּקֵפִים' } },
@@ -1918,13 +1824,10 @@ export const vocabulary: Word[] = [
   { id: 'adj3-38', hebrew: 'אֵפֶקְטִיבִי', transcription: 'эфектИви', russian: 'Результативный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'אֵפֶקְטִיבִית' } },
   { id: 'adj3-39', hebrew: 'בָּר-בִּיצּוּעַ', transcription: 'бар-бицУа', russian: 'Выполнимый', category: 'adjectives', gender: 'masculine' },
   { id: 'adj3-40', hebrew: 'תֵּמָתִי', transcription: 'тематИ', russian: 'Тематический', category: 'adjectives', gender: 'masculine', forms: { feminine: 'תֵּמָתִית' } },
-  { id: 'adj3-41', hebrew: 'רֶלֶוַנְטִי', transcription: 'релевАнти', russian: 'Релевантный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'רֶלֶוַנְטִית' } },
   { id: 'adj3-42', hebrew: 'דּוֹמִינָנְטִי', transcription: 'доминАнти', russian: 'Доминантный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'דּוֹמִינָנְטִית' } },
   { id: 'adj3-43', hebrew: 'אוּנִיבֶרְסָלִי', transcription: 'универсАли', russian: 'Универсальный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'אוּנִיבֶרְסָלִית' } },
   { id: 'adj3-45', hebrew: 'מְהֻדָּר', transcription: 'меhудАр', russian: 'Элегантный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְהוּדֶּרֶת' } },
-  { id: 'adj3-46', hebrew: 'עָקֵב', transcription: 'акЭв', russian: 'Последовательный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'עֲקֵבָה' } },
   { id: 'adj3-48', hebrew: 'אַבְּסוֹלוּטִי', transcription: 'абсолЮти', russian: 'Абсолютный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'אַבְּסוֹלוּטִית' } },
-
   // ===================== ПРЕДЛОЖЕНИЯ ev3 (50 шт.) =====================
   { id: 'ev3-1', hebrew: 'הַטִּיעוּן הַזֶּה לֹא מַסְפִּיק מְבוּסָס', transcription: 'а-тиУн а-зЭ ло маспИк мевусАс', russian: 'Этот аргумент недостаточно обоснован', category: 'sentences', subcategory: 'Дискуссия' },
   { id: 'ev3-2', hebrew: 'צָרִיךְ לְהַגְדִּיר אֶת הַמּוּשָׂגִים לִפְנֵי הַדִּיּוּן', transcription: 'царИх леhагдИр эт а-мусагИм лифнЭй а-диЮн', russian: 'Нужно определить понятия перед дискуссией', category: 'sentences', subcategory: 'Дискуссия' },
@@ -1976,90 +1879,43 @@ export const vocabulary: Word[] = [
   { id: 'ev3-48', hebrew: 'תִּיאַמְנוּ אֶת הָעֲבוֹדָה עִם הַצֶּוֶת הַשֵּׁנִי', transcription: 'тиАмну эт а-аводА им а-цЭвет а-шенИ', russian: 'Мы скоординировали работу со второй командой', category: 'everyday', subcategory: 'Работа' },
   { id: 'ev3-49', hebrew: 'אֲנִי מִתְכּוֹנֵן לַפְּגִישָׁה הַבָּאָה', transcription: 'ани митконЭн ла-пгишА а-баА', russian: 'Я готовлюсь к следующей встрече', category: 'everyday', subcategory: 'Работа' },
   { id: 'ev3-50', hebrew: 'הִתְעָרֵב בַּסִּכְסוּךְ וְפָּתַר אוֹתוֹ', transcription: 'итарЭв ба-сихсУх вэ-патАр отО', russian: 'Он вмешался в конфликт и разрешил его', category: 'everyday', subcategory: 'Общение' },
-
   // ===================== НОВЫЕ ГЛАГОЛЫ v6 (50) =====================
   { id: 'v6-1', hebrew: 'לְהִתְפַּקֵּד', transcription: 'леhитпакЭд', russian: 'Функционировать', category: 'verbs', binyan: 'Хитпаэль', preposition: '—', conjugation: { past: 'הִתְפַּקֵּד', present: 'מִתְפַּקֵּד', future: 'יִתְפַּקֵּד' } },
-  { id: 'v6-2', hebrew: 'לְהַפְרִיד', transcription: 'леhафрИд', russian: 'Разделять / отделять', category: 'verbs', binyan: 'Хифиль', preposition: 'את / בין', conjugation: { past: 'הִפְרִיד', present: 'מַפְרִיד', future: 'יַפְרִיד' } },
   { id: 'v6-3', hebrew: 'לְשַׁחְזֵר', transcription: 'лешахзЭр', russian: 'Восстанавливать / реконструировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'שִׁחְזֵר', present: 'מְשַׁחְזֵר', future: 'יְשַׁחְזֵר' } },
-  { id: 'v6-4', hebrew: 'לְהַנְחוֹת', transcription: 'леhанхОт', russian: 'Инструктировать / направлять', category: 'verbs', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הִנְחָה', present: 'מַנְחֶה', future: 'יַנְחֶה' } },
-  { id: 'v6-5', hebrew: 'לְהִתְנַגֵּד', transcription: 'леhитнагЭд', russian: 'Сопротивляться', category: 'verbs', binyan: 'Хитпаэль', preposition: 'ל', conjugation: { past: 'הִתְנַגֵּד', present: 'מִתְנַגֵּד', future: 'יִתְנַגֵּד' } },
-  { id: 'v6-6', hebrew: 'לְהַעֲרִיךְ', transcription: 'леhаарИх', russian: 'Оценивать / ценить', category: 'verbs', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הֶעֱרִיךְ', present: 'מַעֲרִיךְ', future: 'יַעֲרִיךְ' } },
-  { id: 'v6-7', hebrew: 'לְסַכֵּם', transcription: 'лесакЭм', russian: 'Подводить итог / суммировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'סִיכֵּם', present: 'מְסַכֵּם', future: 'יְסַכֵּם' } },
-  { id: 'v6-8', hebrew: 'לְהִתְמַקֵּד', transcription: 'леhитмакЭд', russian: 'Фокусироваться', category: 'verbs', binyan: 'Хитпаэль', preposition: 'ב', conjugation: { past: 'הִתְמַקֵּד', present: 'מִתְמַקֵּד', future: 'יִתְמַקֵּד' } },
-  { id: 'v6-9', hebrew: 'לְאַשֵׁר', transcription: 'леашЭр', russian: 'Утверждать / подтверждать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'אִישֵׁר', present: 'מְאַשֵׁר', future: 'יְאַשֵׁר' } },
-  { id: 'v6-10', hebrew: 'לְהַגְדִּיר', transcription: 'леhагдИр', russian: 'Определять / задавать параметры', category: 'verbs', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הִגְדִּיר', present: 'מַגְדִּיר', future: 'יַגְדִּיר' } },
-  { id: 'v6-11', hebrew: 'לְהִתְמוֹדֵד', transcription: 'леhитмодЭд', russian: 'Справляться / противостоять', category: 'verbs', binyan: 'Хитпаэль', preposition: 'עם', conjugation: { past: 'הִתְמוֹדֵד', present: 'מִתְמוֹדֵד', future: 'יִתְמוֹדֵד' } },
-  { id: 'v6-12', hebrew: 'לְהִסְתַּכֵּן', transcription: 'леhистакЭн', russian: 'Рисковать', category: 'verbs', binyan: 'Хитпаэль', preposition: 'ב', conjugation: { past: 'הִסְתַּכֵּן', present: 'מִסְתַּכֵּן', future: 'יִסְתַּכֵּן' } },
   { id: 'v6-13', hebrew: 'לְהִצְטַבֵּר', transcription: 'леhицтабЭр', russian: 'Накапливаться', category: 'verbs', binyan: 'Хитпаэль', preposition: '—', conjugation: { past: 'הִצְטַבֵּר', present: 'מִצְטַבֵּר', future: 'יִצְטַבֵּר' } },
-  { id: 'v6-14', hebrew: 'לְהִתְפַּתֵּחַ', transcription: 'леhитпатЭах', russian: 'Развиваться', category: 'verbs', binyan: 'Хитпаэль', preposition: '—', conjugation: { past: 'הִתְפַּתֵּחַ', present: 'מִתְפַּתֵּחַ', future: 'יִתְפַּתֵּחַ' } },
-  { id: 'v6-15', hebrew: 'לְהִתְקַדֵּם', transcription: 'леhиткадЭм', russian: 'Продвигаться / прогрессировать', category: 'verbs', binyan: 'Хитпаэль', preposition: '—', conjugation: { past: 'הִתְקַדֵּם', present: 'מִתְקַדֵּם', future: 'יִתְקַדֵּם' } },
-  { id: 'v6-16', hebrew: 'לְעַדְכֵּן', transcription: 'леадкЭн', russian: 'Обновлять / информировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'עִידְכֵּן', present: 'מְעַדְכֵּן', future: 'יְעַדְכֵּן' } },
-  { id: 'v6-17', hebrew: 'לְגַבֵּשׁ', transcription: 'легабЭш', russian: 'Формировать / кристаллизовать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'גִּיבֵּשׁ', present: 'מְגַבֵּשׁ', future: 'יְגַבֵּשׁ' } },
   { id: 'v6-18', hebrew: 'לְהִתְבַּסֵּס', transcription: 'леhитбасЭс', russian: 'Основываться / опираться', category: 'verbs', binyan: 'Хитпаэль', preposition: 'על', conjugation: { past: 'הִתְבַּסֵּס', present: 'מִתְבַּסֵּס', future: 'יִתְבַּסֵּס' } },
-  { id: 'v6-19', hebrew: 'לְצַמְצֵם', transcription: 'лецамцЭм', russian: 'Сокращать / минимизировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'צִמְצֵם', present: 'מְצַמְצֵם', future: 'יְצַמְצֵם' } },
-  { id: 'v6-20', hebrew: 'לְהַרְחִיב', transcription: 'леhархИв', russian: 'Расширять', category: 'verbs', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הִרְחִיב', present: 'מַרְחִיב', future: 'יַרְחִיב' } },
-  { id: 'v6-21', hebrew: 'לְתַעֵד', transcription: 'летаЭд', russian: 'Документировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'תִּיעֵד', present: 'מְתַעֵד', future: 'יְתַעֵד' } },
-  { id: 'v6-22', hebrew: 'לְהַתְרִיעַ', transcription: 'леhатрИа', russian: 'Предупреждать / бить тревогу', category: 'verbs', binyan: 'Хифиль', preposition: 'על', conjugation: { past: 'הִתְרִיעַ', present: 'מַתְרִיעַ', future: 'יַתְרִיעַ' } },
   { id: 'v6-23', hebrew: 'לִשְׁקוֹל', transcription: 'лишкОль', russian: 'Взвешивать / обдумывать', category: 'verbs', binyan: 'Пааль', preposition: 'את', conjugation: { past: 'שָׁקַל', present: 'שׁוֹקֵל', future: 'יִשְׁקֹל' } },
-  { id: 'v6-24', hebrew: 'לְהַצְדִּיק', transcription: 'леhацдИк', russian: 'Оправдывать / обосновывать', category: 'verbs', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הִצְדִּיק', present: 'מַצְדִּיק', future: 'יַצְדִּיק' } },
-  { id: 'v6-25', hebrew: 'לְשַׁפֵּר', transcription: 'лешапЭр', russian: 'Улучшать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'שִׁיפֵּר', present: 'מְשַׁפֵּר', future: 'יְשַׁפֵּר' } },
-  { id: 'v6-26', hebrew: 'לְנַתֵּחַ', transcription: 'ленатЭах', russian: 'Анализировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'נִיתֵּחַ', present: 'מְנַתֵּחַ', future: 'יְנַתֵּחַ' } },
-  { id: 'v6-27', hebrew: 'לְמַפּוֹת', transcription: 'лемапОт', russian: 'Картографировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'מִיפָּה', present: 'מְמַפֶּה', future: 'יְמַפֶּה' } },
   { id: 'v6-28', hebrew: 'לְדַרֵּג', transcription: 'ледарЭг', russian: 'Ранжировать / классифицировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'דִּירֵּג', present: 'מְדַרֵּג', future: 'יְדַרֵּג' } },
-  { id: 'v6-29', hebrew: 'לְהַנְגִּישׁ', transcription: 'леhангИш', russian: 'Делать доступным', category: 'verbs', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הִנְגִּישׁ', present: 'מַנְגִּישׁ', future: 'יַנְגִּישׁ' } },
-  { id: 'v6-30', hebrew: 'לְהִתְיַעֵץ', transcription: 'леhитъяЭц', russian: 'Консультироваться', category: 'verbs', binyan: 'Хитпаэль', preposition: 'עם', conjugation: { past: 'הִתְיַעֵץ', present: 'מִתְיַעֵץ', future: 'יִתְיַעֵץ' } },
   { id: 'v6-31', hebrew: 'לְכַמֵּת', transcription: 'лехамЭт', russian: 'Количественно определять', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'כִּימֵּת', present: 'מְכַמֵּת', future: 'יְכַמֵּת' } },
-  { id: 'v6-32', hebrew: 'לְסַנְכְּרֵן', transcription: 'лесанкрЭн', russian: 'Синхронизировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'סִינְכְּרֵן', present: 'מְסַנְכְּרֵן', future: 'יְסַנְכְּרֵן' } },
   { id: 'v6-33', hebrew: 'לְאַפְיֵן', transcription: 'леафйЭн', russian: 'Характеризовать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'אִפְיֵן', present: 'מְאַפְיֵן', future: 'יְאַפְיֵן' } },
-  { id: 'v6-34', hebrew: 'לְהִתְחַדֵּשׁ', transcription: 'леhитхадЭш', russian: 'Обновляться', category: 'verbs', binyan: 'Хитпаэль', preposition: '—', conjugation: { past: 'הִתְחַדֵּשׁ', present: 'מִתְחַדֵּשׁ', future: 'יִתְחַדֵּשׁ' } },
-  { id: 'v6-35', hebrew: 'לְהִתְנַהֵל', transcription: 'леhитнаhЭль', russian: 'Управляться / вести себя', category: 'verbs', binyan: 'Хитпаэль', preposition: '—', conjugation: { past: 'הִתְנַהֵל', present: 'מִתְנַהֵל', future: 'יִתְנַהֵל' } },
   { id: 'v6-36', hebrew: 'לְהִשְׁתַּקֵּף', transcription: 'леhиштакЭф', russian: 'Отражаться', category: 'verbs', binyan: 'Хитпаэль', preposition: 'ב', conjugation: { past: 'הִשְׁתַּקֵּף', present: 'מִשְׁתַּקֵּף', future: 'יִשְׁתַּקֵּף' } },
-  { id: 'v6-37', hebrew: 'לְהִתְעַמֵּת', transcription: 'леhитаамЭт', russian: 'Конфронтировать', category: 'verbs', binyan: 'Хитпаэль', preposition: 'עם', conjugation: { past: 'הִתְעַמֵּת', present: 'מִתְעַמֵּת', future: 'יִתְעַמֵּת' } },
   { id: 'v6-38', hebrew: 'לְהִתְחַמֵּק', transcription: 'леhитхамЭк', russian: 'Уклоняться', category: 'verbs', binyan: 'Хитпаэль', preposition: 'מ', conjugation: { past: 'הִתְחַמֵּק', present: 'מִתְחַמֵּק', future: 'יִתְחַמֵּק' } },
-  { id: 'v6-39', hebrew: 'לְהַפְנוֹת', transcription: 'леhафнОт', russian: 'Направлять / перенаправлять', category: 'verbs', binyan: 'Хифиль', preposition: 'את / ל', conjugation: { past: 'הִפְנָה', present: 'מַפְנֶה', future: 'יַפְנֶה' } },
   { id: 'v6-40', hebrew: 'לְהִזְדַּהוֹת', transcription: 'леhиздаhОт', russian: 'Идентифицироваться', category: 'verbs', binyan: 'Хитпаэль', preposition: 'עם', conjugation: { past: 'הִזְדַּהָה', present: 'מִזְדַּהֶה', future: 'יִזְדַּהֶה' } },
   { id: 'v6-41', hebrew: 'לְהָמִיר', transcription: 'леhамИр', russian: 'Конвертировать', category: 'verbs', binyan: 'Хифиль', preposition: 'את / ב', conjugation: { past: 'הֵמִיר', present: 'מֵמִיר', future: 'יָמִיר' } },
   { id: 'v6-42', hebrew: 'לְהֵיעָרֵךְ', transcription: 'леhэарЭх', russian: 'Подготавливаться', category: 'verbs', binyan: 'Нифаль', preposition: 'ל', conjugation: { past: 'נֶעֱרַךְ', present: 'נֶעֱרָךְ', future: 'יֵעָרֵךְ' } },
   { id: 'v6-43', hebrew: 'לְהַאֲצִיל', transcription: 'леhаацИль', russian: 'Делегировать', category: 'verbs', binyan: 'Хифиль', preposition: 'את / ל', conjugation: { past: 'הֶאֱצִיל', present: 'מַאֲצִיל', future: 'יַאֲצִיל' } },
   { id: 'v6-44', hebrew: 'לְמַנֵּף', transcription: 'леманЭф', russian: 'Использовать рычаг', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'מִינֵּף', present: 'מְמַנֵּף', future: 'יְמַנֵּף' } },
-  { id: 'v6-45', hebrew: 'לְתַעְדֵּף', transcription: 'летаадЭф', russian: 'Приоритизировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'תִּעְדֵּף', present: 'מְתַעְדֵּף', future: 'יְתַעְדֵּף' } },
   { id: 'v6-46', hebrew: 'לְהִתְרַחֵק', transcription: 'леhитрахЭк', russian: 'Отдаляться', category: 'verbs', binyan: 'Хитпаэль', preposition: 'מ', conjugation: { past: 'הִתְרַחֵק', present: 'מִתְרַחֵק', future: 'יִתְרַחֵק' } },
   { id: 'v6-47', hebrew: 'לְהִתְקָרֵב', transcription: 'леhиткарЭв', russian: 'Приближаться', category: 'verbs', binyan: 'Хитпаэль', preposition: 'ל / אל', conjugation: { past: 'הִתְקָרֵב', present: 'מִתְקָרֵב', future: 'יִתְקָרֵב' } },
   { id: 'v6-48', hebrew: 'לְהִתְחַלֵּף', transcription: 'леhитхалЭф', russian: 'Сменяться / чередоваться', category: 'verbs', binyan: 'Хитпаэль', preposition: '—', conjugation: { past: 'הִתְחַלֵּף', present: 'מִתְחַלֵּף', future: 'יִתְחַלֵּף' } },
-  { id: 'v6-49', hebrew: 'לְהַעֲמִיד', transcription: 'леhаамИд', russian: 'Ставить / устанавливать позицию', category: 'verbs', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הֶעֱמִיד', present: 'מַעֲמִיד', future: 'יַעֲמִיד' } },
   { id: 'v6-50', hebrew: 'לְהִתְעַדֵּף', transcription: 'леhитадЭф', russian: 'Испаряться (хладагент)', category: 'verbs', binyan: 'Хитпаэль', preposition: '—', conjugation: { past: 'הִתְעַדֵּף', present: 'מִתְעַדֵּף', future: 'יִתְעַדֵּף' } },
-
   // ===================== НОВЫЕ СУЩЕСТВИТЕЛЬНЫЕ n6 (50) =====================
-  { id: 'n7-1', hebrew: 'יוֹזְמָה', transcription: 'йозмА', russian: 'Инициатива', category: 'nouns', gender: 'feminine', forms: { plural: 'יוֹזְמוֹת' } },
-  { id: 'n7-2', hebrew: 'מַעֲרָךְ', transcription: 'маарАх', russian: 'Система / комплекс', category: 'nouns', gender: 'masculine', forms: { plural: 'מַעֲרָכִים' } },
-  { id: 'n7-3', hebrew: 'מָדָד', transcription: 'мадАд', russian: 'Индекс / показатель', category: 'nouns', gender: 'masculine', forms: { plural: 'מַדָּדִים' } },
-  { id: 'n7-4', hebrew: 'עֲדִיפוּת', transcription: 'адифУт', russian: 'Приоритет', category: 'nouns', gender: 'feminine', forms: { plural: 'עֲדִיפוּיוֹת' } },
   { id: 'n7-5', hebrew: 'הֶתְקֵן', transcription: 'эткЭн', russian: 'Устройство / прибор', category: 'nouns', gender: 'masculine', forms: { plural: 'הֶתְקֵנִים' } },
   { id: 'n7-6', hebrew: 'מוֹצָר', transcription: 'моцАр', russian: 'Продукт / товар', category: 'nouns', gender: 'masculine', forms: { plural: 'מוּצָרִים' } },
   { id: 'n7-7', hebrew: 'הֲגָנָה', transcription: 'аганА', russian: 'Защита', category: 'nouns', gender: 'feminine', forms: { plural: 'הֲגָנוֹת' } },
-  { id: 'n7-8', hebrew: 'מְגַמָּה', transcription: 'мегамА', russian: 'Тенденция / тренд', category: 'nouns', gender: 'feminine', forms: { plural: 'מְגַמּוֹת' } },
-  { id: 'n7-9', hebrew: 'תַּשׁוּאָה', transcription: 'ташуА', russian: 'Доходность / отдача', category: 'nouns', gender: 'feminine', forms: { plural: 'תַּשׁוּאוֹת' } },
-  { id: 'n7-10', hebrew: 'יְעִילוּת', transcription: 'еилУт', russian: 'Эффективность', category: 'nouns', gender: 'feminine' , forms: { plural: 'יְעִילוּתוֹת' } },
-  { id: 'n7-11', hebrew: 'סְטִיָּה', transcription: 'стиЯ', russian: 'Отклонение', category: 'nouns', gender: 'feminine', forms: { plural: 'סְטִיּוֹת' } },
-  { id: 'n7-12', hebrew: 'דִּיּוּק', transcription: 'дийУк', russian: 'Точность', category: 'nouns', gender: 'masculine' , forms: { plural: 'דִּיּוּקִים' } },
   { id: 'n7-13', hebrew: 'מִמְצָא', transcription: 'мимцА', russian: 'Находка / обнаружение', category: 'nouns', gender: 'masculine', forms: { plural: 'מִמְצָאִים' } },
   { id: 'n7-14', hebrew: 'הַפְרָעָה', transcription: 'афраА', russian: 'Помеха / нарушение', category: 'nouns', gender: 'feminine', forms: { plural: 'הַפְרָעוֹת' } },
   { id: 'n7-15', hebrew: 'שִׁיפּוּר', transcription: 'шипУр', russian: 'Улучшение', category: 'nouns', gender: 'masculine', forms: { plural: 'שִׁיפּוּרִים' } },
   { id: 'n7-16', hebrew: 'מַשְׁבֵּר', transcription: 'машбЭр', russian: 'Кризис', category: 'nouns', gender: 'masculine', forms: { plural: 'מַשְׁבְּרִים' } },
   { id: 'n7-17', hebrew: 'תּוֹבָנָה', transcription: 'тованА', russian: 'Инсайт / прозрение', category: 'nouns', gender: 'feminine', forms: { plural: 'תּוֹבָנוֹת' } },
-  { id: 'n7-18', hebrew: 'מִפְרָט', transcription: 'мифрАт', russian: 'Спецификация', category: 'nouns', gender: 'masculine', forms: { plural: 'מִפְרָטִים' } },
   { id: 'n7-19', hebrew: 'נִיסּוּי', transcription: 'нисУй', russian: 'Эксперимент / испытание', category: 'nouns', gender: 'masculine', forms: { plural: 'נִיסּוּיִים' } },
   { id: 'n7-20', hebrew: 'תְּחָזִית', transcription: 'тхазИт', russian: 'Прогноз', category: 'nouns', gender: 'feminine', forms: { plural: 'תְּחָזִיּוֹת' } },
   { id: 'n7-21', hebrew: 'חִישׁוּב', transcription: 'хишУв', russian: 'Расчёт / вычисление', category: 'nouns', gender: 'masculine', forms: { plural: 'חִישׁוּבִים' } },
   { id: 'n7-22', hebrew: 'בְּקָרָה', transcription: 'бекарА', russian: 'Контроль / инспекция', category: 'nouns', gender: 'feminine', forms: { plural: 'בְּקָרוֹת' } },
   { id: 'n7-23', hebrew: 'יִישׁוּם', transcription: 'ишУм', russian: 'Применение / внедрение', category: 'nouns', gender: 'masculine', forms: { plural: 'יִישׁוּמִים' } },
-  { id: 'n7-24', hebrew: 'הַנְחָיָה', transcription: 'анхаЯ', russian: 'Инструкция / директива', category: 'nouns', gender: 'feminine', forms: { plural: 'הַנְחָיוֹת' } },
-  { id: 'n7-25', hebrew: 'עֲלוּת', transcription: 'алУт', russian: 'Стоимость / затрата', category: 'nouns', gender: 'feminine', forms: { plural: 'עֲלוּיוֹת' } },
   { id: 'n7-26', hebrew: 'דִּיוֹן', transcription: 'диЙон', russian: 'Обсуждение / дискуссия', category: 'nouns', gender: 'masculine', forms: { plural: 'דִּיוּנִים' } },
   { id: 'n7-27', hebrew: 'מְשׁוּב', transcription: 'мешУв', russian: 'Обратная связь', category: 'nouns', gender: 'masculine', forms: { plural: 'מְשׁוּבִים' } },
   { id: 'n7-28', hebrew: 'תַּחְקִיר', transcription: 'тахкИр', russian: 'Расследование', category: 'nouns', gender: 'masculine', forms: { plural: 'תַּחְקִירִים' } },
-  { id: 'n7-29', hebrew: 'הֶרְכֵּב', transcription: 'эркЭв', russian: 'Состав / компонент', category: 'nouns', gender: 'masculine', forms: { plural: 'הֶרְכֵּבִים' } },
-  { id: 'n7-30', hebrew: 'מִבְנֶה', transcription: 'мивнЭ', russian: 'Структура / строение', category: 'nouns', gender: 'masculine', forms: { plural: 'מִבְנִים' } },
   { id: 'n7-31', hebrew: 'כְּלָל', transcription: 'клАль', russian: 'Правило / принцип', category: 'nouns', gender: 'masculine', forms: { plural: 'כְּלָלִים' } },
   { id: 'n7-32', hebrew: 'סֵדֶר יוֹם', transcription: 'сЭдер йом', russian: 'Повестка дня', category: 'nouns', gender: 'masculine' , forms: { plural: 'סֵדֶר יוֹםִים' } },
   { id: 'n7-33', hebrew: 'הֲכָנָה', transcription: 'аханА', russian: 'Подготовка', category: 'nouns', gender: 'feminine', forms: { plural: 'הֲכָנוֹת' } },
@@ -2074,40 +1930,27 @@ export const vocabulary: Word[] = [
   { id: 'n7-42', hebrew: 'פְּעוּלָּה', transcription: 'пеулА', russian: 'Действие / операция', category: 'nouns', gender: 'feminine', forms: { plural: 'פְּעוּלּוֹת' } },
   { id: 'n7-43', hebrew: 'הֶרְגֵּל', transcription: 'эргЭль', russian: 'Привычка', category: 'nouns', gender: 'masculine', forms: { plural: 'הֶרְגֵּלִים' } },
   { id: 'n7-44', hebrew: 'מַטְעָן', transcription: 'матъАн', russian: 'Груз / заряд', category: 'nouns', gender: 'masculine', forms: { plural: 'מַטְעָנִים' } },
-  { id: 'n7-45', hebrew: 'תַּהֲלִיךְ', transcription: 'таалИх', russian: 'Процесс / процедура', category: 'nouns', gender: 'masculine', forms: { plural: 'תַּהֲלִיכִים' } },
   { id: 'n7-46', hebrew: 'נְתוּנִים', transcription: 'нетунИм', russian: 'Данные', category: 'nouns', gender: 'masculine' , forms: { plural: 'נְתוּנִיםִים' } },
-  { id: 'n7-47', hebrew: 'תִּשְׁתִּית', transcription: 'тиштИт', russian: 'Инфраструктура', category: 'nouns', gender: 'feminine', forms: { plural: 'תִּשְׁתִּיּוֹת' } },
-  { id: 'n7-48', hebrew: 'תְּכוּנָה', transcription: 'тхунА', russian: 'Свойство / характеристика', category: 'nouns', gender: 'feminine', forms: { plural: 'תְּכוּנוֹת' } },
   { id: 'n7-49', hebrew: 'אָמִינוּת', transcription: 'аминУт', russian: 'Достоверность / надёжность', category: 'nouns', gender: 'feminine' , forms: { plural: 'אָמִינוּתוֹת' } },
   { id: 'n7-50', hebrew: 'הֶרְדֵּם', transcription: 'эрдЭм', russian: 'Компетенция', category: 'nouns', gender: 'masculine', forms: { plural: 'הֶרְדֵּמִים' } },
-
   // ===================== НОВЫЕ ПРИЛАГАТЕЛЬНЫЕ adj4 (50) =====================
   { id: 'adj4-1', hebrew: 'מַשְׁמָעוּתִי', transcription: 'машмаутИ', russian: 'Значительный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מַשְׁמָעוּתִית', plural: 'מַשְׁמָעוּתִיִּים' } },
   { id: 'adj4-2', hebrew: 'מַכְרִיעַ', transcription: 'махрИа', russian: 'Решающий', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מַכְרִיעָה', plural: 'מַכְרִיעִים' } },
   { id: 'adj4-3', hebrew: 'חָסִין', transcription: 'хасИн', russian: 'Устойчивый / иммунный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'חֲסִינָה', plural: 'חֲסִינִים' } },
   { id: 'adj4-4', hebrew: 'חָסוּי', transcription: 'хасУй', russian: 'Конфиденциальный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'חֲסוּיָה', plural: 'חֲסוּיִים' } },
-  { id: 'adj4-5', hebrew: 'צָפוּי', transcription: 'цафУй', russian: 'Предсказуемый / ожидаемый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'צְפוּיָה', plural: 'צְפוּיִים' } },
   { id: 'adj4-6', hebrew: 'גּוֹרֵף', transcription: 'горЭф', russian: 'Всеобъемлющий', category: 'adjectives', gender: 'masculine', forms: { feminine: 'גּוֹרֶפֶת', plural: 'גּוֹרְפִים' } },
-  { id: 'adj4-7', hebrew: 'מֵיטָבִי', transcription: 'мэйтавИ', russian: 'Оптимальный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מֵיטָבִית', plural: 'מֵיטָבִיִּים' } },
-  { id: 'adj4-8', hebrew: 'תַּחְרוּתִי', transcription: 'тахрутИ', russian: 'Конкурентоспособный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'תַּחְרוּתִית', plural: 'תַּחְרוּתִיִּים' } },
   { id: 'adj4-9', hebrew: 'שְׁגוּי', transcription: 'шгуЙ', russian: 'Ошибочный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'שְׁגוּיָה', plural: 'שְׁגוּיִים' } },
   { id: 'adj4-10', hebrew: 'נֶאֱמָן', transcription: 'неэмАн', russian: 'Верный / надёжный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'נֶאֱמָנָה', plural: 'נֶאֱמָנִים' } },
   { id: 'adj4-11', hebrew: 'מְחוּיָּב', transcription: 'мехуЯв', russian: 'Обязанный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְחוּיֶּבֶת', plural: 'מְחוּיָּבִים' } },
   { id: 'adj4-12', hebrew: 'בָּסִיסִי', transcription: 'басисИ', russian: 'Базовый / основной', category: 'adjectives', gender: 'masculine', forms: { feminine: 'בָּסִיסִית', plural: 'בָּסִיסִיִּים' } },
   { id: 'adj4-13', hebrew: 'קִיצוֹנִי', transcription: 'кицонИ', russian: 'Экстремальный / крайний', category: 'adjectives', gender: 'masculine', forms: { feminine: 'קִיצוֹנִית', plural: 'קִיצוֹנִיִּים' } },
-  { id: 'adj4-14', hebrew: 'נִרְחָב', transcription: 'нирхАв', russian: 'Обширный / широкий', category: 'adjectives', gender: 'masculine', forms: { feminine: 'נִרְחֶבֶת', plural: 'נִרְחָבִים' } },
-  { id: 'adj4-15', hebrew: 'מְצוּמְצָם', transcription: 'мецумцАм', russian: 'Ограниченный / сокращённый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְצוּמְצֶמֶת', plural: 'מְצוּמְצָמִים' } },
-  { id: 'adj4-16', hebrew: 'בּוֹלֵט', transcription: 'болЭт', russian: 'Выделяющийся / заметный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'בּוֹלֶטֶת', plural: 'בּוֹלְטִים' } },
-  { id: 'adj4-17', hebrew: 'תְּלוּי', transcription: 'талУй', russian: 'Зависящий', category: 'adjectives', gender: 'masculine', forms: { feminine: 'תְּלוּיָה', plural: 'תְּלוּיִים' } },
   { id: 'adj4-18', hebrew: 'עַצְמָאִי', transcription: 'ацмаИ', russian: 'Самостоятельный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'עַצְמָאִית', plural: 'עַצְמָאִיִּים' } },
   { id: 'adj4-19', hebrew: 'מְתוּכְנָן', transcription: 'метухнАн', russian: 'Запланированный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְתוּכְנֶנֶת', plural: 'מְתוּכְנָנִים' } },
-  { id: 'adj4-20', hebrew: 'אָמִין', transcription: 'амИн', russian: 'Надёжный / достоверный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'אֲמִינָה', plural: 'אֲמִינִים' } },
   { id: 'adj4-21', hebrew: 'מְאוּשָּׁר', transcription: 'меушАр', russian: 'Утверждённый / одобренный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְאוּשֶּׁרֶת', plural: 'מְאוּשָּׁרִים' } },
   { id: 'adj4-22', hebrew: 'מוּדָע', transcription: 'мудА', russian: 'Осознающий', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מוּדַעַת', plural: 'מוּדָעִים' } },
   { id: 'adj4-23', hebrew: 'הוֹלֵם', transcription: 'олЭм', russian: 'Соответствующий / подходящий', category: 'adjectives', gender: 'masculine', forms: { feminine: 'הוֹלֶמֶת', plural: 'הוֹלְמִים' } },
   { id: 'adj4-24', hebrew: 'מוֹפְתִי', transcription: 'мофтИ', russian: 'Образцовый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מוֹפְתִית', plural: 'מוֹפְתִיִּים' } },
   { id: 'adj4-25', hebrew: 'מְפוּרָשׁ', transcription: 'мефурАш', russian: 'Явный / подробный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְפוּרֶשֶׁת', plural: 'מְפוּרָשִׁים' } },
-  { id: 'adj4-26', hebrew: 'עָמוּם', transcription: 'амУм', russian: 'Расплывчатый / неясный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'עֲמוּמָה', plural: 'עֲמוּמִים' } },
   { id: 'adj4-27', hebrew: 'חוֹזֵר', transcription: 'хозЭр', russian: 'Повторяющийся', category: 'adjectives', gender: 'masculine', forms: { feminine: 'חוֹזֶרֶת', plural: 'חוֹזְרִים' } },
   { id: 'adj4-28', hebrew: 'הָגוּן', transcription: 'агУн', russian: 'Порядочный / достойный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'הֲגוּנָה', plural: 'הֲגוּנִים' } },
   { id: 'adj4-29', hebrew: 'עָדִין', transcription: 'адИн', russian: 'Деликатный / нежный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'עֲדִינָה', plural: 'עֲדִינִים' } },
@@ -2122,17 +1965,13 @@ export const vocabulary: Word[] = [
   { id: 'adj4-38', hebrew: 'מְסוּיָּם', transcription: 'месуйАм', russian: 'Определённый / конкретный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְסוּיֶּמֶת', plural: 'מְסוּיָּמִים' } },
   { id: 'adj4-39', hebrew: 'מְחוּלָּק', transcription: 'мехулАк', russian: 'Разделённый / распределённый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְחוּלֶּקֶת', plural: 'מְחוּלָּקִים' } },
   { id: 'adj4-40', hebrew: 'רַב תְּחוּמִי', transcription: 'рав тхумИ', russian: 'Междисциплинарный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'רַבַּת תְּחוּמִים' } },
-  { id: 'adj4-41', hebrew: 'דּוֹמִינַנְטִי', transcription: 'доминантИ', russian: 'Доминантный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'דּוֹמִינַנְטִית', plural: 'דּוֹמִינַנְטִיִּים' } },
   { id: 'adj4-42', hebrew: 'חַד מַשְׁמָעִי', transcription: 'хад машмаИ', russian: 'Однозначный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'חַד מַשְׁמָעִית' } },
   { id: 'adj4-43', hebrew: 'תַּקְדִּימִי', transcription: 'такдимИ', russian: 'Прецедентный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'תַּקְדִּימִית', plural: 'תַּקְדִּימִיִּים' } },
   { id: 'adj4-44', hebrew: 'פּוֹרֵץ דֶּרֶךְ', transcription: 'порЭц дЭрех', russian: 'Новаторский / прорывной', category: 'adjectives', gender: 'masculine', forms: { feminine: 'פּוֹרֶצֶת דֶּרֶךְ' } },
   { id: 'adj4-45', hebrew: 'מְשׁוּעְבָּד', transcription: 'мешуъбАд', russian: 'Подчинённый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְשׁוּעְבֶּדֶת', plural: 'מְשׁוּעְבָּדִים' } },
-  { id: 'adj4-46', hebrew: 'עָקֵב', transcription: 'акЭв', russian: 'Последовательный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'עֲקֵבָה', plural: 'עֲקֵבִים' } },
   { id: 'adj4-47', hebrew: 'בַּר הַשָּׂגָה', transcription: 'бар асагА', russian: 'Достижимый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'בַּת הַשָּׂגָה' } },
-  { id: 'adj4-48', hebrew: 'בִּלְתִּי צָפוּי', transcription: 'билтИ цафУй', russian: 'Непредсказуемый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'בִּלְתִּי צְפוּיָה' } },
   { id: 'adj4-49', hebrew: 'מוֹקְדִי', transcription: 'мокдИ', russian: 'Фокусный / центральный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מוֹקְדִית', plural: 'מוֹקְדִיִּים' } },
   { id: 'adj4-50', hebrew: 'הִסְתַּבְּרוּתִי', transcription: 'истабрутИ', russian: 'Вероятный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'הִסְתַּבְּרוּתִית' } },
-
   // ===================== НОВЫЕ ПРЕДЛОЖЕНИЯ ev4 (50) =====================
   { id: 'ev4-1', hebrew: 'הַמַּעֲרֶכֶת מִתְפַּקֶּדֶת כָּרָגִיל לְאַחַר הַתִּיקוּן', transcription: 'а-маарЭхет митпакЭдет карагИль леахАр а-тикУн', russian: 'Система функционирует нормально после ремонта', category: 'everyday', subcategory: 'Профессиональная речь' },
   { id: 'ev4-2', hebrew: 'צָרִיךְ לְזַהוֹת אֶת הַגּוֹרֵם לַתַּקָּלָה לִפְנֵי שֶׁמַּתְחִילִים', transcription: 'царИх лезаhОт эт а-горЭм ла-такалА лифнЭй ше-матхилИм', russian: 'Нужно идентифицировать причину неисправности прежде чем начинать', category: 'everyday', subcategory: 'Профессиональная речь' },
@@ -2184,170 +2023,74 @@ export const vocabulary: Word[] = [
   { id: 'ev4-48', hebrew: 'הָעוֹבְדִים הִתְיַעֲצוּ זֶה עִם זֶה לִפְנֵי שֶׁגִּבְּשׁוּ תָּכְנִית', transcription: 'а-овдИм hитъяацУ зэ им зэ лифнЭй ше-гибшУ тохнИт', russian: 'Сотрудники проконсультировались прежде чем сформировали план', category: 'everyday', subcategory: 'Профессиональная речь' },
   { id: 'ev4-49', hebrew: 'הַמֵּרְחָב הַזֶּה לֹא מַסְפִּיק לְהַתְקָנַת הַצִּיּוּד', transcription: 'а-мерхАв а-зЭ ло маспИк леhатканАт а-циЮд', russian: 'Этого пространства недостаточно для установки оборудования', category: 'everyday', subcategory: 'Профессиональная речь' },
   { id: 'ev4-50', hebrew: 'סֵדֶר הַיּוֹם כָּלַל שְׁלוֹשָׁה נוֹשְׂאִים עִיקָרִיִּים', transcription: 'сЭдер а-йОм калАль шлошА носъИм икариИм', russian: 'Повестка дня включала три основных вопроса', category: 'everyday', subcategory: 'Профессиональная речь' },
-
-
   // ===================== НОВЫЕ ГЛАГОЛЫ (v7) =====================
-  { id: 'v7-1', hebrew: 'לְהַשְׁפִּיעַ', transcription: 'леhашпИа', russian: 'влиять', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'על', conjugation: { past: 'הִשְׁפִּיעַ', present: 'מַשְׁפִּיעַ', future: 'יַשְׁפִּיעַ', imperative: 'הַשְׁפֵּעַ' }, example: { hebrew: 'הַמְּצָב הַכַּלְכָּלִי מַשְׁפִּיעַ עַל כֻּלָּם', russian: 'Экономическая ситуация влияет на всех' } },
-  { id: 'v7-2', hebrew: 'לְהִתְמוֹדֵד', transcription: 'леhитмодЭд', russian: 'справляться / противостоять', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', preposition: 'עם', conjugation: { past: 'הִתְמוֹדֵד', present: 'מִתְמוֹדֵד', future: 'יִתְמוֹדֵד', imperative: 'הִתְמוֹדֵד' }, example: { hebrew: 'הוּא מִתְמוֹדֵד עִם הַקְּשָׁיִים בְּאֹמֶץ', russian: 'Он справляется с трудностями мужественно' } },
-  { id: 'v7-3', hebrew: 'לְהַעֲרִיךְ', transcription: 'леhаарИх', russian: 'оценивать / ценить', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הֶעֱרִיךְ', present: 'מַעֲרִיךְ', future: 'יַעֲרִיךְ', imperative: 'הַעֲרֵךְ' }, example: { hebrew: 'אֲנִי מַעֲרִיךְ אֶת הַמַּאֲמָץ שֶׁלְּךָ', russian: 'Я ценю твои усилия' } },
-  { id: 'v7-4', hebrew: 'לְהַבְטִיחַ', transcription: 'леhавтИах', russian: 'обещать / гарантировать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'ל', conjugation: { past: 'הִבְטִיחַ', present: 'מַבְטִיחַ', future: 'יַבְטִיחַ', imperative: 'הַבְטֵחַ' }, example: { hebrew: 'הוּא הִבְטִיחַ לִי שֶׁיַּגִּיעַ בִּזְמַן', russian: 'Он пообещал мне прийти вовремя' } },
-  { id: 'v7-5', hebrew: 'לְהַפְנוֹת', transcription: 'леhафнОт', russian: 'направлять / перенаправлять', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'אל', conjugation: { past: 'הִפְנָה', present: 'מַפְנֶה', future: 'יַפְנֶה', imperative: 'הַפְנֵה' }, example: { hebrew: 'הָרוֹפֵא הִפְנָה אוֹתִי אֶל מוּמְחֶה', russian: 'Врач направил меня к специалисту' } },
-  { id: 'v7-6', hebrew: 'לְהַצְדִּיק', transcription: 'леhацдИк', russian: 'оправдывать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הִצְדִּיק', present: 'מַצְדִּיק', future: 'יַצְדִּיק', imperative: 'הַצְדֵּק' }, example: { hebrew: 'הוּא מַצְדִּיק אֶת הַהַחְלָטָה שֶׁלּוֹ', russian: 'Он оправдывает своё решение' } },
-  { id: 'v7-7', hebrew: 'לְהִסְתַּמֵּךְ', transcription: 'леhистамЭх', russian: 'опираться / полагаться', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', preposition: 'על', conjugation: { past: 'הִסְתַּמֵּךְ', present: 'מִסְתַּמֵּךְ', future: 'יִסְתַּמֵּךְ', imperative: 'הִסְתַּמֵּךְ' }, example: { hebrew: 'אֲנִי מִסְתַּמֵּךְ עַל הַנְּתוּנִים הָאֵלֶּה', russian: 'Я опираюсь на эти данные' } },
-  { id: 'v7-8', hebrew: 'לְהִתְעַדְכֵּן', transcription: 'леhитъадкЭн', russian: 'обновляться / быть в курсе', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', preposition: 'ב', conjugation: { past: 'הִתְעַדְכֵּן', present: 'מִתְעַדְכֵּן', future: 'יִתְעַדְכֵּן', imperative: 'הִתְעַדְכֵּן' }, example: { hebrew: 'אֲנִי מִתְעַדְכֵּן בַּחֲדָשׁוֹת כָּל בֹּקֶר', russian: 'Я обновляюсь новостями каждое утро' } },
-  { id: 'v7-9', hebrew: 'לְהַפְגִּין', transcription: 'леhафгИн', russian: 'демонстрировать / протестовать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'נגד', conjugation: { past: 'הִפְגִּין', present: 'מַפְגִּין', future: 'יַפְגִּין', imperative: 'הַפְגֵּן' }, example: { hebrew: 'הַסְּטוּדֶנְטִים הִפְגִּינוּ נֶגֶד הַמְּחִירִים', russian: 'Студенты протестовали против цен' } },
-  { id: 'v7-10', hebrew: 'לְהַקְצוֹת', transcription: 'леhакцОт', russian: 'выделять / распределять', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'ל', conjugation: { past: 'הִקְצָה', present: 'מַקְצֶה', future: 'יַקְצֶה', imperative: 'הַקְצֵה' }, example: { hebrew: 'הַחֶבְרָה הִקְצְתָה תַּקְצִיב לַפְּרוֹיֶקְט', russian: 'Компания выделила бюджет на проект' } },
-  { id: 'v7-11', hebrew: 'לְהִשָּׁמֵר', transcription: 'леhишамЭр', russian: 'остерегаться / беречься', category: 'verbs', subcategory: 'Активная форма', binyan: 'Нифаль', preposition: 'מ', conjugation: { past: 'נִשְׁמַר', present: 'נִשְׁמָר', future: 'יִשָּׁמֵר', imperative: 'הִשָּׁמֵר' }, example: { hebrew: 'הִשָּׁמֵר מִפְּנֵי הוֹנָאוֹת', russian: 'Остерегайся мошенничества' } },
-  { id: 'v7-12', hebrew: 'לְנַהֵל', transcription: 'ленаhЭль', russian: 'управлять / вести', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'נִיהֵל', present: 'מְנַהֵל', future: 'יְנַהֵל', imperative: 'נַהֵל' }, example: { hebrew: 'הוּא מְנַהֵל אֶת הַפְּרוֹיֶקְט בְּהַצְלָחָה', russian: 'Он успешно управляет проектом' } },
-  { id: 'v7-13', hebrew: 'לְהַגְדִּיר', transcription: 'леhагдИр', russian: 'определять / задавать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הִגְדִּיר', present: 'מַגְדִּיר', future: 'יַגְדִּיר', imperative: 'הַגְדֵּר' }, example: { hebrew: 'הַחוֹק מַגְדִּיר אֶת הַזְּכוּיוֹת שֶׁל הָאֶזְרָחִים', russian: 'Закон определяет права граждан' } },
-  { id: 'v7-14', hebrew: 'לְעוֹרֵר', transcription: 'леорЭр', russian: 'пробуждать / вызывать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'עוֹרֵר', present: 'מְעוֹרֵר', future: 'יְעוֹרֵר', imperative: 'עוֹרֵר' }, example: { hebrew: 'הַנְּאוּם שֶׁלּוֹ עוֹרֵר הִתְלַהֲבוּת', russian: 'Его речь вызвала энтузиазм' } },
-  { id: 'v7-15', hebrew: 'לְהִתְנַגֵּד', transcription: 'леhитнагЭд', russian: 'сопротивляться / возражать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', preposition: 'ל', conjugation: { past: 'הִתְנַגֵּד', present: 'מִתְנַגֵּד', future: 'יִתְנַגֵּד', imperative: 'הִתְנַגֵּד' }, example: { hebrew: 'הָעוֹבְדִים הִתְנַגְּדוּ לַשִּׁנּוּיִים', russian: 'Работники сопротивлялись изменениям' } },
-  { id: 'v7-16', hebrew: 'לְשַׁקֵּם', transcription: 'лешакЭм', russian: 'реабилитировать / восстанавливать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'שִׁקֵּם', present: 'מְשַׁקֵּם', future: 'יְשַׁקֵּם', imperative: 'שַׁקֵּם' }, example: { hebrew: 'הָעִירִיָּה מְשַׁקֶּמֶת אֶת הַשְּׁכוּנָה', russian: 'Мэрия восстанавливает район' } },
-  { id: 'v7-17', hebrew: 'לְהַנְחוֹת', transcription: 'леhанхОт', russian: 'инструктировать / направлять', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הִנְחָה', present: 'מַנְחֶה', future: 'יַנְחֶה', imperative: 'הַנְחֵה' }, example: { hebrew: 'הַמְּדַרֵּךְ הִנְחָה אוֹתָנוּ בַּסִּיוּר', russian: 'Гид направлял нас на экскурсии' } },
-  { id: 'v7-18', hebrew: 'לְהִתְחַמֵּק', transcription: 'леhитхамЭк', russian: 'уклоняться / увиливать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', preposition: 'מ', conjugation: { past: 'הִתְחַמֵּק', present: 'מִתְחַמֵּק', future: 'יִתְחַמֵּק', imperative: 'הִתְחַמֵּק' }, example: { hebrew: 'הוּא הִתְחַמֵּק מִן הַשְּׁאֵלָה', russian: 'Он уклонился от вопроса' } },
-  { id: 'v7-19', hebrew: 'לְהַפְרִיעַ', transcription: 'леhафрИа', russian: 'мешать / нарушать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'ל', conjugation: { past: 'הִפְרִיעַ', present: 'מַפְרִיעַ', future: 'יַפְרִיעַ', imperative: 'הַפְרַע' }, example: { hebrew: 'הָרַעַשׁ מַפְרִיעַ לִי לְהִתְרַכֵּז', russian: 'Шум мешает мне сосредоточиться' } },
   { id: 'v7-20', hebrew: 'לְכַבֵּד', transcription: 'лехабЭд', russian: 'уважать / почитать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'כִּיבֵּד', present: 'מְכַבֵּד', future: 'יְכַבֵּד', imperative: 'כַּבֵּד' }, example: { hebrew: 'אֲנִי מְכַבֵּד אֶת הַדַּעַת שֶׁלְּךָ', russian: 'Я уважаю твоё мнение' } },
-  { id: 'v7-21', hebrew: 'לְהַכְרִיעַ', transcription: 'леhахрИа', russian: 'решать / предопределять', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הִכְרִיעַ', present: 'מַכְרִיעַ', future: 'יַכְרִיעַ', imperative: 'הַכְרַע' }, example: { hebrew: 'הַקּוֹל הַמַּכְרִיעַ הִכְרִיעַ אֶת הַהַצְבָּעָה', russian: 'Решающий голос предопределил голосование' } },
-  { id: 'v7-22', hebrew: 'לְבַסֵּס', transcription: 'левасЭс', russian: 'обосновывать / базировать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'על', conjugation: { past: 'בִּיסֵּס', present: 'מְבַסֵּס', future: 'יְבַסֵּס', imperative: 'בַּסֵּס' }, example: { hebrew: 'הַמֶּחְקָר מְבוּסָּס עַל עוּבְדּוֹת', russian: 'Исследование основано на фактах' } },
-  { id: 'v7-23', hebrew: 'לְגַבֵּשׁ', transcription: 'легабЭш', russian: 'формировать / кристаллизовать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'גִּיבֵּשׁ', present: 'מְגַבֵּשׁ', future: 'יְגַבֵּשׁ', imperative: 'גַּבֵּשׁ' }, example: { hebrew: 'הַצָּוֶת גִּיבֵּשׁ תָּכְנִית פְּעוּלָה', russian: 'Команда сформировала план действий' } },
   { id: 'v7-24', hebrew: 'לְהָטִיל', transcription: 'леhатИль', russian: 'возлагать / налагать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'על', conjugation: { past: 'הֵטִיל', present: 'מֵטִיל', future: 'יָטִיל', imperative: 'הָטֵל' }, example: { hebrew: 'הַמְּמָשָׁלָה הֵטִילָה סַנְקְצִיּוֹת', russian: 'Правительство наложило санкции' } },
-  { id: 'v7-25', hebrew: 'לְהִתְחַשֵּׁב', transcription: 'леhитхашЭв', russian: 'считаться / учитывать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', preposition: 'ב', conjugation: { past: 'הִתְחַשֵּׁב', present: 'מִתְחַשֵּׁב', future: 'יִתְחַשֵּׁב', imperative: 'הִתְחַשֵּׁב' }, example: { hebrew: 'צָרִיךְ לְהִתְחַשֵּׁב בַּתַּקְצִיב', russian: 'Нужно считаться с бюджетом' } },
-  { id: 'v7-26', hebrew: 'לְפַקֵּחַ', transcription: 'лефакЭах', russian: 'контролировать / надзирать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'על', conjugation: { past: 'פִּיקֵּחַ', present: 'מְפַקֵּחַ', future: 'יְפַקֵּחַ', imperative: 'פַּקֵּחַ' }, example: { hebrew: 'הַמְּפַקֵּחַ מְפַקֵּחַ עַל הָעֲבוֹדוֹת', russian: 'Инспектор контролирует работы' } },
-  { id: 'v7-27', hebrew: 'לְצַפּוֹת', transcription: 'лецапОт', russian: 'предвидеть / ожидать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'ל', conjugation: { past: 'צִפָּה', present: 'מְצַפֶּה', future: 'יְצַפֶּה', imperative: 'צַפֵּה' }, example: { hebrew: 'אֲנִי מְצַפֶּה לְתוֹצָאוֹת טוֹבוֹת', russian: 'Я ожидаю хороших результатов' } },
-  { id: 'v7-28', hebrew: 'לְמַמֵּשׁ', transcription: 'лемамЭш', russian: 'реализовать / осуществлять', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'מִימֵּשׁ', present: 'מְמַמֵּשׁ', future: 'יְמַמֵּשׁ', imperative: 'מַמֵּשׁ' }, example: { hebrew: 'הוּא מִימֵּשׁ אֶת הַחֲלוֹם שֶׁלּוֹ', russian: 'Он реализовал свою мечту' } },
   { id: 'v7-29', hebrew: 'לְהַכִּיר', transcription: 'леhакИр', russian: 'признавать / знать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'ב', conjugation: { past: 'הִכִּיר', present: 'מַכִּיר', future: 'יַכִּיר', imperative: 'הַכֵּר' }, example: { hebrew: 'הַמְּדִינָה הִכִּירָה בַּמְּדִינָה הַחֲדָשָׁה', russian: 'Государство признало новое государство' } },
-  { id: 'v7-30', hebrew: 'לְעַכֵּב', transcription: 'леакЭв', russian: 'задерживать / тормозить', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'עִיכֵּב', present: 'מְעַכֵּב', future: 'יְעַכֵּב', imperative: 'עַכֵּב' }, example: { hebrew: 'הַגֶּשֶׁם עִיכֵּב אֶת הַבִּנְיָה', russian: 'Дождь задержал строительство' } },
   { id: 'v7-31', hebrew: 'לִדְרוֹשׁ', transcription: 'лидрОш', russian: 'требовать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль', preposition: 'מ', conjugation: { past: 'דָּרַשׁ', present: 'דּוֹרֵשׁ', future: 'יִדְרוֹשׁ', imperative: 'דְּרוֹשׁ' }, example: { hebrew: 'הַמּוֹרֶה דּוֹרֵשׁ מִשְׁמַעַת', russian: 'Учитель требует дисциплины' } },
   { id: 'v7-32', hebrew: 'לְהִתְרַגֵּשׁ', transcription: 'леhитрагЭш', russian: 'волноваться / быть тронутым', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', preposition: 'מ', conjugation: { past: 'הִתְרַגֵּשׁ', present: 'מִתְרַגֵּשׁ', future: 'יִתְרַגֵּשׁ', imperative: 'הִתְרַגֵּשׁ' }, example: { hebrew: 'הִיא הִתְרַגְּשָׁה מֵהַמַּתָּנָה', russian: 'Она была тронута подарком' } },
   { id: 'v7-33', hebrew: 'לְהַצִּיל', transcription: 'леhацИль', russian: 'спасать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הִצִּיל', present: 'מַצִּיל', future: 'יַצִּיל', imperative: 'הַצֵּל' }, example: { hebrew: 'הַכַּבַּאי הִצִּיל אֶת הַיְלָדִים', russian: 'Пожарный спас детей' } },
   { id: 'v7-34', hebrew: 'לְפַרְסֵם', transcription: 'лефарсЭм', russian: 'публиковать / рекламировать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'פִּרְסֵם', present: 'מְפַרְסֵם', future: 'יְפַרְסֵם', imperative: 'פַּרְסֵם' }, example: { hebrew: 'הָעִיתּוֹן פִּרְסֵם אֶת הַכַּתָּבָה', russian: 'Газета опубликовала статью' } },
-  { id: 'v7-35', hebrew: 'לְהִתְלוֹנֵן', transcription: 'леhитлонЭн', russian: 'жаловаться', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', preposition: 'על', conjugation: { past: 'הִתְלוֹנֵן', present: 'מִתְלוֹנֵן', future: 'יִתְלוֹנֵן', imperative: 'הִתְלוֹנֵן' }, example: { hebrew: 'הַלָּקוֹחַ הִתְלוֹנֵן עַל הַשֵּׁירוּת', russian: 'Клиент пожаловался на обслуживание' } },
-  { id: 'v7-36', hebrew: 'לְהִתְיָעֵץ', transcription: 'леhитъяЭц', russian: 'советоваться / консультироваться', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', preposition: 'עם', conjugation: { past: 'הִתְיָעֵץ', present: 'מִתְיָעֵץ', future: 'יִתְיָעֵץ', imperative: 'הִתְיָעֵץ' }, example: { hebrew: 'הוּא הִתְיָעֵץ עִם עוֹרֵךְ דִּין', russian: 'Он проконсультировался с адвокатом' } },
   { id: 'v7-37', hebrew: 'לִתְרוֹם', transcription: 'литрОм', russian: 'вносить вклад / жертвовать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль', preposition: 'ל', conjugation: { past: 'תָּרַם', present: 'תּוֹרֵם', future: 'יִתְרוֹם', imperative: 'תְּרוֹם' }, example: { hebrew: 'הוּא תָּרַם כֶּסֶף לְצְדָקָה', russian: 'Он пожертвовал деньги на благотворительность' } },
-  { id: 'v7-38', hebrew: 'לְהוֹכִיחַ', transcription: 'леhохИах', russian: 'доказывать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הוֹכִיחַ', present: 'מוֹכִיחַ', future: 'יוֹכִיחַ', imperative: 'הוֹכַח' }, example: { hebrew: 'הַמַּדְעָן הוֹכִיחַ אֶת הַתְּאוֹרִיָּה', russian: 'Учёный доказал теорию' } },
-  { id: 'v7-39', hebrew: 'לְהִתְפַּשֵּׁר', transcription: 'леhитпашЭр', russian: 'идти на компромисс', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', preposition: 'על', conjugation: { past: 'הִתְפַּשֵּׁר', present: 'מִתְפַּשֵּׁר', future: 'יִתְפַּשֵּׁר', imperative: 'הִתְפַּשֵּׁר' }, example: { hebrew: 'הַצְּדָדִים הִתְפַּשְּׁרוּ עַל הַמְּחִיר', russian: 'Стороны пошли на компромисс по цене' } },
   { id: 'v7-40', hebrew: 'לְעוֹדֵד', transcription: 'леодЭд', russian: 'поощрять / воодушевлять', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'עוֹדֵד', present: 'מְעוֹדֵד', future: 'יְעוֹדֵד', imperative: 'עוֹדֵד' }, example: { hebrew: 'הַמּוֹרָה מְעוֹדֶדֶת אֶת הַתַּלְמִידִים', russian: 'Учительница поощряет учеников' } },
-  { id: 'v7-41', hebrew: 'לְהִתְעַלֵּם', transcription: 'леhитъалЭм', russian: 'игнорировать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хитпаэль', preposition: 'מ', conjugation: { past: 'הִתְעַלֵּם', present: 'מִתְעַלֵּם', future: 'יִתְעַלֵּם', imperative: 'הִתְעַלֵּם' }, example: { hebrew: 'אַל תִּתְעַלֵּם מֵהַבְּעָיָה', russian: 'Не игнорируй проблему' } },
-  { id: 'v7-42', hebrew: 'לְהַכְפִּיל', transcription: 'леhахпИль', russian: 'удваивать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הִכְפִּיל', present: 'מַכְפִּיל', future: 'יַכְפִּיל', imperative: 'הַכְפֵּל' }, example: { hebrew: 'הַחֶבְרָה הִכְפִּילָה אֶת הָרְוָחִים', russian: 'Компания удвоила прибыль' } },
   { id: 'v7-43', hebrew: 'לִשְׁאוֹף', transcription: 'лишъОф', russian: 'стремиться / вдыхать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль', preposition: 'ל', conjugation: { past: 'שָׁאַף', present: 'שׁוֹאֵף', future: 'יִשְׁאַף', imperative: 'שְׁאַף' }, example: { hebrew: 'אֲנִי שׁוֹאֵף לְמַצֵּינוּת', russian: 'Я стремлюсь к совершенству' } },
   { id: 'v7-44', hebrew: 'לְהַסִּיק', transcription: 'леhасИк', russian: 'делать вывод', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'מ', conjugation: { past: 'הִסִּיק', present: 'מַסִּיק', future: 'יַסִּיק', imperative: 'הַסֵּק' }, example: { hebrew: 'מִמַּה שֶׁרָאִינוּ, אֶפְשָׁר לְהַסִּיק מַסְקָנוֹת', russian: 'Из увиденного можно сделать выводы' } },
-  { id: 'v7-45', hebrew: 'לְהַעֲמִיד', transcription: 'леhаамИд', russian: 'ставить / предоставлять', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'את', conjugation: { past: 'הֶעֱמִיד', present: 'מַעֲמִיד', future: 'יַעֲמִיד', imperative: 'הַעֲמֵד' }, example: { hebrew: 'הַחֶבְרָה הֶעֱמִידָה מַשְׁאָבִים לַצָּוֶת', russian: 'Компания предоставила ресурсы команде' } },
   { id: 'v7-46', hebrew: 'לְהִמָּנַע', transcription: 'леhиманА', russian: 'воздерживаться / избегать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Нифаль', preposition: 'מ', conjugation: { past: 'נִמְנַע', present: 'נִמְנָע', future: 'יִמָּנַע', imperative: 'הִמָּנַע' }, example: { hebrew: 'הוּא נִמְנַע מֵהַעֲרוֹת שְׁלִילִיּוֹת', russian: 'Он воздержался от негативных комментариев' } },
-  { id: 'v7-47', hebrew: 'לְתַעְדֵּף', transcription: 'летаъдЭф', russian: 'ставить приоритет', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'תִּעְדֵּף', present: 'מְתַעְדֵּף', future: 'יְתַעְדֵּף', imperative: 'תַּעְדֵּף' }, example: { hebrew: 'צָרִיךְ לְתַעְדֵּף אֶת הַמְּשִׁימוֹת', russian: 'Нужно расставить приоритеты задач' } },
-  { id: 'v7-48', hebrew: 'לְהַפְלוֹת', transcription: 'леhафлОт', russian: 'дискриминировать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Хифиль', preposition: 'בין', conjugation: { past: 'הִפְלָה', present: 'מַפְלֶה', future: 'יַפְלֶה', imperative: 'הַפְלֵה' }, example: { hebrew: 'אָסוּר לְהַפְלוֹת בֵּין עוֹבְדִים', russian: 'Запрещено дискриминировать работников' } },
   { id: 'v7-49', hebrew: 'לִכְבּוֹשׁ', transcription: 'лихбОш', russian: 'завоёвывать / покорять', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пааль', preposition: 'את', conjugation: { past: 'כָּבַשׁ', present: 'כּוֹבֵשׁ', future: 'יִכְבּוֹשׁ', imperative: 'כְּבוֹשׁ' }, example: { hebrew: 'הַצָּוֶת כָּבַשׁ אֶת פִּסְגַּת הָהָר', russian: 'Команда покорила вершину горы' } },
-  { id: 'v7-50', hebrew: 'לְסַכֵּם', transcription: 'лесакЭм', russian: 'подводить итог / резюмировать', category: 'verbs', subcategory: 'Активная форма', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'סִיכֵּם', present: 'מְסַכֵּם', future: 'יְסַכֵּם', imperative: 'סַכֵּם' }, example: { hebrew: 'הַמְּנַהֵל סִיכֵּם אֶת הַיִשִׁיבָה', russian: 'Директор подвёл итог собрания' } },
-
   // ===================== НОВЫЕ СУЩЕСТВИТЕЛЬНЫЕ (n7) =====================
   { id: 'n7-1', hebrew: 'תּוֹדָעָה', transcription: 'тодаА', russian: 'сознание / осознание', category: 'nouns', gender: 'feminine', forms: { plural: 'תּוֹדָעוֹת' } },
-  { id: 'n7-2', hebrew: 'הֲנָחָה', transcription: 'hанахА', russian: 'предположение / допущение', category: 'nouns', gender: 'feminine', forms: { plural: 'הֲנָחוֹת' } },
-  { id: 'n7-3', hebrew: 'מַסְקָנָה', transcription: 'масканА', russian: 'вывод / заключение', category: 'nouns', gender: 'feminine', forms: { plural: 'מַסְקָנוֹת' } },
-  { id: 'n7-4', hebrew: 'הִשְׁפָּעָה', transcription: 'hишпаА', russian: 'влияние / воздействие', category: 'nouns', gender: 'feminine', forms: { plural: 'הִשְׁפָּעוֹת' } },
-  { id: 'n7-5', hebrew: 'סְמָכוּת', transcription: 'смахУт', russian: 'полномочие / власть', category: 'nouns', gender: 'feminine', forms: { plural: 'יַחֲסִים' } },
-  { id: 'n7-6', hebrew: 'תַּרְבּוּת', transcription: 'тарбУт', russian: 'культура', category: 'nouns', gender: 'feminine', forms: { plural: 'תַּרְבֻּיוֹת' } },
-  { id: 'n7-7', hebrew: 'מְדִינִיוּת', transcription: 'мединиУт', russian: 'политика / курс', category: 'nouns', gender: 'feminine', forms: { plural: 'מְדִינִיוּיוֹת' } },
-  { id: 'n7-8', hebrew: 'אַתְגָּר', transcription: 'атгАр', russian: 'вызов / челлендж', category: 'nouns', gender: 'masculine', forms: { plural: 'אַתְגָּרִים' } },
+  { id: 'auto8', hebrew: 'מְדִינִיוּת', transcription: 'мединиУт', russian: 'политика / курс', category: 'nouns', gender: 'feminine', forms: { plural: 'מְדִינִיוּיוֹת' } },
   { id: 'n7-9', hebrew: 'פֵּירוּשׁ', transcription: 'пейрУш', russian: 'толкование / интерпретация', category: 'nouns', gender: 'masculine', forms: { plural: 'פֵּירוּשִׁים' } },
-  { id: 'n7-10', hebrew: 'קוֹנְפְלִיקְט', transcription: 'конфлИкт', russian: 'конфликт', category: 'nouns', gender: 'masculine', forms: { plural: 'קוֹנְפְלִיקְטִים' } },
   { id: 'n7-11', hebrew: 'שִׁגְרָה', transcription: 'шигрА', russian: 'рутина / обыденность', category: 'nouns', gender: 'feminine', forms: { plural: 'שִׁגְרוֹת' } },
   { id: 'n7-12', hebrew: 'מְחוּיָּבוּת', transcription: 'мехуявУт', russian: 'обязательство / приверженность', category: 'nouns', gender: 'feminine', forms: { plural: 'מְחוּיָּבוּיוֹת' } },
-  { id: 'n7-13', hebrew: 'נְקוּדַת מַבָּט', transcription: 'некудАт мабАт', russian: 'точка зрения', category: 'nouns', gender: 'feminine', forms: { plural: 'נְקוּדוֹת מַבָּט' } },
-  { id: 'n7-14', hebrew: 'מַעֲרֶכֶת', transcription: 'маарЭхет', russian: 'система', category: 'nouns', gender: 'feminine', forms: { plural: 'מַעֲרָכוֹת' } },
-  { id: 'n7-15', hebrew: 'תּוֹפָעָה', transcription: 'тофаА', russian: 'явление / феномен', category: 'nouns', gender: 'feminine', forms: { plural: 'תּוֹפָעוֹת' } },
-  { id: 'n7-16', hebrew: 'עֵדוּת', transcription: 'эдУт', russian: 'свидетельство / показания', category: 'nouns', gender: 'feminine', forms: { plural: 'עֵדוּיוֹת' } },
-  { id: 'n7-17', hebrew: 'עֲדִיפוּת', transcription: 'адифУт', russian: 'приоритет / предпочтение', category: 'nouns', gender: 'feminine', forms: { plural: 'עֲדִיפוּיוֹת' } },
-  { id: 'n7-18', hebrew: 'סִיכּוּם', transcription: 'сикУм', russian: 'итог / резюме', category: 'nouns', gender: 'masculine', forms: { plural: 'מַעֲסִיקִים' } },
-  { id: 'n7-19', hebrew: 'פְּתָרוֹן', transcription: 'птарОн', russian: 'решение (проблемы)', category: 'nouns', gender: 'masculine', forms: { plural: 'פְּתָרוֹנוֹת' } },
-  { id: 'n7-20', hebrew: 'תְּגוּבָה', transcription: 'тгувА', russian: 'реакция / отзыв', category: 'nouns', gender: 'feminine', forms: { plural: 'תְּגוּבוֹת' } },
-  { id: 'n7-21', hebrew: 'הֲלָכָה', transcription: 'hалахА', russian: 'правило / обычай', category: 'nouns', gender: 'feminine', forms: { plural: 'הֲלָכוֹת' } },
-  { id: 'n7-22', hebrew: 'מוּנָח', transcription: 'мунАх', russian: 'термин / понятие', category: 'nouns', gender: 'masculine', forms: { plural: 'מוּנָחִים' } },
-  { id: 'n7-23', hebrew: 'הִשְׂגָּחָה', transcription: 'hисгахА', russian: 'надзор / присмотр', category: 'nouns', gender: 'feminine', forms: { plural: 'הִשְׂגָּחוֹת' } },
-  { id: 'n7-24', hebrew: 'תּוֹצָאָה', transcription: 'тоцаА', russian: 'результат / итог', category: 'nouns', gender: 'feminine', forms: { plural: 'תּוֹצָאוֹת' } },
-  { id: 'n7-25', hebrew: 'הַשְׁקָעָה', transcription: 'hашкаА', russian: 'инвестиция / вложение', category: 'nouns', gender: 'feminine', forms: { plural: 'הַשְׁקָעוֹת' } },
-  { id: 'n7-26', hebrew: 'מַחֲלֹקֶת', transcription: 'махалОкет', russian: 'спор / разногласие', category: 'nouns', gender: 'feminine', forms: { plural: 'מַחֲלוֹקוֹת' } },
-  { id: 'n7-27', hebrew: 'שְׁקִיפוּת', transcription: 'шкифУт', russian: 'прозрачность', category: 'nouns', gender: 'feminine', forms: { plural: 'שְׁקִיפוּיוֹת' } },
-  { id: 'n7-28', hebrew: 'הֶתֵּר', transcription: 'hетЭр', russian: 'разрешение / допуск', category: 'nouns', gender: 'masculine', forms: { plural: 'הֶתֵּרִים' } },
+  { id: 'auto9', hebrew: 'נְקוּדַת מַבָּט', transcription: 'некудАт мабАт', russian: 'точка зрения', category: 'nouns', gender: 'feminine', forms: { plural: 'נְקוּדוֹת מַבָּט' } },
+  { id: 'auto10', hebrew: 'הֲלָכָה', transcription: 'hалахА', russian: 'правило / обычай', category: 'nouns', gender: 'feminine', forms: { plural: 'הֲלָכוֹת' } },
+  { id: 'auto11', hebrew: 'הִשְׂגָּחָה', transcription: 'hисгахА', russian: 'надзор / присмотр', category: 'nouns', gender: 'feminine', forms: { plural: 'הִשְׂגָּחוֹת' } },
+  { id: 'auto12', hebrew: 'הֶתֵּר', transcription: 'hетЭр', russian: 'разрешение / допуск', category: 'nouns', gender: 'masculine', forms: { plural: 'הֶתֵּרִים' } },
   { id: 'n7-29', hebrew: 'כְּשֵׁרוֹן', transcription: 'кшерОн', russian: 'талант / способность', category: 'nouns', gender: 'masculine', forms: { plural: 'כִּשְׁרוֹנוֹת' } },
-  { id: 'n7-30', hebrew: 'תַּחֲזִית', transcription: 'тахазИт', russian: 'прогноз', category: 'nouns', gender: 'feminine', forms: { plural: 'תַּחֲזִיוֹת' } },
-  { id: 'n7-31', hebrew: 'הֶקְשֵׁר', transcription: 'hекшЭр', russian: 'контекст / связь', category: 'nouns', gender: 'masculine', forms: { plural: 'הֶקְשֵׁרִים' } },
-  { id: 'n7-32', hebrew: 'תַּחֲקִיר', transcription: 'тахакИр', russian: 'расследование', category: 'nouns', gender: 'masculine', forms: { plural: 'תַּחֲקִירִים' } },
-  { id: 'n7-33', hebrew: 'אַחְרָיוּת', transcription: 'ахраюУт', russian: 'ответственность', category: 'nouns', gender: 'feminine', forms: { plural: 'אַחְרָיוּיוֹת' } },
-  { id: 'n7-34', hebrew: 'מְקוֹרִיוּת', transcription: 'мекориУт', russian: 'оригинальность', category: 'nouns', gender: 'feminine' , forms: { plural: 'מְקוֹרִיוּתוֹת' } },
-  { id: 'n7-35', hebrew: 'הַכָּרָה', transcription: 'hакарА', russian: 'признание', category: 'nouns', gender: 'feminine', forms: { plural: 'הַכָּרוֹת' } },
-  { id: 'n7-36', hebrew: 'חֲלוּקָה', transcription: 'халукА', russian: 'распределение / разделение', category: 'nouns', gender: 'feminine', forms: { plural: 'חֲלוּקוֹת' } },
-  { id: 'n7-37', hebrew: 'מוֹשָׁב', transcription: 'мошАв', russian: 'сессия / заседание', category: 'nouns', gender: 'masculine', forms: { plural: 'מוֹשָׁבִים' } },
-  { id: 'n7-38', hebrew: 'תְּקִינוּת', transcription: 'ткинУт', russian: 'исправность / корректность', category: 'nouns', gender: 'feminine' , forms: { plural: 'תְּקִינוּתוֹת' } },
-  { id: 'n7-39', hebrew: 'נֶאֱמָנוּת', transcription: 'нееманУт', russian: 'верность / надёжность', category: 'nouns', gender: 'feminine' , forms: { plural: 'נֶאֱמָנוּתוֹת' } },
-  { id: 'n7-40', hebrew: 'עֲקֵבִיּוּת', transcription: 'акевиЮт', russian: 'последовательность / систематичность', category: 'nouns', gender: 'feminine' , forms: { plural: 'עֲקֵבִיּוּתוֹת' } },
-  { id: 'n7-41', hebrew: 'סוּבְסִידְיָה', transcription: 'субсИдия', russian: 'субсидия', category: 'nouns', gender: 'feminine', forms: { plural: 'סוּבְסִידְיוֹת' } },
-  { id: 'n7-42', hebrew: 'מִשְׁמָעוּת', transcription: 'мишмаУт', russian: 'значение / смысл', category: 'nouns', gender: 'feminine', forms: { plural: 'מִשְׁמָעוּיוֹת' } },
-  { id: 'n7-43', hebrew: 'זִיכָּרוֹן', transcription: 'зикарОн', russian: 'память / воспоминание', category: 'nouns', gender: 'masculine', forms: { plural: 'זִיכְרוֹנוֹת' } },
-  { id: 'n7-44', hebrew: 'אֲמִינוּת', transcription: 'аминУт', russian: 'достоверность / надёжность', category: 'nouns', gender: 'feminine' , forms: { plural: 'אֲמִינוּתוֹת' } },
+  { id: 'auto13', hebrew: 'מְקוֹרִיוּת', transcription: 'мекориУт', russian: 'оригинальность', category: 'nouns', gender: 'feminine' , forms: { plural: 'מְקוֹרִיוּתוֹת' } },
+  { id: 'auto14', hebrew: 'הַכָּרָה', transcription: 'hакарА', russian: 'признание', category: 'nouns', gender: 'feminine', forms: { plural: 'הַכָּרוֹת' } },
+  { id: 'auto15', hebrew: 'מוֹשָׁב', transcription: 'мошАв', russian: 'сессия / заседание', category: 'nouns', gender: 'masculine', forms: { plural: 'מוֹשָׁבִים' } },
+  { id: 'auto16', hebrew: 'תְּקִינוּת', transcription: 'ткинУт', russian: 'исправность / корректность', category: 'nouns', gender: 'feminine' , forms: { plural: 'תְּקִינוּתוֹת' } },
+  { id: 'auto17', hebrew: 'נֶאֱמָנוּת', transcription: 'нееманУт', russian: 'верность / надёжность', category: 'nouns', gender: 'feminine' , forms: { plural: 'נֶאֱמָנוּתוֹת' } },
+  { id: 'auto18', hebrew: 'סוּבְסִידְיָה', transcription: 'субсИдия', russian: 'субсидия', category: 'nouns', gender: 'feminine', forms: { plural: 'סוּבְסִידְיוֹת' } },
+  { id: 'auto19', hebrew: 'זִיכָּרוֹן', transcription: 'зикарОн', russian: 'память / воспоминание', category: 'nouns', gender: 'masculine', forms: { plural: 'זִיכְרוֹנוֹת' } },
   { id: 'n7-45', hebrew: 'חִידוּשׁ', transcription: 'хидУш', russian: 'обновление / инновация', category: 'nouns', gender: 'masculine', forms: { plural: 'חִידוּשִׁים' } },
-  { id: 'n7-46', hebrew: 'הַגְדָּרָה', transcription: 'hагдарА', russian: 'определение / дефиниция', category: 'nouns', gender: 'feminine', forms: { plural: 'הַגְדָּרוֹת' } },
-  { id: 'n7-47', hebrew: 'מִבְנֶה', transcription: 'мивнЭ', russian: 'структура / строение', category: 'nouns', gender: 'masculine', forms: { plural: 'מִבְנִים' } },
   { id: 'n7-48', hebrew: 'תְּמוּנָה', transcription: 'тмунА', russian: 'картина / изображение', category: 'nouns', gender: 'feminine', forms: { plural: 'תְּמוּנוֹת' } },
-  { id: 'n7-49', hebrew: 'חוֹמֶר', transcription: 'хОмер', russian: 'материал / вещество', category: 'nouns', gender: 'masculine', forms: { plural: 'חוֹמָרִים' } },
-  { id: 'n7-50', hebrew: 'מְגַמָּה', transcription: 'мегамА', russian: 'тенденция / тренд', category: 'nouns', gender: 'feminine', forms: { plural: 'מְגַמּוֹת' } },
-
+  { id: 'auto20', hebrew: 'חוֹמֶר', transcription: 'хОмер', russian: 'материал / вещество', category: 'nouns', gender: 'masculine', forms: { plural: 'חוֹמָרִים' } },
   // ===================== НОВЫЕ ПРИЛАГАТЕЛЬНЫЕ (adj5) =====================
-  { id: 'adj5-1', hebrew: 'בּוֹלֵט', transcription: 'болЭт', russian: 'выдающийся / заметный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'בּוֹלֶטֶת', plural: 'בּוֹלְטִים', femininePlural: 'בּוֹלְטוֹת' } },
-  { id: 'adj5-2', hebrew: 'מַשְׁמָעוּתִי', transcription: 'машмаутИ', russian: 'значительный / существенный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מַשְׁמָעוּתִית', plural: 'מַשְׁמָעוּתִיִּים', femininePlural: 'מַשְׁמָעוּתִיּוֹת' } },
-  { id: 'adj5-3', hebrew: 'הוֹגֵן', transcription: 'hогЭн', russian: 'справедливый / честный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'הוֹגֶנֶת', plural: 'הוֹגְנִים', femininePlural: 'הוֹגְנוֹת' } },
-  { id: 'adj5-4', hebrew: 'אָמִין', transcription: 'амИн', russian: 'надёжный / достоверный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'אֲמִינָה', plural: 'אֲמִינִים', femininePlural: 'אֲמִינוֹת' } },
-  { id: 'adj5-5', hebrew: 'מְדוּיָּק', transcription: 'медуяк', russian: 'точный / аккуратный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְדוּיֶּקֶת', plural: 'מְדוּיָּקִים', femininePlural: 'מְדוּיָּקוֹת' } },
-  { id: 'adj5-6', hebrew: 'חָרִיג', transcription: 'харИг', russian: 'исключительный / нетипичный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'חֲרִיגָה', plural: 'חֲרִיגִים', femininePlural: 'חֲרִיגוֹת' } },
   { id: 'adj5-7', hebrew: 'מוּבָן', transcription: 'мувАн', russian: 'понятный / подразумеваемый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מוּבֶנֶת', plural: 'מוּבָנִים', femininePlural: 'מוּבָנוֹת' } },
-  { id: 'adj5-8', hebrew: 'הֶכְרֵחִי', transcription: 'hехрехИ', russian: 'необходимый / обязательный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'הֶכְרֵחִית', plural: 'הֶכְרֵחִיִּים', femininePlural: 'הֶכְרֵחִיּוֹת' } },
-  { id: 'adj5-9', hebrew: 'רָגִישׁ', transcription: 'рагИш', russian: 'чувствительный / деликатный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'רְגִישָׁה', plural: 'רְגִישִׁים', femininePlural: 'רְגִישׁוֹת' } },
-  { id: 'adj5-10', hebrew: 'מוּפְרָז', transcription: 'муфрАз', russian: 'чрезмерный / преувеличенный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מוּפְרֶזֶת', plural: 'מוּפְרָזִים', femininePlural: 'מוּפְרָזוֹת' } },
   { id: 'adj5-11', hebrew: 'עָקְבִי', transcription: 'аквИ', russian: 'последовательный / систематичный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'עָקְבִית', plural: 'עָקְבִיִּים', femininePlural: 'עָקְבִיּוֹת' } },
   { id: 'adj5-12', hebrew: 'סְבִיר', transcription: 'свирА', russian: 'разумный / приемлемый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'סְבִירָה', plural: 'סְבִירִים', femininePlural: 'סְבִירוֹת' } },
-  { id: 'adj5-13', hebrew: 'חַד', transcription: 'хад', russian: 'острый / резкий', category: 'adjectives', gender: 'masculine', forms: { feminine: 'חַדָּה', plural: 'חַדִּים', femininePlural: 'חַדּוֹת' } },
-  { id: 'adj5-14', hebrew: 'עָדִין', transcription: 'адИн', russian: 'нежный / тонкий / деликатный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'עֲדִינָה', plural: 'עֲדִינִים', femininePlural: 'עֲדִינוֹת' } },
   { id: 'adj5-15', hebrew: 'תָּקִיף', transcription: 'такИф', russian: 'решительный / твёрдый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'תְּקִיפָה', plural: 'תְּקִיפִים', femininePlural: 'תְּקִיפוֹת' } },
   { id: 'adj5-16', hebrew: 'שָׁקוּף', transcription: 'шакУф', russian: 'прозрачный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'שְׁקוּפָה', plural: 'שְׁקוּפִים', femininePlural: 'שְׁקוּפוֹת' } },
   { id: 'adj5-17', hebrew: 'קַשּׁוּח', transcription: 'кашУах', russian: 'жёсткий / суровый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'קַשּׁוּחָה', plural: 'קַשּׁוּחִים', femininePlural: 'קַשּׁוּחוֹת' } },
-  { id: 'adj5-18', hebrew: 'פָּגִיעַ', transcription: 'пагИа', russian: 'уязвимый / ранимый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'פְּגִיעָה', plural: 'פְּגִיעִים', femininePlural: 'פְּגִיעוֹת' } },
   { id: 'adj5-19', hebrew: 'נְגִישׁ', transcription: 'негИш', russian: 'доступный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'נְגִישָׁה', plural: 'נְגִישִׁים', femininePlural: 'נְגִישׁוֹת' } },
   { id: 'adj5-20', hebrew: 'אוֹפְטִימִי', transcription: 'оптИми', russian: 'оптимистичный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'אוֹפְטִימִית', plural: 'אוֹפְטִימִיִּים', femininePlural: 'אוֹפְטִימִיּוֹת' } },
   { id: 'adj5-21', hebrew: 'פֶּסִימִי', transcription: 'песИми', russian: 'пессимистичный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'פֶּסִימִית', plural: 'פֶּסִימִיִּים', femininePlural: 'פֶּסִימִיּוֹת' } },
   { id: 'adj5-22', hebrew: 'תּוֹבְעָנִי', transcription: 'товъанИ', russian: 'требовательный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'תּוֹבְעָנִית', plural: 'תּוֹבְעָנִיִּים', femininePlural: 'תּוֹבְעָנִיּוֹת' } },
-  { id: 'adj5-23', hebrew: 'מוּכָן', transcription: 'мухАн', russian: 'готовый / подготовленный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מוּכָנָה', plural: 'מוּכָנִים', femininePlural: 'מוּכָנוֹת' } },
   { id: 'adj5-24', hebrew: 'עָשִׁיר', transcription: 'ашИр', russian: 'богатый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'עֲשִׁירָה', plural: 'עֲשִׁירִים', femininePlural: 'עֲשִׁירוֹת' } },
   { id: 'adj5-25', hebrew: 'דָּל', transcription: 'даль', russian: 'бедный / скудный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'דַּלָּה', plural: 'דַּלִּים', femininePlural: 'דַּלּוֹת' } },
   { id: 'adj5-26', hebrew: 'יְדִידוּתִי', transcription: 'йедидутИ', russian: 'дружелюбный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'יְדִידוּתִית', plural: 'יְדִידוּתִיִּים', femininePlural: 'יְדִידוּתִיּוֹת' } },
   { id: 'adj5-27', hebrew: 'עוֹיֵן', transcription: 'оЕн', russian: 'враждебный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'עוֹיֶנֶת', plural: 'עוֹיְנִים', femininePlural: 'עוֹיְנוֹת' } },
-  { id: 'adj5-28', hebrew: 'מְיוּחָד', transcription: 'меюхАд', russian: 'особый / уникальный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְיוּחֶדֶת', plural: 'מְיוּחָדִים', femininePlural: 'מְיוּחָדוֹת' } },
-  { id: 'adj5-29', hebrew: 'שִׁגְרָתִי', transcription: 'шигратИ', russian: 'рутинный / обыденный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'שִׁגְרָתִית', plural: 'שִׁגְרָתִיִּים', femininePlural: 'שִׁגְרָתִיּוֹת' } },
   { id: 'adj5-30', hebrew: 'מוּפְלָא', transcription: 'муфлА', russian: 'чудесный / замечательный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מוּפְלֵאָה', plural: 'מוּפְלָאִים', femininePlural: 'מוּפְלָאוֹת' } },
   { id: 'adj5-31', hebrew: 'שׁוֹנֶה', transcription: 'шонЭ', russian: 'разный / отличающийся', category: 'adjectives', gender: 'masculine', forms: { feminine: 'שׁוֹנָה', plural: 'שׁוֹנִים', femininePlural: 'שׁוֹנוֹת' } },
   { id: 'adj5-32', hebrew: 'זָמִין', transcription: 'замИн', russian: 'доступный / имеющийся', category: 'adjectives', gender: 'masculine', forms: { feminine: 'זְמִינָה', plural: 'זְמִינִים', femininePlural: 'זְמִינוֹת' } },
-  { id: 'adj5-33', hebrew: 'צָפוּי', transcription: 'цафУй', russian: 'ожидаемый / предсказуемый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'צְפוּיָה', plural: 'צְפוּיִים', femininePlural: 'צְפוּיוֹת' } },
-  { id: 'adj5-34', hebrew: 'בָּלְתִּי צָפוּי', transcription: 'бильтИ цафУй', russian: 'непредсказуемый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'בָּלְתִּי צְפוּיָה', plural: 'בָּלְתִּי צְפוּיִים', femininePlural: 'בָּלְתִּי צְפוּיוֹת' } },
   { id: 'adj5-35', hebrew: 'מְאַתְגֵּר', transcription: 'меатгЭр', russian: 'вызывающий / сложный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְאַתְגֶּרֶת', plural: 'מְאַתְגְּרִים', femininePlural: 'מְאַתְגְּרוֹת' } },
-  { id: 'adj5-36', hebrew: 'סוֹפִי', transcription: 'софИ', russian: 'окончательный / конечный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'סוֹפִית', plural: 'סוֹפִיִּים', femininePlural: 'סוֹפִיּוֹת' } },
   { id: 'adj5-37', hebrew: 'אִישִׁי', transcription: 'ишИ', russian: 'личный / персональный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'אִישִׁית', plural: 'אִישִׁיִּים', femininePlural: 'אִישִׁיּוֹת' } },
   { id: 'adj5-38', hebrew: 'קוֹלֶקְטִיבִי', transcription: 'колектИви', russian: 'коллективный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'קוֹלֶקְטִיבִית', plural: 'קוֹלֶקְטִיבִיִּים', femininePlural: 'קוֹלֶקְטִיבִיּוֹת' } },
   { id: 'adj5-39', hebrew: 'נוֹכְחִי', transcription: 'нохехИ', russian: 'текущий / нынешний', category: 'adjectives', gender: 'masculine', forms: { feminine: 'נוֹכְחִית', plural: 'נוֹכְחִיִּים', femininePlural: 'נוֹכְחִיּוֹת' } },
-  { id: 'adj5-40', hebrew: 'חָלוּפִי', transcription: 'халуфИ', russian: 'альтернативный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'חֲלוּפִית', plural: 'חֲלוּפִיִּים', femininePlural: 'חֲלוּפִיּוֹת' } },
-  { id: 'adj5-41', hebrew: 'מְהֻדָּר', transcription: 'меhудАр', russian: 'элегантный / изысканный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְהֻדֶּרֶת', plural: 'מְהֻדָּרִים', femininePlural: 'מְהֻדָּרוֹת' } },
-  { id: 'adj5-42', hebrew: 'גָּמִישׁ', transcription: 'гамИш', russian: 'гибкий', category: 'adjectives', gender: 'masculine', forms: { feminine: 'גְּמִישָׁה', plural: 'גְּמִישִׁים', femininePlural: 'גְּמִישׁוֹת' } },
   { id: 'adj5-43', hebrew: 'נָדִיר', transcription: 'надИр', russian: 'редкий', category: 'adjectives', gender: 'masculine', forms: { feminine: 'נְדִירָה', plural: 'נְדִירִים', femininePlural: 'נְדִירוֹת' } },
-  { id: 'adj5-44', hebrew: 'שָׁלֵם', transcription: 'шалЭм', russian: 'целый / полный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'שְׁלֵמָה', plural: 'שְׁלֵמִים', femininePlural: 'שְׁלֵמוֹת' } },
   { id: 'adj5-45', hebrew: 'חֶלְקִי', transcription: 'хелькИ', russian: 'частичный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'חֶלְקִית', plural: 'חֶלְקִיִּים', femininePlural: 'חֶלְקִיּוֹת' } },
   { id: 'adj5-46', hebrew: 'בָּרוּר', transcription: 'барУр', russian: 'ясный / понятный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'בְּרוּרָה', plural: 'בְּרוּרִים', femininePlural: 'בְּרוּרוֹת' } },
-  { id: 'adj5-47', hebrew: 'עָמוּם', transcription: 'амУм', russian: 'смутный / расплывчатый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'עֲמוּמָה', plural: 'עֲמוּמִים', femininePlural: 'עֲמוּמוֹת' } },
   { id: 'adj5-48', hebrew: 'אַכְזָרִי', transcription: 'ахзарИ', russian: 'жестокий', category: 'adjectives', gender: 'masculine', forms: { feminine: 'אַכְזָרִית', plural: 'אַכְזָרִיִּים', femininePlural: 'אַכְזָרִיּוֹת' } },
   { id: 'adj5-49', hebrew: 'רַחְמָנִי', transcription: 'рахманИ', russian: 'милосердный / сострадательный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'רַחְמָנִית', plural: 'רַחְמָנִיִּים', femininePlural: 'רַחְמָנִיּוֹת' } },
   { id: 'adj5-50', hebrew: 'חֲכָם', transcription: 'хахАм', russian: 'умный / мудрый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'חֲכָמָה', plural: 'חֲכָמִים', femininePlural: 'חֲכָמוֹת' } },
-
   // ===================== ДОПОЛНИТЕЛЬНЫЕ ПРЕДЛОЖЕНИЯ (sentences) =====================
   { id: 'se1', hebrew: 'אני הולך לקנות אוכל', transcription: 'ани олех ликнот охель', russian: 'Я иду покупать еду', category: 'sentences' },
   { id: 'se2', hebrew: 'מתי אתה חוזר הביתה?', transcription: 'матай ата хозер а-байта?', russian: 'Когда ты возвращаешься домой?', category: 'sentences' },
   { id: 'se3', hebrew: 'אני רוצה כוס קפה בבקשה', transcription: 'ани роце кос кафе бевакаша', russian: 'Я хочу чашку кофе, пожалуйста', category: 'sentences' },
   { id: 'se4', hebrew: 'איפה התחנה הקרובה?', transcription: 'эйфо а-тахана а-крова?', russian: 'Где ближайшая остановка?', category: 'sentences' },
-  { id: 'se5', hebrew: 'כמה זה עולה?', transcription: 'кама зе оле?', russian: 'Сколько это стоит?', category: 'sentences' },
   { id: 'se6', hebrew: 'אני לא מרגיש טוב היום', transcription: 'ани ло маргиш тов а-йом', russian: 'Я сегодня не очень хорошо себя чувствую', category: 'sentences' },
   { id: 'se7', hebrew: 'בוא נלך לאכול בחוץ', transcription: 'бо нелех леэхоль ба-хуц', russian: 'Давай поедим на улице (в ресторане)', category: 'sentences' },
   { id: 'se8', hebrew: 'אני צריך ללכת לרופא', transcription: 'ани царих лалехет ле-рофе', russian: 'Мне нужно сходить к врачу', category: 'sentences' },
@@ -2393,70 +2136,43 @@ export const vocabulary: Word[] = [
   { id: 'se48', hebrew: 'אני שמח שבאת', transcription: 'ани самеах ше-бата', russian: 'Я рад, что ты пришёл', category: 'sentences' },
   { id: 'se49', hebrew: 'אפשר לשלם בכרטיס אשראי?', transcription: 'эфшар лешалем бе-картис ашрай?', russian: 'Можно заплатить кредитной картой?', category: 'sentences' },
   { id: 'se50', hebrew: 'אני צריך לישון יותר', transcription: 'ани царих лишон йотер', russian: 'Мне нужно больше спать', category: 'sentences' },
-
-
   // ===================== НОВЫЕ СЛОВА — Пакет 6 (100 шт.) =====================
   // --- Глаголы с полными данными ---
-  { id: 'v6-1', hebrew: 'לְהַכְנִיס', transcription: 'леhахнИс', russian: 'Вводить / вносить', category: 'verbs', binyan: 'Хифиль', preposition: 'את / ל', conjugation: { past: 'הִכְנִיס', present: 'מַכְנִיס', future: 'יַכְנִיס', imperative: 'הַכְנֵס' }, example: { hebrew: 'הכנסתי את הנתונים למערכת לפני שהמנהל ביקש אותם', russian: 'Я внёс данные в систему до того как руководитель их попросил' } },
   { id: 'v6-2', hebrew: 'לְהוֹצִיא', transcription: 'леоцИ', russian: 'Выводить / извлекать', category: 'verbs', binyan: 'Хифиль', preposition: 'את / מ', conjugation: { past: 'הוֹצִיא', present: 'מוֹצִיא', future: 'יוֹצִיא', imperative: 'הוֹצֵא' }, example: { hebrew: 'הוצאנו את הציוד הישן מהמחסן כדי לפנות מקום לחדש', russian: 'Мы извлекли старое оборудование со склада чтобы освободить место для нового' } },
-  { id: 'v6-3', hebrew: 'לְהַרְגִּישׁ', transcription: 'леhаргИш', russian: 'Чувствовать / ощущать', category: 'verbs', binyan: 'Хифиль', preposition: 'את / ב', conjugation: { past: 'הִרְגִּישׁ', present: 'מַרְגִּישׁ', future: 'יַרְגִּישׁ' }, example: { hebrew: 'הרגשתי שמשהו לא בסדר במערכת עוד לפני שהאזעקה נדלקה', russian: 'Я почувствовал что что-то не так в системе ещё до того как сработала сигнализация' } },
   { id: 'v6-4', hebrew: 'לְבַטֵּל', transcription: 'леватЭль', russian: 'Отменять / аннулировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'בִּיטֵּל', present: 'מְבַטֵּל', future: 'יְבַטֵּל', imperative: 'בַּטֵּל' }, example: { hebrew: 'ביטלנו את ההזמנה כי הספק לא עמד בלוחות הזמנים', russian: 'Мы отменили заказ потому что поставщик не уложился в сроки' } },
-  { id: 'v6-5', hebrew: 'לְאַשֵׁר', transcription: 'леашЭр', russian: 'Утверждать / подтверждать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'אִישֵׁר', present: 'מְאַשֵׁר', future: 'יְאַשֵׁר', imperative: 'אַשֵׁר' }, example: { hebrew: 'המנהל אישר את התקציב אחרי שבדק את כל הפרטים', russian: 'Менеджер утвердил бюджет после проверки всех деталей' } },
   { id: 'v6-6', hebrew: 'לְהַתְאִים', transcription: 'леhатИм', russian: 'Подходить / соответствовать', category: 'verbs', binyan: 'Хифиль', preposition: 'ל', conjugation: { past: 'הִתְאִים', present: 'מַתְאִים', future: 'יַתְאִים' }, example: { hebrew: 'המפרט לא מתאים לדרישות של הלקוח ולכן צריך לעדכן אותו', russian: 'Спецификация не соответствует требованиям клиента поэтому нужно её обновить' } },
   { id: 'v6-7', hebrew: 'לְהַעֲבִיר', transcription: 'леhаавИр', russian: 'Передавать / переводить', category: 'verbs', binyan: 'Хифиль', preposition: 'את / ל', conjugation: { past: 'הֶעֱבִיר', present: 'מַעֲבִיר', future: 'יַעֲבִיר', imperative: 'הַעֲבֵר' }, example: { hebrew: 'העברתי את הקובץ למנהל הפרויקט כדי שיבדוק את התוכן', russian: 'Я передал файл менеджеру проекта чтобы он проверил содержание' } },
-  { id: 'v6-8', hebrew: 'לִבְדֹּק', transcription: 'ливдОк', russian: 'Проверять', category: 'verbs', binyan: 'Пааль', preposition: 'את', conjugation: { past: 'בָּדַק', present: 'בּוֹדֵק', future: 'יִבְדֹּק', imperative: 'בְּדֹק' }, example: { hebrew: 'בדקתי את כל החיבורים ומצאתי שאחד מהם רופף', russian: 'Я проверил все соединения и обнаружил что одно из них ослабло' } },
   { id: 'v6-9', hebrew: 'לְהַזְהִיר', transcription: 'леhазhИр', russian: 'Предупреждать', category: 'verbs', binyan: 'Хифиль', preposition: 'את / מ', conjugation: { past: 'הִזְהִיר', present: 'מַזְהִיר', future: 'יַזְהִיר', imperative: 'הַזְהֵר' }, example: { hebrew: 'הזהרתי את הצוות שהעבודה בגובה דורשת ציוד מגן מלא', russian: 'Я предупредил команду что работа на высоте требует полного защитного снаряжения' } },
   { id: 'v6-10', hebrew: 'לְהִזְדָּרֵז', transcription: 'леhиздарЭз', russian: 'Торопиться / спешить', category: 'verbs', binyan: 'Хитпаэль', conjugation: { past: 'הִזְדָּרֵז', present: 'מִזְדָּרֵז', future: 'יִזְדָּרֵז' }, example: { hebrew: 'הזדרזנו לסיים את העבודה לפני שהתחיל הגשם', russian: 'Мы поторопились закончить работу до того как начался дождь' } },
-  { id: 'v6-11', hebrew: 'לְסַכֵּם', transcription: 'лесакЭм', russian: 'Подводить итог / суммировать', category: 'verbs', binyan: 'Пиэль', preposition: 'את', conjugation: { past: 'סִיכֵּם', present: 'מְסַכֵּם', future: 'יְסַכֵּם', imperative: 'סַכֵּם' }, example: { hebrew: 'סיכמנו את הפגישה עם רשימה ברורה של משימות לכל חבר צוות', russian: 'Мы подвели итог встречи с чётким списком задач для каждого члена команды' } },
-  { id: 'v6-12', hebrew: 'לְהוֹדִיעַ', transcription: 'леhодИа', russian: 'Уведомлять / сообщать', category: 'verbs', binyan: 'Хифиль', preposition: 'ל / על', conjugation: { past: 'הוֹדִיעַ', present: 'מוֹדִיעַ', future: 'יוֹדִיעַ', imperative: 'הוֹדַע' }, example: { hebrew: 'הודעתי ללקוח שהתיקון יארך יומיים נוספים בגלל חוסר בחלקים', russian: 'Я уведомил клиента что ремонт продлится ещё два дня из-за нехватки деталей' } },
-  { id: 'v6-13', hebrew: 'לִנְהֹל', transcription: 'линhОль', russian: 'Управлять / вести', category: 'verbs', binyan: 'Пааль', preposition: 'את', conjugation: { past: 'נִיהֵל', present: 'מְנַהֵל', future: 'יְנַהֵל', imperative: 'נַהֵל' }, example: { hebrew: 'ניהלתי פרויקט של שלוש שנים עם צוות של עשרים איש', russian: 'Я управлял трёхлетним проектом с командой из двадцати человек' } },
   { id: 'v6-14', hebrew: 'לְהִתְעַסֵּק', transcription: 'леhитасЭк', russian: 'Заниматься / возиться', category: 'verbs', binyan: 'Хитпаэль', preposition: 'ב / עם', conjugation: { past: 'הִתְעַסֵּק', present: 'מִתְעַסֵּק', future: 'יִתְעַסֵּק' }, example: { hebrew: 'אני מתעסק בתיקון מזגנים כבר חמש עשרה שנה', russian: 'Я занимаюсь ремонтом кондиционеров уже пятнадцать лет' } },
   { id: 'v6-15', hebrew: 'לְהַקְשִׁיב', transcription: 'леhакшИв', russian: 'Слушать внимательно', category: 'verbs', binyan: 'Хифиль', preposition: 'ל', conjugation: { past: 'הִקְשִׁיב', present: 'מַקְשִׁיב', future: 'יַקְשִׁיב', imperative: 'הַקְשֵׁב' }, example: { hebrew: 'הקשבתי לכל טענותיו של הלקוח ורשמתי אותן בדוח', russian: 'Я внимательно выслушал все претензии клиента и записал их в отчёт' } },
-
   // --- Существительные с родом и множественным числом ---
-  { id: 'n7-1', hebrew: 'תַּקָּנָה', transcription: 'таканА', russian: 'Постановление / норматив', category: 'nouns', gender: 'feminine', forms: { plural: 'תַּקָּנוֹת' } },
-  { id: 'n7-2', hebrew: 'מִכְרָז', transcription: 'михрАз', russian: 'Тендер / конкурс', category: 'nouns', gender: 'masculine', forms: { plural: 'מִכְרָזִים' } },
-  { id: 'n7-3', hebrew: 'הֲנָחָה', transcription: 'анахА', russian: 'Скидка / предположение', category: 'nouns', gender: 'feminine', forms: { plural: 'הֲנָחוֹת' } },
+  { id: 'auto21', hebrew: 'תַּקָּנָה', transcription: 'таканА', russian: 'Постановление / норматив', category: 'nouns', gender: 'feminine', forms: { plural: 'תַּקָּנוֹת' } },
   { id: 'n7-4', hebrew: 'סוֹפֵר', transcription: 'софЭр', russian: 'Писатель / автор', category: 'nouns', gender: 'masculine', forms: { plural: 'סוֹפְרִים', feminine: 'סוֹפֶרֶת' } },
-  { id: 'n7-5', hebrew: 'תַּצְפִּית', transcription: 'тацпИт', russian: 'Наблюдение / обзор', category: 'nouns', gender: 'feminine', forms: { plural: 'תַּצְפִּיוֹת' } },
-  { id: 'n7-6', hebrew: 'מָנָה', transcription: 'манА', russian: 'Порция / доза', category: 'nouns', gender: 'feminine', forms: { plural: 'מָנוֹת' } },
-  { id: 'n7-7', hebrew: 'קְנָס', transcription: 'кнас', russian: 'Штраф', category: 'nouns', gender: 'masculine', forms: { plural: 'קְנָסוֹת' } },
+  { id: 'auto22', hebrew: 'תַּצְפִּית', transcription: 'тацпИт', russian: 'Наблюдение / обзор', category: 'nouns', gender: 'feminine', forms: { plural: 'תַּצְפִּיוֹת' } },
+  { id: 'auto23', hebrew: 'מָנָה', transcription: 'манА', russian: 'Порция / доза', category: 'nouns', gender: 'feminine', forms: { plural: 'מָנוֹת' } },
+  { id: 'auto24', hebrew: 'קְנָס', transcription: 'кнас', russian: 'Штраф', category: 'nouns', gender: 'masculine', forms: { plural: 'קְנָסוֹת' } },
   { id: 'n7-8', hebrew: 'פְּרוֹטוֹקוֹל', transcription: 'протокОль', russian: 'Протокол', category: 'nouns', gender: 'masculine', forms: { plural: 'פְּרוֹטוֹקוֹלִים' } },
-  { id: 'n7-9', hebrew: 'מַשְׁבֵּר', transcription: 'машбЭр', russian: 'Кризис', category: 'nouns', gender: 'masculine', forms: { plural: 'מַשְׁבָּרִים' } },
   { id: 'n7-10', hebrew: 'עוֹדֵף', transcription: 'одЭф', russian: 'Излишек / остаток', category: 'nouns', gender: 'masculine', forms: { plural: 'עוֹדָפִים' } },
-  { id: 'n7-11', hebrew: 'גֵּירוּשִׁין', transcription: 'гейрушИн', russian: 'Развод', category: 'nouns', gender: 'masculine', forms: { plural: 'גֵּירוּשִׁין' } },
-  { id: 'n7-12', hebrew: 'חֲתוּנָה', transcription: 'хатунА', russian: 'Свадьба', category: 'nouns', gender: 'feminine', forms: { plural: 'חֲתוּנוֹת' } },
-  { id: 'n7-13', hebrew: 'מִשְׁפָּט', transcription: 'мишпАт', russian: 'Суд / предложение (грамм.)', category: 'nouns', gender: 'masculine', forms: { plural: 'מִשְׁפָּטִים' } },
-  { id: 'n7-14', hebrew: 'עֵד', transcription: 'эд', russian: 'Свидетель', category: 'nouns', gender: 'masculine', forms: { plural: 'עֵדִים', feminine: 'עֵדָה' } },
-  { id: 'n7-15', hebrew: 'כְּתֹבֶת', transcription: 'ктОвет', russian: 'Адрес', category: 'nouns', gender: 'feminine', forms: { plural: 'כְּתוֹבוֹת' } },
-  { id: 'n7-16', hebrew: 'סִיוּם', transcription: 'сиЮм', russian: 'Завершение / окончание', category: 'nouns', gender: 'masculine', forms: { plural: 'סִיוּמִים' } },
-  { id: 'n7-17', hebrew: 'הַתְחָלָה', transcription: 'атхалА', russian: 'Начало', category: 'nouns', gender: 'feminine', forms: { plural: 'הַתְחָלוֹת' } },
+  { id: 'auto25', hebrew: 'גֵּירוּשִׁין', transcription: 'гейрушИн', russian: 'Развод', category: 'nouns', gender: 'masculine', forms: { plural: 'גֵּירוּשִׁין' } },
+  { id: 'auto26', hebrew: 'חֲתוּנָה', transcription: 'хатунА', russian: 'Свадьба', category: 'nouns', gender: 'feminine', forms: { plural: 'חֲתוּנוֹת' } },
+  { id: 'auto27', hebrew: 'מִשְׁפָּט', transcription: 'мишпАт', russian: 'Суд / предложение (грамм.)', category: 'nouns', gender: 'masculine', forms: { plural: 'מִשְׁפָּטִים' } },
+  { id: 'auto28', hebrew: 'עֵד', transcription: 'эд', russian: 'Свидетель', category: 'nouns', gender: 'masculine', forms: { plural: 'עֵדִים', feminine: 'עֵדָה' } },
+  { id: 'auto29', hebrew: 'כְּתֹבֶת', transcription: 'ктОвет', russian: 'Адрес', category: 'nouns', gender: 'feminine', forms: { plural: 'כְּתוֹבוֹת' } },
+  { id: 'auto30', hebrew: 'הַתְחָלָה', transcription: 'атхалА', russian: 'Начало', category: 'nouns', gender: 'feminine', forms: { plural: 'הַתְחָלוֹת' } },
   { id: 'n7-18', hebrew: 'שִׁיגָּרָה', transcription: 'шигарА', russian: 'Рутина', category: 'nouns', gender: 'feminine', forms: { plural: 'שִׁיגָּרוֹת' } },
-  { id: 'n7-19', hebrew: 'חֲלוֹם', transcription: 'халОм', russian: 'Мечта / сон', category: 'nouns', gender: 'masculine', forms: { plural: 'חֲלוֹמוֹת' } },
-  { id: 'n7-20', hebrew: 'זִיכָּרוֹן', transcription: 'зикарОн', russian: 'Память / воспоминание', category: 'nouns', gender: 'masculine', forms: { plural: 'זִכְרוֹנוֹת' } },
-  { id: 'n7-21', hebrew: 'מֶרְחָב', transcription: 'мерхАв', russian: 'Пространство', category: 'nouns', gender: 'masculine', forms: { plural: 'מֶרְחַבִּים' } },
-  { id: 'n7-22', hebrew: 'גְּבוּל', transcription: 'гвУль', russian: 'Граница / предел', category: 'nouns', gender: 'masculine', forms: { plural: 'גְּבוּלוֹת' } },
-  { id: 'n7-23', hebrew: 'שְׁכוּנָה', transcription: 'шхунА', russian: 'Район / квартал', category: 'nouns', gender: 'feminine', forms: { plural: 'שְׁכוּנוֹת' } },
+  { id: 'auto31', hebrew: 'חֲלוֹם', transcription: 'халОм', russian: 'Мечта / сон', category: 'nouns', gender: 'masculine', forms: { plural: 'חֲלוֹמוֹת' } },
+  { id: 'auto32', hebrew: 'גְּבוּל', transcription: 'гвУль', russian: 'Граница / предел', category: 'nouns', gender: 'masculine', forms: { plural: 'גְּבוּלוֹת' } },
+  { id: 'auto33', hebrew: 'שְׁכוּנָה', transcription: 'шхунА', russian: 'Район / квартал', category: 'nouns', gender: 'feminine', forms: { plural: 'שְׁכוּנוֹת' } },
   { id: 'n7-24', hebrew: 'תַּחֲנָה', transcription: 'таханА', russian: 'Станция / остановка', category: 'nouns', gender: 'feminine', forms: { plural: 'תַּחֲנוֹת' } },
   { id: 'n7-25', hebrew: 'מוֹסָד', transcription: 'мосАд', russian: 'Учреждение / институт', category: 'nouns', gender: 'masculine', forms: { plural: 'מוֹסָדוֹת' } },
-
   // --- Прилагательные с формами ---
   { id: 'adj6-1', hebrew: 'מָעוּט', transcription: 'маУт', russian: 'Малочисленный / скудный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מוּעֶטֶת', plural: 'מוּעָטִים' } },
   { id: 'adj6-2', hebrew: 'מְרוּוָח', transcription: 'мерувАх', russian: 'Просторный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְרוּוַחַת', plural: 'מְרוּוָחִים' } },
   { id: 'adj6-3', hebrew: 'צָפוּף', transcription: 'цафУф', russian: 'Тесный / плотный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'צְפוּפָה', plural: 'צְפוּפִים' } },
-  { id: 'adj6-4', hebrew: 'שָׁקוּף', transcription: 'шакУф', russian: 'Прозрачный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'שְׁקוּפָה', plural: 'שְׁקוּפִים' } },
   { id: 'adj6-5', hebrew: 'עָמוּס', transcription: 'амУс', russian: 'Загруженный / нагруженный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'עֲמוּסָה', plural: 'עֲמוּסִים' } },
-  { id: 'adj6-6', hebrew: 'רְגִישׁ', transcription: 'регИш', russian: 'Чувствительный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'רְגִישָׁה', plural: 'רְגִישִׁים' } },
   { id: 'adj6-7', hebrew: 'מְסוּכָּן', transcription: 'месукАн', russian: 'Опасный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְסוּכֶּנֶת', plural: 'מְסוּכָּנִים' } },
-  { id: 'adj6-8', hebrew: 'שִׁגְרָתִי', transcription: 'шигратИ', russian: 'Рутинный / обыденный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'שִׁגְרָתִית', plural: 'שִׁגְרָתִיִּים' } },
-  { id: 'adj6-9', hebrew: 'מְצוּמְצָם', transcription: 'мецумцАм', russian: 'Ограниченный / сокращённый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְצוּמְצֶמֶת', plural: 'מְצוּמְצָמִים' } },
-  { id: 'adj6-10', hebrew: 'נַחוּץ', transcription: 'нахУц', russian: 'Необходимый / нужный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'נְחוּצָה', plural: 'נְחוּצִים' } },
-  { id: 'adj6-11', hebrew: 'מוּגָן', transcription: 'мугАн', russian: 'Защищённый', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מוּגֶנֶת', plural: 'מוּגָנִים' } },
-  { id: 'adj6-12', hebrew: 'זָמִין', transcription: 'замИн', russian: 'Доступный (можно получить)', category: 'adjectives', gender: 'masculine', forms: { feminine: 'זְמִינָה', plural: 'זְמִינִים' } },
   { id: 'adj6-13', hebrew: 'תָּקוּעַ', transcription: 'такУа', russian: 'Застрявший / заклинивший', category: 'adjectives', gender: 'masculine', forms: { feminine: 'תְּקוּעָה', plural: 'תְּקוּעִים' } },
-  { id: 'adj6-14', hebrew: 'מְקוּלְקָל', transcription: 'мекулкАль', russian: 'Испорченный / сломанный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מְקוּלְקֶלֶת', plural: 'מְקוּלְקָלִים' } },
-  { id: 'adj6-15', hebrew: 'מוּשְׁלָם', transcription: 'мушлАм', russian: 'Идеальный / совершенный', category: 'adjectives', gender: 'masculine', forms: { feminine: 'מוּשְׁלֶמֶת', plural: 'מוּשְׁלָמִים' } },
-
   // --- Предложения: сложные деловые и технические ---
   { id: 'se51', hebrew: 'אחרי שבדקנו את כל האפשרויות הגענו למסקנה שצריך להחליף את כל הצנרת', transcription: 'ахарэй ше-бадАкну эт коль а-эфшаруйОт игАну ле-маскана ше-царИх леахлИф эт коль а-цнарОт', russian: 'Проверив все варианты, мы пришли к выводу что нужно заменить весь трубопровод', category: 'sentences', subcategory: 'Профессиональная речь' },
   { id: 'se52', hebrew: 'הלקוח דרש הסבר מפורט על כל סעיף בחשבונית לפני שהסכים לשלם', transcription: 'а-лакОах дарАш эсбЭр мефурАт аль коль саИф ба-хешбонИт лифнЭй ше-искИм лешалЭм', russian: 'Клиент потребовал подробное объяснение каждого пункта в счёте прежде чем согласился платить', category: 'sentences', subcategory: 'Профессиональная речь' },
@@ -2478,5 +2194,4 @@ export const vocabulary: Word[] = [
   { id: 'se68', hebrew: 'הביקורת העלתה כמה ליקויים שצריך לטפל בהם לפני שממשיכים', transcription: 'а-бикОрет эалтА кАма ликуйИм ше-царИх летапЭль ба-hЭм лифнЭй ше-мамшихИм', russian: 'Проверка выявила несколько недочётов которые нужно устранить прежде чем продолжать', category: 'sentences', subcategory: 'Профессиональная речь' },
   { id: 'se69', hebrew: 'השיטה הזו מוכחת כיעילה ומומלצת על ידי כל המומחים בתחום', transcription: 'а-шитА а-зу мухЭхет ке-яилА у-мумлЭцет аль йедЭй коль а-мумхИм ба-тхУм', russian: 'Этот метод доказал свою эффективность и рекомендован всеми экспертами в данной области', category: 'sentences', subcategory: 'Профессиональная речь' },
   { id: 'se70', hebrew: 'כל ההחלטות צריכות להתקבל על בסיס נתונים ולא על בסיס הנחות', transcription: 'коль а-hахлатОт црихОт леиткабЭль аль басИс нетунИм вэ-ло аль басИс анахОт', russian: 'Все решения должны приниматься на основе данных а не на основе предположений', category: 'sentences', subcategory: 'Профессиональная речь' },
-
 ];
