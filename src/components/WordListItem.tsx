@@ -2,6 +2,7 @@ import { memo } from 'react';
 import { Word } from '@/data/vocabulary';
 import { ReviewData } from '@/hooks/useSpacedRepetition';
 import { Clock, RotateCcw, Star } from 'lucide-react';
+import ClickableHebrew from '@/components/ClickableHebrew';
 
 interface WordListItemProps {
   word: Word;
@@ -27,9 +28,7 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite
     <div className={`content-visibility-auto rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col gap-2 shadow-sm`}>
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
-          <span className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground block" dir="rtl">
-            {word.hebrew}
-          </span>
+          <ClickableHebrew text={word.hebrew} className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground block" />
           <span className="text-base text-muted-foreground italic block">{word.transcription}</span>
         </div>
         <div className="flex items-center gap-1.5 flex-shrink-0 mt-1">
@@ -90,7 +89,7 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite
 
       {word.example && (
         <div className="mt-1 border-t border-border pt-2">
-          <p className="font-hebrew text-base text-foreground/80" dir="rtl">{word.example.hebrew}</p>
+          <ClickableHebrew text={word.example.hebrew} className="font-hebrew text-base text-foreground/80 block" />
           <p className="text-sm text-muted-foreground mt-0.5">{word.example.russian}</p>
         </div>
       )}
