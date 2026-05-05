@@ -46,9 +46,7 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval, isFavorite, on
             className={`absolute inset-0 rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-3 pt-1 pb-14 flex flex-col items-center justify-center gap-1 shadow-sm hover:shadow-md transition-shadow overflow-hidden`}
             style={{ backfaceVisibility: 'hidden' }}
           >
-            <span className="font-hebrew text-2xl md:text-3xl leading-tight text-foreground text-center break-words w-full max-w-full flex-shrink-0" dir="rtl">
-              {word.hebrew}
-            </span>
+            <ClickableHebrew text={word.hebrew} className="font-hebrew text-2xl md:text-3xl leading-tight text-foreground text-center break-words w-full max-w-full flex-shrink-0 block" />
             <span className="text-sm text-muted-foreground italic text-center break-words w-full max-w-full flex-shrink-0">{word.transcription}</span>
             <div className="flex flex-wrap gap-0.5 justify-center w-full text-[9px] flex-shrink-0">
               {word.gender && (
