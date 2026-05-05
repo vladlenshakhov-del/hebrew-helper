@@ -6,26 +6,23 @@ const stripPunct = (s: string) => s.replace(/[.,!?;:"'()\[\]…—–\-״׳]/g, 
 // Build lookup once
 let lookup: Map<string, Word[]> | null = null;
 
+const addKey = (m: Map<string, Word[]>, key: string, w: Word) => {
+  if (!key || key.includes(' ')) return;
+  const arr = m.get(key);
+  if (arr) arr.push(w); else m.set(key, [w]);
+};
+
 const getLookup = (): Map<string, Word[]> => {
   if (lookup) return lookup;
-  lookup = new Map();
+  const m = new Map<string, Word[]>();
   for (const w of vocabulary) {
-    const key = stripNiqqud(w.hebrew).trim();
-    if (!key || key.includes(' ')) continue; // skip phrases for word-token lookup
-    const arr = lookup.get(key) || [];
-    arr.push(w);
-    lookup.set(key, arr);
-    // Also index alternative forms
-    if (w.forms?.feminine) {
-      const k = stripNiqqud(w.forms.feminine).trim();
-      if (k && !k.includes(' ')) (lookup.get(k) || lookup.set(k, []).get(k)!).push(w);
-    }
-    if (w.forms?.plural) {
-      const k = stripNiqqud(w.forms.plural).trim();
-      if (k && !k.includes(' ')) (lookup.get(k) || lookup.set(k, []).get(k)!).push(w);
-    }
+    addKey(m, stripNiqqud(w.hebrew).trim(), w);
+    if (w.forms?.feminine) addKey(m, stripNiqqud(w.forms.feminine).trim(), w);
+    if (w.forms?.plural) addKey(m, stripNiqqud(w.forms.plural).trim(), w);
+    if (w.forms?.femininePlural) addKey(m, stripNiqqud(w.forms.femininePlural).trim(), w);
   }
-  return lookup;
+  lookup = m;
+  return m;
 };
 
 const PREFIXES = ['ו', 'ה', 'ב', 'ל', 'מ', 'כ', 'ש', 'וה', 'וב', 'ול', 'ומ', 'וכ', 'וש'];
