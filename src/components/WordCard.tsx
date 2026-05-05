@@ -2,6 +2,7 @@ import { memo, useState } from 'react';
 import { Word } from '@/data/vocabulary';
 import { ReviewData } from '@/hooks/useSpacedRepetition';
 import { Clock, RotateCcw, Star } from 'lucide-react';
+import ClickableHebrew from '@/components/ClickableHebrew';
 
 interface WordCardProps {
   word: Word;
@@ -104,7 +105,7 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval, isFavorite, on
               )}
               {word.example && (
                 <div className="text-center border-t border-primary-foreground/20 pt-0.5 w-full">
-                  <p className="font-hebrew text-sm font-semibold text-primary-foreground/90 break-words w-full max-w-full" dir="rtl">{word.example.hebrew}</p>
+                  <ClickableHebrew text={word.example.hebrew} onLight className="font-hebrew text-sm font-semibold text-primary-foreground/90 break-words w-full max-w-full block" />
                   <p className="text-xs font-medium text-primary-foreground/70 mt-0.5 break-words w-full max-w-full">{word.example.russian}</p>
                 </div>
               )}
