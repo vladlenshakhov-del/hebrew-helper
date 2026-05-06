@@ -50,21 +50,15 @@ const ClickableToken = ({ token, onLight }: { token: string; onLight?: boolean }
           <p className="text-xs text-muted-foreground">Перевод не найден</p>
         ) : (
           <div className="space-y-1">
-            {matches.slice(0, 3).map((w) => {
-              // Show short Russian translation only — first meaning, no examples
-              const shortRu = w.russian.split(/[;\n]|,\s/)[0].trim();
-              // Prefer the shortest hebrew form for display (avoid long phrases)
-              const heb = w.hebrew.length > 24 ? w.hebrew.split(/\s+/)[0] : w.hebrew;
-              return (
-                <div key={w.id} className="text-sm leading-tight">
-                  <span className="font-hebrew text-base font-semibold" dir="rtl">{heb}</span>
-                  {w.transcription && (
-                    <span className="text-[11px] text-muted-foreground italic mx-1">{w.transcription.split(/[;,]/)[0]}</span>
-                  )}
-                  <div className="text-foreground text-sm">{shortRu}</div>
-                </div>
-              );
-            })}
+            {matches.slice(0, 2).map((m, i) => (
+              <div key={i} className="text-sm leading-tight">
+                <span className="font-hebrew text-base font-semibold" dir="rtl">{m.hebrew}</span>
+                {m.tr && (
+                  <span className="text-[11px] text-muted-foreground italic mx-1">{m.tr}</span>
+                )}
+                <div className="text-foreground text-sm">{m.ru}</div>
+              </div>
+            ))}
           </div>
         )}
       </PopoverContent>
