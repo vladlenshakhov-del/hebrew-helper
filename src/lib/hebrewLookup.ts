@@ -1,14 +1,17 @@
 import { vocabulary, Word } from '@/data/vocabulary';
+import { HEBREW_DICT, DictEntry } from './hebrewDictionary';
 
 const stripNiqqud = (s: string) => s.replace(/[\u0591-\u05C7]/g, '');
 const stripPunct = (s: string) => s.replace(/[.,!?;:"'()\[\]…—–\-״׳]/g, '').trim();
+const clean = (s: string) => stripPunct(stripNiqqud(s));
 
-let primary: Map<string, Word[]> | null = null;
-let secondary: Map<string, Word[]> | null = null;
+// Точечный индекс: только записи словаря, чьё hebrew — одно слово (без пробелов).
+// Так клик по слову внутри фразы НЕ возвращает родительскую фразу.
+let singleWordIndex: Map<string, Word[]> | null = null;
 
-const add = (m: Map<string, Word[]>, key: string, w: Word) => {
-  const k = stripPunct(stripNiqqud(key));
-  if (!k) return;
+const addWord = (m: Map<string, Word[]>, key: string, w: Word) => {
+  const k = clean(key);
+  if (!k || k.includes(' ')) return;
   const arr = m.get(k);
   if (arr) {
     if (!arr.includes(w)) arr.push(w);
@@ -17,63 +20,61 @@ const add = (m: Map<string, Word[]>, key: string, w: Word) => {
   }
 };
 
-const tokenize = (s: string) => stripNiqqud(s).split(/\s+/).map(stripPunct).filter(Boolean);
-
 const build = () => {
-  const p = new Map<string, Word[]>();
-  const s = new Map<string, Word[]>();
+  const m = new Map<string, Word[]>();
   for (const w of vocabulary) {
-    // Primary: full entry hebrew (single word) + form variants
-    const main = stripNiqqud(w.hebrew).trim();
-    if (main && !main.includes(' ')) add(p, main, w);
-    if (w.forms?.feminine) add(p, w.forms.feminine, w);
-    if (w.forms?.plural) add(p, w.forms.plural, w);
-    if (w.forms?.femininePlural) add(p, w.forms.femininePlural, w);
-
-    // Secondary: every token from phrase entries, examples, conjugations
-    const sources: string[] = [w.hebrew];
-    if (w.example?.hebrew) sources.push(w.example.hebrew);
-    if (w.conjugation?.past) sources.push(w.conjugation.past);
-    if (w.conjugation?.present) sources.push(w.conjugation.present);
-    if (w.conjugation?.future) sources.push(w.conjugation.future);
-    if (w.conjugation?.imperative) sources.push(w.conjugation.imperative);
-    for (const src of sources) {
-      for (const tok of tokenize(src)) add(s, tok, w);
-    }
+    const main = clean(w.hebrew);
+    if (main && !main.includes(' ')) addWord(m, main, w);
+    if (w.forms?.feminine) addWord(m, w.forms.feminine, w);
+    if (w.forms?.plural) addWord(m, w.forms.plural, w);
+    if (w.forms?.femininePlural) addWord(m, w.forms.femininePlural, w);
   }
-  primary = p;
-  secondary = s;
+  singleWordIndex = m;
 };
 
-const PREFIXES = ['ו', 'ה', 'ב', 'ל', 'מ', 'כ', 'ש', 'וה', 'וב', 'ול', 'ומ', 'וכ', 'וש', 'מה', 'שה', 'שב', 'של', 'מל'];
-const SUFFIXES = ['ים', 'ות', 'יים', 'ייה', 'נו', 'כם', 'כן', 'הם', 'הן', 'תי', 'תם', 'תן', 'ני', 'נו', 'ך', 'ם', 'ן', 'ה', 'ת', 'י', 'ו'];
+// Префиксы, которые в иврите часто «приклеиваются» к слову.
+const PREFIXES = ['ו', 'ה', 'ב', 'ל', 'מ', 'כ', 'ש', 'וה', 'וב', 'ול', 'ומ', 'וכ', 'וש', 'מה', 'שה', 'כש', 'לכש'];
 
-const tryMap = (m: Map<string, Word[]>, clean: string): Word[] | null => {
-  if (m.has(clean)) return m.get(clean)!;
+export interface LookupResult {
+  hebrew: string;
+  ru: string;
+  tr?: string;
+  source: 'dict' | 'vocab';
+}
+
+const fromDict = (key: string): LookupResult | null => {
+  const e: DictEntry | undefined = HEBREW_DICT[key];
+  if (!e) return null;
+  return { hebrew: key, ru: e.ru, tr: e.tr, source: 'dict' };
+};
+
+const fromVocab = (key: string): LookupResult | null => {
+  if (!singleWordIndex) build();
+  const arr = singleWordIndex!.get(key);
+  if (!arr || arr.length === 0) return null;
+  const w = arr[0];
+  const ru = w.russian.split(/[;\n]|,\s/)[0].trim();
+  return { hebrew: clean(w.hebrew), ru, tr: w.transcription?.split(/[;,]/)[0]?.trim(), source: 'vocab' };
+};
+
+const tryKey = (key: string): LookupResult | null => fromDict(key) || fromVocab(key);
+
+export const lookupHebrewWord = (token: string): LookupResult[] => {
+  const c = clean(token);
+  if (!c) return [];
+
+  // 1) Точное совпадение
+  const exact = tryKey(c);
+  if (exact) return [exact];
+
+  // 2) Снятие одного из частых префиксов
   for (const p of PREFIXES) {
-    if (clean.startsWith(p) && clean.length > p.length + 1) {
-      const stem = clean.slice(p.length);
-      if (m.has(stem)) return m.get(stem)!;
-      for (const sf of SUFFIXES) {
-        if (stem.endsWith(sf) && stem.length > sf.length + 1) {
-          const s2 = stem.slice(0, -sf.length);
-          if (m.has(s2)) return m.get(s2)!;
-        }
-      }
+    if (c.length > p.length + 1 && c.startsWith(p)) {
+      const stem = c.slice(p.length);
+      const r = tryKey(stem);
+      if (r) return [r];
     }
   }
-  for (const sf of SUFFIXES) {
-    if (clean.endsWith(sf) && clean.length > sf.length + 1) {
-      const stem = clean.slice(0, -sf.length);
-      if (m.has(stem)) return m.get(stem)!;
-    }
-  }
-  return null;
-};
 
-export const lookupHebrewWord = (token: string): Word[] => {
-  if (!primary || !secondary) build();
-  const clean = stripPunct(stripNiqqud(token));
-  if (!clean) return [];
-  return tryMap(primary!, clean) || tryMap(secondary!, clean) || [];
+  return [];
 };
