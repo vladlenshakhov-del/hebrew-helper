@@ -27,8 +27,26 @@ export interface Word {
   forms?: WordForms;
   binyan?: Binyan;
   preposition?: string;   // предлог для глагола
+  root?: string;          // שורש (корень слова)
   conjugation?: VerbConjugation;
-  example?: { hebrew: string; russian: string };
+  // Русская транскрипция для всех времен глагола
+  conjugationTranscription?: {
+    past?: string;
+    present?: string;
+    future?: string;
+    imperative?: string;
+  };
+  example?: {
+    hebrew: string;
+    transcription?: string;
+    russian: string;
+  };
+  // Для выражений и предложений (пословный разбор)
+  fullAnalysis?: Array<{
+    word: string;
+    translation: string;
+    details: string; // часть речи, время, лицо или падеж
+  }>;
 }
 
 export const categoryLabels: Record<Category, { ru: string; he: string; icon: string }> = {

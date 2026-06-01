@@ -1,8 +1,9 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { Word } from '@/data/vocabulary';
 import { ReviewData } from '@/hooks/useSpacedRepetition';
 import { Clock, RotateCcw, Star } from 'lucide-react';
-import ClickableHebrew from '@/components/ClickableHebrew';
+import { Badge } from '@/components/ui/badge';
+import WordDetailDialog from '@/components/WordDetailDialog';
 
 interface WordListItemProps {
   word: Word;
@@ -21,19 +22,28 @@ const intervalOptions = [
 ];
 
 const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite, onToggleFavorite }: WordListItemProps) => {
+  const [open, setOpen] = useState(false);
   const isDue = !review || Date.now() >= review.nextReview;
   const daysLeft = review ? Math.max(0, Math.ceil((review.nextReview - Date.now()) / 86400000)) : 0;
 
   return (
-    <div className={`content-visibility-auto rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col gap-2 shadow-sm`}>
+    <div
+      onClick={() => setOpen(true)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter') setOpen(true); }}
+      className={`content-visibility-auto cursor-pointer rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col gap-2 shadow-sm hover:shadow-md hover:border-primary/40 transition-all`}
+    >
       <div className="flex items-start justify-between gap-4">
-        <div className="flex-1">
-          <ClickableHebrew text={word.hebrew} className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground block" />
+        <div className="flex-1 min-w-0">
+          <span className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground block" dir="rtl">
+            {word.hebrew}
+          </span>
           <span className="text-base text-muted-foreground italic block">{word.transcription}</span>
         </div>
         <div className="flex items-center gap-1.5 flex-shrink-0 mt-1">
           <button
-            onClick={() => onToggleFavorite?.(word.id)}
+            onClick={(e) => { e.stopPropagation(); onToggleFavorite?.(word.id); }}
             className="p-1 rounded hover:bg-accent transition-colors"
             title={isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
           >
@@ -46,60 +56,37 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite
           )}
         </div>
       </div>
-      <div className="flex flex-wrap gap-1 items-center">
+
+      <div className="flex flex-wrap gap-1.5 items-center">
         {word.gender && (
-          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">
+          <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
             {word.gender === 'masculine' ? '♂' : '♀'}
-          </span>
+          </Badge>
         )}
         {word.binyan && (
-          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">
-            {word.binyan}
-          </span>
+          <Badge variant="default" className="text-[10px] px-1.5 py-0">{word.binyan}</Badge>
+        )}
+        {word.root && (
+          <Badge variant="outline" className="text-[10px] px-1.5 py-0 font-hebrew" dir="rtl">
+            שורש: {word.root}
+          </Badge>
         )}
         {word.preposition && (
-          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/50 text-accent-foreground">
-            + {word.preposition}
-          </span>
+          <Badge variant="outline" className="text-[10px] px-1.5 py-0">+ {word.preposition}</Badge>
         )}
         {word.subcategory && !word.binyan && (
-          <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground whitespace-nowrap">
-            {word.subcategory}
-          </span>
+          <Badge variant="secondary" className="text-[10px] px-1.5 py-0">{word.subcategory}</Badge>
         )}
       </div>
+
       <span className="text-xl font-medium text-primary">{word.russian}</span>
-      
-      {word.forms && (
-        <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-          {word.forms.feminine && <span>♀ {word.forms.feminine}</span>}
-          {word.forms.plural && <span>мн. {word.forms.plural}</span>}
-          {word.forms.femininePlural && <span>♀мн. {word.forms.femininePlural}</span>}
-        </div>
-      )}
-
-      {word.conjugation && (
-        <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-          {word.conjugation.past && <span>⏪ {word.conjugation.past}</span>}
-          {word.conjugation.present && <span>▶️ {word.conjugation.present}</span>}
-          {word.conjugation.future && <span>⏩ {word.conjugation.future}</span>}
-          {word.conjugation.imperative && <span>❗ {word.conjugation.imperative}</span>}
-        </div>
-      )}
-
-      {word.example && (
-        <div className="mt-1 border-t border-border pt-2">
-          <ClickableHebrew text={word.example.hebrew} className="font-hebrew text-base text-foreground/80 block" />
-          <p className="text-sm text-muted-foreground mt-0.5">{word.example.russian}</p>
-        </div>
-      )}
 
       {/* Interval buttons */}
       <div className="flex items-center gap-1 mt-1">
         {intervalOptions.map(opt => (
           <button
             key={opt.days}
-            onClick={() => onSetInterval?.(word.id, opt.days)}
+            onClick={(e) => { e.stopPropagation(); onSetInterval?.(word.id, opt.days); }}
             className={`text-[10px] px-2 py-1 rounded-md border transition-colors ${
               review?.interval === opt.days
                 ? 'bg-primary text-primary-foreground border-primary'
@@ -111,7 +98,7 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite
         ))}
         {review && (
           <button
-            onClick={() => onClearInterval?.(word.id)}
+            onClick={(e) => { e.stopPropagation(); onClearInterval?.(word.id); }}
             className="text-[10px] px-1.5 py-1 rounded-md border border-border bg-muted text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
             title="Сбросить"
           >
@@ -119,6 +106,8 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite
           </button>
         )}
       </div>
+
+      <WordDetailDialog word={word} open={open} onOpenChange={setOpen} />
     </div>
   );
 };
