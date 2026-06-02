@@ -189,6 +189,31 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
             )}
             <p className="text-sm text-foreground/80">{word.example.russian}</p>
           </div>
+
+        {/* Related sentences from vocabulary */}
+        {relatedSentences.length > 0 && (
+          <div className="py-2">
+            <h4 className="text-xs uppercase tracking-wide text-muted-foreground font-semibold mb-2">
+              Встречается в твоих предложениях
+            </h4>
+            <div className="space-y-2">
+              {relatedSentences.map(s => (
+                <div
+                  key={s.id}
+                  className="rounded-xl border border-border bg-muted/30 p-3 space-y-1 hover:bg-muted/50 transition-colors"
+                >
+                  <ClickableHebrew
+                    text={s.hebrew}
+                    className="font-hebrew text-xl md:text-2xl leading-relaxed text-foreground block"
+                  />
+                  {s.transcription && (
+                    <p className="text-sm text-muted-foreground italic">{s.transcription}</p>
+                  )}
+                  <p className="text-sm text-foreground/80">{s.russian}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         )}
       </DialogContent>
     </Dialog>
