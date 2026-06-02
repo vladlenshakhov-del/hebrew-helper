@@ -189,6 +189,8 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
             )}
             <p className="text-sm text-foreground/80">{word.example.russian}</p>
           </div>
+        )}
+
 
         {/* Related sentences from vocabulary */}
         {relatedSentences.length > 0 && (
