@@ -1,5 +1,5 @@
-import { memo, ReactNode } from 'react';
-import { Word } from '@/data/vocabulary';
+import { memo, ReactNode, useMemo } from 'react';
+import { Word, vocabulary } from '@/data/vocabulary';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
@@ -24,6 +24,51 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
   const tr = word.conjugationTranscription;
   const availableTenses = conj ? tenseOrder.filter(t => conj[t.key]) : [];
   const defaultTense = availableTenses[0]?.key;
+
+  const relatedSentences = useMemo(() => {
+    if (!open) return [];
+    const strip = (s: string) => s.replace(/[\u0591-\u05C7]/g, '').replace(/[.,!?;:"'()\[\]…—–\-״׳]/g, '').trim();
+    const needles = new Set<string>();
+    const addNeedle = (s?: string) => {
+      if (!s) return;
+      const c = strip(s);
+      if (c.length >= 2) needles.add(c);
+    };
+    addNeedle(word.hebrew);
+    addNeedle(word.forms?.feminine);
+    addNeedle(word.forms?.plural);
+    addNeedle(word.forms?.femininePlural);
+    if (conj) {
+      addNeedle(conj.past);
+      addNeedle(conj.present);
+      addNeedle(conj.future);
+      addNeedle(conj.imperative);
+    }
+    // Корневая последовательность (без точек) — fallback
+    const rootLetters = word.root?.replace(/\./g, '');
+    const out: Word[] = [];
+    for (const w of vocabulary) {
+      if (w.id === word.id) continue;
+      if (w.category !== 'sentences' && w.category !== 'everyday') continue;
+      const hay = strip(w.hebrew);
+      let match = false;
+      for (const n of needles) {
+        if (hay.includes(n)) { match = true; break; }
+      }
+      if (!match && rootLetters && rootLetters.length >= 3) {
+        // проверка корня: все буквы в порядке как подпоследовательность
+        let idx = 0;
+        for (const ch of hay) {
+          if (ch === rootLetters[idx]) idx++;
+          if (idx === rootLetters.length) break;
+        }
+        if (idx === rootLetters.length) match = true;
+      }
+      if (match) out.push(w);
+      if (out.length >= 12) break;
+    }
+    return out;
+  }, [open, word, conj]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -143,6 +188,33 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
               <p className="text-sm text-muted-foreground italic">{word.example.transcription}</p>
             )}
             <p className="text-sm text-foreground/80">{word.example.russian}</p>
+          </div>
+        )}
+
+
+        {/* Related sentences from vocabulary */}
+        {relatedSentences.length > 0 && (
+          <div className="py-2">
+            <h4 className="text-xs uppercase tracking-wide text-muted-foreground font-semibold mb-2">
+              Встречается в твоих предложениях
+            </h4>
+            <div className="space-y-2">
+              {relatedSentences.map(s => (
+                <div
+                  key={s.id}
+                  className="rounded-xl border border-border bg-muted/30 p-3 space-y-1 hover:bg-muted/50 transition-colors"
+                >
+                  <ClickableHebrew
+                    text={s.hebrew}
+                    className="font-hebrew text-xl md:text-2xl leading-relaxed text-foreground block"
+                  />
+                  {s.transcription && (
+                    <p className="text-sm text-muted-foreground italic">{s.transcription}</p>
+                  )}
+                  <p className="text-sm text-foreground/80">{s.russian}</p>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </DialogContent>
