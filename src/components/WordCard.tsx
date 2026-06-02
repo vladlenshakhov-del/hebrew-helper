@@ -34,13 +34,13 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval, isFavorite, on
         className={`group relative w-full rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-3 pt-2 pb-12 flex flex-col items-center justify-center gap-1.5 shadow-sm hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98] transition-all overflow-hidden text-center`}
         style={{ minHeight: word.category === 'sentences' ? '220px' : '180px' }}
       >
-        <span className="font-hebrew text-2xl md:text-3xl leading-tight text-foreground break-words w-full block" dir="rtl">
+        <span className="font-hebrew font-bold text-2xl md:text-3xl leading-tight text-foreground break-words w-full block" dir="rtl">
           {word.hebrew}
         </span>
-        <span className="text-sm text-muted-foreground italic break-words w-full">{word.transcription}</span>
-        <span className="text-sm font-semibold text-primary break-words w-full">{word.russian}</span>
+        <span className="text-base text-muted-foreground italic break-words w-full">{word.transcription}</span>
 
         <div className="flex flex-wrap gap-1 justify-center w-full">
+
           {word.gender && (
             <Badge variant="secondary" className="text-[9px] px-1.5 py-0">
               {word.gender === 'masculine' ? '♂' : '♀'}
