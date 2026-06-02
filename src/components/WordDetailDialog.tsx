@@ -25,6 +25,51 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
   const availableTenses = conj ? tenseOrder.filter(t => conj[t.key]) : [];
   const defaultTense = availableTenses[0]?.key;
 
+  const relatedSentences = useMemo(() => {
+    if (!open) return [];
+    const strip = (s: string) => s.replace(/[\u0591-\u05C7]/g, '').replace(/[.,!?;:"'()\[\]…—–\-״׳]/g, '').trim();
+    const needles = new Set<string>();
+    const addNeedle = (s?: string) => {
+      if (!s) return;
+      const c = strip(s);
+      if (c.length >= 2) needles.add(c);
+    };
+    addNeedle(word.hebrew);
+    addNeedle(word.forms?.feminine);
+    addNeedle(word.forms?.plural);
+    addNeedle(word.forms?.femininePlural);
+    if (conj) {
+      addNeedle(conj.past);
+      addNeedle(conj.present);
+      addNeedle(conj.future);
+      addNeedle(conj.imperative);
+    }
+    // Корневая последовательность (без точек) — fallback
+    const rootLetters = word.root?.replace(/\./g, '');
+    const out: Word[] = [];
+    for (const w of vocabulary) {
+      if (w.id === word.id) continue;
+      if (w.category !== 'sentences' && w.category !== 'everyday') continue;
+      const hay = strip(w.hebrew);
+      let match = false;
+      for (const n of needles) {
+        if (hay.includes(n)) { match = true; break; }
+      }
+      if (!match && rootLetters && rootLetters.length >= 3) {
+        // проверка корня: все буквы в порядке как подпоследовательность
+        let idx = 0;
+        for (const ch of hay) {
+          if (ch === rootLetters[idx]) idx++;
+          if (idx === rootLetters.length) break;
+        }
+        if (idx === rootLetters.length) match = true;
+      }
+      if (match) out.push(w);
+      if (out.length >= 12) break;
+    }
+    return out;
+  }, [open, word, conj]);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto animate-scale-in">
