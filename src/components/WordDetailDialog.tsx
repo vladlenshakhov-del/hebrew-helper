@@ -178,16 +178,16 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
 
         {/* Example */}
         {word.example && (
-          <div className="mt-2 rounded-xl border-2 border-primary/30 bg-primary/5 p-4 space-y-1.5">
-            <span className="text-[10px] uppercase tracking-wide text-primary font-bold">Пример</span>
+          <div className="mt-2 rounded-xl border-2 border-primary/30 bg-primary/5 p-4 space-y-2">
+            <span className="text-xs uppercase tracking-wide text-primary font-bold">Пример</span>
             <ClickableHebrew
               text={word.example.hebrew}
-              className="font-hebrew text-xl leading-relaxed text-foreground block"
+              className="font-hebrew text-2xl leading-relaxed text-foreground block"
             />
             {word.example.transcription && (
-              <p className="text-sm text-muted-foreground italic">{word.example.transcription}</p>
+              <p className="text-base text-muted-foreground italic">{word.example.transcription}</p>
             )}
-            <p className="text-sm text-foreground/80">{word.example.russian}</p>
+            <p className="text-base text-foreground/90">{word.example.russian}</p>
           </div>
         )}
 
@@ -195,23 +195,23 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
         {/* Related sentences from vocabulary */}
         {relatedSentences.length > 0 && (
           <div className="py-2">
-            <h4 className="text-xs uppercase tracking-wide text-muted-foreground font-semibold mb-2">
+            <h4 className="text-sm uppercase tracking-wide text-muted-foreground font-semibold mb-2">
               Встречается в твоих предложениях
             </h4>
             <div className="space-y-2">
               {relatedSentences.map(s => (
                 <div
                   key={s.id}
-                  className="rounded-xl border border-border bg-muted/30 p-3 space-y-1 hover:bg-muted/50 transition-colors"
+                  className="rounded-xl border border-border bg-muted/30 p-3 space-y-1.5 hover:bg-muted/50 transition-colors"
                 >
                   <ClickableHebrew
                     text={s.hebrew}
-                    className="font-hebrew text-xl md:text-2xl leading-relaxed text-foreground block"
+                    className="font-hebrew text-2xl leading-relaxed text-foreground block"
                   />
                   {s.transcription && (
-                    <p className="text-sm text-muted-foreground italic">{s.transcription}</p>
+                    <p className="text-base text-muted-foreground italic">{s.transcription}</p>
                   )}
-                  <p className="text-sm text-foreground/80">{s.russian}</p>
+                  <p className="text-base text-foreground/90">{s.russian}</p>
                 </div>
               ))}
             </div>
