@@ -79,7 +79,7 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite
         )}
       </div>
 
-      <span className="text-xl font-medium text-primary">{word.russian}</span>
+      
 
       {/* Interval buttons */}
       <div className="flex items-center gap-1 mt-1">
