@@ -1,5 +1,5 @@
-import { memo, ReactNode } from 'react';
-import { Word } from '@/data/vocabulary';
+import { memo, ReactNode, useMemo } from 'react';
+import { Word, vocabulary } from '@/data/vocabulary';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
