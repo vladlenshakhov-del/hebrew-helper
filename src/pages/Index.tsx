@@ -7,6 +7,7 @@ import { useTheme } from '@/components/ThemeProvider';
 import { useSpacedRepetition, shuffleArray } from '@/hooks/useSpacedRepetition';
 import { useFavorites } from '@/hooks/useFavorites';
 import { Search, LayoutGrid, List, Sun, Moon, Shuffle, ArrowUpDown, Eye, EyeOff, Heart } from 'lucide-react';
+import AddWordDialog from '@/components/AddWordDialog';
 
 const BINYANIM = ['Пааль', 'Пиэль', 'Хифиль', 'Нифаль', 'Пуаль', 'Хуфаль', 'Хитпаэль'] as const;
 
@@ -118,6 +119,7 @@ const Index = () => {
               <button onClick={toggleTheme} className="p-2 rounded-lg border border-border bg-muted text-muted-foreground hover:text-foreground transition-colors" title={theme === 'light' ? 'Тёмная тема' : 'Светлая тема'}>
                 {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
               </button>
+              <AddWordDialog />
               <div className="flex rounded-lg border border-border overflow-hidden">
                 <button onClick={() => setViewMode('cards')} className={`p-2 transition-colors ${viewMode === 'cards' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`} title="Карточки">
                   <LayoutGrid className="w-4 h-4" />
