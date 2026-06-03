@@ -1,4 +1,4 @@
-import { memo, ReactNode, useMemo } from 'react';
+import { memo, ReactNode, useEffect, useMemo, useRef } from 'react';
 import { Word, vocabulary } from '@/data/vocabulary';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -20,10 +20,33 @@ const tenseOrder: Array<{ key: 'past' | 'present' | 'future' | 'imperative'; lab
 ];
 
 const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) => {
+  const contentRef = useRef<HTMLDivElement>(null);
   const conj = word.conjugation;
   const tr = word.conjugationTranscription;
   const availableTenses = conj ? tenseOrder.filter(t => conj[t.key]) : [];
   const defaultTense = availableTenses[0]?.key;
+
+  useEffect(() => {
+    if (!open) return;
+
+    document.documentElement.classList.add('dialog-scroll-lock');
+    document.body.classList.add('dialog-scroll-lock');
+
+    const blockBackgroundTouch = (event: TouchEvent) => {
+      const content = contentRef.current;
+      if (!content || !content.contains(event.target as Node)) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener('touchmove', blockBackgroundTouch, { passive: false });
+
+    return () => {
+      document.removeEventListener('touchmove', blockBackgroundTouch);
+      document.documentElement.classList.remove('dialog-scroll-lock');
+      document.body.classList.remove('dialog-scroll-lock');
+    };
+  }, [open]);
 
   const relatedSentences = useMemo(() => {
     if (!open) return [];
@@ -72,7 +95,11 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto animate-scale-in">
+      <DialogContent
+        ref={contentRef}
+        data-dialog-scroll-area="true"
+        className="max-w-lg max-h-[90vh] overflow-y-auto overscroll-y-contain [-webkit-overflow-scrolling:touch] animate-scale-in"
+      >
         <DialogHeader>
           <DialogTitle className="sr-only">Разбор: {word.russian}</DialogTitle>
         </DialogHeader>
