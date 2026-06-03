@@ -120,6 +120,19 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground font-sans;
   }
+
+  html.dialog-scroll-lock,
+  body.dialog-scroll-lock {
+    overscroll-behavior-y: contain;
+    touch-action: none;
+  }
+
+  .dialog-scroll-lock [data-dialog-scroll-area="true"] {
+    touch-action: pan-y;
+    overscroll-behavior-y: contain;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 @layer utilities {
