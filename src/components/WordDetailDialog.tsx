@@ -21,6 +21,7 @@ const tenseOrder: Array<{ key: 'past' | 'present' | 'future' | 'imperative'; lab
 
 const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
+  const touchStartYRef = useRef(0);
   const conj = word.conjugation;
   const tr = word.conjugationTranscription;
   const availableTenses = conj ? tenseOrder.filter(t => conj[t.key]) : [];
@@ -32,16 +33,32 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
     document.documentElement.classList.add('dialog-scroll-lock');
     document.body.classList.add('dialog-scroll-lock');
 
+    const rememberTouchStart = (event: TouchEvent) => {
+      touchStartYRef.current = event.touches[0]?.clientY ?? 0;
+    };
+
     const blockBackgroundTouch = (event: TouchEvent) => {
       const content = contentRef.current;
       if (!content || !content.contains(event.target as Node)) {
         event.preventDefault();
+        return;
+      }
+
+      const currentY = event.touches[0]?.clientY ?? 0;
+      const movingDown = currentY > touchStartYRef.current;
+      const atTop = content.scrollTop <= 0;
+      const atBottom = content.scrollTop + content.clientHeight >= content.scrollHeight - 1;
+
+      if ((atTop && movingDown) || (atBottom && !movingDown)) {
+        event.preventDefault();
       }
     };
 
+    document.addEventListener('touchstart', rememberTouchStart, { passive: true });
     document.addEventListener('touchmove', blockBackgroundTouch, { passive: false });
 
     return () => {
+      document.removeEventListener('touchstart', rememberTouchStart);
       document.removeEventListener('touchmove', blockBackgroundTouch);
       document.documentElement.classList.remove('dialog-scroll-lock');
       document.body.classList.remove('dialog-scroll-lock');
