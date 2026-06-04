@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sparkles, Plus, Loader2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { vocabulary, type Binyan, type Category, type Word } from '@/data/vocabulary';
 
 interface WordDraft {
   hebrew: string;
@@ -19,10 +20,27 @@ const EMPTY: WordDraft = {
   example: { hebrew: '', transcription: '', russian: '' },
 };
 
-const AddWordDialog = () => {
+interface AddWordDialogProps {
+  onWordAdded?: () => void;
+}
+
+const BINYANIM: Binyan[] = ['Пааль', 'Пиэль', 'Хифиль', 'Нифаль', 'Пуаль', 'Хуфаль', 'Хитпаэль'];
+const emptyDraft = (): WordDraft => ({ ...EMPTY, example: { ...EMPTY.example } });
+
+const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [draft, setDraft] = useState<WordDraft>(EMPTY);
+  const [draft, setDraft] = useState<WordDraft>(emptyDraft);
+
+  const resetForm = () => setDraft(emptyDraft());
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen);
+    if (!nextOpen) {
+      setLoading(false);
+      resetForm();
+    }
+  };
 
   const fillWithGemini = async () => {
     if (!draft.hebrew.trim()) {
@@ -79,16 +97,36 @@ const AddWordDialog = () => {
       toast({ title: 'Заполните иврит и перевод', variant: 'destructive' });
       return;
     }
-    const drafts = JSON.parse(localStorage.getItem('draftWords') || '[]');
-    drafts.push({ ...draft, id: `draft-${Date.now()}` });
-    localStorage.setItem('draftWords', JSON.stringify(drafts));
-    toast({ title: 'Сохранено', description: 'Слово добавлено в черновики' });
-    setDraft(EMPTY);
+    const normalizedBinyan = BINYANIM.includes(draft.binyan as Binyan) ? draft.binyan as Binyan : undefined;
+    const category: Category = normalizedBinyan ? 'verbs' : 'everyday';
+    const example = draft.example.hebrew.trim() && draft.example.russian.trim()
+      ? {
+          hebrew: draft.example.hebrew.trim(),
+          transcription: draft.example.transcription.trim() || undefined,
+          russian: draft.example.russian.trim(),
+        }
+      : undefined;
+    const word: Word = {
+      id: `user-${Date.now()}`,
+      hebrew: draft.hebrew.trim(),
+      transcription: draft.transcription.trim(),
+      russian: draft.russian.trim(),
+      category,
+      root: draft.root.trim() || undefined,
+      binyan: normalizedBinyan,
+      example,
+    };
+
+    vocabulary.unshift(word);
+    localStorage.removeItem('draftWords');
+    onWordAdded?.();
+    toast({ title: 'Сохранено', description: 'Слово добавлено в общий список' });
+    resetForm();
     setOpen(false);
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <button
           className="p-2 rounded-lg border border-border bg-gradient-to-br from-indigo-500 to-purple-600 text-white hover:opacity-90 transition-opacity"
@@ -162,7 +200,12 @@ const AddWordDialog = () => {
               placeholder="Перевод"
             />
           </div>
-          <Button onClick={save} className="w-full">Сохранить</Button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <Button type="button" variant="outline" onClick={resetForm} className="bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+              Очистить форму
+            </Button>
+            <Button onClick={save}>Сохранить</Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
