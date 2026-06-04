@@ -32,6 +32,9 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
 
     document.documentElement.classList.add('dialog-scroll-lock');
     document.body.classList.add('dialog-scroll-lock');
+    document.documentElement.style.overscrollBehaviorY = 'contain';
+    document.body.style.overscrollBehaviorY = 'contain';
+    document.body.style.overflow = 'hidden';
 
     const rememberTouchStart = (event: TouchEvent) => {
       touchStartYRef.current = event.touches[0]?.clientY ?? 0;
@@ -62,6 +65,9 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
       document.removeEventListener('touchmove', blockBackgroundTouch);
       document.documentElement.classList.remove('dialog-scroll-lock');
       document.body.classList.remove('dialog-scroll-lock');
+      document.documentElement.style.overscrollBehaviorY = 'auto';
+      document.body.style.overscrollBehaviorY = 'auto';
+      document.body.style.overflow = 'auto';
     };
   }, [open]);
 
