@@ -35,6 +35,7 @@ const Index = () => {
   const [showDueOnly, setShowDueOnly] = useState(false);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [selectedBinyan, setSelectedBinyan] = useState<string | null>(null);
+  const [vocabularyVersion, setVocabularyVersion] = useState(0);
   const deferredSearch = useDeferredValue(search);
   const itemsPerPage = viewMode === 'cards' ? 60 : 120;
   const [visibleCount, setVisibleCount] = useState(itemsPerPage);
@@ -62,7 +63,7 @@ const Index = () => {
       const matchFavorites = !showFavoritesOnly || isFavorite(w.id);
       return matchCat && matchSearch && matchBinyan && matchDue && matchFavorites;
     });
-  }, [selectedCategory, deferredSearch, selectedBinyan, showDueOnly, showFavoritesOnly, isDue, isFavorite, stripNiqqud]);
+  }, [selectedCategory, deferredSearch, selectedBinyan, showDueOnly, showFavoritesOnly, vocabularyVersion, isDue, isFavorite, stripNiqqud]);
 
   const processed = useMemo(() => {
     let result = sortByPriority(filtered);
@@ -119,7 +120,7 @@ const Index = () => {
               <button onClick={toggleTheme} className="p-2 rounded-lg border border-border bg-muted text-muted-foreground hover:text-foreground transition-colors" title={theme === 'light' ? 'Тёмная тема' : 'Светлая тема'}>
                 {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
               </button>
-              <AddWordDialog />
+              <AddWordDialog onWordAdded={() => setVocabularyVersion((version) => version + 1)} />
               <div className="flex rounded-lg border border-border overflow-hidden">
                 <button onClick={() => setViewMode('cards')} className={`p-2 transition-colors ${viewMode === 'cards' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`} title="Карточки">
                   <LayoutGrid className="w-4 h-4" />
