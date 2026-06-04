@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -31,8 +31,12 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [draft, setDraft] = useState<WordDraft>(emptyDraft);
+  const requestIdRef = useRef(0);
 
-  const resetForm = () => setDraft(emptyDraft());
+  const resetForm = () => {
+    requestIdRef.current += 1;
+    setDraft(emptyDraft());
+  };
 
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
@@ -53,6 +57,8 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
       if (!key) return;
       localStorage.setItem('GEMINI_API_KEY', key);
     }
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
     setLoading(true);
     try {
       const prompt = `Проанализируй ивритское слово "${draft.hebrew}". Верни СТРОГО JSON без markdown:
@@ -83,12 +89,14 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
       const data = await res.json();
       const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
       const parsed = JSON.parse(text);
+      if (requestId !== requestIdRef.current) return;
       setDraft({ ...EMPTY, ...parsed, example: { ...EMPTY.example, ...(parsed.example || {}) } });
       toast({ title: 'Готово', description: 'Поля заполнены через Gemini' });
     } catch (e: any) {
+      if (requestId !== requestIdRef.current) return;
       toast({ title: 'Ошибка Gemini', description: e.message?.slice(0, 200), variant: 'destructive' });
     } finally {
-      setLoading(false);
+      if (requestId === requestIdRef.current) setLoading(false);
     }
   };
 
@@ -118,7 +126,6 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
     };
 
     vocabulary.unshift(word);
-    localStorage.removeItem('draftWords');
     onWordAdded?.();
     toast({ title: 'Сохранено', description: 'Слово добавлено в общий список' });
     resetForm();
