@@ -117,18 +117,16 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  html {
-    overscroll-behavior-y: contain;
+  html,
+  body,
+  #root {
+    overflow: auto;
+    overscroll-behavior-y: none !important;
+    overscroll-behavior: none !important;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
-    overscroll-behavior-y: contain;
-  }
-
-  html.dialog-scroll-lock,
-  body.dialog-scroll-lock {
-    overscroll-behavior-y: contain;
   }
 
   .dialog-scroll-lock [data-dialog-scroll-area="true"] {
@@ -137,6 +135,7 @@ All colors MUST be HSL.
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
+
 }
 
 @layer utilities {
