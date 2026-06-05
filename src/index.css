@@ -121,6 +121,7 @@ All colors MUST be HSL.
   body,
   #root {
     overflow: auto;
+    touch-action: pan-y;
     overscroll-behavior-y: none !important;
     overscroll-behavior: none !important;
   }
@@ -131,9 +132,15 @@ All colors MUST be HSL.
 
   .dialog-scroll-lock [data-dialog-scroll-area="true"] {
     touch-action: pan-y;
-    overscroll-behavior-y: contain;
+    overscroll-behavior-y: contain !important;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  [data-dialog-scroll-area="true"],
+  [data-dialog-scroll-area="true"] * {
+    touch-action: pan-y;
+    overscroll-behavior-y: contain !important;
   }
 
 }

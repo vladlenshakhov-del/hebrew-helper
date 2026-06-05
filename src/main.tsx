@@ -22,6 +22,20 @@ window.addEventListener(
     const touchY = e.touches[0].clientY;
     const touchScrollDelta = touchY - touchStartStartY;
 
+    const target = e.target instanceof Element ? e.target : null;
+    const scrollArea = target?.closest<HTMLElement>('[data-dialog-scroll-area="true"]');
+    if (scrollArea) {
+      const canScrollUp = scrollArea.scrollTop > 0;
+      const canScrollDown = scrollArea.scrollTop + scrollArea.clientHeight < scrollArea.scrollHeight - 1;
+
+      if ((touchScrollDelta > 0 && canScrollUp) || (touchScrollDelta < 0 && canScrollDown)) {
+        return;
+      }
+
+      e.preventDefault();
+      return;
+    }
+
     // If user pulls down at the very top of the page, block pull-to-refresh.
     if (window.pageYOffset === 0 && touchScrollDelta > 0) {
       e.preventDefault();
