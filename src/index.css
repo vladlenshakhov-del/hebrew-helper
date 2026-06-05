@@ -117,8 +117,13 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    overscroll-behavior-y: contain;
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
+    overscroll-behavior-y: contain;
   }
 
   html.dialog-scroll-lock,
