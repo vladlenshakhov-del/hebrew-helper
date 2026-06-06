@@ -144,7 +144,7 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
           <Plus className="w-4 h-4" />
         </button>
       </DialogTrigger>
-      <DialogContent ref={contentRef} className="max-w-md max-h-[90vh] overflow-y-auto touch-pan-y [overscroll-behavior-y:contain!important] [-webkit-overflow-scrolling:touch] [&_*]:touch-pan-y [&_*]:[overscroll-behavior-y:contain!important]">
+      <DialogContent ref={contentRef} className="max-w-md">
         <DialogHeader>
           <DialogTitle>Добавить новое слово</DialogTitle>
         </DialogHeader>
