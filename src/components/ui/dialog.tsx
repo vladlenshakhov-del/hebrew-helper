@@ -72,11 +72,11 @@ const unlockBackground = () => {
 };
 
 
-const Dialog = ({ open, defaultOpen, onOpenChange, ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) => {
+const Dialog = ({ open, defaultOpen, onOpenChange, modal, ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) => {
   const [internalOpen, setInternalOpen] = React.useState(defaultOpen ?? false);
   const isOpen = open ?? internalOpen;
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (!isOpen) return;
     lockBackground();
     return unlockBackground;
@@ -90,7 +90,7 @@ const Dialog = ({ open, defaultOpen, onOpenChange, ...props }: React.ComponentPr
     [open, onOpenChange],
   );
 
-  return <DialogPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={handleOpenChange} {...props} />;
+  return <DialogPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={handleOpenChange} modal={modal ?? false} {...props} />;
 };
 
 const DialogTrigger = DialogPrimitive.Trigger;
