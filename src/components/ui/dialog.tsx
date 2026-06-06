@@ -4,7 +4,59 @@ import { X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-const Dialog = DialogPrimitive.Root;
+let openDialogCount = 0;
+const prev = { rootPointerEvents: "", rootOverflow: "", bodyOverflow: "" };
+
+const lockBackground = () => {
+  if (typeof document === "undefined") return;
+  if (openDialogCount === 0) {
+    const root = document.getElementById("root");
+    if (root) {
+      prev.rootPointerEvents = root.style.pointerEvents;
+      prev.rootOverflow = root.style.overflow;
+      root.style.pointerEvents = "none";
+      root.style.overflow = "hidden";
+    }
+    prev.bodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+  }
+  openDialogCount += 1;
+};
+
+const unlockBackground = () => {
+  if (typeof document === "undefined") return;
+  openDialogCount = Math.max(0, openDialogCount - 1);
+  if (openDialogCount === 0) {
+    const root = document.getElementById("root");
+    if (root) {
+      root.style.pointerEvents = prev.rootPointerEvents || "auto";
+      root.style.overflow = prev.rootOverflow || "auto";
+    }
+    document.body.style.overflow = prev.bodyOverflow || "auto";
+  }
+};
+
+const Dialog = ({ open, defaultOpen, onOpenChange, ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) => {
+  const [internalOpen, setInternalOpen] = React.useState(defaultOpen ?? false);
+  const isOpen = open ?? internalOpen;
+
+  React.useEffect(() => {
+    if (!isOpen) return;
+    lockBackground();
+    return unlockBackground;
+  }, [isOpen]);
+
+  const handleOpenChange = React.useCallback(
+    (next: boolean) => {
+      if (open === undefined) setInternalOpen(next);
+      onOpenChange?.(next);
+    },
+    [open, onOpenChange],
+  );
+
+  return <DialogPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={handleOpenChange} {...props} />;
+};
+
 const DialogTrigger = DialogPrimitive.Trigger;
 const DialogPortal = DialogPrimitive.Portal;
 const DialogClose = DialogPrimitive.Close;

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -34,70 +34,6 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
   const requestIdRef = useRef(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!open) return;
-
-    const html = document.documentElement;
-    const body = document.body;
-    const root = document.getElementById('root');
-    const previous = {
-      htmlOverscrollY: html.style.overscrollBehaviorY,
-      htmlOverscroll: html.style.overscrollBehavior,
-      bodyOverscrollY: body.style.overscrollBehaviorY,
-      bodyOverscroll: body.style.overscrollBehavior,
-      bodyOverflow: body.style.overflow,
-      rootOverscrollY: root?.style.overscrollBehaviorY || '',
-      rootOverscroll: root?.style.overscrollBehavior || '',
-    };
-    let touchStartY = 0;
-
-    const lockRoot = (element: HTMLElement | null) => {
-      if (!element) return;
-      element.style.overscrollBehaviorY = 'none';
-      element.style.overscrollBehavior = 'none';
-    };
-
-    const onTouchStart = (event: TouchEvent) => {
-      if (event.touches.length === 1) {
-        touchStartY = event.touches[0].clientY;
-      }
-    };
-
-    const onTouchMove = (event: TouchEvent) => {
-      const area = contentRef.current;
-      if (!area || event.touches.length !== 1) return;
-      const deltaY = event.touches[0].clientY - touchStartY;
-      const atTop = area.scrollTop <= 0;
-      const atBottom = area.scrollTop + area.clientHeight >= area.scrollHeight - 1;
-
-      if ((atTop && deltaY > 0) || (atBottom && deltaY < 0)) {
-        event.preventDefault();
-      }
-    };
-
-    lockRoot(html);
-    lockRoot(body);
-    lockRoot(root);
-    body.style.overflow = 'hidden';
-
-    const area = contentRef.current;
-    area?.addEventListener('touchstart', onTouchStart, { passive: false });
-    area?.addEventListener('touchmove', onTouchMove, { passive: false });
-
-    return () => {
-      html.style.overscrollBehaviorY = previous.htmlOverscrollY;
-      html.style.overscrollBehavior = previous.htmlOverscroll;
-      body.style.overscrollBehaviorY = previous.bodyOverscrollY;
-      body.style.overscrollBehavior = previous.bodyOverscroll;
-      body.style.overflow = previous.bodyOverflow;
-      if (root) {
-        root.style.overscrollBehaviorY = previous.rootOverscrollY;
-        root.style.overscrollBehavior = previous.rootOverscroll;
-      }
-      area?.removeEventListener('touchstart', onTouchStart);
-      area?.removeEventListener('touchmove', onTouchMove);
-    };
-  }, [open]);
 
   const resetForm = () => {
     requestIdRef.current += 1;
