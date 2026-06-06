@@ -5,20 +5,37 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 let openDialogCount = 0;
-const prev = { rootPointerEvents: "", rootOverflow: "", bodyOverflow: "" };
+const prev = {
+  rootPointerEvents: "",
+  rootOverflow: "",
+  bodyOverflow: "",
+  bodyOverscroll: "",
+  htmlOverflow: "",
+  htmlOverscroll: "",
+  scrollY: 0,
+};
 
 const lockBackground = () => {
   if (typeof document === "undefined") return;
   if (openDialogCount === 0) {
     const root = document.getElementById("root");
+    const html = document.documentElement;
+    const body = document.body;
+    prev.scrollY = window.scrollY;
     if (root) {
       prev.rootPointerEvents = root.style.pointerEvents;
       prev.rootOverflow = root.style.overflow;
       root.style.pointerEvents = "none";
       root.style.overflow = "hidden";
     }
-    prev.bodyOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    prev.bodyOverflow = body.style.overflow;
+    prev.bodyOverscroll = body.style.overscrollBehavior;
+    prev.htmlOverflow = html.style.overflow;
+    prev.htmlOverscroll = html.style.overscrollBehavior;
+    body.style.overflow = "hidden";
+    body.style.overscrollBehavior = "none";
+    html.style.overflow = "hidden";
+    html.style.overscrollBehavior = "none";
   }
   openDialogCount += 1;
 };
@@ -28,13 +45,19 @@ const unlockBackground = () => {
   openDialogCount = Math.max(0, openDialogCount - 1);
   if (openDialogCount === 0) {
     const root = document.getElementById("root");
+    const html = document.documentElement;
+    const body = document.body;
     if (root) {
       root.style.pointerEvents = prev.rootPointerEvents || "auto";
       root.style.overflow = prev.rootOverflow || "auto";
     }
-    document.body.style.overflow = prev.bodyOverflow || "auto";
+    body.style.overflow = prev.bodyOverflow || "auto";
+    body.style.overscrollBehavior = prev.bodyOverscroll || "";
+    html.style.overflow = prev.htmlOverflow || "auto";
+    html.style.overscrollBehavior = prev.htmlOverscroll || "";
   }
 };
+
 
 const Dialog = ({ open, defaultOpen, onOpenChange, ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) => {
   const [internalOpen, setInternalOpen] = React.useState(defaultOpen ?? false);
