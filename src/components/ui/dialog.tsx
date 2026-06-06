@@ -5,22 +5,34 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 let openDialogCount = 0;
-let previousBodyOverflow = "";
+const prev = { rootPointerEvents: "", rootOverflow: "", bodyOverflow: "" };
 
-const lockBodyScroll = () => {
+const lockBackground = () => {
   if (typeof document === "undefined") return;
   if (openDialogCount === 0) {
-    previousBodyOverflow = document.body.style.overflow;
+    const root = document.getElementById("root");
+    if (root) {
+      prev.rootPointerEvents = root.style.pointerEvents;
+      prev.rootOverflow = root.style.overflow;
+      root.style.pointerEvents = "none";
+      root.style.overflow = "hidden";
+    }
+    prev.bodyOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
   }
   openDialogCount += 1;
 };
 
-const unlockBodyScroll = () => {
+const unlockBackground = () => {
   if (typeof document === "undefined") return;
   openDialogCount = Math.max(0, openDialogCount - 1);
   if (openDialogCount === 0) {
-    document.body.style.overflow = previousBodyOverflow;
+    const root = document.getElementById("root");
+    if (root) {
+      root.style.pointerEvents = prev.rootPointerEvents || "auto";
+      root.style.overflow = prev.rootOverflow || "auto";
+    }
+    document.body.style.overflow = prev.bodyOverflow || "auto";
   }
 };
 
@@ -30,14 +42,14 @@ const Dialog = ({ open, defaultOpen, onOpenChange, ...props }: React.ComponentPr
 
   React.useEffect(() => {
     if (!isOpen) return;
-    lockBodyScroll();
-    return unlockBodyScroll;
+    lockBackground();
+    return unlockBackground;
   }, [isOpen]);
 
   const handleOpenChange = React.useCallback(
-    (nextOpen: boolean) => {
-      if (open === undefined) setInternalOpen(nextOpen);
-      onOpenChange?.(nextOpen);
+    (next: boolean) => {
+      if (open === undefined) setInternalOpen(next);
+      onOpenChange?.(next);
     },
     [open, onOpenChange],
   );
@@ -46,9 +58,7 @@ const Dialog = ({ open, defaultOpen, onOpenChange, ...props }: React.ComponentPr
 };
 
 const DialogTrigger = DialogPrimitive.Trigger;
-
 const DialogPortal = DialogPrimitive.Portal;
-
 const DialogClose = DialogPrimitive.Close;
 
 const DialogOverlay = React.forwardRef<
@@ -75,8 +85,9 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       data-dialog-scroll-area="true"
+      style={{ pointerEvents: "auto", overscrollBehavior: "contain", overflowY: "auto" }}
       className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg max-h-[85vh] translate-x-[-50%] translate-y-[-50%] gap-4 overflow-y-auto overscroll-y-contain border bg-background p-6 shadow-lg duration-200 touch-pan-y [overscroll-behavior-y:contain!important] [-webkit-overflow-scrolling:touch] [&_*]:touch-pan-y [&_*]:[overscroll-behavior-y:contain!important] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg max-h-[85vh] translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
         className,
       )}
       {...props}

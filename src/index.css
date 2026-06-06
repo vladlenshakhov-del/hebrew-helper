@@ -117,33 +117,16 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  html,
-  body,
-  #root {
-    overflow: auto;
-    touch-action: pan-y;
-    overscroll-behavior-y: none !important;
-    overscroll-behavior: none !important;
-  }
-
   body {
     @apply bg-background text-foreground font-sans;
   }
 
-  .dialog-scroll-lock [data-dialog-scroll-area="true"] {
-    touch-action: pan-y;
-    overscroll-behavior-y: contain !important;
-    overflow-y: auto;
+  [data-dialog-scroll-area="true"] {
+    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
   }
-
-  [data-dialog-scroll-area="true"],
-  [data-dialog-scroll-area="true"] * {
-    touch-action: pan-y;
-    overscroll-behavior-y: contain !important;
-  }
-
 }
+
 
 @layer utilities {
   .perspective-1000 {
