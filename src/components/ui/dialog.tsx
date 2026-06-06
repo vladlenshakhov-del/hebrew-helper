@@ -7,10 +7,13 @@ import { cn } from "@/lib/utils";
 let openDialogCount = 0;
 const prev = {
   rootPointerEvents: "",
-  rootOverflow: "",
+  bodyPosition: "",
+  bodyTop: "",
+  bodyLeft: "",
+  bodyWidth: "",
+  bodyHeight: "",
   bodyOverflow: "",
   bodyOverscroll: "",
-  htmlOverflow: "",
   htmlOverscroll: "",
   scrollY: 0,
 };
@@ -24,17 +27,23 @@ const lockBackground = () => {
     prev.scrollY = window.scrollY;
     if (root) {
       prev.rootPointerEvents = root.style.pointerEvents;
-      prev.rootOverflow = root.style.overflow;
       root.style.pointerEvents = "none";
-      root.style.overflow = "hidden";
     }
+    prev.bodyPosition = body.style.position;
+    prev.bodyTop = body.style.top;
+    prev.bodyLeft = body.style.left;
+    prev.bodyWidth = body.style.width;
+    prev.bodyHeight = body.style.height;
     prev.bodyOverflow = body.style.overflow;
     prev.bodyOverscroll = body.style.overscrollBehavior;
-    prev.htmlOverflow = html.style.overflow;
     prev.htmlOverscroll = html.style.overscrollBehavior;
+    body.style.position = "fixed";
+    body.style.top = `-${prev.scrollY}px`;
+    body.style.left = "0";
+    body.style.width = "100%";
+    body.style.height = "100%";
     body.style.overflow = "hidden";
     body.style.overscrollBehavior = "none";
-    html.style.overflow = "hidden";
     html.style.overscrollBehavior = "none";
   }
   openDialogCount += 1;
@@ -49,12 +58,16 @@ const unlockBackground = () => {
     const body = document.body;
     if (root) {
       root.style.pointerEvents = prev.rootPointerEvents || "auto";
-      root.style.overflow = prev.rootOverflow || "auto";
     }
-    body.style.overflow = prev.bodyOverflow || "auto";
+    body.style.position = prev.bodyPosition;
+    body.style.top = prev.bodyTop;
+    body.style.left = prev.bodyLeft;
+    body.style.width = prev.bodyWidth;
+    body.style.height = prev.bodyHeight;
+    body.style.overflow = prev.bodyOverflow;
     body.style.overscrollBehavior = prev.bodyOverscroll || "";
-    html.style.overflow = prev.htmlOverflow || "auto";
     html.style.overscrollBehavior = prev.htmlOverscroll || "";
+    window.scrollTo(0, prev.scrollY);
   }
 };
 
@@ -108,9 +121,9 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       data-dialog-scroll-area="true"
-      style={{ pointerEvents: "auto", overscrollBehavior: "contain", overflowY: "auto" }}
+      style={{ pointerEvents: "auto", overscrollBehaviorY: "contain" }}
       className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg max-h-[85vh] translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg max-h-[90vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
         className,
       )}
       {...props}
