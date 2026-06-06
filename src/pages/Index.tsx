@@ -15,7 +15,6 @@ const Index = () => {
   const { theme, toggleTheme } = useTheme();
   const sr = useSpacedRepetition();
   const { isFavorite, toggleFavorite, isLoaded } = useFavorites();
-  const [headerVisible] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
   const [search, setSearch] = useState('');
   const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
