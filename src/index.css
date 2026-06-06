@@ -117,13 +117,18 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground font-sans;
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
   }
 
-  [data-dialog-scroll-area="true"] {
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
+  body {
+    @apply bg-background text-foreground font-sans;
   }
 }
 
