@@ -24,6 +24,25 @@ const Index = () => {
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [selectedBinyan, setSelectedBinyan] = useState<string | null>(null);
   const [vocabularyVersion, setVocabularyVersion] = useState(0);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+
+  useEffect(() => {
+    const scrollContainer = (document.scrollingElement || document.documentElement || document.body) as HTMLElement;
+    let lastScrollTop = scrollContainer.scrollTop;
+
+    const handleContainerScroll = () => {
+      const currentScroll = scrollContainer.scrollTop;
+      if (currentScroll > lastScrollTop && currentScroll > 50) {
+        setIsHeaderVisible(false);
+      } else {
+        setIsHeaderVisible(true);
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    };
+
+    window.addEventListener('scroll', handleContainerScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleContainerScroll);
+  }, []);
   const deferredSearch = useDeferredValue(search);
   const itemsPerPage = viewMode === 'cards' ? 60 : 120;
   const [visibleCount, setVisibleCount] = useState(itemsPerPage);
@@ -94,7 +113,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border">
+      <header className={`sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border transition-transform duration-300 ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="max-w-5xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
             <div>
