@@ -24,6 +24,25 @@ const Index = () => {
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [selectedBinyan, setSelectedBinyan] = useState<string | null>(null);
   const [vocabularyVersion, setVocabularyVersion] = useState(0);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+
+  useEffect(() => {
+    const scrollContainer = (document.scrollingElement || document.documentElement || document.body) as HTMLElement;
+    let lastScrollTop = scrollContainer.scrollTop;
+
+    const handleContainerScroll = () => {
+      const currentScroll = scrollContainer.scrollTop;
+      if (currentScroll > lastScrollTop && currentScroll > 50) {
+        setIsHeaderVisible(false);
+      } else {
+        setIsHeaderVisible(true);
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    };
+
+    window.addEventListener('scroll', handleContainerScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleContainerScroll);
+  }, []);
   const deferredSearch = useDeferredValue(search);
   const itemsPerPage = viewMode === 'cards' ? 60 : 120;
   const [visibleCount, setVisibleCount] = useState(itemsPerPage);
