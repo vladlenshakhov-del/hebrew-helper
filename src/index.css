@@ -142,3 +142,7 @@ All colors MUST be HSL.
     contain-intrinsic-size: 280px;
   }
 }
+
+body, html {
+  overscroll-behavior-y: contain !important;
+}
