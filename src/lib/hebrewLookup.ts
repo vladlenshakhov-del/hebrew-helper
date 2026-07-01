@@ -39,13 +39,25 @@ export interface LookupResult {
   hebrew: string;
   ru: string;
   tr?: string;
+  pos?: string;
+  note?: string;
   source: 'dict' | 'vocab';
 }
+
+const PREFIX_NOTE: Record<string, string> = {
+  'ה': 'опр. артикль ה — «этот/the»',
+  'ו': 'союз ו — «и»',
+  'ב': 'предлог ב — «в/на»',
+  'ל': 'предлог ל — «к/для»',
+  'מ': 'предлог מ — «из/от»',
+  'כ': 'предлог כ — «как»',
+  'ש': 'частица ש — «что/который»',
+};
 
 const fromDict = (key: string): LookupResult | null => {
   const e: DictEntry | undefined = HEBREW_DICT[key];
   if (!e) return null;
-  return { hebrew: key, ru: e.ru, tr: e.tr, source: 'dict' };
+  return { hebrew: key, ru: e.ru, tr: e.tr, pos: e.pos, note: e.note, source: 'dict' };
 };
 
 const fromVocab = (key: string): LookupResult | null => {
@@ -54,7 +66,8 @@ const fromVocab = (key: string): LookupResult | null => {
   if (!arr || arr.length === 0) return null;
   const w = arr[0];
   const ru = w.russian.split(/[;\n]|,\s/)[0].trim();
-  return { hebrew: clean(w.hebrew), ru, tr: w.transcription?.split(/[;,]/)[0]?.trim(), source: 'vocab' };
+  const pos = w.binyan ? 'гл.' : (w.category === 'verbs' ? 'гл.' : undefined);
+  return { hebrew: clean(w.hebrew), ru, tr: w.transcription?.split(/[;,]/)[0]?.trim(), pos, source: 'vocab' };
 };
 
 const tryKey = (key: string): LookupResult | null => fromDict(key) || fromVocab(key);
@@ -63,16 +76,21 @@ export const lookupHebrewWord = (token: string): LookupResult[] => {
   const c = clean(token);
   if (!c) return [];
 
-  // 1) Точное совпадение
+  // 1) Точное совпадение (учитывает контекстные формы, напр. המדד = сущ.)
   const exact = tryKey(c);
   if (exact) return [exact];
 
-  // 2) Снятие одного из частых префиксов
+  // 2) Снятие одного из частых префиксов + пометка о префиксе
   for (const p of PREFIXES) {
     if (c.length > p.length + 1 && c.startsWith(p)) {
       const stem = c.slice(p.length);
       const r = tryKey(stem);
-      if (r) return [r];
+      if (r) {
+        const prefixNote = p.length === 1
+          ? PREFIX_NOTE[p]
+          : `префикс ${p} + основа ${stem}`;
+        return [{ ...r, note: [prefixNote, r.note].filter(Boolean).join(' · ') }];
+      }
     }
   }
 
