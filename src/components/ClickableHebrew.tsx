@@ -49,14 +49,22 @@ const ClickableToken = ({ token, onLight }: { token: string; onLight?: boolean }
         {matches.length === 0 ? (
           <p className="text-xs text-muted-foreground">Перевод не найден</p>
         ) : (
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             {matches.slice(0, 2).map((m, i) => (
               <div key={i} className="text-sm leading-tight">
                 <span className="font-hebrew text-base font-semibold" dir="rtl">{m.hebrew}</span>
                 {m.tr && (
                   <span className="text-[11px] text-muted-foreground italic mx-1">{m.tr}</span>
                 )}
-                <div className="text-foreground text-sm">{m.ru}</div>
+                <div className="text-foreground text-sm">
+                  {m.pos && (
+                    <span className="text-[10px] uppercase tracking-wide text-primary font-semibold mr-1">[{m.pos}]</span>
+                  )}
+                  {m.ru}
+                </div>
+                {m.note && (
+                  <div className="text-[11px] text-muted-foreground mt-0.5">{m.note}</div>
+                )}
               </div>
             ))}
           </div>
