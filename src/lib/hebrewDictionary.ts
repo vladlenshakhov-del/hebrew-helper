@@ -5,7 +5,10 @@
 export interface DictEntry {
   ru: string;          // короткий перевод
   tr?: string;         // транскрипция (опц.)
+  pos?: string;        // часть речи (сущ., гл., прил., ...)
+  note?: string;       // контекстное пояснение (опц.)
 }
+
 
 // Ключи — без огласовок (никкуда), в нижнем регистре не нужно (иврит).
 export const HEBREW_DICT: Record<string, DictEntry> = {
