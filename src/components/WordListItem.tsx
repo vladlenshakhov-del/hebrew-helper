@@ -27,6 +27,7 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite
   const daysLeft = review ? Math.max(0, Math.ceil((review.nextReview - Date.now()) / 86400000)) : 0;
 
   return (
+    <>
     <div
       onClick={() => setOpen(true)}
       role="button"
