@@ -108,8 +108,9 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite
         )}
       </div>
 
-      <WordDetailDialog word={word} open={open} onOpenChange={setOpen} />
     </div>
+    <WordDetailDialog word={word} open={open} onOpenChange={setOpen} />
+    </>
   );
 };
 
