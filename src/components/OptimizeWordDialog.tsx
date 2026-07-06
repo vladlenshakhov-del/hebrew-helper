@@ -124,6 +124,13 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
     handleOpenChange(false);
   };
 
+  const handleDelete = () => {
+    deleteWord(word.id);
+    toast({ title: 'Карточка удалена', description: 'Слово полностью удалено из словаря' });
+    setConfirmDelete(false);
+    handleOpenChange(false);
+  };
+
   const DiffRow = ({ label, before, after }: { label: string; before?: string; after?: string }) => {
     const changed = (after ?? '') && after !== before;
     if (!after) return null;
