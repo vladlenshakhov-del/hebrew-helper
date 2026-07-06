@@ -218,12 +218,44 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
                 </div>
               )}
             </div>
-            <Button onClick={apply} className="w-full">
-              <Check className="w-4 h-4" /> Применить изменения
-            </Button>
+            <div className="flex gap-2">
+              <Button onClick={apply} className="flex-1">
+                <Check className="w-4 h-4" /> Применить изменения
+              </Button>
+              <Button
+                type="button"
+                variant="destructive"
+                size="icon"
+                onClick={() => setConfirmDelete(true)}
+                title="Удалить карточку"
+                aria-label="Удалить карточку"
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
         )}
       </DialogContent>
+
+      <AlertDialog open={confirmDelete} onOpenChange={setConfirmDelete}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Удалить карточку?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Вы уверены, что хотите полностью удалить это слово/предложение из словаря? Действие необратимо.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Отмена</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDelete}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              <Trash2 className="w-4 h-4 mr-1" /> Удалить
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Dialog>
   );
 };
