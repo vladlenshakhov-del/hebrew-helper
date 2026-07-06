@@ -1,10 +1,20 @@
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Loader2, Wand2, Check } from 'lucide-react';
+import { Loader2, Wand2, Check, Trash2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import type { Word } from '@/data/vocabulary';
-import { saveOverride } from '@/lib/wordOverrides';
+import { saveOverride, deleteWord } from '@/lib/wordOverrides';
 
 interface Props {
   word: Word;
