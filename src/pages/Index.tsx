@@ -8,6 +8,9 @@ import { useSpacedRepetition, shuffleArray } from '@/hooks/useSpacedRepetition';
 import { useFavorites } from '@/hooks/useFavorites';
 import { Search, LayoutGrid, List, Sun, Moon, Shuffle, ArrowUpDown, Eye, EyeOff, Heart } from 'lucide-react';
 import AddWordDialog from '@/components/AddWordDialog';
+import { applyStoredOverrides, VOCAB_UPDATED_EVENT } from '@/lib/wordOverrides';
+
+applyStoredOverrides();
 
 const BINYANIM = ['Пааль', 'Пиэль', 'Хифиль', 'Нифаль', 'Пуаль', 'Хуфаль', 'Хитпаэль'] as const;
 
