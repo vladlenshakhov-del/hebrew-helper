@@ -167,9 +167,21 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
               <div className="text-sm text-muted-foreground italic">{word.transcription}</div>
               <div className="text-sm text-primary">{word.russian}</div>
             </div>
-            <Button onClick={runOptimize} className="w-full">
-              <Wand2 className="w-4 h-4" /> Запустить оптимизацию
-            </Button>
+            <div className="flex gap-2">
+              <Button onClick={runOptimize} className="flex-1">
+                <Wand2 className="w-4 h-4" /> Запустить оптимизацию
+              </Button>
+              <Button
+                type="button"
+                variant="destructive"
+                size="icon"
+                onClick={() => setConfirmDelete(true)}
+                title="Удалить карточку"
+                aria-label="Удалить карточку"
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
         )}
 
