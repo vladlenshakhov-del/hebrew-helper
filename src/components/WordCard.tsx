@@ -24,6 +24,7 @@ const intervalOptions = [
 
 const WordCard = ({ word, review, onSetInterval, onClearInterval, isFavorite, onToggleFavorite }: WordCardProps) => {
   const [open, setOpen] = useState(false);
+  const [aiOpen, setAiOpen] = useState(false);
   const isDue = !review || Date.now() >= review.nextReview;
   const daysLeft = review ? Math.max(0, Math.ceil((review.nextReview - Date.now()) / 86400000)) : 0;
 
