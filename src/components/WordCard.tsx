@@ -1,9 +1,10 @@
 import { memo, useState } from 'react';
 import { Word } from '@/data/vocabulary';
 import { ReviewData } from '@/hooks/useSpacedRepetition';
-import { Clock, RotateCcw, Star } from 'lucide-react';
+import { Clock, RotateCcw, Star, Wand2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import WordDetailDialog from '@/components/WordDetailDialog';
+import OptimizeWordDialog from '@/components/OptimizeWordDialog';
 
 interface WordCardProps {
   word: Word;
