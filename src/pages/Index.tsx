@@ -46,6 +46,12 @@ const Index = () => {
     window.addEventListener('scroll', handleContainerScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleContainerScroll);
   }, []);
+
+  useEffect(() => {
+    const handler = () => setVocabularyVersion((v) => v + 1);
+    window.addEventListener(VOCAB_UPDATED_EVENT, handler);
+    return () => window.removeEventListener(VOCAB_UPDATED_EVENT, handler);
+  }, []);
   const deferredSearch = useDeferredValue(search);
   const itemsPerPage = viewMode === 'cards' ? 60 : 120;
   const [visibleCount, setVisibleCount] = useState(itemsPerPage);
