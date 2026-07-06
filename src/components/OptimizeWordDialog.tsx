@@ -1,10 +1,20 @@
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Loader2, Wand2, Check } from 'lucide-react';
+import { Loader2, Wand2, Check, Trash2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import type { Word } from '@/data/vocabulary';
-import { saveOverride } from '@/lib/wordOverrides';
+import { saveOverride, deleteWord } from '@/lib/wordOverrides';
 
 interface Props {
   word: Word;
@@ -40,6 +50,7 @@ const SYSTEM_PROMPT = `Ты — эксперт по ивриту и редакт
 
 const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
   const [loading, setLoading] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [result, setResult] = useState<AiResult | null>(null);
 
   const handleOpenChange = (o: boolean) => {
@@ -113,6 +124,13 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
     handleOpenChange(false);
   };
 
+  const handleDelete = () => {
+    deleteWord(word.id);
+    toast({ title: 'Карточка удалена', description: 'Слово полностью удалено из словаря' });
+    setConfirmDelete(false);
+    handleOpenChange(false);
+  };
+
   const DiffRow = ({ label, before, after }: { label: string; before?: string; after?: string }) => {
     const changed = (after ?? '') && after !== before;
     if (!after) return null;
@@ -149,9 +167,21 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
               <div className="text-sm text-muted-foreground italic">{word.transcription}</div>
               <div className="text-sm text-primary">{word.russian}</div>
             </div>
-            <Button onClick={runOptimize} className="w-full">
-              <Wand2 className="w-4 h-4" /> Запустить оптимизацию
-            </Button>
+            <div className="flex gap-2">
+              <Button onClick={runOptimize} className="flex-1">
+                <Wand2 className="w-4 h-4" /> Запустить оптимизацию
+              </Button>
+              <Button
+                type="button"
+                variant="destructive"
+                size="icon"
+                onClick={() => setConfirmDelete(true)}
+                title="Удалить карточку"
+                aria-label="Удалить карточку"
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
         )}
 
@@ -188,12 +218,44 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
                 </div>
               )}
             </div>
-            <Button onClick={apply} className="w-full">
-              <Check className="w-4 h-4" /> Применить изменения
-            </Button>
+            <div className="flex gap-2">
+              <Button onClick={apply} className="flex-1">
+                <Check className="w-4 h-4" /> Применить изменения
+              </Button>
+              <Button
+                type="button"
+                variant="destructive"
+                size="icon"
+                onClick={() => setConfirmDelete(true)}
+                title="Удалить карточку"
+                aria-label="Удалить карточку"
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
         )}
       </DialogContent>
+
+      <AlertDialog open={confirmDelete} onOpenChange={setConfirmDelete}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Удалить карточку?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Вы уверены, что хотите полностью удалить это слово/предложение из словаря? Действие необратимо.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Отмена</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDelete}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              <Trash2 className="w-4 h-4 mr-1" /> Удалить
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Dialog>
   );
 };
