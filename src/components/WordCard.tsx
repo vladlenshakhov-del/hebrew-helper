@@ -1,9 +1,10 @@
 import { memo, useState } from 'react';
 import { Word } from '@/data/vocabulary';
 import { ReviewData } from '@/hooks/useSpacedRepetition';
-import { Clock, RotateCcw, Star } from 'lucide-react';
+import { Clock, RotateCcw, Star, Wand2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import WordDetailDialog from '@/components/WordDetailDialog';
+import OptimizeWordDialog from '@/components/OptimizeWordDialog';
 
 interface WordCardProps {
   word: Word;
@@ -23,6 +24,7 @@ const intervalOptions = [
 
 const WordCard = ({ word, review, onSetInterval, onClearInterval, isFavorite, onToggleFavorite }: WordCardProps) => {
   const [open, setOpen] = useState(false);
+  const [aiOpen, setAiOpen] = useState(false);
   const isDue = !review || Date.now() >= review.nextReview;
   const daysLeft = review ? Math.max(0, Math.ceil((review.nextReview - Date.now()) / 86400000)) : 0;
 
@@ -65,16 +67,29 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval, isFavorite, on
               <Clock className="w-3 h-3" /> {daysLeft}д
             </span>
           ) : <span />}
-          <span
-            role="button"
-            tabIndex={0}
-            onClick={(e) => { e.stopPropagation(); onToggleFavorite?.(word.id); }}
-            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); onToggleFavorite?.(word.id); } }}
-            className="p-1 rounded-full hover:bg-accent transition-colors cursor-pointer"
-            title={isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
-          >
-            <Star className={`w-4 h-4 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground'}`} />
-          </span>
+          <div className="flex items-center gap-1">
+            <span
+              role="button"
+              tabIndex={0}
+              onClick={(e) => { e.stopPropagation(); setAiOpen(true); }}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); setAiOpen(true); } }}
+              className="p-1 rounded-full hover:bg-accent transition-colors cursor-pointer text-primary"
+              title="AI-Оптимизация 🪄"
+              aria-label="AI-Оптимизация"
+            >
+              <Wand2 className="w-4 h-4" />
+            </span>
+            <span
+              role="button"
+              tabIndex={0}
+              onClick={(e) => { e.stopPropagation(); onToggleFavorite?.(word.id); }}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); onToggleFavorite?.(word.id); } }}
+              className="p-1 rounded-full hover:bg-accent transition-colors cursor-pointer"
+              title={isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
+            >
+              <Star className={`w-4 h-4 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground'}`} />
+            </span>
+          </div>
         </div>
       </button>
 
@@ -105,6 +120,7 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval, isFavorite, on
       </div>
 
       <WordDetailDialog word={word} open={open} onOpenChange={setOpen} />
+      <OptimizeWordDialog word={word} open={aiOpen} onOpenChange={setAiOpen} />
     </div>
   );
 };

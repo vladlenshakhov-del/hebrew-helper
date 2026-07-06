@@ -8,6 +8,9 @@ import { useSpacedRepetition, shuffleArray } from '@/hooks/useSpacedRepetition';
 import { useFavorites } from '@/hooks/useFavorites';
 import { Search, LayoutGrid, List, Sun, Moon, Shuffle, ArrowUpDown, Eye, EyeOff, Heart } from 'lucide-react';
 import AddWordDialog from '@/components/AddWordDialog';
+import { applyStoredOverrides, VOCAB_UPDATED_EVENT } from '@/lib/wordOverrides';
+
+applyStoredOverrides();
 
 const BINYANIM = ['Пааль', 'Пиэль', 'Хифиль', 'Нифаль', 'Пуаль', 'Хуфаль', 'Хитпаэль'] as const;
 
@@ -42,6 +45,12 @@ const Index = () => {
 
     window.addEventListener('scroll', handleContainerScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleContainerScroll);
+  }, []);
+
+  useEffect(() => {
+    const handler = () => setVocabularyVersion((v) => v + 1);
+    window.addEventListener(VOCAB_UPDATED_EVENT, handler);
+    return () => window.removeEventListener(VOCAB_UPDATED_EVENT, handler);
   }, []);
   const deferredSearch = useDeferredValue(search);
   const itemsPerPage = viewMode === 'cards' ? 60 : 120;
