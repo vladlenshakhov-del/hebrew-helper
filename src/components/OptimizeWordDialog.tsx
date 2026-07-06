@@ -50,6 +50,7 @@ const SYSTEM_PROMPT = `Ты — эксперт по ивриту и редакт
 
 const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
   const [loading, setLoading] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [result, setResult] = useState<AiResult | null>(null);
 
   const handleOpenChange = (o: boolean) => {
