@@ -67,16 +67,29 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval, isFavorite, on
               <Clock className="w-3 h-3" /> {daysLeft}д
             </span>
           ) : <span />}
-          <span
-            role="button"
-            tabIndex={0}
-            onClick={(e) => { e.stopPropagation(); onToggleFavorite?.(word.id); }}
-            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); onToggleFavorite?.(word.id); } }}
-            className="p-1 rounded-full hover:bg-accent transition-colors cursor-pointer"
-            title={isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
-          >
-            <Star className={`w-4 h-4 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground'}`} />
-          </span>
+          <div className="flex items-center gap-1">
+            <span
+              role="button"
+              tabIndex={0}
+              onClick={(e) => { e.stopPropagation(); setAiOpen(true); }}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); setAiOpen(true); } }}
+              className="p-1 rounded-full hover:bg-accent transition-colors cursor-pointer text-primary"
+              title="AI-Оптимизация 🪄"
+              aria-label="AI-Оптимизация"
+            >
+              <Wand2 className="w-4 h-4" />
+            </span>
+            <span
+              role="button"
+              tabIndex={0}
+              onClick={(e) => { e.stopPropagation(); onToggleFavorite?.(word.id); }}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); onToggleFavorite?.(word.id); } }}
+              className="p-1 rounded-full hover:bg-accent transition-colors cursor-pointer"
+              title={isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
+            >
+              <Star className={`w-4 h-4 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground'}`} />
+            </span>
+          </div>
         </div>
       </button>
 
