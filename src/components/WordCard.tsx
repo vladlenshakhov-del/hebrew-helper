@@ -120,6 +120,7 @@ const WordCard = ({ word, review, onSetInterval, onClearInterval, isFavorite, on
       </div>
 
       <WordDetailDialog word={word} open={open} onOpenChange={setOpen} />
+      <OptimizeWordDialog word={word} open={aiOpen} onOpenChange={setAiOpen} />
     </div>
   );
 };
