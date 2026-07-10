@@ -82,13 +82,27 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
         </DialogHeader>
 
         {/* Hero */}
-        <div className="flex flex-col items-center gap-2 text-center pb-4 border-b border-border">
+        <div className="relative flex flex-col items-center gap-2 text-center pb-4 border-b border-border">
+          <div className="absolute right-0 top-0 flex rounded-md border border-border overflow-hidden">
+            <button
+              onClick={() => setLang('ru')}
+              className={`text-[10px] px-2 py-1 font-medium transition-colors ${lang === 'ru' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+            >
+              RU
+            </button>
+            <button
+              onClick={() => setLang('en')}
+              className={`text-[10px] px-2 py-1 font-medium transition-colors ${lang === 'en' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+            >
+              EN
+            </button>
+          </div>
           <ClickableHebrew
             text={word.hebrew}
             className="font-hebrew text-4xl md:text-5xl leading-tight text-foreground block"
           />
           <span className="text-base text-muted-foreground italic">{word.transcription}</span>
-          <span className="text-xl font-semibold text-primary">{word.russian}</span>
+          <span className="text-xl font-semibold text-primary">{lang === 'en' ? (word.english || word.russian) : word.russian}</span>
 
           <div className="flex flex-wrap gap-1.5 justify-center mt-1">
             {word.gender && (
