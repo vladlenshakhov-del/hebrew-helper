@@ -78,7 +78,7 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
         className="max-w-lg animate-scale-in"
       >
         <DialogHeader>
-          <DialogTitle className="sr-only">Разбор: {word.russian}</DialogTitle>
+          <DialogTitle className="sr-only">Разбор: {lang === 'en' ? (word.english || word.russian) : word.russian}</DialogTitle>
         </DialogHeader>
 
         {/* Hero */}
