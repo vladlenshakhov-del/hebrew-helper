@@ -81,22 +81,28 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
           <DialogTitle className="sr-only">Разбор: {lang === 'en' ? (word.english || word.russian) : word.russian}</DialogTitle>
         </DialogHeader>
 
-        {/* Hero */}
-        <div className="relative flex flex-col items-center gap-2 text-center pb-4 border-b border-border">
-          <div className="absolute right-0 top-0 flex rounded-md border border-border overflow-hidden">
+        {/* Language toggle — own row, not overlapping content */}
+        <div className="flex justify-end pb-2">
+          <div className="inline-flex rounded-md border border-border overflow-hidden">
             <button
+              type="button"
               onClick={() => setLang('ru')}
-              className={`text-[10px] px-2 py-1 font-medium transition-colors ${lang === 'ru' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+              className={`text-xs px-3 py-1 font-medium transition-colors ${lang === 'ru' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
             >
               RU
             </button>
             <button
+              type="button"
               onClick={() => setLang('en')}
-              className={`text-[10px] px-2 py-1 font-medium transition-colors ${lang === 'en' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+              className={`text-xs px-3 py-1 font-medium transition-colors ${lang === 'en' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
             >
               EN
             </button>
           </div>
+        </div>
+
+        {/* Hero */}
+        <div className="flex flex-col items-center gap-2 text-center pb-4 border-b border-border">
           <ClickableHebrew
             text={word.hebrew}
             className="font-hebrew text-4xl md:text-5xl leading-tight text-foreground block"
