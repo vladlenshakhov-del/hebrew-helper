@@ -205,7 +205,7 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
             {word.example.transcription && (
               <p className="text-base text-muted-foreground italic">{word.example.transcription}</p>
             )}
-            <p className="text-base text-foreground/90">{word.example.russian}</p>
+            <p className="text-base text-foreground/90">{lang === 'en' ? (word.example.english || word.example.russian) : word.example.russian}</p>
           </div>
         )}
 
