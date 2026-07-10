@@ -23,6 +23,7 @@ export interface Word {
   hebrew: string;
   transcription: string;
   russian: string;
+  english?: string;
   category: Category;
   subcategory?: string;
   gender?: Gender;
@@ -42,6 +43,7 @@ export interface Word {
     hebrew: string;
     transcription?: string;
     russian: string;
+    english?: string;
   };
   // Для выражений и предложений (пословный разбор)
   fullAnalysis?: Array<{

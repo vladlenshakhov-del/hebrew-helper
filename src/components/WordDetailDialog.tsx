@@ -1,4 +1,4 @@
-import { memo, ReactNode, useMemo } from 'react';
+import { memo, ReactNode, useMemo, useState } from 'react';
 import { Word, vocabulary } from '@/data/vocabulary';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -20,6 +20,7 @@ const tenseOrder: Array<{ key: 'past' | 'present' | 'future' | 'imperative'; lab
 ];
 
 const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) => {
+  const [lang, setLang] = useState<'ru' | 'en'>('ru');
   const conj = word.conjugation;
   const tr = word.conjugationTranscription;
   const availableTenses = conj ? tenseOrder.filter(t => conj[t.key]) : [];
@@ -77,17 +78,31 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
         className="max-w-lg animate-scale-in"
       >
         <DialogHeader>
-          <DialogTitle className="sr-only">Разбор: {word.russian}</DialogTitle>
+          <DialogTitle className="sr-only">Разбор: {lang === 'en' ? (word.english || word.russian) : word.russian}</DialogTitle>
         </DialogHeader>
 
         {/* Hero */}
-        <div className="flex flex-col items-center gap-2 text-center pb-4 border-b border-border">
+        <div className="relative flex flex-col items-center gap-2 text-center pb-4 border-b border-border">
+          <div className="absolute right-0 top-0 flex rounded-md border border-border overflow-hidden">
+            <button
+              onClick={() => setLang('ru')}
+              className={`text-[10px] px-2 py-1 font-medium transition-colors ${lang === 'ru' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+            >
+              RU
+            </button>
+            <button
+              onClick={() => setLang('en')}
+              className={`text-[10px] px-2 py-1 font-medium transition-colors ${lang === 'en' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+            >
+              EN
+            </button>
+          </div>
           <ClickableHebrew
             text={word.hebrew}
             className="font-hebrew text-4xl md:text-5xl leading-tight text-foreground block"
           />
           <span className="text-base text-muted-foreground italic">{word.transcription}</span>
-          <span className="text-xl font-semibold text-primary">{word.russian}</span>
+          <span className="text-xl font-semibold text-primary">{lang === 'en' ? (word.english || word.russian) : word.russian}</span>
 
           <div className="flex flex-wrap gap-1.5 justify-center mt-1">
             {word.gender && (
@@ -190,7 +205,7 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
             {word.example.transcription && (
               <p className="text-base text-muted-foreground italic">{word.example.transcription}</p>
             )}
-            <p className="text-base text-foreground/90">{word.example.russian}</p>
+            <p className="text-base text-foreground/90">{lang === 'en' ? (word.example.english || word.example.russian) : word.example.russian}</p>
           </div>
         )}
 
