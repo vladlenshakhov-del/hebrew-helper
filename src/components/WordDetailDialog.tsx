@@ -20,6 +20,7 @@ const tenseOrder: Array<{ key: 'past' | 'present' | 'future' | 'imperative'; lab
 ];
 
 const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) => {
+  const [lang, setLang] = useState<'ru' | 'en'>('ru');
   const conj = word.conjugation;
   const tr = word.conjugationTranscription;
   const availableTenses = conj ? tenseOrder.filter(t => conj[t.key]) : [];
