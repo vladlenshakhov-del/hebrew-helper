@@ -27,24 +27,29 @@ type AiResult = {
   hebrew?: string;
   transcription?: string;
   russian?: string;
+  english?: string;
+  englishPronunciation?: string;
   root?: string;
   binyan?: string;
-  example?: { hebrew?: string; transcription?: string; russian?: string };
+  example?: { hebrew?: string; transcription?: string; russian?: string; english?: string; englishPronunciation?: string };
   changes_summary?: string;
 };
 
 const SYSTEM_PROMPT = `Ты — эксперт по ивриту и редактор словаря. Изучи присланную карточку (слово, перевод, примеры).
 - Если в ивритском написании, корнях или огласовках есть ошибки (например, пропущена буква йуд), исправь их.
 - Если ошибок нет, расширь карточку: добавь ещё один точный перевод на русский (если применимо) ИЛИ одно новое короткое предложение-пример на иврите с огласовками и переводом.
+- Всегда добавь/исправь поля english и englishPronunciation настоящим английским переводом. Никогда не копируй русский перевод в english.
 Верни результат СТРОГО в формате JSON, сохранив исходный ID карточки. Формат:
 {
   "id": "исходный id",
   "hebrew": "иврит с никудот",
   "transcription": "русская транскрипция с ударениями",
   "russian": "перевод (при необходимости — расширенный: 'основной / доп. вариант')",
+  "english": "real English translation",
+  "englishPronunciation": "simple English reading/pronunciation line",
   "root": "корень через точку или пустая строка",
   "binyan": "биньян если глагол, иначе пустая строка",
-  "example": { "hebrew": "...", "transcription": "...", "russian": "..." },
+  "example": { "hebrew": "...", "transcription": "...", "russian": "...", "english": "...", "englishPronunciation": "..." },
   "changes_summary": "коротко на русском: что именно исправлено или добавлено"
 }`;
 
@@ -76,6 +81,8 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
         hebrew: word.hebrew,
         transcription: word.transcription,
         russian: word.russian,
+        english: word.english,
+        englishPronunciation: word.englishPronunciation,
         category: word.category,
         root: word.root,
         binyan: word.binyan,
@@ -111,12 +118,16 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
     if (result.hebrew) patch.hebrew = result.hebrew;
     if (result.transcription) patch.transcription = result.transcription;
     if (result.russian) patch.russian = result.russian;
+    if (result.english) patch.english = result.english;
+    if (result.englishPronunciation) patch.englishPronunciation = result.englishPronunciation;
     if (result.root) patch.root = result.root;
     if (result.example?.hebrew && result.example?.russian) {
       patch.example = {
         hebrew: result.example.hebrew,
         transcription: result.example.transcription,
         russian: result.example.russian,
+        english: result.example.english,
+        englishPronunciation: result.example.englishPronunciation,
       };
     }
     saveOverride(word.id, patch);
@@ -204,6 +215,8 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
               <DiffRow label="Иврит" before={word.hebrew} after={result.hebrew} />
               <DiffRow label="Транскрипция" before={word.transcription} after={result.transcription} />
               <DiffRow label="Перевод" before={word.russian} after={result.russian} />
+              <DiffRow label="English" before={word.english} after={result.english} />
+              <DiffRow label="English pronunciation" before={word.englishPronunciation} after={result.englishPronunciation} />
               <DiffRow label="Корень" before={word.root} after={result.root} />
               {result.example?.hebrew && (
                 <div className="space-y-1 border-t border-border pt-2">
@@ -214,6 +227,9 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
                   )}
                   {result.example.russian && (
                     <div className="text-sm">{result.example.russian}</div>
+                  )}
+                  {result.example.english && (
+                    <div className="text-sm text-primary">{result.example.english}</div>
                   )}
                 </div>
               )}

@@ -24,6 +24,7 @@ export interface Word {
   transcription: string;
   russian: string;
   english?: string;
+  englishPronunciation?: string;
   category: Category;
   subcategory?: string;
   gender?: Gender;
@@ -44,6 +45,7 @@ export interface Word {
     transcription?: string;
     russian: string;
     english?: string;
+    englishPronunciation?: string;
   };
   // Для выражений и предложений (пословный разбор)
   fullAnalysis?: Array<{

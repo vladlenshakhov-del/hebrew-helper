@@ -1,9 +1,16 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import { Word } from '@/data/vocabulary';
 import { ReviewData } from '@/hooks/useSpacedRepetition';
-import { Clock, RotateCcw, Star } from 'lucide-react';
+import { Clock, Languages, Loader2, RotateCcw, Star } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import WordDetailDialog from '@/components/WordDetailDialog';
+import {
+  CardLanguageMode,
+  generateEnglishForWord,
+  getEnglishPronunciation,
+  getEnglishText,
+  getStoredEnglishOverride,
+} from '@/lib/languageDisplay';
+import { toast } from '@/hooks/use-toast';
 
 interface WordListItemProps {
   word: Word;
@@ -22,27 +29,80 @@ const intervalOptions = [
 ];
 
 const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite, onToggleFavorite }: WordListItemProps) => {
-  const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<CardLanguageMode>('hebrew');
+  const [englishOverride, setEnglishOverride] = useState(() => getStoredEnglishOverride(word.id));
+  const [loadingEnglish, setLoadingEnglish] = useState(false);
   const isDue = !review || Date.now() >= review.nextReview;
   const daysLeft = review ? Math.max(0, Math.ceil((review.nextReview - Date.now()) / 86400000)) : 0;
+  const englishText = useMemo(() => getEnglishText(word, englishOverride), [word, englishOverride]);
+  const englishPronunciation = useMemo(() => getEnglishPronunciation(word, englishOverride), [word, englishOverride]);
+
+  useEffect(() => {
+    setEnglishOverride(getStoredEnglishOverride(word.id));
+    setMode('hebrew');
+  }, [word.id]);
+
+  const toggleLanguage = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    if (mode === 'english') {
+      setMode('hebrew');
+      return;
+    }
+
+    setMode('english');
+    if (englishText || loadingEnglish) return;
+
+    setLoadingEnglish(true);
+    try {
+      const generated = await generateEnglishForWord(word);
+      setEnglishOverride(generated);
+    } catch {
+      toast({
+        title: 'English не заполнен',
+        description: 'Добавь Gemini API ключ через AI-форму или оптимизацию, чтобы сгенерировать перевод.',
+        variant: 'destructive',
+      });
+    } finally {
+      setLoadingEnglish(false);
+    }
+  };
 
   return (
-    <>
     <div
-      onClick={() => setOpen(true)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => { if (e.key === 'Enter') setOpen(true); }}
-      className={`content-visibility-auto cursor-pointer rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col gap-2 shadow-sm hover:shadow-md hover:border-primary/40 transition-all`}
+      className={`content-visibility-auto rounded-xl bg-card border ${isDue ? 'border-border' : 'border-primary/30'} p-4 flex flex-col gap-2 shadow-sm hover:shadow-md hover:border-primary/40 transition-all`}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1 min-w-0">
-          <span className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground block" dir="rtl">
-            {word.hebrew}
-          </span>
-          <span className="text-base text-muted-foreground italic block">{word.transcription}</span>
+          {mode === 'hebrew' ? (
+            <>
+              <span className="font-hebrew text-3xl md:text-4xl leading-relaxed text-foreground block" dir="rtl">
+                {word.hebrew}
+              </span>
+              <span className="text-base text-muted-foreground italic block">{word.transcription}</span>
+            </>
+          ) : (
+            <>
+              <span className="text-2xl md:text-3xl font-bold leading-snug text-foreground block" dir="ltr">
+                {loadingEnglish ? 'Generating English translation...' : englishText || 'English translation is missing'}
+              </span>
+              <span className="text-base text-muted-foreground italic block" dir="ltr">
+                {loadingEnglish ? 'Please wait' : englishPronunciation || 'No English pronunciation yet'}
+              </span>
+            </>
+          )}
+          <span className="text-base font-semibold text-primary block mt-1">{word.russian}</span>
         </div>
         <div className="flex items-center gap-1.5 flex-shrink-0 mt-1">
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="inline-flex items-center gap-1 rounded-md border border-border bg-muted px-2 py-1 text-[10px] font-semibold text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            aria-label="Переключить Иврит / English"
+            title="Переключить Иврит / English"
+          >
+            {loadingEnglish ? <Loader2 className="w-3 h-3 animate-spin" /> : <Languages className="w-3 h-3" />}
+            {mode === 'hebrew' ? 'HE → EN' : 'EN → HE'}
+          </button>
           <button
             onClick={(e) => { e.stopPropagation(); onToggleFavorite?.(word.id); }}
             className="p-1 rounded hover:bg-accent transition-colors"
@@ -109,8 +169,6 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite
       </div>
 
     </div>
-    <WordDetailDialog word={word} open={open} onOpenChange={setOpen} />
-    </>
   );
 };
 
