@@ -243,7 +243,20 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
             </div>
           </div>
         )}
+
+        {/* Bottom controls: language mode toggle */}
+        <div className="sticky bottom-0 mt-4 pt-3 pb-1 bg-background border-t border-border flex justify-center">
+          <button
+            type="button"
+            onClick={() => setMode(m => (m === 'hebrew' ? 'english' : 'hebrew'))}
+            className="inline-flex items-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/20 transition-colors"
+            aria-label="Переключить язык отображения"
+          >
+            {mode === 'hebrew' ? '🇮🇱 Иврит → 🇬🇧 English' : '🇬🇧 English → 🇮🇱 Иврит'}
+          </button>
+        </div>
       </DialogContent>
+
     </Dialog>
   );
 };
