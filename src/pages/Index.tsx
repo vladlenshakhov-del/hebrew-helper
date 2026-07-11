@@ -72,6 +72,7 @@ const Index = () => {
       const matchSearch =
         !q ||
         w.russian.toLowerCase().includes(q) ||
+        w.english?.toLowerCase().includes(q) ||
         stripNiqqud(w.hebrew).includes(qClean) ||
         w.transcription.toLowerCase().includes(q);
       const matchBinyan = !selectedBinyan || w.binyan === selectedBinyan;

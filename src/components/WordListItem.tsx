@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useState } from 'react';
+import { memo, useEffect, useMemo, useState, type MouseEvent } from 'react';
 import { Word } from '@/data/vocabulary';
 import { ReviewData } from '@/hooks/useSpacedRepetition';
 import { Clock, Languages, Loader2, RotateCcw, Star } from 'lucide-react';
@@ -42,7 +42,7 @@ const WordListItem = ({ word, review, onSetInterval, onClearInterval, isFavorite
     setMode('hebrew');
   }, [word.id]);
 
-  const toggleLanguage = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const toggleLanguage = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (mode === 'english') {
       setMode('hebrew');
