@@ -10,14 +10,16 @@ interface WordDraft {
   hebrew: string;
   transcription: string;
   russian: string;
+  english: string;
+  englishPronunciation: string;
   root: string;
   binyan: string;
-  example: { hebrew: string; transcription: string; russian: string };
+  example: { hebrew: string; transcription: string; russian: string; english: string; englishPronunciation: string };
 }
 
 const EMPTY: WordDraft = {
-  hebrew: '', transcription: '', russian: '', root: '', binyan: '',
-  example: { hebrew: '', transcription: '', russian: '' },
+  hebrew: '', transcription: '', russian: '', english: '', englishPronunciation: '', root: '', binyan: '',
+  example: { hebrew: '', transcription: '', russian: '', english: '', englishPronunciation: '' },
 };
 
 interface AddWordDialogProps {
@@ -75,12 +77,16 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
   "hebrew": "слово с огласовками (никудот)",
   "transcription": "русская транскрипция с ударениями",
   "russian": "перевод на русский с учётом части речи",
+  "english": "real English translation, not Russian transliteration",
+  "englishPronunciation": "simple English reading/pronunciation line",
   "root": "корень через точку, например פ.ת.ח",
   "binyan": "биньян если глагол, иначе пустая строка",
   "example": {
     "hebrew": "пример предложения на иврите",
     "transcription": "русская транскрипция примера",
-    "russian": "перевод примера с учётом контекста всей фразы"
+    "russian": "перевод примера с учётом контекста всей фразы",
+    "english": "natural English translation of the whole example",
+    "englishPronunciation": "English reading line for the example"
   }
 }`;
       const res = await fetch(
@@ -121,6 +127,8 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
           hebrew: draft.example.hebrew.trim(),
           transcription: draft.example.transcription.trim() || undefined,
           russian: draft.example.russian.trim(),
+          english: draft.example.english.trim() || undefined,
+          englishPronunciation: draft.example.englishPronunciation.trim() || undefined,
         }
       : undefined;
     const word: Word = {
@@ -128,6 +136,8 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
       hebrew: draft.hebrew.trim(),
       transcription: draft.transcription.trim(),
       russian: draft.russian.trim(),
+      english: draft.english.trim() || undefined,
+      englishPronunciation: draft.englishPronunciation.trim() || undefined,
       category,
       root: draft.root.trim() || undefined,
       binyan: normalizedBinyan,
@@ -186,6 +196,14 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
             <label className="text-sm font-medium mb-1 block">Перевод *</label>
             <Input value={draft.russian} onChange={(e) => setDraft({ ...draft, russian: e.target.value })} />
           </div>
+          <div>
+            <label className="text-sm font-medium mb-1 block">English</label>
+            <Input value={draft.english} onChange={(e) => setDraft({ ...draft, english: e.target.value })} />
+          </div>
+          <div>
+            <label className="text-sm font-medium mb-1 block">English pronunciation</label>
+            <Input value={draft.englishPronunciation} onChange={(e) => setDraft({ ...draft, englishPronunciation: e.target.value })} />
+          </div>
           <div className="grid grid-cols-2 gap-2">
             <div>
               <label className="text-sm font-medium mb-1 block">Корень</label>
@@ -214,6 +232,16 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
               value={draft.example.russian}
               onChange={(e) => setDraft({ ...draft, example: { ...draft.example, russian: e.target.value } })}
               placeholder="Перевод"
+            />
+            <Input
+              value={draft.example.english}
+              onChange={(e) => setDraft({ ...draft, example: { ...draft.example, english: e.target.value } })}
+              placeholder="English"
+            />
+            <Input
+              value={draft.example.englishPronunciation}
+              onChange={(e) => setDraft({ ...draft, example: { ...draft.example, englishPronunciation: e.target.value } })}
+              placeholder="English pronunciation"
             />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
