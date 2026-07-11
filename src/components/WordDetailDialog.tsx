@@ -79,37 +79,27 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
         className="max-w-lg animate-scale-in"
       >
         <DialogHeader>
-          <DialogTitle className="sr-only">Разбор: {lang === 'en' ? (word.english || word.russian) : word.russian}</DialogTitle>
+          <DialogTitle className="sr-only">Разбор: {word.russian}</DialogTitle>
         </DialogHeader>
 
-        {/* Language toggle — own row, not overlapping content */}
-        <div className="flex justify-end pb-2">
-          <div className="inline-flex rounded-md border border-border overflow-hidden">
-            <button
-              type="button"
-              onClick={() => setLang('ru')}
-              className={`text-xs px-3 py-1 font-medium transition-colors ${lang === 'ru' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
-            >
-              RU
-            </button>
-            <button
-              type="button"
-              onClick={() => setLang('en')}
-              className={`text-xs px-3 py-1 font-medium transition-colors ${lang === 'en' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
-            >
-              EN
-            </button>
-          </div>
-        </div>
-
-        {/* Hero */}
+        {/* Hero — top swaps between Hebrew and English based on mode */}
         <div className="flex flex-col items-center gap-2 text-center pb-4 border-b border-border">
-          <ClickableHebrew
-            text={word.hebrew}
-            className="font-hebrew text-4xl md:text-5xl leading-tight text-foreground block"
-          />
-          <span className="text-base text-muted-foreground italic">{word.transcription}</span>
-          <span className="text-xl font-semibold text-primary">{lang === 'en' ? (word.english || word.russian) : word.russian}</span>
+          {mode === 'hebrew' ? (
+            <>
+              <ClickableHebrew
+                text={word.hebrew}
+                className="font-hebrew text-4xl md:text-5xl leading-tight text-foreground block"
+              />
+              <span className="text-base text-muted-foreground italic">{word.transcription}</span>
+            </>
+          ) : (
+            <span className="text-4xl md:text-5xl font-bold leading-tight text-foreground break-words">
+              {word.english || word.russian}
+            </span>
+          )}
+
+          {/* Russian translation always visible */}
+          <span className="text-xl font-semibold text-primary">{word.russian}</span>
 
           <div className="flex flex-wrap gap-1.5 justify-center mt-1">
             {word.gender && (
@@ -127,6 +117,7 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
             )}
           </div>
         </div>
+
 
         {/* Forms */}
         {word.forms && (
