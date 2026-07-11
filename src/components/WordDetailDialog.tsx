@@ -196,16 +196,26 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
         {word.example && (
           <div className="mt-2 rounded-xl border-2 border-primary/30 bg-primary/5 p-4 space-y-2">
             <span className="text-xs uppercase tracking-wide text-primary font-bold">Пример</span>
-            <ClickableHebrew
-              text={word.example.hebrew}
-              className="font-hebrew text-2xl leading-relaxed text-foreground block"
-            />
-            {word.example.transcription && (
-              <p className="text-base text-muted-foreground italic">{word.example.transcription}</p>
+            {mode === 'hebrew' ? (
+              <>
+                <ClickableHebrew
+                  text={word.example.hebrew}
+                  className="font-hebrew text-2xl leading-relaxed text-foreground block"
+                />
+                {word.example.transcription && (
+                  <p className="text-base text-muted-foreground italic">{word.example.transcription}</p>
+                )}
+              </>
+            ) : (
+              <p className="text-2xl font-semibold text-foreground leading-relaxed">
+                {word.example.english || word.example.russian}
+              </p>
             )}
-            <p className="text-base text-foreground/90">{lang === 'en' ? (word.example.english || word.example.russian) : word.example.russian}</p>
+            {/* Russian example always visible */}
+            <p className="text-base text-foreground/90">{word.example.russian}</p>
           </div>
         )}
+
 
 
         {/* Related sentences from vocabulary */}
