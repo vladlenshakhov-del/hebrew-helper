@@ -20,9 +20,10 @@ const tenseOrder: Array<{ key: 'past' | 'present' | 'future' | 'imperative'; lab
 ];
 
 const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) => {
-  const [lang, setLang] = useState<'ru' | 'en'>('ru');
+  const [mode, setMode] = useState<'hebrew' | 'english'>('hebrew');
   const conj = word.conjugation;
   const tr = word.conjugationTranscription;
+
   const availableTenses = conj ? tenseOrder.filter(t => conj[t.key]) : [];
   const defaultTense = availableTenses[0]?.key;
 
@@ -78,37 +79,27 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
         className="max-w-lg animate-scale-in"
       >
         <DialogHeader>
-          <DialogTitle className="sr-only">Разбор: {lang === 'en' ? (word.english || word.russian) : word.russian}</DialogTitle>
+          <DialogTitle className="sr-only">Разбор: {word.russian}</DialogTitle>
         </DialogHeader>
 
-        {/* Language toggle — own row, not overlapping content */}
-        <div className="flex justify-end pb-2">
-          <div className="inline-flex rounded-md border border-border overflow-hidden">
-            <button
-              type="button"
-              onClick={() => setLang('ru')}
-              className={`text-xs px-3 py-1 font-medium transition-colors ${lang === 'ru' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
-            >
-              RU
-            </button>
-            <button
-              type="button"
-              onClick={() => setLang('en')}
-              className={`text-xs px-3 py-1 font-medium transition-colors ${lang === 'en' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
-            >
-              EN
-            </button>
-          </div>
-        </div>
-
-        {/* Hero */}
+        {/* Hero — top swaps between Hebrew and English based on mode */}
         <div className="flex flex-col items-center gap-2 text-center pb-4 border-b border-border">
-          <ClickableHebrew
-            text={word.hebrew}
-            className="font-hebrew text-4xl md:text-5xl leading-tight text-foreground block"
-          />
-          <span className="text-base text-muted-foreground italic">{word.transcription}</span>
-          <span className="text-xl font-semibold text-primary">{lang === 'en' ? (word.english || word.russian) : word.russian}</span>
+          {mode === 'hebrew' ? (
+            <>
+              <ClickableHebrew
+                text={word.hebrew}
+                className="font-hebrew text-4xl md:text-5xl leading-tight text-foreground block"
+              />
+              <span className="text-base text-muted-foreground italic">{word.transcription}</span>
+            </>
+          ) : (
+            <span className="text-4xl md:text-5xl font-bold leading-tight text-foreground break-words">
+              {word.english || word.russian}
+            </span>
+          )}
+
+          {/* Russian translation always visible */}
+          <span className="text-xl font-semibold text-primary">{word.russian}</span>
 
           <div className="flex flex-wrap gap-1.5 justify-center mt-1">
             {word.gender && (
@@ -126,6 +117,7 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
             )}
           </div>
         </div>
+
 
         {/* Forms */}
         {word.forms && (
@@ -204,16 +196,26 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
         {word.example && (
           <div className="mt-2 rounded-xl border-2 border-primary/30 bg-primary/5 p-4 space-y-2">
             <span className="text-xs uppercase tracking-wide text-primary font-bold">Пример</span>
-            <ClickableHebrew
-              text={word.example.hebrew}
-              className="font-hebrew text-2xl leading-relaxed text-foreground block"
-            />
-            {word.example.transcription && (
-              <p className="text-base text-muted-foreground italic">{word.example.transcription}</p>
+            {mode === 'hebrew' ? (
+              <>
+                <ClickableHebrew
+                  text={word.example.hebrew}
+                  className="font-hebrew text-2xl leading-relaxed text-foreground block"
+                />
+                {word.example.transcription && (
+                  <p className="text-base text-muted-foreground italic">{word.example.transcription}</p>
+                )}
+              </>
+            ) : (
+              <p className="text-2xl font-semibold text-foreground leading-relaxed">
+                {word.example.english || word.example.russian}
+              </p>
             )}
-            <p className="text-base text-foreground/90">{lang === 'en' ? (word.example.english || word.example.russian) : word.example.russian}</p>
+            {/* Russian example always visible */}
+            <p className="text-base text-foreground/90">{word.example.russian}</p>
           </div>
         )}
+
 
 
         {/* Related sentences from vocabulary */}
@@ -241,7 +243,20 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
             </div>
           </div>
         )}
+
+        {/* Bottom controls: language mode toggle */}
+        <div className="sticky bottom-0 mt-4 pt-3 pb-1 bg-background border-t border-border flex justify-center">
+          <button
+            type="button"
+            onClick={() => setMode(m => (m === 'hebrew' ? 'english' : 'hebrew'))}
+            className="inline-flex items-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/20 transition-colors"
+            aria-label="Переключить язык отображения"
+          >
+            {mode === 'hebrew' ? '🇮🇱 Иврит → 🇬🇧 English' : '🇬🇧 English → 🇮🇱 Иврит'}
+          </button>
+        </div>
       </DialogContent>
+
     </Dialog>
   );
 };
