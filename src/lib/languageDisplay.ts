@@ -55,7 +55,7 @@ export const getEnglishPronunciation = (word: Word, override?: EnglishOverride) 
     word.englishPronunciation?.trim() ||
     override?.example?.englishPronunciation?.trim() ||
     word.example?.englishPronunciation?.trim() ||
-    getEnglishText(word, override)
+    ''
   );
 };
 
