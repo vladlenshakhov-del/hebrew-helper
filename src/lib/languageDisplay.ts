@@ -55,7 +55,7 @@ export const getEnglishPronunciation = (word: Word, override?: EnglishOverride) 
     word.englishPronunciation?.trim() ||
     override?.example?.englishPronunciation?.trim() ||
     word.example?.englishPronunciation?.trim() ||
-    getEnglishText(word, override)
+    ''
   );
 };
 
@@ -68,12 +68,20 @@ export const generateEnglishForWord = async (word: Word): Promise<EnglishOverrid
   const prompt = `You are a professional Hebrew-Russian-English dictionary editor.
 Translate the CARD into natural English using the full context. Do NOT copy or transliterate the Russian translation into English fields.
 For a sentence card, "english" must be the full English sentence. For a single word, "english" must be the English word/phrase.
-"englishPronunciation" should be a simple readable English pronunciation/reading line. For normal English sentences, repeat the English sentence with clear punctuation.
+
+CRITICAL RULE for "englishPronunciation":
+It MUST be the pronunciation of the ENGLISH text written with RUSSIAN (Cyrillic) letters, wrapped in square brackets, with stress marks (́) on stressed syllables.
+Do NOT copy the English text itself. Do NOT use Latin letters. Only Cyrillic transliteration.
+Examples:
+  english: "It's important"        -> englishPronunciation: "[Итс импо́ртэнт]"
+  english: "I need to check it"    -> englishPronunciation: "[Ай нид ту чек ит]"
+  english: "compressor"            -> englishPronunciation: "[кэмпрэ́сэр]"
+
 Return STRICT JSON only:
 {
   "english": "real English translation",
-  "englishPronunciation": "English reading/pronunciation line",
-  "example": { "english": "English example translation if example exists", "englishPronunciation": "English reading line for the example" }
+  "englishPronunciation": "[транскрипция русскими буквами со ударением]",
+  "example": { "english": "English example translation if example exists", "englishPronunciation": "[транскрипция примера русскими буквами]" }
 }
 
 CARD:

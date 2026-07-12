@@ -1,15 +1,23 @@
-import { memo, ReactNode, useMemo, useState } from 'react';
+import { memo, ReactNode, useEffect, useMemo, useState } from 'react';
 import { Word, vocabulary } from '@/data/vocabulary';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import ClickableHebrew from '@/components/ClickableHebrew';
+import {
+  CardLanguageMode,
+  getEnglishPronunciation,
+  getEnglishText,
+  getStoredEnglishOverride,
+} from '@/lib/languageDisplay';
 
 interface WordDetailDialogProps {
   word: Word;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   trigger?: ReactNode;
+  initialMode?: CardLanguageMode;
+  englishOverride?: ReturnType<typeof getStoredEnglishOverride>;
 }
 
 const tenseOrder: Array<{ key: 'past' | 'present' | 'future' | 'imperative'; label: string }> = [
@@ -19,10 +27,15 @@ const tenseOrder: Array<{ key: 'past' | 'present' | 'future' | 'imperative'; lab
   { key: 'imperative', label: 'Повел.' },
 ];
 
-const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) => {
-  const [mode, setMode] = useState<'hebrew' | 'english'>('hebrew');
+const WordDetailDialog = ({ word, open, onOpenChange, initialMode = 'hebrew', englishOverride }: WordDetailDialogProps) => {
+  const [mode, setMode] = useState<CardLanguageMode>(initialMode);
+  useEffect(() => { if (open) setMode(initialMode); }, [open, initialMode]);
+  const override = englishOverride ?? getStoredEnglishOverride(word.id);
+  const englishText = useMemo(() => getEnglishText(word, override), [word, override]);
+  const englishPron = useMemo(() => getEnglishPronunciation(word, override), [word, override]);
   const conj = word.conjugation;
   const tr = word.conjugationTranscription;
+
 
   const availableTenses = conj ? tenseOrder.filter(t => conj[t.key]) : [];
   const defaultTense = availableTenses[0]?.key;
@@ -93,10 +106,16 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
               <span className="text-base text-muted-foreground italic">{word.transcription}</span>
             </>
           ) : (
-            <span className="text-4xl md:text-5xl font-bold leading-tight text-foreground break-words">
-              {word.english || word.russian}
-            </span>
+            <>
+              <span className="text-4xl md:text-5xl font-bold leading-tight text-foreground break-words" dir="ltr">
+                {englishText || 'English translation is missing'}
+              </span>
+              <span className="text-base text-muted-foreground italic">
+                {englishPron || '[транскрипция ещё не сгенерирована]'}
+              </span>
+            </>
           )}
+
 
           {/* Russian translation always visible */}
           <span className="text-xl font-semibold text-primary">{word.russian}</span>
@@ -207,9 +226,16 @@ const WordDetailDialog = ({ word, open, onOpenChange }: WordDetailDialogProps) =
                 )}
               </>
             ) : (
-              <p className="text-2xl font-semibold text-foreground leading-relaxed">
-                {word.example.english || word.example.russian}
-              </p>
+              <>
+                <p className="text-2xl font-semibold text-foreground leading-relaxed" dir="ltr">
+                  {override?.example?.english?.trim() || word.example.english?.trim() || 'English example is missing'}
+                </p>
+                {(override?.example?.englishPronunciation || word.example.englishPronunciation) && (
+                  <p className="text-base text-muted-foreground italic">
+                    {override?.example?.englishPronunciation || word.example.englishPronunciation}
+                  </p>
+                )}
+              </>
             )}
             {/* Russian example always visible */}
             <p className="text-base text-foreground/90">{word.example.russian}</p>
