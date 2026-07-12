@@ -106,10 +106,16 @@ const WordDetailDialog = ({ word, open, onOpenChange, initialMode = 'hebrew', en
               <span className="text-base text-muted-foreground italic">{word.transcription}</span>
             </>
           ) : (
-            <span className="text-4xl md:text-5xl font-bold leading-tight text-foreground break-words">
-              {word.english || word.russian}
-            </span>
+            <>
+              <span className="text-4xl md:text-5xl font-bold leading-tight text-foreground break-words" dir="ltr">
+                {englishText || 'English translation is missing'}
+              </span>
+              <span className="text-base text-muted-foreground italic">
+                {englishPron || '[транскрипция ещё не сгенерирована]'}
+              </span>
+            </>
           )}
+
 
           {/* Russian translation always visible */}
           <span className="text-xl font-semibold text-primary">{word.russian}</span>
