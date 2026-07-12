@@ -226,9 +226,16 @@ const WordDetailDialog = ({ word, open, onOpenChange, initialMode = 'hebrew', en
                 )}
               </>
             ) : (
-              <p className="text-2xl font-semibold text-foreground leading-relaxed">
-                {word.example.english || word.example.russian}
-              </p>
+              <>
+                <p className="text-2xl font-semibold text-foreground leading-relaxed" dir="ltr">
+                  {override?.example?.english?.trim() || word.example.english?.trim() || 'English example is missing'}
+                </p>
+                {(override?.example?.englishPronunciation || word.example.englishPronunciation) && (
+                  <p className="text-base text-muted-foreground italic">
+                    {override?.example?.englishPronunciation || word.example.englishPronunciation}
+                  </p>
+                )}
+              </>
             )}
             {/* Russian example always visible */}
             <p className="text-base text-foreground/90">{word.example.russian}</p>
