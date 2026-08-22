@@ -20,10 +20,16 @@ export interface VerbConjugation {
 
 export interface Word {
   id: string;
-  hebrew: string;
+  // === Жёсткая 6-компонентная структура карточки ===
+  hebrew: string;                  // 1. текст на иврите (с огласовками)
+  hebrewTranscription?: string;    // 2. транскрипция иврита русскими буквами
+  hebrewTranslation?: string;      // 3. перевод иврита на русский
+  english?: string;                // 4. предложение на английском
+  englishTranscription?: string;   // 5. транскрипция английского РУССКИМИ буквами
+  englishTranslation?: string;     // 6. перевод английского предложения на русский
+  // Legacy-поля (синонимы 2 и 3), сохранены для совместимости данных
   transcription: string;
   russian: string;
-  english?: string;
   englishPronunciation?: string;
   category: Category;
   subcategory?: string;
