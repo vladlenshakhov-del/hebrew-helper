@@ -78,22 +78,32 @@ export const generateEnglishForWord = async (word: Word): Promise<EnglishOverrid
   }
 
   const prompt = `You are a professional Hebrew-Russian-English dictionary editor.
-Translate the CARD into natural English using the full context. Do NOT copy or transliterate the Russian translation into English fields.
-For a sentence card, "english" must be the full English sentence. For a single word, "english" must be the English word/phrase.
+Every card has a STRICT 6-component structure:
+  1. hebrew                — Hebrew text with nikkud
+  2. hebrewTranscription   — Hebrew pronunciation in RUSSIAN (Cyrillic) letters
+  3. hebrewTranslation     — Russian translation of the Hebrew
+  4. english               — natural English sentence/word
+  5. englishTranscription  — pronunciation of the ENGLISH text in RUSSIAN (Cyrillic) letters
+  6. englishTranslation    — Russian translation of the English sentence
 
-CRITICAL RULE for "englishPronunciation":
-It MUST be the pronunciation of the ENGLISH text written with RUSSIAN (Cyrillic) letters, wrapped in square brackets, with stress marks (́) on stressed syllables.
-Do NOT copy the English text itself. Do NOT use Latin letters. Only Cyrillic transliteration.
+You must produce components 4, 5, 6 for the CARD below.
+Do NOT copy or transliterate the Russian translation into "english".
+
+CRITICAL RULE for "englishTranscription":
+It MUST be how the ENGLISH text sounds, written with RUSSIAN (Cyrillic) letters, with stress marks (́).
+NEVER put the Hebrew transcription there. NEVER use Latin letters. NEVER copy the English text itself.
 Examples:
-  english: "It's important"        -> englishPronunciation: "[Итс импо́ртэнт]"
-  english: "I need to check it"    -> englishPronunciation: "[Ай нид ту чек ит]"
-  english: "compressor"            -> englishPronunciation: "[кэмпрэ́сэр]"
+  english: "How is it going?"      -> englishTranscription: "хау из ит го́уинг?"
+  english: "It's important"        -> englishTranscription: "итс импо́ртэнт"
+  english: "I need to check it"    -> englishTranscription: "ай нид ту чек ит"
+  english: "compressor"            -> englishTranscription: "кэмпрэ́сэр"
 
 Return STRICT JSON only:
 {
   "english": "real English translation",
-  "englishPronunciation": "[транскрипция русскими буквами со ударением]",
-  "example": { "english": "English example translation if example exists", "englishPronunciation": "[транскрипция примера русскими буквами]" }
+  "englishTranscription": "транскрипция английского русскими буквами с ударением",
+  "englishTranslation": "русский перевод английского предложения",
+  "example": { "english": "English example translation if example exists", "englishTranscription": "транскрипция примера русскими буквами" }
 }
 
 CARD:
