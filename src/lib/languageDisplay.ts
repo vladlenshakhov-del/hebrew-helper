@@ -49,15 +49,27 @@ export const getEnglishText = (word: Word, override?: EnglishOverride) => {
   return override?.english?.trim() || word.english?.trim() || word.example?.english?.trim() || '';
 };
 
+// Транскрипция английского — ВСЕГДА русскими буквами (englishTranscription).
 export const getEnglishPronunciation = (word: Word, override?: EnglishOverride) => {
   return (
     override?.englishPronunciation?.trim() ||
+    word.englishTranscription?.trim() ||
     word.englishPronunciation?.trim() ||
     override?.example?.englishPronunciation?.trim() ||
     word.example?.englishPronunciation?.trim() ||
     ''
   );
 };
+
+// Русский перевод английской части (по умолчанию совпадает с переводом иврита).
+export const getEnglishTranslation = (word: Word) =>
+  word.englishTranslation?.trim() || word.hebrewTranslation?.trim() || word.russian;
+
+export const getHebrewTranscription = (word: Word) =>
+  word.hebrewTranscription?.trim() || word.transcription;
+
+export const getHebrewTranslation = (word: Word) =>
+  word.hebrewTranslation?.trim() || word.russian;
 
 export const generateEnglishForWord = async (word: Word): Promise<EnglishOverride> => {
   const key = localStorage.getItem('GEMINI_API_KEY');
@@ -66,22 +78,32 @@ export const generateEnglishForWord = async (word: Word): Promise<EnglishOverrid
   }
 
   const prompt = `You are a professional Hebrew-Russian-English dictionary editor.
-Translate the CARD into natural English using the full context. Do NOT copy or transliterate the Russian translation into English fields.
-For a sentence card, "english" must be the full English sentence. For a single word, "english" must be the English word/phrase.
+Every card has a STRICT 6-component structure:
+  1. hebrew                — Hebrew text with nikkud
+  2. hebrewTranscription   — Hebrew pronunciation in RUSSIAN (Cyrillic) letters
+  3. hebrewTranslation     — Russian translation of the Hebrew
+  4. english               — natural English sentence/word
+  5. englishTranscription  — pronunciation of the ENGLISH text in RUSSIAN (Cyrillic) letters
+  6. englishTranslation    — Russian translation of the English sentence
 
-CRITICAL RULE for "englishPronunciation":
-It MUST be the pronunciation of the ENGLISH text written with RUSSIAN (Cyrillic) letters, wrapped in square brackets, with stress marks (́) on stressed syllables.
-Do NOT copy the English text itself. Do NOT use Latin letters. Only Cyrillic transliteration.
+You must produce components 4, 5, 6 for the CARD below.
+Do NOT copy or transliterate the Russian translation into "english".
+
+CRITICAL RULE for "englishTranscription":
+It MUST be how the ENGLISH text sounds, written with RUSSIAN (Cyrillic) letters, with stress marks (́).
+NEVER put the Hebrew transcription there. NEVER use Latin letters. NEVER copy the English text itself.
 Examples:
-  english: "It's important"        -> englishPronunciation: "[Итс импо́ртэнт]"
-  english: "I need to check it"    -> englishPronunciation: "[Ай нид ту чек ит]"
-  english: "compressor"            -> englishPronunciation: "[кэмпрэ́сэр]"
+  english: "How is it going?"      -> englishTranscription: "хау из ит го́уинг?"
+  english: "It's important"        -> englishTranscription: "итс импо́ртэнт"
+  english: "I need to check it"    -> englishTranscription: "ай нид ту чек ит"
+  english: "compressor"            -> englishTranscription: "кэмпрэ́сэр"
 
 Return STRICT JSON only:
 {
   "english": "real English translation",
-  "englishPronunciation": "[транскрипция русскими буквами со ударением]",
-  "example": { "english": "English example translation if example exists", "englishPronunciation": "[транскрипция примера русскими буквами]" }
+  "englishTranscription": "транскрипция английского русскими буквами с ударением",
+  "englishTranslation": "русский перевод английского предложения",
+  "example": { "english": "English example translation if example exists", "englishTranscription": "транскрипция примера русскими буквами" }
 }
 
 CARD:
@@ -108,7 +130,20 @@ ${JSON.stringify({
   if (!res.ok) throw new Error(await res.text());
   const data = await res.json();
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
-  const parsed = JSON.parse(text) as EnglishOverride;
+  const raw = JSON.parse(text) as EnglishOverride & {
+    englishTranscription?: string;
+    example?: { english?: string; englishTranscription?: string; englishPronunciation?: string };
+  };
+  const parsed: EnglishOverride = {
+    english: raw.english,
+    englishPronunciation: raw.englishTranscription || raw.englishPronunciation,
+    example: raw.example
+      ? {
+          english: raw.example.english,
+          englishPronunciation: raw.example.englishTranscription || raw.example.englishPronunciation,
+        }
+      : undefined,
+  };
   if (!parsed.english?.trim()) throw new Error('Gemini returned empty English translation');
   saveEnglishOverride(word.id, parsed);
   return parsed;
