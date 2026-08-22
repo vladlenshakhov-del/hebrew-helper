@@ -49,15 +49,27 @@ export const getEnglishText = (word: Word, override?: EnglishOverride) => {
   return override?.english?.trim() || word.english?.trim() || word.example?.english?.trim() || '';
 };
 
+// Транскрипция английского — ВСЕГДА русскими буквами (englishTranscription).
 export const getEnglishPronunciation = (word: Word, override?: EnglishOverride) => {
   return (
     override?.englishPronunciation?.trim() ||
+    word.englishTranscription?.trim() ||
     word.englishPronunciation?.trim() ||
     override?.example?.englishPronunciation?.trim() ||
     word.example?.englishPronunciation?.trim() ||
     ''
   );
 };
+
+// Русский перевод английской части (по умолчанию совпадает с переводом иврита).
+export const getEnglishTranslation = (word: Word) =>
+  word.englishTranslation?.trim() || word.hebrewTranslation?.trim() || word.russian;
+
+export const getHebrewTranscription = (word: Word) =>
+  word.hebrewTranscription?.trim() || word.transcription;
+
+export const getHebrewTranslation = (word: Word) =>
+  word.hebrewTranslation?.trim() || word.russian;
 
 export const generateEnglishForWord = async (word: Word): Promise<EnglishOverride> => {
   const key = localStorage.getItem('GEMINI_API_KEY');
