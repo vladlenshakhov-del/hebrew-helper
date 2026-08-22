@@ -130,7 +130,20 @@ ${JSON.stringify({
   if (!res.ok) throw new Error(await res.text());
   const data = await res.json();
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
-  const parsed = JSON.parse(text) as EnglishOverride;
+  const raw = JSON.parse(text) as EnglishOverride & {
+    englishTranscription?: string;
+    example?: { english?: string; englishTranscription?: string; englishPronunciation?: string };
+  };
+  const parsed: EnglishOverride = {
+    english: raw.english,
+    englishPronunciation: raw.englishTranscription || raw.englishPronunciation,
+    example: raw.example
+      ? {
+          english: raw.example.english,
+          englishPronunciation: raw.example.englishTranscription || raw.example.englishPronunciation,
+        }
+      : undefined,
+  };
   if (!parsed.english?.trim()) throw new Error('Gemini returned empty English translation');
   saveEnglishOverride(word.id, parsed);
   return parsed;
