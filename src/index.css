@@ -145,4 +145,11 @@ All colors MUST be HSL.
 
 body, html {
   overscroll-behavior-y: contain !important;
+  /* Разрешаем pinch-to-zoom двумя пальцами */
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+/* Никаких блокировок жестов на контейнерах — только убираем задержку тапа */
+button, a, [role="button"] {
+  touch-action: manipulation;
 }
