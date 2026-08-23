@@ -8,17 +8,41 @@ const Dialog = ({ open, defaultOpen, onOpenChange, modal, ...props }: React.Comp
   const [internalOpen, setInternalOpen] = React.useState(defaultOpen ?? false);
   const isOpen = open ?? internalOpen;
 
+  // Жёсткая блокировка скролла страницы, пока открыт диалог:
+  // body фиксируется (pull-to-refresh невозможен), позиция восстанавливается при закрытии.
   React.useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.height = '100vh';
-    } else {
-      document.body.style.overflow = '';
-      document.body.style.height = '';
-    }
+    if (!isOpen) return;
+
+    const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    const body = document.body;
+    const html = document.documentElement;
+    const prev = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow,
+      overscroll: html.style.overscrollBehavior,
+    };
+
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+    body.style.overflow = 'hidden';
+    html.style.overscrollBehavior = 'none';
+
     return () => {
-      document.body.style.overflow = '';
-      document.body.style.height = '';
+      body.style.position = prev.position;
+      body.style.top = prev.top;
+      body.style.left = prev.left;
+      body.style.right = prev.right;
+      body.style.width = prev.width;
+      body.style.overflow = prev.overflow;
+      html.style.overscrollBehavior = prev.overscroll;
+      window.scrollTo(0, scrollY);
     };
   }, [isOpen]);
 
@@ -61,7 +85,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg max-h-[85dvh] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch] translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
         className,
       )}
       {...props}
