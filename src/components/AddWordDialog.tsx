@@ -90,7 +90,7 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
     "transcription": "русская транскрипция примера",
     "russian": "перевод примера с учётом контекста всей фразы",
     "english": "natural English translation of the whole example",
-    "englishPronunciation": "English reading line for the example"
+    "englishTranscription": "произношение английского примера русскими буквами"
   }
 }`;
       const res = await fetch(
@@ -107,7 +107,16 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
       if (!res.ok) throw new Error(await res.text());
       const data = await res.json();
       const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
-      const parsed = JSON.parse(text);
+      const raw = JSON.parse(text);
+      const parsed = {
+        ...raw,
+        englishPronunciation: raw.englishTranscription || raw.englishPronunciation,
+        russian: raw.hebrewTranslation || raw.russian,
+        transcription: raw.hebrewTranscription || raw.transcription,
+        example: raw.example
+          ? { ...raw.example, englishPronunciation: raw.example.englishTranscription || raw.example.englishPronunciation }
+          : raw.example,
+      };
       if (requestId !== requestIdRef.current) return;
       setDraft({ ...EMPTY, ...parsed, example: { ...EMPTY.example, ...(parsed.example || {}) } });
       toast({ title: 'Готово', description: 'Поля заполнены через Gemini' });
