@@ -72,13 +72,17 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
 4. Транскрипция должна отражать реальное прочтение (для существительного с артиклем: «а-мада́д», а не «мада́д»).
 5. Если введённое слово — существительное, поле "binyan" оставь пустым.
 
+6. Карточка имеет ЖЁСТКУЮ 6-компонентную структуру: hebrew, hebrewTranscription (иврит русскими буквами), hebrewTranslation (русский перевод иврита), english, englishTranscription (произношение АНГЛИЙСКОГО текста РУССКИМИ буквами, напр. "How is it going?" -> "хау из ит го́уинг?"), englishTranslation (русский перевод английского).
+7. В englishTranscription ЗАПРЕЩЕНО подставлять ивритскую транскрипцию или латиницу — только кириллица от английского произношения.
+
 Проанализируй ивритское слово "${draft.hebrew}". Верни СТРОГО JSON без markdown:
 {
   "hebrew": "слово с огласовками (никудот)",
-  "transcription": "русская транскрипция с ударениями",
-  "russian": "перевод на русский с учётом части речи",
+  "transcription": "русская транскрипция иврита с ударениями",
+  "russian": "перевод иврита на русский с учётом части речи",
   "english": "real English translation, not Russian transliteration",
-  "englishPronunciation": "simple English reading/pronunciation line",
+  "englishTranscription": "произношение английского русскими буквами с ударением",
+  "englishTranslation": "русский перевод английского предложения",
   "root": "корень через точку, например פ.ת.ח",
   "binyan": "биньян если глагол, иначе пустая строка",
   "example": {
