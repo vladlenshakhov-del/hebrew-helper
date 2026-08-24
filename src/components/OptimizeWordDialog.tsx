@@ -11,10 +11,13 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Loader2, Wand2, Check, Trash2 } from 'lucide-react';
+import { Loader2, Wand2, Check, Trash2, Mic } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import type { Word } from '@/data/vocabulary';
 import { saveOverride, deleteWord } from '@/lib/wordOverrides';
+import { rephraseWithGemini } from '@/lib/geminiRephrase';
+import VoiceFeedbackInput from '@/components/VoiceFeedbackInput';
+
 
 interface Props {
   word: Word;
