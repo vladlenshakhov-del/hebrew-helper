@@ -303,7 +303,9 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
                 <Trash2 className="w-4 h-4" />
               </Button>
             </div>
+            {renderFixSection()}
           </div>
+
         )}
       </DialogContent>
 
