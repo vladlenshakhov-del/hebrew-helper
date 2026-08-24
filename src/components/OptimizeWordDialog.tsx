@@ -99,7 +99,7 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
     }
   };
 
-  const FixSection = () => (
+  const renderFixSection = () => (
     <div className="border-t border-border pt-3 space-y-2">
       {!showFix ? (
         <Button type="button" variant="outline" className="w-full" onClick={() => setShowFix(true)}>
