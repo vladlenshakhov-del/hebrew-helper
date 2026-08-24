@@ -60,14 +60,65 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
   const [loading, setLoading] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [result, setResult] = useState<AiResult | null>(null);
+  const [showFix, setShowFix] = useState(false);
 
   const handleOpenChange = (o: boolean) => {
     onOpenChange(o);
     if (!o) {
       setResult(null);
       setLoading(false);
+      setShowFix(false);
     }
   };
+
+  /** Current effective card: original word merged with the AI preview (if any). */
+  const currentCard = () => ({
+    id: word.id,
+    hebrew: result?.hebrew ?? word.hebrew,
+    transcription: result?.transcription ?? word.transcription,
+    russian: result?.russian ?? word.russian,
+    english: result?.english ?? word.english,
+    englishPronunciation: result?.englishPronunciation ?? word.englishPronunciation,
+    category: word.category,
+    root: result?.root ?? word.root,
+    binyan: result?.binyan ?? word.binyan,
+    example: result?.example ?? word.example,
+  });
+
+  const runRephrase = async (feedback: string) => {
+    setLoading(true);
+    try {
+      const fixed = await rephraseWithGemini(currentCard(), feedback);
+      setResult({ id: word.id, ...fixed });
+      setShowFix(false);
+      toast({ title: 'Карточка перегенерирована', description: 'Проверьте правки и примените' });
+    } catch (e: any) {
+      toast({ title: 'Ошибка Gemini', description: e?.message?.slice(0, 200), variant: 'destructive' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const FixSection = () => (
+    <div className="border-t border-border pt-3 space-y-2">
+      {!showFix ? (
+        <Button type="button" variant="outline" className="w-full" onClick={() => setShowFix(true)}>
+          <Mic className="w-4 h-4" /> Исправить / Уточнить
+        </Button>
+      ) : (
+        <>
+          <p className="text-xs text-muted-foreground">
+            Надиктуйте или напишите, что не так — Gemini перегенерирует эту же карточку.
+          </p>
+          <VoiceFeedbackInput loading={loading} onSubmit={runRephrase} submitLabel="Перегенерировать" />
+          <Button type="button" variant="ghost" className="w-full" onClick={() => setShowFix(false)}>
+            Отмена
+          </Button>
+        </>
+      )}
+    </div>
+  );
+
 
   const runOptimize = async () => {
     let key = localStorage.getItem('GEMINI_API_KEY');
