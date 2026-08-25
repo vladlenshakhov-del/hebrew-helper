@@ -11,12 +11,10 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Loader2, Wand2, Check, Trash2, Mic } from 'lucide-react';
+import { Loader2, Wand2, Check, Trash2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import type { Word } from '@/data/vocabulary';
 import { saveOverride, deleteWord } from '@/lib/wordOverrides';
-import { rephraseWithGemini } from '@/lib/geminiRephrase';
-import VoiceFeedbackInput from '@/components/VoiceFeedbackInput';
 
 
 interface Props {
@@ -60,14 +58,12 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
   const [loading, setLoading] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [result, setResult] = useState<AiResult | null>(null);
-  const [showFix, setShowFix] = useState(false);
 
   const handleOpenChange = (o: boolean) => {
     onOpenChange(o);
     if (!o) {
       setResult(null);
       setLoading(false);
-      setShowFix(false);
     }
   };
 
@@ -84,41 +80,6 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
     binyan: result?.binyan ?? word.binyan,
     example: result?.example ?? word.example,
   });
-
-  const runRephrase = async (feedback: string) => {
-    setLoading(true);
-    try {
-      const fixed = await rephraseWithGemini(currentCard(), feedback);
-      setResult({ id: word.id, ...fixed });
-      setShowFix(false);
-      toast({ title: 'Карточка перегенерирована', description: 'Проверьте правки и примените' });
-    } catch (e: any) {
-      toast({ title: 'Ошибка Gemini', description: e?.message?.slice(0, 200), variant: 'destructive' });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const renderFixSection = () => (
-    <div className="border-t border-border pt-3 space-y-2">
-      {!showFix ? (
-        <Button type="button" variant="outline" className="w-full" onClick={() => setShowFix(true)}>
-          <Mic className="w-4 h-4" /> Исправить / Уточнить
-        </Button>
-      ) : (
-        <>
-          <p className="text-xs text-muted-foreground">
-            Надиктуйте или напишите, что не так — Gemini перегенерирует эту же карточку.
-          </p>
-          <VoiceFeedbackInput loading={loading} onSubmit={runRephrase} submitLabel="Перегенерировать" />
-          <Button type="button" variant="ghost" className="w-full" onClick={() => setShowFix(false)}>
-            Отмена
-          </Button>
-        </>
-      )}
-    </div>
-  );
-
 
   const runOptimize = async () => {
     let key = localStorage.getItem('GEMINI_API_KEY');
@@ -247,7 +208,6 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
                 <Trash2 className="w-4 h-4" />
               </Button>
             </div>
-            {renderFixSection()}
           </div>
 
         )}
@@ -305,7 +265,6 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
                 <Trash2 className="w-4 h-4" />
               </Button>
             </div>
-            {renderFixSection()}
           </div>
 
         )}
