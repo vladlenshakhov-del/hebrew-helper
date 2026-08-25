@@ -2,7 +2,9 @@ import { useRef, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Sparkles, Plus, Loader2 } from 'lucide-react';
+import { Sparkles, Plus, Loader2, Mic } from 'lucide-react';
+import { rephraseWithGemini } from '@/lib/geminiRephrase';
+import VoiceFeedbackInput from '@/components/VoiceFeedbackInput';
 import { toast } from '@/hooks/use-toast';
 import { vocabulary, type Binyan, type Category, type Word } from '@/data/vocabulary';
 
@@ -33,6 +35,7 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [draft, setDraft] = useState<WordDraft>(emptyDraft);
+  const [showFix, setShowFix] = useState(false);
   const requestIdRef = useRef(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -40,6 +43,7 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
   const resetForm = () => {
     requestIdRef.current += 1;
     setDraft(emptyDraft());
+    setShowFix(false);
   };
 
   const handleOpenChange = (nextOpen: boolean) => {
@@ -128,6 +132,40 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
     }
   };
 
+  const runRephrase = async (feedback: string) => {
+    setLoading(true);
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
+    try {
+      const fixed = await rephraseWithGemini({ ...draft }, feedback);
+      if (requestId !== requestIdRef.current) return;
+      setDraft((prev) => ({
+        ...prev,
+        hebrew: fixed.hebrew || prev.hebrew,
+        transcription: fixed.transcription || prev.transcription,
+        russian: fixed.russian || prev.russian,
+        english: fixed.english || prev.english,
+        englishPronunciation: fixed.englishPronunciation || prev.englishPronunciation,
+        root: fixed.root || prev.root,
+        binyan: fixed.binyan || prev.binyan,
+        example: {
+          hebrew: fixed.example?.hebrew || prev.example.hebrew,
+          transcription: fixed.example?.transcription || prev.example.transcription,
+          russian: fixed.example?.russian || prev.example.russian,
+          english: fixed.example?.english || prev.example.english,
+          englishPronunciation: fixed.example?.englishPronunciation || prev.example.englishPronunciation,
+        },
+      }));
+      setShowFix(false);
+      toast({ title: 'Карточка исправлена', description: fixed.changes_summary?.slice(0, 160) || 'Поля обновлены' });
+    } catch (e: any) {
+      if (requestId !== requestIdRef.current) return;
+      toast({ title: 'Ошибка Gemini', description: e?.message?.slice(0, 200), variant: 'destructive' });
+    } finally {
+      if (requestId === requestIdRef.current) setLoading(false);
+    }
+  };
+
   const save = () => {
     if (!draft.hebrew || !draft.russian) {
       toast({ title: 'Заполните иврит и перевод', variant: 'destructive' });
@@ -199,6 +237,26 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
               Заполнить через Gemini
             </Button>
+
+            {(draft.russian || draft.transcription) && (
+              <div className="mt-2 space-y-2">
+                {!showFix ? (
+                  <Button type="button" variant="outline" className="w-full" onClick={() => setShowFix(true)}>
+                    <Mic className="w-4 h-4" /> Исправить / Уточнить
+                  </Button>
+                ) : (
+                  <>
+                    <p className="text-xs text-muted-foreground">
+                      Надиктуйте или напишите замечание — Gemini перегенерирует карточку с учётом правки.
+                    </p>
+                    <VoiceFeedbackInput loading={loading} onSubmit={runRephrase} submitLabel="Перегенерировать" />
+                    <Button type="button" variant="ghost" className="w-full" onClick={() => setShowFix(false)}>
+                      Отмена
+                    </Button>
+                  </>
+                )}
+              </div>
+            )}
           </div>
 
           <div>
