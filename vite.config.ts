@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode, command }) => ({
   base: "./",
   server: {
     host: "::",
@@ -13,7 +13,9 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  // The tagger is preview-only. `build:dev` also uses development mode, so
+  // checking mode alone incorrectly runs its source transformer during builds.
+  plugins: [react(), command === "serve" && mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
