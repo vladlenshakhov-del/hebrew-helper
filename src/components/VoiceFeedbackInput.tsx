@@ -46,16 +46,19 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
     if (!SpeechRecognition) {
       toast({
         title: 'Голосовой ввод недоступен',
-        description: 'Используйте микрофон на клавиатуре телефона или введите замечание текстом.',
+        description: 'Используйте микрофон на клавиатуре телефона или введите команду текстом ниже.',
       });
       return;
     }
     const recognition = new SpeechRecognition();
     recognition.lang = 'ru-RU';
     recognition.interimResults = true;
-    recognition.continuous = true;
+    recognition.continuous = false;
+    recognition.maxAlternatives = 1;
     baseTextRef.current = text ? text.trim() + ' ' : '';
 
+    recognition.onstart = () => setListening(true);
+    recognition.onaudiostart = () => setListening(true);
     recognition.onresult = (event: any) => {
       let transcript = '';
       for (let i = 0; i < event.results.length; i++) {
@@ -65,9 +68,17 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
     };
     recognition.onerror = (event: any) => {
       setListening(false);
-      if (event?.error === 'not-allowed') {
-        toast({ title: 'Нет доступа к микрофону', variant: 'destructive' });
-      }
+      const code = event?.error;
+      const messages: Record<string, string> = {
+        'not-allowed': 'Нет доступа к микрофону — разрешите его в настройках браузера.',
+        'service-not-allowed': 'Распознавание речи заблокировано браузером.',
+        'no-speech': 'Речь не распознана — попробуйте ещё раз или введите текст.',
+        'audio-capture': 'Микрофон не найден.',
+        network: 'Нет связи с сервисом распознавания.',
+        aborted: '',
+      };
+      const description = messages[code] ?? `Ошибка распознавания: ${code}`;
+      if (description) toast({ title: 'Голосовой ввод', description, variant: 'destructive' });
     };
     recognition.onend = () => setListening(false);
 
@@ -101,7 +112,7 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
         <Textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder={placeholder || 'Например: транскрипция неверная, читается «а-мада́д»'}
+          placeholder={placeholder || 'Введите команду текстом или надиктуйте голосом'}
           className="min-h-[80px] pr-12 text-base"
         />
         <Button
@@ -109,20 +120,46 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
           size="icon"
           variant={listening ? 'destructive' : 'secondary'}
           onClick={toggleListening}
-          title={listening ? 'Остановить запись' : 'Надиктовать замечание'}
-          aria-label={listening ? 'Остановить запись' : 'Надиктовать замечание'}
+          onTouchEnd={(e) => {
+            e.preventDefault();
+            toggleListening();
+          }}
+          style={{ touchAction: 'manipulation' }}
+          title={listening ? 'Остановить запись' : 'Надиктовать команду'}
+          aria-label={listening ? 'Остановить запись' : 'Надиктовать команду'}
           className="absolute right-2 top-2"
         >
           {listening ? <MicOff className="w-4 h-4 animate-pulse" /> : <Mic className="w-4 h-4" />}
         </Button>
       </div>
-      {listening && <p className="text-xs text-destructive">Идёт запись — говорите...</p>}
-      <Button type="button" onClick={submit} disabled={loading} className="w-full">
+      {listening && (
+        <p className="text-xs text-destructive flex items-center gap-2">
+          <span className="inline-block w-2 h-2 rounded-full bg-destructive animate-pulse" />
+          Слушаю... говорите
+        </p>
+      )}
+      {!SpeechRecognition && (
+        <p className="text-[11px] text-muted-foreground">
+          Голосовой ввод не поддерживается этим браузером — введите команду текстом.
+        </p>
+      )}
+      <Button
+        type="button"
+        onClick={submit}
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          submit();
+        }}
+        style={{ touchAction: 'manipulation' }}
+        disabled={loading}
+        className="w-full"
+      >
         {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
         {submitLabel}
       </Button>
     </div>
   );
 };
+
 
 export default VoiceFeedbackInput;
