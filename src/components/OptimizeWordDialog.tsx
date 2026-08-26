@@ -67,19 +67,8 @@ const OptimizeWordDialog = ({ word, open, onOpenChange }: Props) => {
     }
   };
 
-  /** Current effective card: original word merged with the AI preview (if any). */
-  const currentCard = () => ({
-    id: word.id,
-    hebrew: result?.hebrew ?? word.hebrew,
-    transcription: result?.transcription ?? word.transcription,
-    russian: result?.russian ?? word.russian,
-    english: result?.english ?? word.english,
-    englishPronunciation: result?.englishPronunciation ?? word.englishPronunciation,
-    category: word.category,
-    root: result?.root ?? word.root,
-    binyan: result?.binyan ?? word.binyan,
-    example: result?.example ?? word.example,
-  });
+
+
 
   const runOptimize = async () => {
     let key = localStorage.getItem('GEMINI_API_KEY');
