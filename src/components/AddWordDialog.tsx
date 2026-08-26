@@ -200,8 +200,10 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
               Заполнить через Gemini
             </Button>
+          </div>
 
           <div>
+
             <label className="text-sm font-medium mb-1 block">Транскрипция</label>
             <Input value={draft.transcription} onChange={(e) => setDraft({ ...draft, transcription: e.target.value })} />
           </div>
