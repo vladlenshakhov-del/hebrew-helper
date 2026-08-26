@@ -6,8 +6,9 @@ import CategoryFilter from '@/components/CategoryFilter';
 import { useTheme } from '@/components/ThemeProvider';
 import { useSpacedRepetition, shuffleArray } from '@/hooks/useSpacedRepetition';
 import { useFavorites } from '@/hooks/useFavorites';
-import { Search, LayoutGrid, List, Sun, Moon, Shuffle, ArrowUpDown, Eye, EyeOff, Heart } from 'lucide-react';
+import { Search, LayoutGrid, List, Sun, Moon, Shuffle, ArrowUpDown, Eye, EyeOff, Heart, Bot } from 'lucide-react';
 import AddWordDialog from '@/components/AddWordDialog';
+import GeminiAssistantDialog from '@/components/GeminiAssistantDialog';
 import { applyStoredOverrides, VOCAB_UPDATED_EVENT } from '@/lib/wordOverrides';
 
 applyStoredOverrides();
@@ -28,6 +29,7 @@ const Index = () => {
   const [selectedBinyan, setSelectedBinyan] = useState<string | null>(null);
   const [vocabularyVersion, setVocabularyVersion] = useState(0);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [assistantOpen, setAssistantOpen] = useState(false);
 
   useEffect(() => {
     const scrollContainer = (document.scrollingElement || document.documentElement || document.body) as HTMLElement;
@@ -267,6 +269,22 @@ const Index = () => {
           </div>
         )}
       </main>
+
+      {/* Единый голосовой помощник Gemini */}
+      <button
+        onClick={() => setAssistantOpen(true)}
+        className="fixed bottom-5 right-5 z-20 flex items-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-transform hover:scale-105 active:scale-95"
+        title="Голосовой помощник Gemini"
+        aria-label="Голосовой помощник Gemini"
+      >
+        <Bot className="h-5 w-5" />
+        <span className="hidden sm:inline">Помощник Gemini</span>
+      </button>
+      <GeminiAssistantDialog
+        open={assistantOpen}
+        onOpenChange={setAssistantOpen}
+        onApplied={() => setVocabularyVersion((v) => v + 1)}
+      />
     </div>
   );
 };
