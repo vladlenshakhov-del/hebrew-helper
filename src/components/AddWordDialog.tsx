@@ -40,7 +40,7 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
   const resetForm = () => {
     requestIdRef.current += 1;
     setDraft(emptyDraft());
-    setShowFix(false);
+    
   };
 
   const handleOpenChange = (nextOpen: boolean) => {
