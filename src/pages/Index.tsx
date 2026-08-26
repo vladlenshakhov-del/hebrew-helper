@@ -273,13 +273,19 @@ const Index = () => {
       {/* Единый голосовой помощник Gemini */}
       <button
         onClick={() => setAssistantOpen(true)}
-        className="fixed bottom-5 right-5 z-20 flex items-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-transform hover:scale-105 active:scale-95"
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          setAssistantOpen(true);
+        }}
+        style={{ zIndex: 99999, touchAction: 'manipulation' }}
+        className="fixed top-3 right-3 flex items-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-transform active:scale-95"
         title="Голосовой помощник Gemini"
         aria-label="Голосовой помощник Gemini"
       >
         <Bot className="h-5 w-5" />
         <span className="hidden sm:inline">Помощник Gemini</span>
       </button>
+
       <GeminiAssistantDialog
         open={assistantOpen}
         onOpenChange={setAssistantOpen}
