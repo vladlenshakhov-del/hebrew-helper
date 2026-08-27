@@ -15,8 +15,10 @@ interface Props {
 const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправить', onSubmit }: Props) => {
   const [text, setText] = useState('');
   const [listening, setListening] = useState(false);
+  const [speechError, setSpeechError] = useState('');
   const recognitionRef = useRef<any>(null);
   const baseTextRef = useRef('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const SpeechRecognition =
     typeof window !== 'undefined'
@@ -33,7 +35,11 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
     };
   }, []);
 
-  const toggleListening = () => {
+  const focusKeyboardInput = () => {
+    textareaRef.current?.focus({ preventScroll: true });
+  };
+
+  const toggleListening = async () => {
     if (listening) {
       try {
         recognitionRef.current?.stop();
@@ -44,12 +50,28 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
       return;
     }
     if (!SpeechRecognition) {
+      setSpeechError('Web Speech API не поддерживается [unsupported]. Используйте микрофон клавиатуры Android.');
+      focusKeyboardInput();
       toast({
         title: 'Голосовой ввод недоступен',
         description: 'Используйте микрофон на клавиатуре телефона или введите команду текстом ниже.',
       });
       return;
     }
+    setSpeechError('');
+
+    try {
+      const stream = await navigator.mediaDevices?.getUserMedia({ audio: true });
+      stream?.getTracks().forEach((track) => track.stop());
+    } catch (error) {
+      const code = error instanceof DOMException ? error.name : 'permission-error';
+      const message = `Ошибка доступа к микрофону [${code}]. Разрешите микрофон приложению или используйте микрофон клавиатуры.`;
+      setSpeechError(message);
+      toast({ title: 'Голосовой ввод', description: message, variant: 'destructive' });
+      focusKeyboardInput();
+      return;
+    }
+
     const recognition = new SpeechRecognition();
     recognition.lang = 'ru-RU';
     recognition.interimResults = true;
@@ -57,7 +79,10 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
     recognition.maxAlternatives = 1;
     baseTextRef.current = text ? text.trim() + ' ' : '';
 
-    recognition.onstart = () => setListening(true);
+    recognition.onstart = () => {
+      setSpeechError('');
+      setListening(true);
+    };
     recognition.onaudiostart = () => setListening(true);
     recognition.onresult = (event: any) => {
       let transcript = '';
@@ -70,15 +95,16 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
       setListening(false);
       const code = event?.error;
       const messages: Record<string, string> = {
-        'not-allowed': 'Нет доступа к микрофону — разрешите его в настройках браузера.',
-        'service-not-allowed': 'Распознавание речи заблокировано браузером.',
-        'no-speech': 'Речь не распознана — попробуйте ещё раз или введите текст.',
-        'audio-capture': 'Микрофон не найден.',
-        network: 'Нет связи с сервисом распознавания.',
-        aborted: '',
+        'not-allowed': 'Ошибка доступа к микрофону [not-allowed]. Разрешите микрофон в настройках Android.',
+        'service-not-allowed': 'Распознавание речи заблокировано [service-not-allowed]. Используйте микрофон клавиатуры.',
+        'no-speech': 'Речь не распознана [no-speech]. Попробуйте ещё раз.',
+        'audio-capture': 'Микрофон не найден [audio-capture].',
+        network: 'Ошибка сервиса распознавания [network]. Проверьте подключение.',
+        aborted: 'Распознавание остановлено [aborted].',
       };
-      const description = messages[code] ?? `Ошибка распознавания: ${code}`;
-      if (description) toast({ title: 'Голосовой ввод', description, variant: 'destructive' });
+      const description = messages[code] ?? `Ошибка распознавания [${code || 'unknown'}].`;
+      setSpeechError(description);
+      toast({ title: 'Голосовой ввод', description, variant: 'destructive' });
     };
     recognition.onend = () => setListening(false);
 
@@ -86,8 +112,11 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
     try {
       recognition.start();
       setListening(true);
-    } catch {
+    } catch (error) {
       setListening(false);
+      const code = error instanceof DOMException ? error.name : 'start-failed';
+      setSpeechError(`Не удалось запустить распознавание [${code}]. Используйте микрофон клавиатуры.`);
+      focusKeyboardInput();
     }
   };
 
@@ -110,8 +139,17 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
     <div className="space-y-2">
       <div className="relative">
         <Textarea
+          ref={textareaRef}
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => {
+            setText(e.target.value);
+            setSpeechError('');
+          }}
+          onPointerDown={focusKeyboardInput}
+          onClick={focusKeyboardInput}
+          inputMode="text"
+          autoCapitalize="sentences"
+          enterKeyHint="send"
           placeholder={placeholder || 'Введите команду текстом или надиктуйте голосом'}
           className="min-h-[80px] pr-12 text-base"
         />
@@ -138,11 +176,15 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
           Слушаю... говорите
         </p>
       )}
-      {!SpeechRecognition && (
-        <p className="text-[11px] text-muted-foreground">
-          Голосовой ввод не поддерживается этим браузером — введите команду текстом.
+      {speechError && (
+        <p role="alert" className="rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-xs text-destructive">
+          {speechError}
         </p>
       )}
+      <p className="text-[11px] text-muted-foreground">
+        Коснитесь поля и нажмите микрофон на клавиатуре Android либо введите команду текстом.
+        {!SpeechRecognition && ' Web Speech API в этом WebView не поддерживается.'}
+      </p>
       <Button
         type="button"
         onClick={submit}
