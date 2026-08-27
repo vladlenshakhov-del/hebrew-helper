@@ -181,11 +181,10 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
           {speechError}
         </p>
       )}
-      {!SpeechRecognition && (
-        <p className="text-[11px] text-muted-foreground">
-          Коснитесь поля и нажмите микрофон на клавиатуре Android либо введите команду текстом.
-        </p>
-      )}
+      <p className="text-[11px] text-muted-foreground">
+        Коснитесь поля и нажмите микрофон на клавиатуре Android либо введите команду текстом.
+        {!SpeechRecognition && ' Web Speech API в этом WebView не поддерживается.'}
+      </p>
       <Button
         type="button"
         onClick={submit}
