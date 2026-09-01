@@ -79,16 +79,25 @@ ${JSON.stringify(compact(currentVocabulary))}
 
     if (!res.ok) throw new Error(await res.text());
     const data = await res.json();
-    const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
-    const parsed = JSON.parse(raw);
+    const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
 
-    return {
-      replyText: parsed.replyText || 'Запрос обработан.',
-      actionPerformed: parsed.actionPerformed || undefined,
-      updatedVocabulary: Array.isArray(parsed.updatedVocabulary) && parsed.updatedVocabulary.length
-        ? (parsed.updatedVocabulary as Word[])
-        : undefined,
-    };
+    // Модель может вернуть JSON (в т.ч. в ```json ... ```) или просто текст.
+    try {
+      const cleanJson = responseText.replace(/```json|```/g, '').trim();
+      const parsed = JSON.parse(cleanJson);
+      return {
+        replyText: parsed.replyText || responseText || 'Запрос обработан.',
+        actionPerformed: parsed.actionPerformed || undefined,
+        updatedVocabulary:
+          Array.isArray(parsed.updatedVocabulary) && parsed.updatedVocabulary.length
+            ? (parsed.updatedVocabulary as Word[])
+            : undefined,
+      };
+    } catch {
+      // Модель ответила обычным текстом — показываем его как есть.
+      return { replyText: responseText || 'Запрос обработан.' };
+    }
+
   } catch (error) {
     console.error('Gemini Error:', error);
     return { replyText: 'Произошла ошибка при обработке запроса. Попробуй переформулировать.' };
