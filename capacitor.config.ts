@@ -8,6 +8,10 @@ const config: CapacitorConfig = {
     url: 'https://c2a084d8-14ba-40af-a442-02793b9e97fc.lovableproject.com?forceHideBadge=true',
     cleartext: true,
   },
+  android: {
+    // Полностью отключает системный оверскролл/Pull-to-Refresh в WebView
+    overScrollMode: 'never',
+  },
 };
 
 export default config;
