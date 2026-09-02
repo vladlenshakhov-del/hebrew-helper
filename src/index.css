@@ -141,13 +141,17 @@ All colors MUST be HSL.
   }
 }
 
+html, body {
+  overscroll-behavior-y: contain;
+  touch-action: pan-x pan-y;
+}
+
 html, body, #root {
   /* Полностью выключаем pull-to-refresh и «резинку» на мобильных */
   overscroll-behavior: none !important;
   overscroll-behavior-y: none !important;
   -webkit-overflow-scrolling: touch;
-  /* Разрешаем pinch-to-zoom двумя пальцами */
-  touch-action: pan-x pan-y pinch-zoom;
+  touch-action: pan-x pan-y;
 }
 
 
