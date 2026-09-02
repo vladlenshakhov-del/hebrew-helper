@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import { Capacitor } from '@capacitor/core';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Mic, MicOff, Loader2, Send } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+
 
 interface Props {
   loading?: boolean;
