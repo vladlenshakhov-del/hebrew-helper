@@ -32,7 +32,9 @@ const Index = () => {
   const [assistantOpen, setAssistantOpen] = useState(false);
 
   useEffect(() => {
-    const scrollContainer = (document.scrollingElement || document.documentElement || document.body) as HTMLElement;
+    const rootEl = document.getElementById('root');
+    const docEl = (document.scrollingElement || document.documentElement) as HTMLElement;
+    const scrollContainer = (rootEl ?? docEl) as HTMLElement;
     let lastScrollTop = scrollContainer.scrollTop;
 
     const handleContainerScroll = () => {
@@ -45,9 +47,10 @@ const Index = () => {
       lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     };
 
-    window.addEventListener('scroll', handleContainerScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleContainerScroll);
+    scrollContainer.addEventListener('scroll', handleContainerScroll, { passive: true });
+    return () => scrollContainer.removeEventListener('scroll', handleContainerScroll);
   }, []);
+
 
   useEffect(() => {
     const handler = () => setVocabularyVersion((v) => v + 1);
