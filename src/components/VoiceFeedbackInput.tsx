@@ -27,6 +27,80 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
       ? (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
       : undefined;
 
+  const isNative = Capacitor.isNativePlatform();
+  const nativeActiveRef = useRef(false);
+
+  const loadNativePlugin = async () => {
+    const mod = await import('@capacitor-community/speech-recognition');
+    return mod.SpeechRecognition;
+  };
+
+  const stopNative = async () => {
+    try {
+      const plugin = await loadNativePlugin();
+      await plugin.stop();
+      await plugin.removeAllListeners();
+    } catch {
+      /* noop */
+    }
+    nativeActiveRef.current = false;
+    setListening(false);
+  };
+
+  const startNative = async () => {
+    try {
+      const plugin = await loadNativePlugin();
+      const { available } = await plugin.available();
+      if (!available) {
+        setSpeechError('Нативное распознавание недоступно [native-unavailable]. Используйте микрофон клавиатуры.');
+        focusKeyboardInput();
+        return;
+      }
+
+      let perm = await plugin.checkPermissions();
+      if (perm.speechRecognition !== 'granted') {
+        perm = await plugin.requestPermissions();
+      }
+      if (perm.speechRecognition !== 'granted') {
+        const message = 'Ошибка доступа к микрофону [native-not-allowed]. Разрешите микрофон в настройках Android.';
+        setSpeechError(message);
+        toast({ title: 'Голосовой ввод', description: message, variant: 'destructive' });
+        focusKeyboardInput();
+        return;
+      }
+
+      baseTextRef.current = text ? text.trim() + ' ' : '';
+      await plugin.removeAllListeners();
+      await plugin.addListener('partialResults', (data: any) => {
+        const value = data?.matches?.[0];
+        if (value) setText(baseTextRef.current + value);
+      });
+      await plugin.addListener('listeningState', (data: any) => {
+        if (data?.status === 'stopped') {
+          nativeActiveRef.current = false;
+          setListening(false);
+        }
+      });
+
+      setSpeechError('');
+      nativeActiveRef.current = true;
+      setListening(true);
+      await plugin.start({
+        language: 'ru-RU',
+        maxResults: 1,
+        partialResults: true,
+        popup: false,
+      });
+    } catch (error) {
+      nativeActiveRef.current = false;
+      setListening(false);
+      const message = `Ошибка нативного распознавания [${(error as any)?.message || 'native-error'}]. Используйте микрофон клавиатуры.`;
+      setSpeechError(message);
+      toast({ title: 'Голосовой ввод', description: message, variant: 'destructive' });
+      focusKeyboardInput();
+    }
+  };
+
   useEffect(() => {
     return () => {
       try {
@@ -34,7 +108,9 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
       } catch {
         /* noop */
       }
+      if (nativeActiveRef.current) void stopNative();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const focusKeyboardInput = () => {
@@ -43,6 +119,10 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
 
   const toggleListening = async () => {
     if (listening) {
+      if (isNative && nativeActiveRef.current) {
+        await stopNative();
+        return;
+      }
       try {
         recognitionRef.current?.stop();
       } catch {
@@ -51,8 +131,17 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
       setListening(false);
       return;
     }
+
+    // Нативный APK — используем плагин Capacitor.
+    if (isNative) {
+      setSpeechError('');
+      await startNative();
+      return;
+    }
+
     if (!SpeechRecognition) {
       setSpeechError('Web Speech API не поддерживается [unsupported]. Используйте микрофон клавиатуры Android.');
+
       focusKeyboardInput();
       toast({
         title: 'Голосовой ввод недоступен',
