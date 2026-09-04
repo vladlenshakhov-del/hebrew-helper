@@ -6,6 +6,7 @@ import VoiceFeedbackInput from '@/components/VoiceFeedbackInput';
 import { toast } from '@/hooks/use-toast';
 import { askSmartGemini, applySmartUpdates } from '@/lib/smartGemini';
 import type { Word } from '@/data/vocabulary';
+import ReactMarkdown from 'react-markdown';
 
 interface Props {
   open: boolean;
@@ -14,7 +15,7 @@ interface Props {
 }
 
 interface ChatMessage {
-  role: 'user' | 'ai';
+  role: 'user' | 'assistant';
   text: string;
   action?: string;
   updates?: Word[];
@@ -39,14 +40,26 @@ const GeminiAssistantDialog = ({ open, onOpenChange, onApplied }: Props) => {
 
   const run = async (command: string) => {
     if (!command.trim()) return;
-    setMessages((m) => [...m, { role: 'user', text: command }]);
+    const nextMessages: ChatMessage[] = [...messages, { role: 'user', text: command }];
+    setMessages(nextMessages);
     setLoading(true);
-    const res = await askSmartGemini(command);
-    setMessages((m) => [
-      ...m,
-      { role: 'ai', text: res.replyText, action: res.actionPerformed, updates: res.updatedVocabulary },
-    ]);
-    setLoading(false);
+    try {
+      const history = nextMessages.map((message) => ({
+        role: message.role,
+        content: message.text,
+      }));
+      const res = await askSmartGemini(command, history);
+      setMessages((current) => [
+        ...current,
+        { role: 'assistant', text: res.replyText, action: res.actionPerformed, updates: res.updatedVocabulary },
+      ]);
+    } catch (error) {
+      const description = error instanceof Error ? error.message : 'Неизвестная ошибка AI';
+      toast({ title: 'Помощник недоступен', description, variant: 'destructive' });
+      setMessages((current) => [...current, { role: 'assistant', text: `**Ошибка:** ${description}` }]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const apply = (index: number) => {
@@ -94,7 +107,9 @@ const GeminiAssistantDialog = ({ open, onOpenChange, onApplied }: Props) => {
                     m.role === 'user' ? 'bg-primary/10 ml-6' : 'bg-muted/50 mr-6'
                   }`}
                 >
-                  {m.text}
+                  {m.role === 'assistant' ? (
+                    <ReactMarkdown className="prose prose-sm max-w-none text-foreground dark:prose-invert">{m.text}</ReactMarkdown>
+                  ) : m.text}
                   {m.action && <div className="text-[11px] text-muted-foreground mt-1">{m.action}</div>}
                   {m.updates && !m.applied && (
                     <Button size="sm" className="mt-2" onClick={() => apply(i)}>

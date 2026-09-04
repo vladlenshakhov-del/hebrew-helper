@@ -142,11 +142,12 @@ All colors MUST be HSL.
 }
 
 html, body {
-  height: 100%;
+  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   overscroll-behavior: none !important;
   overscroll-behavior-y: none !important;
-  touch-action: pan-x pan-y;
+  touch-action: none;
 }
 
 /* Корневой контейнер — единственный скроллер приложения.
@@ -158,8 +159,7 @@ html, body {
   overflow-x: hidden;
   overscroll-behavior: none !important;
   overscroll-behavior-y: none !important;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-x pan-y;
+  touch-action: pan-y pinch-zoom;
 }
 
 
