@@ -13,7 +13,7 @@ interface Props {
   onSubmit: (feedback: string) => void;
 }
 
-/** Text + voice (Web Speech API) input used to tell Gemini what to fix in a card. */
+/** Text + voice input: native Android recognizer in APK, Web Speech API in browsers. */
 const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправить', onSubmit }: Props) => {
   const [text, setText] = useState('');
   const [listening, setListening] = useState(false);
@@ -71,26 +71,30 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
 
       baseTextRef.current = text ? text.trim() + ' ' : '';
       await plugin.removeAllListeners();
-      await plugin.addListener('partialResults', (data: any) => {
-        const value = data?.matches?.[0];
-        if (value) setText(baseTextRef.current + value);
-      });
       await plugin.addListener('listeningState', (data: any) => {
-        if (data?.status === 'stopped') {
-          nativeActiveRef.current = false;
-          setListening(false);
-        }
+        setListening(data?.status === 'started');
       });
 
       setSpeechError('');
       nativeActiveRef.current = true;
       setListening(true);
-      await plugin.start({
+      // Android's system recognition popup is substantially more reliable than
+      // background recognition across Samsung/Xiaomi/Pixel WebViews.
+      const result = await plugin.start({
         language: 'ru-RU',
-        maxResults: 1,
-        partialResults: true,
-        popup: false,
+        maxResults: 3,
+        partialResults: false,
+        popup: true,
       });
+      const value = result.matches?.[0]?.trim();
+      if (value) {
+        setText(baseTextRef.current + value);
+      } else {
+        setSpeechError('Речь не распознана. Нажмите микрофон и попробуйте ещё раз.');
+      }
+      await plugin.removeAllListeners();
+      nativeActiveRef.current = false;
+      setListening(false);
     } catch (error) {
       nativeActiveRef.current = false;
       setListening(false);
@@ -132,7 +136,7 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
       return;
     }
 
-    // Нативный APK — используем плагин Capacitor.
+    // Native APK always uses Android SpeechRecognizer, never Web Speech API.
     if (isNative) {
       setSpeechError('');
       await startNative();
@@ -249,11 +253,6 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
           size="icon"
           variant={listening ? 'destructive' : 'secondary'}
           onClick={toggleListening}
-          onTouchEnd={(e) => {
-            e.preventDefault();
-            toggleListening();
-          }}
-          style={{ touchAction: 'manipulation' }}
           title={listening ? 'Остановить запись' : 'Надиктовать команду'}
           aria-label={listening ? 'Остановить запись' : 'Надиктовать команду'}
           className="absolute right-2 top-2"
@@ -273,17 +272,13 @@ const VoiceFeedbackInput = ({ loading, placeholder, submitLabel = 'Исправ�
         </p>
       )}
       <p className="text-[11px] text-muted-foreground">
-        Коснитесь поля и нажмите микрофон на клавиатуре Android либо введите команду текстом.
-        {!SpeechRecognition && ' Web Speech API в этом WebView не поддерживается.'}
+        {isNative
+          ? 'В APK откроется системное распознавание Android. Команду также можно ввести текстом.'
+          : 'Введите команду текстом или используйте микрофон браузера.'}
       </p>
       <Button
         type="button"
         onClick={submit}
-        onTouchEnd={(e) => {
-          e.preventDefault();
-          submit();
-        }}
-        style={{ touchAction: 'manipulation' }}
         disabled={loading}
         className="w-full"
       >

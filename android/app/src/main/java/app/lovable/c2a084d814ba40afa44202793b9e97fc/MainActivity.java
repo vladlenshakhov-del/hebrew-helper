@@ -1,6 +1,8 @@
 package app.lovable.c2a084d814ba40afa44202793b9e97fc;
 
 import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebView;
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.BridgeWebChromeClient;
 
@@ -11,6 +13,12 @@ public class MainActivity extends BridgeActivity {
 
         // BridgeWebChromeClient handles AUDIO_CAPTURE requests and asks for the
         // Android runtime permissions before granting microphone access to WebView.
-        getBridge().getWebView().setWebChromeClient(new BridgeWebChromeClient(getBridge()));
+        WebView webView = getBridge().getWebView();
+        webView.setWebChromeClient(new BridgeWebChromeClient(getBridge()));
+
+        // Disable Android WebView edge overscroll at the native layer. Capacitor
+        // has no supported overScrollMode config option, so this must be explicit.
+        webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        webView.setVerticalScrollBarEnabled(false);
     }
 }
