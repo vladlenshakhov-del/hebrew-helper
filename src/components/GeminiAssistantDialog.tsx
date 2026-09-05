@@ -108,7 +108,9 @@ const GeminiAssistantDialog = ({ open, onOpenChange, onApplied }: Props) => {
                   }`}
                 >
                   {m.role === 'assistant' ? (
-                    <ReactMarkdown className="prose prose-sm max-w-none text-foreground dark:prose-invert">{m.text}</ReactMarkdown>
+                    <div className="prose prose-sm max-w-none text-foreground dark:prose-invert">
+                      <ReactMarkdown>{m.text}</ReactMarkdown>
+                    </div>
                   ) : m.text}
                   {m.action && <div className="text-[11px] text-muted-foreground mt-1">{m.action}</div>}
                   {m.updates && !m.applied && (
