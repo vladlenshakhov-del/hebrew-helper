@@ -273,27 +273,17 @@ const Index = () => {
         )}
       </main>
 
-      {/* Единый голосовой помощник Gemini */}
-      <button
-        onClick={() => setAssistantOpen(true)}
-        onTouchEnd={(e) => {
-          e.preventDefault();
-          setAssistantOpen(true);
-        }}
-        style={{ zIndex: 99999, touchAction: 'manipulation' }}
-        className="fixed top-3 right-3 flex items-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-transform active:scale-95"
-        title="Голосовой помощник Gemini"
-        aria-label="Голосовой помощник Gemini"
-      >
-        <Bot className="h-5 w-5" />
-        <span className="hidden sm:inline">Помощник Gemini</span>
-      </button>
-
-      <GeminiAssistantDialog
-        open={assistantOpen}
-        onOpenChange={setAssistantOpen}
-        onApplied={() => setVocabularyVersion((v) => v + 1)}
-      />
+              {processed.length > visibleCount && (
+          <div className="mt-8 flex justify-center">
+            <button
+              onClick={() => setVisibleCount((count) => Math.min(count + itemsPerPage, processed.length))}
+              className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              Показать ещё ({visibleCount} / {processed.length})
+            </button>
+          </div>
+        )}
+      </main>
     </div>
   );
 };
