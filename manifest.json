@@ -1,0 +1,11 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Technical Hebrew",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Technical Hebrew",
+  "start_url": "/",
+  "theme_color": "#ffffff"
+}
