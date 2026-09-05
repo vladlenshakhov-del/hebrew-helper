@@ -5,27 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0" />
     <title>Hebrew Helper — иврит для техников и общения</title>
         <style>
-  html, body, #root {
-    overscroll-behavior-y: none !important;
-    overflow-y: auto !important;
+  /* Жестко фиксируем корень, чтобы он вообще не двигался */
+  html, body {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    overscroll-behavior: none;
+  }
+
+  /* Весь основной контент пускаем через отдельный скролл-контейнер */
+  #root {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
   }
 </style>
-<script>
-  document.addEventListener('touchmove', function(e) {
-    // Жёстко блокируем попытку браузера дернуть рефреш при любом свайпе у верхнего края
-    if (window.pageYOffset <= 0) {
-      // Разрешаем скролл вниз, но глушим отскок вверх
-      let touchY = e.touches[0].clientY;
-      if (touchY > window.lastTouchY && window.pageYOffset === 0) {
-        // Если тянем вниз на самом верху — гасим дефолтное поведение WebView
-        e.preventDefault();
-      }
-    }
-    window.lastTouchY = e.touches[0].clientY;
-  }, { passive: false });
-</script>
-
 
     <meta name="description" content="Карточки иврита с транскрипцией, английским переводом и разбором слов: техническая лексика и разговорные фразы." />
     <meta name="author" content="Hebrew Helper" />
