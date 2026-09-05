@@ -19,7 +19,8 @@ const App = () => {
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
+          <BrowserRouter basename="/hebrew-helper">
+
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="*" element={<NotFound />} />
