@@ -5,26 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0" />
     <title>Hebrew Helper — иврит для техников и общения</title>
         <style>
-        html, body {
-            overscroll-behavior-y: none;
-            overflow-x: hidden;
-            touch-action: pan-y;
-        }
-    </style>
-    <script>
-        let touchStartY = 0;
-        window.addEventListener('touchstart', function(e) {
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
+  html, body, #root {
+    overscroll-behavior-y: none !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+</style>
+<script>
+  document.addEventListener('touchmove', function(e) {
+    // Жёстко блокируем попытку браузера дернуть рефреш при любом свайпе у верхнего края
+    if (window.pageYOffset <= 0) {
+      // Разрешаем скролл вниз, но глушим отскок вверх
+      let touchY = e.touches[0].clientY;
+      if (touchY > window.lastTouchY && window.pageYOffset === 0) {
+        // Если тянем вниз на самом верху — гасим дефолтное поведение WebView
+        e.preventDefault();
+      }
+    }
+    window.lastTouchY = e.touches[0].clientY;
+  }, { passive: false });
+</script>
 
-        window.addEventListener('touchmove', function(e) {
-            let touchY = e.touches[0].clientY;
-            let currentScrollY = window.scrollY;
-            if (currentScrollY <= 0 && touchY > touchStartY) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-    </script>
 
     <meta name="description" content="Карточки иврита с транскрипцией, английским переводом и разбором слов: техническая лексика и разговорные фразы." />
     <meta name="author" content="Hebrew Helper" />
