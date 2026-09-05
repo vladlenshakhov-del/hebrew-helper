@@ -4,6 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0" />
     <title>Hebrew Helper — иврит для техников и общения</title>
+        <style>
+        html, body {
+            overscroll-behavior-y: none;
+            overflow-x: hidden;
+            touch-action: pan-y;
+        }
+    </style>
+    <script>
+        let touchStartY = 0;
+        window.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', function(e) {
+            let touchY = e.touches[0].clientY;
+            let currentScrollY = window.scrollY;
+            if (currentScrollY <= 0 && touchY > touchStartY) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+
     <meta name="description" content="Карточки иврита с транскрипцией, английским переводом и разбором слов: техническая лексика и разговорные фразы." />
     <meta name="author" content="Hebrew Helper" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
