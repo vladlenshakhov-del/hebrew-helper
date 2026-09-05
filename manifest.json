@@ -6,7 +6,7 @@
   "orientation": "any",
   "scope": "/hebrew-helper/",
   "short_name": "Technical Hebrew",
-  "start_url": "https://vladlenshakhov.github.io/hebrew-helper/",
+  "start_url": "/",
   "theme_color": "#ffffff",
   "description": "Technical Hebrew dictionary and learning app"
 }
