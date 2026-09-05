@@ -259,7 +259,7 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
               placeholder="English pronunciation"
             />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <Button type="button" variant="outline" onClick={resetForm} className="bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground">
               Очистить форму
             </Button>
@@ -272,3 +272,4 @@ const AddWordDialog = ({ onWordAdded }: AddWordDialogProps) => {
 };
 
 export default AddWordDialog;
+
