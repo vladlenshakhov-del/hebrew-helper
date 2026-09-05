@@ -4,8 +4,9 @@
   "display": "standalone",
   "name": "Technical Hebrew",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/hebrew-helper/",
   "short_name": "Technical Hebrew",
-  "start_url": "/",
-  "theme_color": "#ffffff"
+  "start_url": "https://vladlenshakhov.github.io/hebrew-helper/",
+  "theme_color": "#ffffff",
+  "description": "Technical Hebrew dictionary and learning app"
 }
