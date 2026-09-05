@@ -261,19 +261,7 @@ const Index = () => {
           </div>
         )}
 
-        {processed.length > visibleCount && (
-          <div className="mt-8 flex justify-center">
-            <button
-              onClick={() => setVisibleCount((count) => Math.min(count + itemsPerPage, processed.length))}
-              className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              Показать ещё ({visibleCount} / {processed.length})
-            </button>
-          </div>
-        )}
-      </main>
-
-              {processed.length > visibleCount && (
+                {processed.length > visibleCount && (
           <div className="mt-8 flex justify-center">
             <button
               onClick={() => setVisibleCount((count) => Math.min(count + itemsPerPage, processed.length))}
