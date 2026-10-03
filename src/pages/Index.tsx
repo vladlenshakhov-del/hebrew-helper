@@ -39,9 +39,12 @@ const Index = () => {
 
     const handleContainerScroll = () => {
       const currentScroll = scrollContainer.scrollTop;
-      if (currentScroll > lastScrollTop && currentScroll > 50) {
+      const delta = currentScroll - lastScrollTop;
+      // Небольшие подёргивания пальца игнорируем, чтобы шапка не «мигала».
+      if (Math.abs(delta) < 12) return;
+      if (delta > 0 && currentScroll > 80) {
         setIsHeaderVisible(false);
-      } else {
+      } else if (delta < 0) {
         setIsHeaderVisible(true);
       }
       lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
@@ -128,7 +131,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className={`sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border transition-transform duration-300 ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+      <header className={`sticky top-0 z-10 bg-background border-b border-border transition-transform duration-300 ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="max-w-5xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
             <div>
