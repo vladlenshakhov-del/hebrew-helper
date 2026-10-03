@@ -135,9 +135,10 @@ All colors MUST be HSL.
     transform: rotateY(180deg);
   }
 
+  /* Отключено: в Android WebView при прокрутке вверх карточки перерисовывались
+     и страница «прыгала», что выглядело как обновление. */
   .content-visibility-auto {
-    content-visibility: auto;
-    contain-intrinsic-size: 280px;
+    content-visibility: visible;
   }
 }
 
