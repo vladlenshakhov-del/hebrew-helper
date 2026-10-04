@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback, useEffect, useDeferredValue } from 'react';
+import { useState, useMemo, useCallback, useEffect, useDeferredValue, useRef } from 'react';
+import { Capacitor } from '@capacitor/core';
 import { vocabulary, Category, categoryLabels } from '@/data/vocabulary';
 import WordCard from '@/components/WordCard';
 import WordListItem from '@/components/WordListItem';
@@ -13,20 +14,35 @@ import { applyStoredOverrides, VOCAB_UPDATED_EVENT } from '@/lib/wordOverrides';
 
 applyStoredOverrides();
 
+// В APK сохраняем экран (фильтры + позицию прокрутки), чтобы даже если Android
+// перезапустит WebView, пользователь вернулся ровно туда, где был.
+const VIEW_STATE_KEY = 'hh-view-state';
+const isNativeApp = Capacitor.isNativePlatform();
+type SavedView = { category?: string; viewMode?: 'cards' | 'list'; visibleCount?: number; scrollTop?: number; binyan?: string | null };
+const readSavedView = (): SavedView => {
+  if (!isNativeApp) return {};
+  try { return JSON.parse(localStorage.getItem(VIEW_STATE_KEY) || '{}'); } catch { return {}; }
+};
+const writeSavedView = (patch: SavedView) => {
+  if (!isNativeApp) return;
+  try { localStorage.setItem(VIEW_STATE_KEY, JSON.stringify({ ...readSavedView(), ...patch })); } catch { /* ignore */ }
+};
+const initialView = readSavedView();
+
 const BINYANIM = ['Пааль', 'Пиэль', 'Хифиль', 'Нифаль', 'Пуаль', 'Хуфаль', 'Хитпаэль'] as const;
 
 const Index = () => {
   const { theme, toggleTheme } = useTheme();
   const sr = useSpacedRepetition();
   const { isFavorite, toggleFavorite, isLoaded } = useFavorites();
-  const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>((initialView.category as Category | 'all') || 'all');
   const [search, setSearch] = useState('');
-  const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
+  const [viewMode, setViewMode] = useState<'cards' | 'list'>(initialView.viewMode || 'cards');
   const [isShuffled, setIsShuffled] = useState(false);
   const [shuffleKey, setShuffleKey] = useState(0);
   const [showDueOnly, setShowDueOnly] = useState(false);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
-  const [selectedBinyan, setSelectedBinyan] = useState<string | null>(null);
+  const [selectedBinyan, setSelectedBinyan] = useState<string | null>(initialView.binyan ?? null);
   const [vocabularyVersion, setVocabularyVersion] = useState(0);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [assistantOpen, setAssistantOpen] = useState(false);
@@ -49,9 +65,25 @@ const Index = () => {
       }
       lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     };
+    let saveTimer: number | undefined;
+    const handleSaveScroll = () => {
+      window.clearTimeout(saveTimer);
+      saveTimer = window.setTimeout(() => writeSavedView({ scrollTop: scrollContainer.scrollTop }), 250);
+    };
+    if (isNativeApp) {
+      scrollContainer.addEventListener('scroll', handleSaveScroll, { passive: true });
+      const target = initialView.scrollTop ?? 0;
+      if (target > 0) {
+        requestAnimationFrame(() => requestAnimationFrame(() => { scrollContainer.scrollTop = target; }));
+      }
+    }
 
     scrollContainer.addEventListener('scroll', handleContainerScroll, { passive: true });
-    return () => scrollContainer.removeEventListener('scroll', handleContainerScroll);
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleContainerScroll);
+      scrollContainer.removeEventListener('scroll', handleSaveScroll);
+      window.clearTimeout(saveTimer);
+    };
   }, []);
 
 
@@ -62,15 +94,21 @@ const Index = () => {
   }, []);
   const deferredSearch = useDeferredValue(search);
   const itemsPerPage = viewMode === 'cards' ? 60 : 120;
-  const [visibleCount, setVisibleCount] = useState(itemsPerPage);
+  const [visibleCount, setVisibleCount] = useState(() => Math.max(itemsPerPage, initialView.visibleCount ?? 0));
+  const skipFirstReset = useRef(true);
 
   const stripNiqqud = useCallback((s: string) => s.replace(/[\u0591-\u05C7]/g, ''), []);
 
   const { isDue, sortByPriority, getReview, setInterval: setSrInterval, clearInterval: clearSrInterval, reviews } = sr;
 
   useEffect(() => {
+    if (skipFirstReset.current) { skipFirstReset.current = false; return; }
     setVisibleCount(itemsPerPage);
   }, [itemsPerPage, selectedCategory, search, isShuffled, shuffleKey, showDueOnly, showFavoritesOnly, selectedBinyan]);
+
+  useEffect(() => {
+    writeSavedView({ category: selectedCategory, viewMode, visibleCount, binyan: selectedBinyan });
+  }, [selectedCategory, viewMode, visibleCount, selectedBinyan]);
 
   const filtered = useMemo(() => {
     return vocabulary.filter((w) => {
