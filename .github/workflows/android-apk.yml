@@ -10,11 +10,11 @@ permissions:
 
 jobs:
   apk:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
 
@@ -23,7 +23,12 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - uses: android-actions/setup-android@v3
+      # Android SDK is preinstalled on GitHub Ubuntu runners; just point Gradle at it
+      - name: Configure Android SDK
+        run: |
+          echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
+          yes | "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
       - name: Install Dependencies
         run: npm install --no-audit --no-fund --legacy-peer-deps
@@ -35,7 +40,9 @@ jobs:
         run: npx cap sync android
 
       - name: Build debug APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
         working-directory: android
 
       - uses: actions/upload-artifact@v4
