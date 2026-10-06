@@ -1,8 +1,8 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import { installAndroidNoRefresh } from "./lib/androidNoRefresh";
 
-// Блокировка pull-to-refresh живёт в хуке usePreventPullToRefresh (подключён в App).
-
+installAndroidNoRefresh();
 
 createRoot(document.getElementById("root")!).render(<App />);

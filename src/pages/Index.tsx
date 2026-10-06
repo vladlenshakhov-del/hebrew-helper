@@ -48,13 +48,12 @@ const Index = () => {
   const [assistantOpen, setAssistantOpen] = useState(false);
 
   useEffect(() => {
-    const rootEl = document.getElementById('root');
     const docEl = (document.scrollingElement || document.documentElement) as HTMLElement;
-    const scrollContainer = (rootEl ?? docEl) as HTMLElement;
-    let lastScrollTop = scrollContainer.scrollTop;
+    const getTop = () => window.scrollY || docEl.scrollTop || 0;
+    let lastScrollTop = getTop();
 
     const handleContainerScroll = () => {
-      const currentScroll = scrollContainer.scrollTop;
+      const currentScroll = getTop();
       const delta = currentScroll - lastScrollTop;
       // Небольшие подёргивания пальца игнорируем, чтобы шапка не «мигала».
       if (Math.abs(delta) < 12) return;
@@ -68,20 +67,20 @@ const Index = () => {
     let saveTimer: number | undefined;
     const handleSaveScroll = () => {
       window.clearTimeout(saveTimer);
-      saveTimer = window.setTimeout(() => writeSavedView({ scrollTop: scrollContainer.scrollTop }), 250);
+      saveTimer = window.setTimeout(() => writeSavedView({ scrollTop: getTop() }), 250);
     };
     if (isNativeApp) {
-      scrollContainer.addEventListener('scroll', handleSaveScroll, { passive: true });
+      window.addEventListener('scroll', handleSaveScroll, { passive: true });
       const target = initialView.scrollTop ?? 0;
       if (target > 0) {
-        requestAnimationFrame(() => requestAnimationFrame(() => { scrollContainer.scrollTop = target; }));
+        requestAnimationFrame(() => requestAnimationFrame(() => { window.scrollTo(0, target); }));
       }
     }
 
-    scrollContainer.addEventListener('scroll', handleContainerScroll, { passive: true });
+    window.addEventListener('scroll', handleContainerScroll, { passive: true });
     return () => {
-      scrollContainer.removeEventListener('scroll', handleContainerScroll);
-      scrollContainer.removeEventListener('scroll', handleSaveScroll);
+      window.removeEventListener('scroll', handleContainerScroll);
+      window.removeEventListener('scroll', handleSaveScroll);
       window.clearTimeout(saveTimer);
     };
   }, []);
