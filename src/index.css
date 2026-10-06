@@ -142,25 +142,17 @@ All colors MUST be HSL.
   }
 }
 
+/* Прокручивается сама страница (а не внутренний контейнер): так Android-оболочка
+   APK видит настоящую позицию прокрутки и не принимает свайп вверх за «обновить». */
 html, body {
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
-  overscroll-behavior: none !important;
-  overscroll-behavior-y: none !important;
-  touch-action: none;
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
 }
 
-/* Корневой контейнер — единственный скроллер приложения.
-   Полностью исключает системный Pull-to-Refresh в Android WebView. */
-#root {
-  height: 100vh;
-  height: 100dvh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior: none !important;
-  overscroll-behavior-y: none !important;
-  touch-action: pan-y pinch-zoom;
+/* В Android-приложении страница всегда держится хотя бы на 1px ниже верха
+   (см. src/lib/androidNoRefresh.ts) — для этого ей нужна небольшая лишняя высота. */
+html.android-webview body {
+  min-height: calc(100vh + 4px);
 }
 
 
